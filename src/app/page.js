@@ -10,6 +10,13 @@ export default function Home() {
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('すべて');
   const [isSyncing, setIsSyncing] = useState(false);
+  
+  // チャンネル管理用の状態
+  const [showSettings, setShowSettings] = useState(false);
+  const [channels, setChannels] = useState([]);
+  const [newChannelName, setNewChannelName] = useState('');
+  const [newChannelId, setNewChannelId] = useState('');
+  const [isAddingChannel, setIsAddingChannel] = useState(false);
 
   const tabs = ['すべて', '最新 (Shorts)', '最新 (通常)', '週間人気 (Shorts)', '週間人気 (通常)'];
 
@@ -51,10 +58,57 @@ export default function Home() {
     }
   };
 
+  const fetchChannels = async () => {
+    try {
+      const res = await fetch('/api/channels');
+      if (res.ok) {
+        const data = await res.json();
+        setChannels(data.channels || []);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleAddChannel = async (e) => {
+    e.preventDefault();
+    if (!newChannelName || !newChannelId) return;
+    
+    setIsAddingChannel(true);
+    try {
+      const res = await fetch('/api/channels', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: newChannelName, channelId: newChannelId })
+      });
+      
+      if (res.ok) {
+        setNewChannelName('');
+        setNewChannelId('');
+        fetchChannels(); // 一覧を再取得
+      } else {
+        const err = await res.json();
+        alert('追加エラー: ' + err.error);
+      }
+    } catch (err) {
+      alert('エラーが発生しました: ' + err.message);
+    } finally {
+      setIsAddingChannel(false);
+    }
+  };
+
+  const openSettings = () => {
+    setShowSettings(true);
+    fetchChannels();
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Wuthering Trends</h1>
+        <div className={styles.topBar}>
+          <h1 className={styles.title}>Wuthering Trends</h1>
+          <button className={styles.settingsIconBtn} onClick={openSettings}>⚙️</button>
+        </div>
         <p className={styles.subtitle}>Daily updated gallery of popular and latest videos.</p>
         <button 
           className={styles.syncButton} 
@@ -93,6 +147,56 @@ export default function Home() {
             .map((video) => (
               <VideoCard key={video.id} video={video} />
           ))}
+        </div>
+      )}
+
+      {/* チャンネル設定モーダル */}
+      {showSettings && (
+        <div className={styles.modalOverlay} onClick={() => setShowSettings(false)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.modalHeader}>
+              <h2>⚙️ 確実収集チャンネル設定</h2>
+              <button className={styles.closeBtn} onClick={() => setShowSettings(false)}>×</button>
+            </div>
+            
+            <p className={styles.modalDesc}>ここに登録されたチャンネルの動画は、検索から漏れることなく確実に収集されます。</p>
+            
+            <form className={styles.addChannelForm} onSubmit={handleAddChannel}>
+              <input 
+                type="text" 
+                placeholder="チャンネル名 (例: 鳴潮公式)" 
+                value={newChannelName}
+                onChange={(e) => setNewChannelName(e.target.value)}
+                required
+              />
+              <input 
+                type="text" 
+                placeholder="チャンネルID (例: UC...)" 
+                value={newChannelId}
+                onChange={(e) => setNewChannelId(e.target.value)}
+                required
+              />
+              <button type="submit" disabled={isAddingChannel}>
+                {isAddingChannel ? '追加中...' : '追加する'}
+              </button>
+            </form>
+
+            <div className={styles.channelList}>
+              <h3>登録済みチャンネル一覧</h3>
+              {channels.length === 0 ? (
+                <p className={styles.emptyList}>登録されていません</p>
+              ) : (
+                <ul>
+                  {channels.map(ch => (
+                    <li key={ch.id}>
+                      <span className={styles.chName}>{ch.name}</span>
+                      <span className={styles.chId}>{ch.channelId}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
         </div>
       )}
     </main>

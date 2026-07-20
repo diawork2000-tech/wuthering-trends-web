@@ -11,14 +11,33 @@
   animation: slideDown 0.8s ease-out;
 }
 
+.topBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+
+.settingsIconBtn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: absolute;
+  right: -40px;
+}
+.settingsIconBtn:hover {
+  transform: rotate(45deg);
+}
+
 .title {
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1rem;
-  letter-spacing: -1px;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.05em;
+  color: #f0f0f0;
 }
 
 .subtitle {

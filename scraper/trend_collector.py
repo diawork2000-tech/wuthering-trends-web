@@ -59,8 +59,35 @@ def fetch_youtube_api(youtube, query, max_results, region_code, order="date", pu
         print(f"  [Error] Failed to search '{query}' (duration={video_duration}): {str(e)}")
         return []
 
+def get_target_channels_from_notion(headers, channels_db_id):
+    """Notionのデータベースから対象チャンネルIDのリストを取得する"""
+    if not channels_db_id:
+        return []
+    
+    print("Fetching target channels from Notion...")
+    url = f"https://api.notion.com/v1/databases/{channels_db_id}/query"
+    channel_ids = []
+    
+    try:
+        res = requests.post(url, headers=headers, json={})
+        if res.status_code == 200:
+            data = res.json()
+            for page in data.get("results", []):
+                props = page.get("properties", {})
+                # 'チャンネルID'というテキストプロパティを探す
+                ch_id_prop = props.get("チャンネルID", {}).get("rich_text", [])
+                if ch_id_prop:
+                    channel_ids.append(ch_id_prop[0].get("plain_text", ""))
+        else:
+            print(f"  [Error] Failed to fetch channels: {res.text}")
+    except Exception as e:
+        print(f"  [Error] Communication with Notion failed: {str(e)}")
+        
+    print(f"Found {len(channel_ids)} target channels in Notion.")
+    return channel_ids
+
 def fetch_channel_latest_videos(youtube, channel_id, max_results=10):
-    """チャンネルのアップロード済みプレイリストから最新動画を取得 (1トークン消費)"""
+    """チャンネルのアップロード済みプレイリストから最新動画を取得し、1週間以内のものだけに絞る"""
     if not channel_id.startswith("UC"):
         return []
     
@@ -75,10 +102,26 @@ def fetch_channel_latest_videos(youtube, channel_id, max_results=10):
         )
         response = request.execute()
         
+        # 1週間前の日時を計算
+        one_week_ago = datetime.now(timezone.utc) - timedelta(days=7)
+        
         # プレイリストアイテムを検索APIのアイテムフォーマットに似せて変換する
         items = []
         for pl_item in response.get("items", []):
             snippet = pl_item.get("snippet", {})
+            published_at_str = snippet.get("publishedAt")
+            if not published_at_str:
+                continue
+                
+            # 日付のフィルター (1週間以内か判定)
+            try:
+                # ISO 8601フォーマットのパース
+                published_at = datetime.fromisoformat(published_at_str.replace('Z', '+00:00'))
+                if published_at < one_week_ago:
+                    continue # 1週間より前の動画はスキップ
+            except Exception:
+                pass
+                
             # resourceId.videoId に動画IDが入っている
             video_id = snippet.get("resourceId", {}).get("videoId")
             if video_id:
@@ -154,8 +197,21 @@ def get_youtube_trends(config, mode="latest"):
             
         results[query] = videos
 
-    # 特定チャンネルの動画を確実に追加する
+    # Notionから特定チャンネルを読み込んで動画を確実に追加する
+    notion_api_key = os.getenv("NOTION_API_KEY")
+    channels_db_id = os.getenv("NOTION_CHANNELS_DB_ID")
     target_channels = yt_config.get("target_channels", [])
+    
+    if notion_api_key and channels_db_id:
+        headers = {
+            "Authorization": f"Bearer {notion_api_key}",
+            "Content-Type": "application/json",
+            "Notion-Version": "2022-06-28"
+        }
+        notion_channels = get_target_channels_from_notion(headers, channels_db_id)
+        # config.jsonとNotionの両方のリストを合体させる
+        target_channels = list(set(target_channels + notion_channels))
+
     if target_channels and mode == "latest":
         print("\n  - Fetching latest videos from targeted channels...")
         channel_videos = []
