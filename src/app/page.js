@@ -13,8 +13,11 @@ export default function Home() {
     async function fetchVideos() {
       try {
         const res = await fetch('/api/videos');
-        if (!res.ok) throw new Error('Failed to fetch data');
-        const data = await res.json();
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error(`Status: ${res.status}, Details: ${text}`);
+        }
+        const data = JSON.parse(await res.text());
         setVideos(data.videos || []);
       } catch (err) {
         setError(err.message);

@@ -58,6 +58,6 @@ export async function GET() {
     return NextResponse.json({ videos });
   } catch (error) {
     console.error('Error fetching videos from Notion:', error);
-    return NextResponse.json({ error: 'Failed to fetch videos' }, { status: 500 });
+    return NextResponse.json({ error: error.message || 'Unknown error occurred in API' }, { status: 500 });
   }
 }
