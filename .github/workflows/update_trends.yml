@@ -1,0 +1,37 @@
+name: Update YouTube Trends
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 毎日UTC 0:00（日本時間9:00）に自動実行
+  workflow_dispatch: # 手動実行用ボタン（GitHub画面から）
+  repository_dispatch:
+    types: [trigger-scraper] # Webアプリ側からのAPI経由での実行トリガー
+
+jobs:
+  run-scraper:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          
+      - name: Install dependencies
+        run: |
+          cd scraper
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: Run Trend Collector
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          cd scraper
+          python trend_collector.py

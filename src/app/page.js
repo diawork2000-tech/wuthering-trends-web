@@ -9,6 +9,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('すべて');
+  const [isSyncing, setIsSyncing] = useState(false);
 
   const tabs = ['すべて', '最新 (Shorts)', '最新 (通常)', '週間人気 (Shorts)', '週間人気 (通常)'];
 
@@ -31,11 +32,37 @@ export default function Home() {
     fetchVideos();
   }, []);
 
+  const handleSync = async () => {
+    if (!window.confirm('クラウドで情報収集を開始しますか？完了まで数分かかり、Discordに通知されます。')) return;
+    
+    setIsSyncing(true);
+    try {
+      const res = await fetch('/api/trigger', { method: 'POST' });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        alert(`起動に失敗しました: ${err.error || res.status}`);
+      } else {
+        alert('情報収集スクリプトを起動しました！数分後にDiscordへ通知が届きます。');
+      }
+    } catch (err) {
+      alert('エラーが発生しました: ' + err.message);
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.header}>
         <h1 className={styles.title}>Wuthering Trends</h1>
         <p className={styles.subtitle}>Daily updated gallery of popular and latest videos.</p>
+        <button 
+          className={styles.syncButton} 
+          onClick={handleSync} 
+          disabled={isSyncing}
+        >
+          {isSyncing ? '起動中...' : '🔄 最新情報を収集'}
+        </button>
       </div>
 
       <div className={styles.tabsContainer}>

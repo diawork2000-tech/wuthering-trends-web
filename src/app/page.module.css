@@ -25,6 +25,31 @@
   font-size: 1.2rem;
   color: #888;
   font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.syncButton {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(5px);
+  margin-top: 10px;
+}
+
+.syncButton:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.syncButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .tabsContainer {
