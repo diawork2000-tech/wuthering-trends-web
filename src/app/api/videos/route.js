@@ -1,28 +1,42 @@
-import { Client } from '@notionhq/client';
 import { NextResponse } from 'next/server';
 
-const notion = new Client({ auth: process.env.NOTION_API_KEY });
-const databaseId = process.env.NOTION_DATABASE_ID;
-
 export async function GET() {
-  if (!databaseId) {
-    return NextResponse.json({ error: 'Database ID is not defined' }, { status: 500 });
+  const notionApiKey = process.env.NOTION_API_KEY;
+  const databaseId = process.env.NOTION_DATABASE_ID;
+
+  if (!databaseId || !notionApiKey) {
+    return NextResponse.json({ error: 'Database ID or API Key is not defined' }, { status: 500 });
   }
 
   try {
-    const response = await notion.databases.query({
-      database_id: databaseId,
-      sorts: [
-        {
-          timestamp: 'created_time',
-          direction: 'descending',
-        },
-      ],
-      page_size: 100, // 最新の100件を取得
+    const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${notionApiKey}`,
+        'Content-Type': 'application/json',
+        'Notion-Version': '2022-06-28'
+      },
+      body: JSON.stringify({
+        sorts: [
+          {
+            timestamp: 'created_time',
+            direction: 'descending',
+          },
+        ],
+        page_size: 100,
+      }),
+      // Next.jsのキャッシュを無効化して常に最新を取得
+      cache: 'no-store'
     });
 
-    const videos = response.results.map((page) => {
-      // データの安全な抽出
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`Notion API Error: ${response.status} ${errText}`);
+    }
+
+    const data = await response.json();
+
+    const videos = data.results.map((page) => {
       const titleProp = page.properties['タイトル'];
       const urlProp = page.properties['URL'];
       const channelProp = page.properties['チャンネル'];
@@ -33,14 +47,16 @@ export async function GET() {
       const channel = channelProp?.rich_text?.[0]?.plain_text || 'Unknown Channel';
       const category = categoryProp?.select?.name || '';
       
-      // サムネイル画像（カバー画像）
       const thumbnail = page.cover?.external?.url || 'https://via.placeholder.com/640x360.png?text=No+Image';
 
-      // YouTubeのVideo IDを抽出
       let videoId = '';
       if (url) {
-        const urlObj = new URL(url);
-        videoId = urlObj.searchParams.get('v') || '';
+        try {
+          const urlObj = new URL(url);
+          videoId = urlObj.searchParams.get('v') || '';
+        } catch (e) {
+          // invalid url
+        }
       }
 
       return {
