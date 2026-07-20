@@ -8,6 +8,9 @@ export default function Home() {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [activeTab, setActiveTab] = useState('すべて');
+
+  const tabs = ['すべて', '最新 (Shorts)', '最新 (通常)', '週間人気 (Shorts)', '週間人気 (通常)'];
 
   useEffect(() => {
     async function fetchVideos() {
@@ -35,6 +38,18 @@ export default function Home() {
         <p className={styles.subtitle}>Daily updated gallery of popular and latest videos.</p>
       </div>
 
+      <div className={styles.tabsContainer}>
+        {tabs.map((tab) => (
+          <button
+            key={tab}
+            className={`${styles.tabButton} ${activeTab === tab ? styles.activeTab : ''}`}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
       {loading ? (
         <div className={styles.loadingContainer}>
           <div className={styles.spinner}></div>
@@ -46,8 +61,10 @@ export default function Home() {
         </div>
       ) : (
         <div className={styles.gallery}>
-          {videos.map((video) => (
-            <VideoCard key={video.id} video={video} />
+          {videos
+            .filter((video) => activeTab === 'すべて' || video.category === activeTab)
+            .map((video) => (
+              <VideoCard key={video.id} video={video} />
           ))}
         </div>
       )}

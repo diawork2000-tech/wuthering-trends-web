@@ -9,6 +9,10 @@ export default function VideoCard({ video }) {
 
   // Intersection Observer for mobile scroll auto-play
   useEffect(() => {
+    // マウスでホバー可能なPC環境ではスクロール再生（Observer）を無効化
+    const isHoverable = window.matchMedia('(hover: hover)').matches;
+    if (isHoverable) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
