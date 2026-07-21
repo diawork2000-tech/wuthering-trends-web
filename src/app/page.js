@@ -25,6 +25,9 @@ export default function Home() {
   const [configSha, setConfigSha] = useState('');
   const [configData, setConfigData] = useState(null);
 
+  // ズーム機能用の状態 (カード幅: 200px 〜 500px 程度)
+  const [zoomLevel, setZoomLevel] = useState(300);
+
   const tabs = ['すべて', '最新 (Shorts)', '最新 (通常)', '週間人気 (Shorts)', '週間人気 (通常)', '登録チャンネル'];
 
   useEffect(() => {
@@ -203,7 +206,21 @@ export default function Home() {
       <div className={styles.header}>
         <div className={styles.topBar}>
           <h1 className={styles.title}>Wuthering Trends</h1>
-          <button className={styles.settingsIconBtn} onClick={openSettings}>⚙️</button>
+          <div className={styles.topControls}>
+            <div className={styles.zoomControl}>
+              <span title="動画サイズを縮小">➖</span>
+              <input 
+                type="range" 
+                min="150" 
+                max="500" 
+                value={zoomLevel} 
+                onChange={(e) => setZoomLevel(Number(e.target.value))}
+                className={styles.zoomSlider}
+              />
+              <span title="動画サイズを拡大">➕</span>
+            </div>
+            <button className={styles.settingsIconBtn} onClick={openSettings}>⚙️</button>
+          </div>
         </div>
         <p className={styles.subtitle}>Daily updated gallery of popular and latest videos.</p>
         <button 
@@ -237,7 +254,7 @@ export default function Home() {
           <p>Error: {error}</p>
         </div>
       ) : (
-        <div className={styles.gallery}>
+        <div className={styles.gallery} style={{ '--card-width': `${zoomLevel}px` }}>
           {videos
             .filter((video) => activeTab === 'すべて' || video.category === activeTab)
             .map((video) => (

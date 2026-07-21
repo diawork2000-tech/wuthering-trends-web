@@ -9,14 +9,13 @@ export async function GET() {
   }
 
   try {
-    const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${notionApiKey}`,
-        'Content-Type': 'application/json',
-        'Notion-Version': '2022-06-28'
-      },
-      body: JSON.stringify({
+    let allResults = [];
+    let hasMore = true;
+    let nextCursor = undefined;
+    
+    // 最大5ページ (500件) まで取得する
+    while (hasMore && allResults.length < 500) {
+      const body = {
         sorts: [
           {
             timestamp: 'created_time',
@@ -24,19 +23,36 @@ export async function GET() {
           },
         ],
         page_size: 100,
-      }),
-      // Next.jsのキャッシュを無効化して常に最新を取得
-      cache: 'no-store'
-    });
+      };
+      
+      if (nextCursor) {
+        body.start_cursor = nextCursor;
+      }
 
-    if (!response.ok) {
-      const errText = await response.text();
-      throw new Error(`Notion API Error: ${response.status} ${errText}`);
+      const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${notionApiKey}`,
+          'Content-Type': 'application/json',
+          'Notion-Version': '2022-06-28'
+        },
+        body: JSON.stringify(body),
+        cache: 'no-store'
+      });
+
+      if (!response.ok) {
+        const errText = await response.text();
+        throw new Error(`Notion API Error: ${response.status} ${errText}`);
+      }
+
+      const data = await response.json();
+      allResults = allResults.concat(data.results);
+      
+      hasMore = data.has_more;
+      nextCursor = data.next_cursor;
     }
 
-    const data = await response.json();
-
-    const videos = data.results.map((page) => {
+    const videos = allResults.map((page) => {
       const titleProp = page.properties['タイトル'];
       const urlProp = page.properties['URL'];
       const channelProp = page.properties['チャンネル'];

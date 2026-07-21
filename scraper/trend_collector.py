@@ -37,11 +37,26 @@ def should_exclude(title, exclude_words):
 
 def translate_if_needed(text):
     """日本語が含まれていなければGoogle翻訳で日本語に変換する"""
-    if not text or is_japanese(text):
+    if not text:
         return text
+        
+    if is_japanese(text):
+        return text
+        
     try:
-        return GoogleTranslator(source='auto', target='ja').translate(text)
-    except Exception:
+        # 短い中国語などが自動判定で日本語(ja)と誤判定されるのを防ぐため、
+        # autoで翻訳前と同じ結果になった場合はzh-TWからの翻訳を試す
+        translator_auto = GoogleTranslator(source='auto', target='ja')
+        trans_auto = translator_auto.translate(text)
+        
+        if trans_auto != text:
+            return trans_auto
+            
+        # それでも変わらない場合は中国語（繁体字）として強制翻訳
+        translator_zh = GoogleTranslator(source='zh-TW', target='ja')
+        return translator_zh.translate(text)
+    except Exception as e:
+        print(f"Translation error: {e}")
         return text
 
 def fetch_youtube_api(youtube, query, max_results, region_code, order="date", published_after=None, video_duration="short"):
@@ -56,6 +71,7 @@ def fetch_youtube_api(youtube, query, max_results, region_code, order="date", pu
         "order": order,
         "maxResults": max_results,
         "regionCode": region_code,
+        "relevanceLanguage": "ja",
         "videoDuration": video_duration
     }
     if published_after:

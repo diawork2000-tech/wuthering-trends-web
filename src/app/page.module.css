@@ -13,22 +13,46 @@
 
 .topBar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 16px;
+}
+
+.topControls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.zoomControl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.zoomControl span {
+  font-size: 0.8rem;
+  color: #aaa;
+  cursor: default;
+}
+
+.zoomSlider {
+  width: 100px;
+  cursor: pointer;
+  accent-color: #0070f3;
 }
 
 .settingsIconBtn {
   background: none;
   border: none;
-  font-size: 2rem;
+  font-size: 1.8rem;
   cursor: pointer;
   transition: transform 0.2s;
-  padding: 0;
-  margin: 0;
 }
 .settingsIconBtn:hover {
-  transform: rotate(45deg);
+  transform: scale(1.1);
 }
 
 .title {
