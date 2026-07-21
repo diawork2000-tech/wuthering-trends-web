@@ -16,7 +16,13 @@ def load_config():
     if not os.path.exists(CONFIG_FILE):
         print(f"Error: {CONFIG_FILE} not found. Using default settings.")
         return {
-            "youtube": {"search_queries": ["鳴潮", "Wuthering Waves"], "max_results_per_query": 50, "region_code": "JP"}
+            "youtube": {
+                "search_queries": ["鳴潮", "Wuthering Waves"], 
+                "max_results_per_query": 50, 
+                "region_code": "JP",
+                "shorts_ratio": 0.85,
+                "jp_ratio": 0.85
+            }
         }
     with open(CONFIG_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
@@ -176,8 +182,10 @@ def get_youtube_trends(config, mode="latest"):
     region_code = yt_config.get("region_code", "JP")
     exclude_words = yt_config.get("exclude_words", [])
     
-    # 85%をShorts、15%を通常動画（medium）に割り当てる
-    shorts_limit = int(max_results * 0.85)
+    shorts_ratio = yt_config.get("shorts_ratio", 0.85)
+    jp_ratio = yt_config.get("jp_ratio", 0.85)
+    
+    shorts_limit = int(max_results * shorts_ratio)
     long_limit = max_results - shorts_limit
 
     # popular_weekly モードの場合は1週間前の日時を設定
@@ -196,13 +204,27 @@ def get_youtube_trends(config, mode="latest"):
         long_items = fetch_youtube_api(youtube, query, long_limit, region_code, order, published_after, "medium")
         
         videos = []
-        # Shortsの処理
+        
+        # Shortsの処理（言語割合による制限）
+        shorts_jp_limit = int(shorts_limit * jp_ratio)
+        shorts_foreign_limit = shorts_limit - shorts_jp_limit
+        shorts_jp_count = 0
+        shorts_foreign_count = 0
+        
         for item in shorts_items:
             snippet = item.get("snippet", {})
             if snippet.get("liveBroadcastContent") != "none": continue
             title = snippet.get("title", "")
             if should_exclude(title, exclude_words): continue
             
+            # 言語判定と上限チェック
+            if is_japanese(title):
+                if shorts_jp_count >= shorts_jp_limit: continue
+                shorts_jp_count += 1
+            else:
+                if shorts_foreign_count >= shorts_foreign_limit: continue
+                shorts_foreign_count += 1
+                
             videos.append({
                 "title": translate_if_needed(title),
                 "original_title": title,
@@ -212,12 +234,25 @@ def get_youtube_trends(config, mode="latest"):
                 "video_type": "Shorts"
             })
             
-        # 通常動画の処理
+        # 通常動画の処理（言語割合による制限）
+        long_jp_limit = int(long_limit * jp_ratio)
+        long_foreign_limit = long_limit - long_jp_limit
+        long_jp_count = 0
+        long_foreign_count = 0
+        
         for item in long_items:
             snippet = item.get("snippet", {})
             if snippet.get("liveBroadcastContent") != "none": continue
             title = snippet.get("title", "")
             if should_exclude(title, exclude_words): continue
+            
+            # 言語判定と上限チェック
+            if is_japanese(title):
+                if long_jp_count >= long_jp_limit: continue
+                long_jp_count += 1
+            else:
+                if long_foreign_count >= long_foreign_limit: continue
+                long_foreign_count += 1
             
             videos.append({
                 "title": translate_if_needed(title),

@@ -25,6 +25,14 @@ export default function Home() {
   const [configSha, setConfigSha] = useState('');
   const [configData, setConfigData] = useState(null);
 
+  // 大元設定用の状態
+  const [activeSettingsTab, setActiveSettingsTab] = useState('general');
+  const [searchQueries, setSearchQueries] = useState([]);
+  const [newSearchQuery, setNewSearchQuery] = useState('');
+  const [maxResults, setMaxResults] = useState(50);
+  const [shortsRatio, setShortsRatio] = useState(0.85);
+  const [jpRatio, setJpRatio] = useState(0.85);
+
   // ズーム機能用の状態 (カード幅: 200px 〜 500px 程度)
   const [zoomLevel, setZoomLevel] = useState(300);
 
@@ -138,6 +146,10 @@ export default function Home() {
         setConfigData(data.config);
         setConfigSha(data.sha);
         setExcludeWords(data.config.youtube?.exclude_words || []);
+        setSearchQueries(data.config.youtube?.search_queries || []);
+        setMaxResults(data.config.youtube?.max_results_per_query || 50);
+        setShortsRatio(data.config.youtube?.shorts_ratio ?? 0.85);
+        setJpRatio(data.config.youtube?.jp_ratio ?? 0.85);
       }
     } catch (err) {
       console.error(err);
@@ -151,7 +163,17 @@ export default function Home() {
     try {
       const newConfig = { ...configData };
       if (!newConfig.youtube) newConfig.youtube = {};
-      newConfig.youtube.exclude_words = newExcludeWords;
+      
+      // newExcludeWordsが引数で渡された場合はそれを使用し、そうでない場合は現在の状態を使用
+      newConfig.youtube.exclude_words = newExcludeWords || excludeWords;
+      
+      // searchQueriesが引数で渡された場合はそれを使用
+      newConfig.youtube.search_queries = arguments.length > 1 && arguments[1] ? arguments[1] : searchQueries;
+      
+      // 他のプロパティも現在の状態を反映
+      newConfig.youtube.max_results_per_query = maxResults;
+      newConfig.youtube.shorts_ratio = shortsRatio;
+      newConfig.youtube.jp_ratio = jpRatio;
 
       const res = await fetch('/api/config', {
         method: 'PUT',
@@ -193,6 +215,32 @@ export default function Home() {
     const newWords = excludeWords.filter(w => w !== word);
     setExcludeWords(newWords);
     updateConfig(newWords);
+  };
+
+  const handleAddSearchQuery = (e) => {
+    e.preventDefault();
+    if (!newSearchQuery.trim()) return;
+    const q = newSearchQuery.trim();
+    if (searchQueries.includes(q)) {
+      alert('既に登録されています');
+      return;
+    }
+    
+    const newQs = [...searchQueries, q];
+    setSearchQueries(newQs);
+    setNewSearchQuery('');
+    updateConfig(null, newQs);
+  };
+
+  const handleDeleteSearchQuery = (q) => {
+    if (!window.confirm(`「${q}」を検索キーワードから削除しますか？`)) return;
+    const newQs = searchQueries.filter(w => w !== q);
+    setSearchQueries(newQs);
+    updateConfig(null, newQs);
+  };
+
+  const handleSaveGeneralSettings = () => {
+    updateConfig();
   };
 
   const openSettings = () => {
@@ -268,83 +316,182 @@ export default function Home() {
         <div className={styles.modalOverlay} onClick={() => setShowSettings(false)}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalHeader}>
-              <h2>⚙️ 確実収集チャンネル設定</h2>
+              <h2>⚙️ システム設定</h2>
               <button className={styles.closeBtn} onClick={() => setShowSettings(false)}>×</button>
             </div>
-            <div className={styles.settingsGrid}>
-              <div className={styles.settingsSection}>
-                <h3>📺 登録チャンネル</h3>
-                <p className={styles.modalDesc}>ここに登録されたチャンネルの動画は、検索から漏れることなく確実に収集されます。</p>
-                <form className={styles.addForm} onSubmit={handleAddChannel}>
-                  <input 
-                    type="text" 
-                    placeholder="チャンネル名 (例: 鳴潮公式)" 
-                    value={newChannelName}
-                    onChange={(e) => setNewChannelName(e.target.value)}
-                    required
-                  />
-                  <input 
-                    type="text" 
-                    placeholder="URL または チャンネルID" 
-                    value={newChannelId}
-                    onChange={(e) => setNewChannelId(e.target.value)}
-                    required
-                  />
-                  <button type="submit" disabled={isAddingChannel}>
-                    {isAddingChannel ? '追加中...' : '追加'}
-                  </button>
-                </form>
-                <div className={styles.itemList}>
-                  {channels.length === 0 ? (
-                    <p className={styles.emptyList}>登録されていません</p>
-                  ) : (
-                    <ul>
-                      {channels.map(ch => (
-                        <li key={ch.id}>
-                          <div className={styles.itemInfo}>
-                            <span className={styles.itemName}>{ch.name}</span>
-                            <span className={styles.itemId}>{ch.channelId}</span>
-                          </div>
-                          <button className={styles.deleteBtn} onClick={() => handleDeleteChannel(ch.id)}>削除</button>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
+            
+            <div className={styles.settingsTabs}>
+              <button 
+                className={`${styles.settingsTab} ${activeSettingsTab === 'general' ? styles.activeSettingsTab : ''}`}
+                onClick={() => setActiveSettingsTab('general')}
+              >大元設定</button>
+              <button 
+                className={`${styles.settingsTab} ${activeSettingsTab === 'channels' ? styles.activeSettingsTab : ''}`}
+                onClick={() => setActiveSettingsTab('channels')}
+              >登録チャンネル</button>
+              <button 
+                className={`${styles.settingsTab} ${activeSettingsTab === 'exclude' ? styles.activeSettingsTab : ''}`}
+                onClick={() => setActiveSettingsTab('exclude')}
+              >除外ワード</button>
+            </div>
 
-              <div className={styles.settingsSection}>
-                <h3>🚫 除外ワード</h3>
-                <p className={styles.modalDesc}>ここに登録した単語がタイトルに完全に一致する動画は収集されません。</p>
-                <form className={styles.addForm} onSubmit={handleAddExcludeWord}>
-                  <input 
-                    type="text" 
-                    placeholder="除外する単語 (例: MMD)" 
-                    value={newExcludeWord}
-                    onChange={(e) => setNewExcludeWord(e.target.value)}
-                    required
-                  />
-                  <button type="submit" disabled={isUpdatingConfig}>
-                    {isUpdatingConfig ? '追加中...' : '追加'}
+            <div className={styles.settingsBody}>
+              {activeSettingsTab === 'general' && (
+                <div className={styles.settingsSection}>
+                  <h3>🔍 検索キーワード</h3>
+                  <p className={styles.modalDesc}>YouTubeで検索するキーワード。複数ある場合、それぞれに対して検索が実行されます。</p>
+                  <form className={styles.addForm} onSubmit={handleAddSearchQuery}>
+                    <input 
+                      type="text" 
+                      placeholder="キーワード (例: 鳴潮)" 
+                      value={newSearchQuery}
+                      onChange={(e) => setNewSearchQuery(e.target.value)}
+                      required
+                    />
+                    <button type="submit" disabled={isUpdatingConfig}>追加</button>
+                  </form>
+                  <div className={styles.tagList}>
+                    {searchQueries.map(q => (
+                      <span key={q} className={styles.tag}>
+                        {q} <button onClick={() => handleDeleteSearchQuery(q)} className={styles.tagDelBtn}>×</button>
+                      </span>
+                    ))}
+                  </div>
+
+                  <hr className={styles.divider} />
+
+                  <h3>📊 収集パラメータ設定</h3>
+                  <div className={styles.paramGroup}>
+                    <label>
+                      1キーワードあたりの最大収集件数 (現在の設定: {maxResults}件)
+                      <input 
+                        type="number" 
+                        min="5" 
+                        max="50" 
+                        value={maxResults}
+                        onChange={(e) => setMaxResults(Number(e.target.value))}
+                        className={styles.numberInput}
+                      />
+                    </label>
+                  </div>
+                  
+                  <div className={styles.paramGroup}>
+                    <label>
+                      Shortsと通常動画の割合 (Shorts: {Math.round(shortsRatio * 100)}% / 通常: {100 - Math.round(shortsRatio * 100)}%)
+                      <input 
+                        type="range" 
+                        min="0" 
+                        max="1" 
+                        step="0.05"
+                        value={shortsRatio}
+                        onChange={(e) => setShortsRatio(Number(e.target.value))}
+                        className={styles.rangeInput}
+                      />
+                    </label>
+                  </div>
+
+                  <div className={styles.paramGroup}>
+                    <label>
+                      日本と海外動画の割合 (日本: {Math.round(jpRatio * 100)}% / 海外: {100 - Math.round(jpRatio * 100)}%)
+                      <input 
+                        type="range" 
+                        min="0" 
+                        max="1" 
+                        step="0.05"
+                        value={jpRatio}
+                        onChange={(e) => setJpRatio(Number(e.target.value))}
+                        className={styles.rangeInput}
+                      />
+                    </label>
+                  </div>
+
+                  <button 
+                    className={styles.saveBtn} 
+                    onClick={handleSaveGeneralSettings}
+                    disabled={isUpdatingConfig}
+                  >
+                    {isUpdatingConfig ? '保存中...' : '設定を保存'}
                   </button>
-                </form>
-                <div className={styles.itemList}>
-                  {excludeWords.length === 0 ? (
-                    <p className={styles.emptyList}>登録されていません</p>
-                  ) : (
-                    <ul>
-                      {excludeWords.map(word => (
-                        <li key={word}>
-                          <span className={styles.itemName}>{word}</span>
-                          <button className={styles.deleteBtn} onClick={() => handleDeleteExcludeWord(word)} disabled={isUpdatingConfig}>
-                            削除
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
                 </div>
-              </div>
+              )}
+
+              {activeSettingsTab === 'channels' && (
+                <div className={styles.settingsSection}>
+                  <h3>📺 登録チャンネル</h3>
+                  <p className={styles.modalDesc}>ここに登録されたチャンネルの動画は、検索から漏れることなく確実に収集されます。</p>
+                  <form className={styles.addForm} onSubmit={handleAddChannel}>
+                    <input 
+                      type="text" 
+                      placeholder="チャンネル名 (例: 鳴潮公式)" 
+                      value={newChannelName}
+                      onChange={(e) => setNewChannelName(e.target.value)}
+                      required
+                    />
+                    <input 
+                      type="text" 
+                      placeholder="URL または チャンネルID" 
+                      value={newChannelId}
+                      onChange={(e) => setNewChannelId(e.target.value)}
+                      required
+                    />
+                    <button type="submit" disabled={isAddingChannel}>
+                      {isAddingChannel ? '追加中...' : '追加'}
+                    </button>
+                  </form>
+                  <div className={styles.itemList}>
+                    {channels.length === 0 ? (
+                      <p className={styles.emptyList}>登録されていません</p>
+                    ) : (
+                      <ul>
+                        {channels.map(ch => (
+                          <li key={ch.id}>
+                            <div className={styles.itemInfo}>
+                              <span className={styles.itemName}>{ch.name}</span>
+                              <span className={styles.itemId}>{ch.channelId}</span>
+                            </div>
+                            <button className={styles.deleteBtn} onClick={() => handleDeleteChannel(ch.id)}>削除</button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {activeSettingsTab === 'exclude' && (
+                <div className={styles.settingsSection}>
+                  <h3>🚫 除外ワード</h3>
+                  <p className={styles.modalDesc}>ここに登録した単語がタイトルに完全に一致する動画は収集されません。</p>
+                  <form className={styles.addForm} onSubmit={handleAddExcludeWord}>
+                    <input 
+                      type="text" 
+                      placeholder="除外する単語 (例: MMD)" 
+                      value={newExcludeWord}
+                      onChange={(e) => setNewExcludeWord(e.target.value)}
+                      required
+                    />
+                    <button type="submit" disabled={isUpdatingConfig}>
+                      {isUpdatingConfig ? '追加中...' : '追加'}
+                    </button>
+                  </form>
+                  <div className={styles.itemList}>
+                    {excludeWords.length === 0 ? (
+                      <p className={styles.emptyList}>登録されていません</p>
+                    ) : (
+                      <ul>
+                        {excludeWords.map(word => (
+                          <li key={word}>
+                            <span className={styles.itemName}>{word}</span>
+                            <button className={styles.deleteBtn} onClick={() => handleDeleteExcludeWord(word)} disabled={isUpdatingConfig}>
+                              削除
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

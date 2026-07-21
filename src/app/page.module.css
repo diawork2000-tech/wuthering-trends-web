@@ -235,16 +235,134 @@
   font-size: 0.9rem;
 }
 
-.settingsGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+.settingsTabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
 }
 
-@media (max-width: 768px) {
-  .settingsGrid {
-    grid-template-columns: 1fr;
-  }
+.settingsTab {
+  background: none;
+  border: none;
+  color: #888;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 6px;
+}
+
+.settingsTab:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.activeSettingsTab {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.settingsBody {
+  min-height: 300px;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.tag {
+  background: rgba(37, 117, 252, 0.2);
+  border: 1px solid rgba(37, 117, 252, 0.5);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.tagDelBtn {
+  background: none;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.tagDelBtn:hover {
+  color: #ff4d4f;
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 25px 0;
+}
+
+.paramGroup {
+  margin-bottom: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.paramGroup label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.numberInput {
+  background: #111;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.rangeInput {
+  width: 100%;
+  cursor: pointer;
+  accent-color: #0070f3;
+}
+
+.saveBtn {
+  background: #0070f3;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+  margin-top: 10px;
+}
+
+.saveBtn:hover:not(:disabled) {
+  background: #0051b3;
+}
+
+.saveBtn:disabled {
+  background: #333;
+  cursor: not-allowed;
 }
 
 .settingsSection {
