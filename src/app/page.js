@@ -18,6 +18,13 @@ export default function Home() {
   const [newChannelId, setNewChannelId] = useState('');
   const [isAddingChannel, setIsAddingChannel] = useState(false);
 
+  // 除外ワード管理用の状態
+  const [excludeWords, setExcludeWords] = useState([]);
+  const [newExcludeWord, setNewExcludeWord] = useState('');
+  const [isUpdatingConfig, setIsUpdatingConfig] = useState(false);
+  const [configSha, setConfigSha] = useState('');
+  const [configData, setConfigData] = useState(null);
+
   const tabs = ['すべて', '最新 (Shorts)', '最新 (通常)', '週間人気 (Shorts)', '週間人気 (通常)', '登録チャンネル'];
 
   useEffect(() => {
@@ -104,9 +111,91 @@ export default function Home() {
     }
   };
 
+  const handleDeleteChannel = async (id) => {
+    if (!window.confirm('このチャンネルを削除してもよろしいですか？')) return;
+    
+    try {
+      const res = await fetch(`/api/channels/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        fetchChannels();
+      } else {
+        const err = await res.json();
+        alert('削除エラー: ' + err.error);
+      }
+    } catch (err) {
+      alert('エラーが発生しました: ' + err.message);
+    }
+  };
+
+  const fetchConfig = async () => {
+    try {
+      const res = await fetch('/api/config');
+      if (res.ok) {
+        const data = await res.json();
+        setConfigData(data.config);
+        setConfigSha(data.sha);
+        setExcludeWords(data.config.youtube?.exclude_words || []);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const updateConfig = async (newExcludeWords) => {
+    if (!configData || !configSha) return;
+    setIsUpdatingConfig(true);
+    
+    try {
+      const newConfig = { ...configData };
+      if (!newConfig.youtube) newConfig.youtube = {};
+      newConfig.youtube.exclude_words = newExcludeWords;
+
+      const res = await fetch('/api/config', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ config: newConfig, sha: configSha })
+      });
+
+      if (res.ok) {
+        fetchConfig(); // SHAを更新するために再取得
+      } else {
+        const err = await res.json();
+        alert('設定更新エラー: ' + err.error);
+        fetchConfig(); // 失敗時も再取得して状態を戻す
+      }
+    } catch (err) {
+      alert('エラーが発生しました: ' + err.message);
+    } finally {
+      setIsUpdatingConfig(false);
+    }
+  };
+
+  const handleAddExcludeWord = (e) => {
+    e.preventDefault();
+    if (!newExcludeWord.trim()) return;
+    const word = newExcludeWord.trim();
+    if (excludeWords.includes(word)) {
+      alert('既に登録されています');
+      return;
+    }
+    
+    const newWords = [...excludeWords, word];
+    setExcludeWords(newWords);
+    setNewExcludeWord('');
+    updateConfig(newWords);
+  };
+
+  const handleDeleteExcludeWord = (word) => {
+    if (!window.confirm(`「${word}」を除外ワードから削除しますか？`)) return;
+    const newWords = excludeWords.filter(w => w !== word);
+    setExcludeWords(newWords);
+    updateConfig(newWords);
+  };
+
   const openSettings = () => {
     setShowSettings(true);
     fetchChannels();
+    fetchConfig();
   };
 
   return (
@@ -165,43 +254,80 @@ export default function Home() {
               <h2>⚙️ 確実収集チャンネル設定</h2>
               <button className={styles.closeBtn} onClick={() => setShowSettings(false)}>×</button>
             </div>
-            
-            <p className={styles.modalDesc}>ここに登録されたチャンネルの動画は、検索から漏れることなく確実に収集されます。</p>
-            
-            <form className={styles.addChannelForm} onSubmit={handleAddChannel}>
-              <input 
-                type="text" 
-                placeholder="チャンネル名 (例: 鳴潮公式)" 
-                value={newChannelName}
-                onChange={(e) => setNewChannelName(e.target.value)}
-                required
-              />
-              <input 
-                type="text" 
-                placeholder="チャンネルID (例: UC...)" 
-                value={newChannelId}
-                onChange={(e) => setNewChannelId(e.target.value)}
-                required
-              />
-              <button type="submit" disabled={isAddingChannel}>
-                {isAddingChannel ? '追加中...' : '追加する'}
-              </button>
-            </form>
+            <div className={styles.settingsGrid}>
+              <div className={styles.settingsSection}>
+                <h3>📺 登録チャンネル</h3>
+                <p className={styles.modalDesc}>ここに登録されたチャンネルの動画は、検索から漏れることなく確実に収集されます。</p>
+                <form className={styles.addForm} onSubmit={handleAddChannel}>
+                  <input 
+                    type="text" 
+                    placeholder="チャンネル名 (例: 鳴潮公式)" 
+                    value={newChannelName}
+                    onChange={(e) => setNewChannelName(e.target.value)}
+                    required
+                  />
+                  <input 
+                    type="text" 
+                    placeholder="URL または チャンネルID" 
+                    value={newChannelId}
+                    onChange={(e) => setNewChannelId(e.target.value)}
+                    required
+                  />
+                  <button type="submit" disabled={isAddingChannel}>
+                    {isAddingChannel ? '追加中...' : '追加'}
+                  </button>
+                </form>
+                <div className={styles.itemList}>
+                  {channels.length === 0 ? (
+                    <p className={styles.emptyList}>登録されていません</p>
+                  ) : (
+                    <ul>
+                      {channels.map(ch => (
+                        <li key={ch.id}>
+                          <div className={styles.itemInfo}>
+                            <span className={styles.itemName}>{ch.name}</span>
+                            <span className={styles.itemId}>{ch.channelId}</span>
+                          </div>
+                          <button className={styles.deleteBtn} onClick={() => handleDeleteChannel(ch.id)}>削除</button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
 
-            <div className={styles.channelList}>
-              <h3>登録済みチャンネル一覧</h3>
-              {channels.length === 0 ? (
-                <p className={styles.emptyList}>登録されていません</p>
-              ) : (
-                <ul>
-                  {channels.map(ch => (
-                    <li key={ch.id}>
-                      <span className={styles.chName}>{ch.name}</span>
-                      <span className={styles.chId}>{ch.channelId}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <div className={styles.settingsSection}>
+                <h3>🚫 除外ワード</h3>
+                <p className={styles.modalDesc}>ここに登録した単語がタイトルに完全に一致する動画は収集されません。</p>
+                <form className={styles.addForm} onSubmit={handleAddExcludeWord}>
+                  <input 
+                    type="text" 
+                    placeholder="除外する単語 (例: MMD)" 
+                    value={newExcludeWord}
+                    onChange={(e) => setNewExcludeWord(e.target.value)}
+                    required
+                  />
+                  <button type="submit" disabled={isUpdatingConfig}>
+                    {isUpdatingConfig ? '追加中...' : '追加'}
+                  </button>
+                </form>
+                <div className={styles.itemList}>
+                  {excludeWords.length === 0 ? (
+                    <p className={styles.emptyList}>登録されていません</p>
+                  ) : (
+                    <ul>
+                      {excludeWords.map(word => (
+                        <li key={word}>
+                          <span className={styles.itemName}>{word}</span>
+                          <button className={styles.deleteBtn} onClick={() => handleDeleteExcludeWord(word)} disabled={isUpdatingConfig}>
+                            削除
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
