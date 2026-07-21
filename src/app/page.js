@@ -74,12 +74,19 @@ export default function Home() {
     e.preventDefault();
     if (!newChannelName || !newChannelId) return;
     
+    // URLが入力された場合、UCから始まるチャンネルIDを抽出する
+    let extractedId = newChannelId.trim();
+    const match = extractedId.match(/(?:channel\/)?(UC[\w-]{22})/);
+    if (match) {
+      extractedId = match[1];
+    }
+    
     setIsAddingChannel(true);
     try {
       const res = await fetch('/api/channels', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: newChannelName, channelId: newChannelId })
+        body: JSON.stringify({ name: newChannelName, channelId: extractedId })
       });
       
       if (res.ok) {
