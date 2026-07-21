@@ -6,7 +6,7 @@
       "鳴潮 攻略",
       "鳴潮 最新情報"
     ],
-    "max_results_per_query": 5,
+    "max_results_per_query": 50,
     "region_code": "JP",
     "target_channels": [
       "UCw-Oq6UqC_U9o1mI1g4dIxg"
