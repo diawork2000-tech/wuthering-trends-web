@@ -67,12 +67,32 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Name and Channel ID are required' }, { status: 400 });
     }
 
+    // Notionデータベースのスキーマを取得して、title型のプロパティ名を探す
+    const dbResponse = await fetch(`https://api.notion.com/v1/databases/${channelsDbId}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${notionApiKey}`,
+        'Notion-Version': '2022-06-28'
+      }
+    });
+    
+    if (!dbResponse.ok) {
+      throw new Error('Failed to fetch database schema');
+    }
+    
+    const dbData = await dbResponse.json();
+    let titlePropertyName = '名前'; // デフォルト
+    for (const key in dbData.properties) {
+      if (dbData.properties[key].type === 'title') {
+        titlePropertyName = key;
+        break;
+      }
+    }
+
     const payload = {
       parent: { database_id: channelsDbId },
       properties: {
-        // タイトルプロパティは名前不定なので、プロパティタイプで指定できればいいが、
-        // 典型的には「名前」または「Name」
-        "名前": {
+        [titlePropertyName]: {
           title: [
             {
               text: { content: name }
@@ -100,30 +120,8 @@ export async function POST(request) {
     });
 
     if (!response.ok) {
-      // プロパティ名「名前」が見つからなかった場合のフォールバック（英語のNameの場合）
-      if (response.status === 400) {
-        const fallbackPayload = { ...payload };
-        delete fallbackPayload.properties["名前"];
-        fallbackPayload.properties["Name"] = payload.properties["名前"];
-        
-        const fallbackRes = await fetch('https://api.notion.com/v1/pages', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${notionApiKey}`,
-            'Content-Type': 'application/json',
-            'Notion-Version': '2022-06-28'
-          },
-          body: JSON.stringify(fallbackPayload)
-        });
-        
-        if (!fallbackRes.ok) {
-          const errText = await fallbackRes.text();
-          throw new Error(`Notion API Error (Fallback): ${fallbackRes.status} ${errText}`);
-        }
-      } else {
-        const errText = await response.text();
-        throw new Error(`Notion API Error: ${response.status} ${errText}`);
-      }
+      const errText = await response.text();
+      throw new Error(`Notion API Error: ${response.status} ${errText}`);
     }
 
     return NextResponse.json({ success: true });

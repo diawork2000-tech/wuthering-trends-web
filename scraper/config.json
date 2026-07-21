@@ -10,6 +10,10 @@
     "region_code": "JP",
     "target_channels": [
       "UCw-Oq6UqC_U9o1mI1g4dIxg"
+    ],
+    "exclude_words": [
+      "MMD",
+      "viralvideo"
     ]
   }
 }

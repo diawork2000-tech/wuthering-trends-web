@@ -22,8 +22,18 @@ def load_config():
         return json.load(f)
 
 def is_japanese(text):
-    """テキストに日本語（ひらがな、カタカナ、漢字）が含まれているか簡易判定"""
-    return bool(re.search(r'[ぁ-んァ-ヶ亜-熙]', text))
+    """テキストにひらがな・カタカナが含まれているか簡易判定（中国語の誤検知を防ぐため漢字を除外）"""
+    return bool(re.search(r'[ぁ-んァ-ヶ]', text))
+
+def should_exclude(title, exclude_words):
+    """タイトルが除外ワード（完全一致）を含んでいるか判定"""
+    if not exclude_words:
+        return False
+    for ew in exclude_words:
+        # 単語境界 \b を用いて完全一致検索（大文字小文字区別なし）
+        if re.search(r'\b' + re.escape(ew) + r'\b', title, re.IGNORECASE):
+            return True
+    return False
 
 def translate_if_needed(text):
     """日本語が含まれていなければGoogle翻訳で日本語に変換する"""
@@ -148,6 +158,7 @@ def get_youtube_trends(config, mode="latest"):
     queries = yt_config.get("search_queries", ["鳴潮"])
     max_results = yt_config.get("max_results_per_query", 50)
     region_code = yt_config.get("region_code", "JP")
+    exclude_words = yt_config.get("exclude_words", [])
     
     # 85%をShorts、15%を通常動画（medium）に割り当てる
     shorts_limit = int(max_results * 0.85)
@@ -173,9 +184,12 @@ def get_youtube_trends(config, mode="latest"):
         for item in shorts_items:
             snippet = item.get("snippet", {})
             if snippet.get("liveBroadcastContent") != "none": continue
+            title = snippet.get("title", "")
+            if should_exclude(title, exclude_words): continue
+            
             videos.append({
-                "title": translate_if_needed(snippet.get("title", "")),
-                "original_title": snippet.get("title", ""),
+                "title": translate_if_needed(title),
+                "original_title": title,
                 "channel": snippet.get("channelTitle", ""),
                 "url": f"https://www.youtube.com/watch?v={item['id']['videoId']}",
                 "thumbnail": snippet.get("thumbnails", {}).get("medium", {}).get("url", ""),
@@ -186,9 +200,12 @@ def get_youtube_trends(config, mode="latest"):
         for item in long_items:
             snippet = item.get("snippet", {})
             if snippet.get("liveBroadcastContent") != "none": continue
+            title = snippet.get("title", "")
+            if should_exclude(title, exclude_words): continue
+            
             videos.append({
-                "title": translate_if_needed(snippet.get("title", "")),
-                "original_title": snippet.get("title", ""),
+                "title": translate_if_needed(title),
+                "original_title": title,
                 "channel": snippet.get("channelTitle", ""),
                 "url": f"https://www.youtube.com/watch?v={item['id']['videoId']}",
                 "thumbnail": snippet.get("thumbnails", {}).get("medium", {}).get("url", ""),
@@ -221,8 +238,9 @@ def get_youtube_trends(config, mode="latest"):
             for item in ch_items:
                 snippet = item.get("snippet", {})
                 
-                # タイトルにShortsなどと入っている簡易判定（完全ではない）
                 title = snippet.get("title", "")
+                if should_exclude(title, exclude_words): continue
+                
                 is_shorts = "#shorts" in title.lower() or "shorts" in title.lower()
                 v_type = "Shorts" if is_shorts else "通常"
                 
@@ -438,6 +456,11 @@ def main():
     print(f"\nDone. Results have been saved to {output_file} and {md_output_file}")
     
     print("\n[3] Uploading to Notion Database...")
+    # 対象チャンネルの動画を分離する
+    target_channel_videos = []
+    if "★Target Channels" in latest_data:
+        target_channel_videos = latest_data.pop("★Target Channels")
+
     # Notionへ通知（フラットなリストに変換してカテゴリを付与）
     latest_flat = get_flat_video_list(latest_data)
     popular_flat = get_flat_video_list(popular_data)
@@ -459,6 +482,11 @@ def main():
         # 最新のShortsと通常を分けて登録
         send_to_notion([v for v in latest_flat if v.get("video_type") == "Shorts"], "最新 (Shorts)", existing_urls)
         send_to_notion([v for v in latest_flat if v.get("video_type") == "通常"], "最新 (通常)", existing_urls)
+        
+        # 登録チャンネルの動画を専用カテゴリで登録
+        if target_channel_videos:
+            target_flat = get_flat_video_list({"dummy": target_channel_videos})
+            send_to_notion(target_flat, "登録チャンネル", existing_urls)
     else:
         print("Notion API is not configured. Skipping upload.")
     
