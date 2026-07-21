@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 
 export async function DELETE(request, { params }) {
-  const { id } = params; // NotionのページID
+  const p = await params;
+  const { id } = p; // NotionのページID
   const notionApiKey = process.env.NOTION_API_KEY;
 
   if (!notionApiKey) {
