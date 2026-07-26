@@ -36,3 +36,12 @@ jobs:
         run: |
           cd scraper
           python trend_collector.py
+
+      - name: Commit and Push Execution Logs back to repository
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scraper/logs.json || true
+          git commit -m "[Auto-Log] Update trend collector logs [skip ci]" || echo "No log changes to commit"
+          git pull --rebase origin main || true
+          git push origin main || echo "Failed to push log update"

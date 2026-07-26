@@ -65,6 +65,59 @@ def translate_if_needed(text):
         print(f"Translation error: {e}")
         return text
 
+# Activity Logger for Web UI Tracking
+class ActivityLogger:
+    def __init__(self):
+        now_jst = datetime.now(timezone.utc) + timedelta(hours=9)
+        self.log_data = {
+            "id": now_jst.isoformat(),
+            "timestamp": now_jst.strftime("%Y/%m/%d %H:%M (JST)"),
+            "status": "Success",
+            "api_key_status": "Key #1 (メイン構成運用)",
+            "new_items_count": 0,
+            "summary": "処理開始中...",
+            "details": [f"🎬 [{now_jst.strftime('%H:%M')}] 起動: トレンド収集＆自動整理プロセス始動"]
+        }
+
+    def log(self, msg):
+        now_time = (datetime.now(timezone.utc) + timedelta(hours=9)).strftime("%H:%M:%S")
+        self.log_data["details"].append(f"• [{now_time}] {msg}")
+        print(f"  [Log] {msg}")
+
+    def set_key_status(self, text):
+        self.log_data["api_key_status"] = text
+
+    def add_new_items(self, count):
+        self.log_data["new_items_count"] += count
+
+    def set_summary(self, summary_text, is_error=False):
+        self.log_data["summary"] = summary_text
+        if is_error:
+            self.log_data["status"] = "Error"
+
+    def save_to_json(self):
+        log_file = "logs.json"
+        existing_logs = []
+        if os.path.exists(log_file):
+            try:
+                with open(log_file, "r", encoding="utf-8") as f:
+                    existing_logs = json.load(f)
+                    if not isinstance(existing_logs, list):
+                        existing_logs = []
+            except Exception:
+                existing_logs = []
+
+        # 新規ログをトップ(最上位)に追加し、最大170件でカット (約1週間+ゆとり分)
+        existing_logs.insert(0, self.log_data)
+        existing_logs = existing_logs[:170]
+
+        with open(log_file, "w", encoding="utf-8") as f:
+            json.dump(existing_logs, f, ensure_ascii=False, indent=2)
+        print(f"  [Log Saved] 稼働ログが {log_file} に正常に保管・同期されました！")
+
+# Global activity logger instance
+logger = ActivityLogger()
+
 class YouTubeKeyManager:
     """複数のAPIキーをローテートし、クォータ切れエラー(403等)を検知して予備キーへバトンタッチする管理クラス"""
     def __init__(self):
@@ -75,8 +128,10 @@ class YouTubeKeyManager:
         self.client = None
         if self.keys:
             self._build_client()
+            logger.log(f"🔑 APIキープール構築完了: 全 {len(self.keys)} 枚中、Key #1 から通信スタート")
         else:
             print("  [Error] No valid YouTube API keys found in YOUTUBE_API_KEY.")
+            logger.set_summary("YouTube APIキーが登録されていません", is_error=True)
 
     def _build_client(self):
         print(f"  [Info] Using YouTube API Key #{self.current_index + 1} of {len(self.keys)}")
@@ -87,11 +142,18 @@ class YouTubeKeyManager:
 
     def switch_key(self):
         if self.current_index + 1 < len(self.keys):
-            print(f"  [Warning] API Quota limits detected for Key #{self.current_index + 1}. Auto-switching to Key #{self.current_index + 2}!")
+            msg = f"⚠️ Key #{self.current_index + 1} にて1日上限に到達！予備キー #{self.current_index + 2} へ即時オートローテーション移行！"
+            print("  [Warning] " + msg)
+            logger.log(msg)
+            logger.set_key_status(f"⚠️ Key #{self.current_index + 2} へ交代適用済 ({len(self.keys)}枚体制)")
             self.current_index += 1
             self._build_client()
             return True
-        print("  [Fatal Error] All available YouTube API keys have exhausted their quota for today!")
+        msg = "🛑 設定中の全てのAPIキー(1〜4枚目)のクォータ上限を使い切りました！"
+        print("  [Fatal Error] " + msg)
+        logger.log(msg)
+        logger.set_key_status("🛑 全キー上限到達停止中")
+        logger.set_summary("全APIキー上限による中断", is_error=True)
         return False
 
     def execute(self, req_func):
@@ -101,7 +163,7 @@ class YouTubeKeyManager:
                 return req_func(self.client)
             except Exception as e:
                 err_msg = str(e).lower()
-                if "quota" in err_msg or "403" in err_msg or "exceeded" in err_msg or "rateLimitExceeded" in err_msg:
+                if "quota" in err_msg or "403" in err_msg or "exceeded" in err_msg or "ratelimit" in err_msg:
                     if not self.switch_key():
                         print(f"  [Error] All keys used up. Could not complete YouTube API request: {str(e)}")
                         return None
@@ -445,7 +507,12 @@ def send_to_notion(video_list, category, existing_urls):
             
         time.sleep(0.35) # Rate limit avoidance (Max 3 req/sec)
         
-    print(f"Category '{category}': Uploaded {success_count} new items. Skipped {skip_count} existing items.")
+    msg = f"カテゴリ「{category}」: 新規追加 {success_count} 件 / スキップ {skip_count} 件 (登録済)"
+    print("  " + msg)
+    if success_count > 0:
+        logger.log(msg)
+    logger.add_new_items(success_count)
+    return success_count
 
 def send_to_discord(msg, filepath=None):
     """DiscordのWebhookにメッセージ（とファイル）を送信する"""
@@ -489,13 +556,17 @@ def main():
     
     # 起動時のDiscord通知
     send_to_discord("🚀 **[情報収集開始]** 鳴潮トレンド収集ツールの自動実行がスタートしました！\n数分後に完了結果をお知らせします。")
+    logger.log("🚀 Discordへ開始通知を送信完了")
     
     config = load_config()
+    logger.log(f"📋 検索設定ロード: キーワード {len(config.get('youtube', {}).get('search_queries', []))}個 / 1ワード最大 {config.get('youtube', {}).get('max_results_per_query', 50)} 件")
     
     print("\n[1] Fetching LATEST YouTube trends (85% Shorts, 15% Normal)...")
+    logger.log("🆕 [ステップ1] 「最新トレンド (Shorts & 長尺)」の検索・回収処理をスタート...")
     latest_data = get_youtube_trends(config, mode="latest")
     
     print("\n[2] Fetching POPULAR YouTube trends from past 7 days (85% Shorts, 15% Normal)...")
+    logger.log("🔥 [ステップ2] 「週間人気ランキング (直近7日間)」の回収処理をスタート...")
     popular_data = get_youtube_trends(config, mode="popular_weekly")
     
     collected_data = {
@@ -535,12 +606,11 @@ def main():
     print(f"\nDone. Results have been saved to {output_file} and {md_output_file}")
     
     print("\n[3] Uploading to Notion Database...")
-    # 対象チャンネルの動画を分離する
+    logger.log("📤 [ステップ3] Notionデータベースへの差分・新規アップロード検証を開始...")
     target_channel_videos = []
     if "★Target Channels" in latest_data:
         target_channel_videos = latest_data.pop("★Target Channels")
 
-    # Notionへ通知（フラットなリストに変換してカテゴリを付与）
     latest_flat = get_flat_video_list(latest_data)
     popular_flat = get_flat_video_list(popular_data)
     
@@ -554,24 +624,24 @@ def main():
         }
         existing_urls = get_existing_notion_urls(headers, database_id)
         
-        # 週間人気のShortsと通常を分けて登録
         send_to_notion([v for v in popular_flat if v.get("video_type") == "Shorts"], "週間人気 (Shorts)", existing_urls)
         send_to_notion([v for v in popular_flat if v.get("video_type") == "通常"], "週間人気 (通常)", existing_urls)
-        
-        # 最新のShortsと通常を分けて登録
         send_to_notion([v for v in latest_flat if v.get("video_type") == "Shorts"], "最新 (Shorts)", existing_urls)
         send_to_notion([v for v in latest_flat if v.get("video_type") == "通常"], "最新 (通常)", existing_urls)
         
-        # 登録チャンネルの動画を専用カテゴリで登録
         if target_channel_videos:
             target_flat = get_flat_video_list({"dummy": target_channel_videos})
             send_to_notion(target_flat, "登録チャンネル", existing_urls)
     else:
         print("Notion API is not configured. Skipping upload.")
+        logger.log("ℹ️ Notion設定不備のためアップロードスキップ")
     
-    # Discordへ通知 (任意)
     completion_msg = "**✅ [鳴潮トレンド収集完了]**\n本日の最新動画一覧と人気ランキングの収集が完了しました！添付のMarkdownファイルをご確認ください。\n※Notionアプリのギャラリービューからサムネイル付きで綺麗にご覧いただけます！"
     send_to_discord(completion_msg, md_output_file)
+    
+    logger.log(f"✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: {logger.log_data['new_items_count']} 件)")
+    logger.set_summary(f"正常完了 (新着Notion追加: {logger.log_data['new_items_count']} 件)")
+    logger.save_to_json()
 
 if __name__ == "__main__":
     main()

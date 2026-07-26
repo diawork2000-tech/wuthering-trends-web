@@ -33,10 +33,40 @@ export default function Home() {
   const [shortsRatio, setShortsRatio] = useState(0.85);
   const [jpRatio, setJpRatio] = useState(0.85);
 
+  // 稼働ログ管理用の状態
+  const [logs, setLogs] = useState([]);
+  const [loadingLogs, setLoadingLogs] = useState(false);
+  const [expandedLogId, setExpandedLogId] = useState(null);
+
   // ズーム機能用の状態 (カード幅: 200px 〜 500px 程度)
   const [zoomLevel, setZoomLevel] = useState(300);
 
   const tabs = ['すべて', '最新 (Shorts)', '最新 (通常)', '週間人気 (Shorts)', '週間人気 (通常)', '登録チャンネル'];
+
+  const fetchLogs = async () => {
+    setLoadingLogs(true);
+    try {
+      const res = await fetch('/api/logs');
+      if (res.ok) {
+        const data = await res.json();
+        setLogs(data.logs || []);
+        if (data.logs && data.logs.length > 0) {
+          setExpandedLogId(data.logs[0].id); // 最初のログを自動展開
+        }
+      }
+    } catch (err) {
+      console.error('Error fetching logs:', err);
+    } finally {
+      setLoadingLogs(false);
+    }
+  };
+
+  const openLogsModal = () => {
+    setShowSettings(true);
+    setActiveSettingsTab('logs');
+    fetchLogs();
+  };
+
 
   useEffect(() => {
     async function fetchVideos() {
@@ -267,7 +297,8 @@ export default function Home() {
               />
               <span title="動画サイズを拡大">➕</span>
             </div>
-            <button className={styles.settingsIconBtn} onClick={openSettings}>⚙️</button>
+            <button className={styles.settingsIconBtn} onClick={openLogsModal} title="システム稼働ログ (1週間分)">📜</button>
+            <button className={styles.settingsIconBtn} onClick={openSettings} title="システム設定">⚙️</button>
           </div>
         </div>
         <p className={styles.subtitle}>Daily updated gallery of popular and latest videos.</p>
@@ -333,6 +364,10 @@ export default function Home() {
                 className={`${styles.settingsTab} ${activeSettingsTab === 'exclude' ? styles.activeSettingsTab : ''}`}
                 onClick={() => setActiveSettingsTab('exclude')}
               >除外ワード</button>
+              <button 
+                className={`${styles.settingsTab} ${activeSettingsTab === 'logs' ? styles.activeSettingsTab : ''}`}
+                onClick={() => { setActiveSettingsTab('logs'); fetchLogs(); }}
+              >📜 稼働ログ (1週分)</button>
             </div>
 
             <div className={styles.settingsBody}>
@@ -490,6 +525,58 @@ export default function Home() {
                       </ul>
                     )}
                   </div>
+                </div>
+              )}
+
+              {activeSettingsTab === 'logs' && (
+                <div className={styles.settingsSection}>
+                  <div className={styles.logsHeader}>
+                    <h3>📊 全自動トレンド収集 ＆ APIキー運用の足跡</h3>
+                    <button className={styles.refreshLogsBtn} onClick={fetchLogs} disabled={loadingLogs}>
+                      {loadingLogs ? '読込中...' : '🔄 ログ再読込'}
+                    </button>
+                  </div>
+                  <p className={styles.modalDesc}>
+                    毎日1時間おきに連続稼働する自動システムの過去1週間（最高約170回分）の全稼働・APIスワップ記録です。
+                  </p>
+                  
+                  {loadingLogs ? (
+                    <div className={styles.loadingLogs}>過去のログファイルを同期中...</div>
+                  ) : logs.length === 0 ? (
+                    <p className={styles.emptyList}>記録されたログはまだありません。次回の収集動作完了後に自動表示されます。</p>
+                  ) : (
+                    <div className={styles.logsContainer}>
+                      {logs.map(log => {
+                        const isExpanded = expandedLogId === log.id;
+                        return (
+                          <div 
+                            key={log.id} 
+                            className={`${styles.logItem} ${log.status === 'Error' ? styles.logError : ''}`}
+                            onClick={() => setExpandedLogId(isExpanded ? null : log.id)}
+                          >
+                            <div className={styles.logSummaryRow}>
+                              <span className={log.status === 'Success' ? styles.statusSuccess : styles.statusError}>
+                                {log.status === 'Success' ? '🟢 正常完了' : '🔴 停止・例外'}
+                              </span>
+                              <span className={styles.logTime}>{log.timestamp}</span>
+                              <span className={styles.logKeyBadge}>{log.api_key_status || 'Key #1'}</span>
+                            </div>
+                            <div className={styles.logTextRow}>
+                              <strong>{log.summary}</strong>
+                              <span className={styles.expandHint}>{isExpanded ? '▲ 詳細を閉じる' : '▼ 詳しい足跡を開く'}</span>
+                            </div>
+                            {isExpanded && log.details && (
+                              <div className={styles.logDetailsBox}>
+                                {log.details.map((line, index) => (
+                                  <div key={index} className={styles.logLine}>{line}</div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
