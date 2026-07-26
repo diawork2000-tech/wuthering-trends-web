@@ -2,7 +2,7 @@ name: Update YouTube Trends
 
 on:
   schedule:
-    - cron: '0 */2 * * *' # 毎日2時間おきに自動実行（全自動ローテーションAPIキー構造により運用対応）
+    - cron: '0 */1 * * *' # 毎日1時間おき（1日24回、全自動フル回転起動）
   workflow_dispatch: # 手動実行用ボタン（GitHub画面から）
   repository_dispatch:
     types: [trigger-scraper] # Webアプリ側からのAPI経由での実行トリガー

@@ -66,63 +66,52 @@ def translate_if_needed(text):
         return text
 
 class YouTubeKeyManager:
-    """複数のYouTube APIキーをローテートして管理し、容量切れ（Quota Exceeded）時に自動で切り替えるラッパークラス"""
+    """複数のAPIキーをローテートし、クォータ切れエラー(403等)を検知して予備キーへバトンタッチする管理クラス"""
     def __init__(self):
-        raw_keys = os.getenv("YOUTUBE_API_KEY", "")
-        # カンマや改行、複数スペースなどで区切られたキーを抽出し整頓する
-        self.keys = [k.strip() for k in re.split(r'[,\\n\\s]+', raw_keys) if k.strip() and k.strip() != "your_youtube_api_key_here"]
+        raw_key_str = os.getenv("YOUTUBE_API_KEY", "")
+        # カンマ、改行、スペースなどで結合されていれば綺麗に分解してプール化
+        self.keys = [k.strip() for k in raw_key_str.split(",") if k.strip() and k.strip() != "your_youtube_api_key_here"]
         self.current_index = 0
         self.client = None
-        if not self.keys:
-            print("  [Error] No valid YouTube API Key found in environment variables.")
-        else:
-            print(f"  [KeyManager] Initialized with {len(self.keys)} API key(s). Active key #{self.current_index + 1}.")
+        if self.keys:
             self._build_client()
+        else:
+            print("  [Error] No valid YouTube API keys found in YOUTUBE_API_KEY.")
 
     def _build_client(self):
-        if self.current_index < len(self.keys):
-            self.client = build("youtube", "v3", developerKey=self.keys[self.current_index])
-        else:
-            self.client = None
+        print(f"  [Info] Using YouTube API Key #{self.current_index + 1} of {len(self.keys)}")
+        self.client = build("youtube", "v3", developerKey=self.keys[self.current_index])
 
-    def switch_to_next_key(self):
+    def get_client(self):
+        return self.client
+
+    def switch_key(self):
         if self.current_index + 1 < len(self.keys):
+            print(f"  [Warning] API Quota limits detected for Key #{self.current_index + 1}. Auto-switching to Key #{self.current_index + 2}!")
             self.current_index += 1
-            print(f"\n  ⚠️ [KeyManager] Quota limit hit on API Key #{self.current_index}! Auto-switching to backup Key #{self.current_index + 1}...")
             self._build_client()
             return True
-        print("\n  ❌ [KeyManager] All available YouTube API keys have exhausted their quota for today!")
+        print("  [Fatal Error] All available YouTube API keys have exhausted their quota for today!")
         return False
 
-    def execute_search(self, **kwargs):
+    def execute(self, req_func):
+        """API実行をラッピング。403エラー(Quota Exceeded)時には即時スイッチして再試行する"""
         while self.client:
             try:
-                return self.client.search().list(**kwargs).execute()
+                return req_func(self.client)
             except Exception as e:
-                err_str = str(e).lower()
-                # クォータ上限エラー(403/429/quotaExceeded/rateLimitExceeded等)の判別
-                if "quota" in err_str or "403" in err_str or "exceeded" in err_str or "429" in err_str or "limit" in err_str:
-                    if not self.switch_to_next_key():
-                        raise e
+                err_msg = str(e).lower()
+                if "quota" in err_msg or "403" in err_msg or "exceeded" in err_msg or "rateLimitExceeded" in err_msg:
+                    if not self.switch_key():
+                        print(f"  [Error] All keys used up. Could not complete YouTube API request: {str(e)}")
+                        return None
                 else:
-                    raise e
-        return {}
+                    print(f"  [Error] Non-quota YouTube API error encountered: {str(e)}")
+                    return None
+        return None
 
-    def execute_playlist_items(self, **kwargs):
-        while self.client:
-            try:
-                return self.client.playlistItems().list(**kwargs).execute()
-            except Exception as e:
-                err_str = str(e).lower()
-                if "quota" in err_str or "403" in err_str or "exceeded" in err_str or "429" in err_str or "limit" in err_str:
-                    if not self.switch_to_next_key():
-                        raise e
-                else:
-                    raise e
-        return {}
-
-def fetch_youtube_api(youtube, query, max_results, region_code, order="date", published_after=None, video_duration="short"):
-    """YouTube APIの実行（ページネーションなしの簡易版）"""
+def fetch_youtube_api(key_manager, query, max_results, region_code, order="date", published_after=None, video_duration="short"):
+    """YouTube APIの実行（全自動フェイルオーバー付帯版）"""
     if max_results <= 0:
         return []
         
@@ -139,16 +128,14 @@ def fetch_youtube_api(youtube, query, max_results, region_code, order="date", pu
     if published_after:
         kwargs["publishedAfter"] = published_after
 
-    try:
-        if hasattr(youtube, "execute_search"):
-            response = youtube.execute_search(**kwargs)
-        else:
-            request = youtube.search().list(**kwargs)
-            response = request.execute()
+    def _req(client):
+        request = client.search().list(**kwargs)
+        return request.execute()
+
+    response = key_manager.execute(_req)
+    if response and "items" in response:
         return response.get("items", [])
-    except Exception as e:
-        print(f"  [Error] Failed to search '{query}' (duration={video_duration}): {str(e)}")
-        return []
+    return []
 
 def get_target_channels_from_notion(headers, channels_db_id):
     """Notionのデータベースから対象チャンネルIDのリストを取得する"""
@@ -165,7 +152,6 @@ def get_target_channels_from_notion(headers, channels_db_id):
             data = res.json()
             for page in data.get("results", []):
                 props = page.get("properties", {})
-                # 'チャンネルID'というテキストプロパティを探す
                 ch_id_prop = props.get("チャンネルID", {}).get("rich_text", [])
                 if ch_id_prop:
                     channel_ids.append(ch_id_prop[0].get("plain_text", ""))
@@ -177,71 +163,54 @@ def get_target_channels_from_notion(headers, channels_db_id):
     print(f"Found {len(channel_ids)} target channels in Notion.")
     return channel_ids
 
-def fetch_channel_latest_videos(youtube, channel_id, max_results=10):
-    """チャンネルのアップロード済みプレイリストから最新動画を取得し、1週間以内のものだけに絞る"""
+def fetch_channel_latest_videos(key_manager, channel_id, max_results=10):
+    """チャンネルのアップロード済みプレイリストから最新動画を取得し、1週間以内のものだけに絞る（キースワップ自動適用）"""
     if not channel_id.startswith("UC"):
         return []
     
-    # アップロードプレイリストIDは、チャンネルIDの先頭の 'UC' を 'UU' に変えたもの
     playlist_id = "UU" + channel_id[2:]
     
-    try:
-        if hasattr(youtube, "execute_playlist_items"):
-            response = youtube.execute_playlist_items(
-                part="snippet",
-                playlistId=playlist_id,
-                maxResults=max_results
-            )
-        else:
-            request = youtube.playlistItems().list(
-                part="snippet",
-                playlistId=playlist_id,
-                maxResults=max_results
-            )
-            response = request.execute()
-        
-        # 1週間前の日時を計算
-        one_week_ago = datetime.now(timezone.utc) - timedelta(days=7)
-        
-        # プレイリストアイテムを検索APIのアイテムフォーマットに似せて変換する
-        items = []
-        for pl_item in response.get("items", []):
-            snippet = pl_item.get("snippet", {})
-            published_at_str = snippet.get("publishedAt")
-            if not published_at_str:
-                continue
-                
-            # 日付のフィルター (1週間以内か判定)
-            try:
-                # ISO 8601フォーマットのパース
-                published_at = datetime.fromisoformat(published_at_str.replace('Z', '+00:00'))
-                if published_at < one_week_ago:
-                    continue # 1週間より前の動画はスキップ
-            except Exception:
-                pass
-                
-            # resourceId.videoId に動画IDが入っている
-            video_id = snippet.get("resourceId", {}).get("videoId")
-            if video_id:
-                # 検索APIと構造を合わせる
-                items.append({
-                    "id": {"videoId": video_id},
-                    "snippet": snippet
-                })
-        return items
-    except Exception as e:
-        print(f"  [Error] Failed to fetch channel {channel_id}: {str(e)}")
-        return []
+    def _req(client):
+        request = client.playlistItems().list(
+            part="snippet",
+            playlistId=playlist_id,
+            maxResults=max_results
+        )
+        return request.execute()
 
-def get_youtube_trends(config, mode="latest", yt_manager=None):
-    """Fetch videos based on mode ('latest' or 'popular_weekly')"""
-    if yt_manager and yt_manager.client:
-        youtube = yt_manager
-    else:
-        youtube = YouTubeKeyManager()
-        if not youtube.keys:
-            return {"error": "YouTube API Key is not set or valid."}
+    response = key_manager.execute(_req)
+    if not response:
+        return []
         
+    one_week_ago = datetime.now(timezone.utc) - timedelta(days=7)
+    items = []
+    for pl_item in response.get("items", []):
+        snippet = pl_item.get("snippet", {})
+        published_at_str = snippet.get("publishedAt")
+        if not published_at_str:
+            continue
+            
+        try:
+            published_at = datetime.fromisoformat(published_at_str.replace('Z', '+00:00'))
+            if published_at < one_week_ago:
+                continue
+        except Exception:
+            pass
+            
+        video_id = snippet.get("resourceId", {}).get("videoId")
+        if video_id:
+            items.append({
+                "id": {"videoId": video_id},
+                "snippet": snippet
+            })
+    return items
+
+def get_youtube_trends(config, mode="latest"):
+    """Fetch videos based on mode ('latest' or 'popular_weekly') using multi-key fallback support"""
+    key_manager = YouTubeKeyManager()
+    if not key_manager.get_client():
+        return {"error": "No valid YouTube API Keys are configured."}
+    
     results = {}
     
     yt_config = config.get("youtube", {})
@@ -256,7 +225,6 @@ def get_youtube_trends(config, mode="latest", yt_manager=None):
     shorts_limit = int(max_results * shorts_ratio)
     long_limit = max_results - shorts_limit
 
-    # popular_weekly モードの場合は1週間前の日時を設定
     published_after = None
     order = "date"
     if mode == "popular_weekly":
@@ -266,14 +234,11 @@ def get_youtube_trends(config, mode="latest", yt_manager=None):
 
     for query in queries:
         print(f"  - Searching YouTube for: '{query}' (Mode: {mode})")
-        # Shortsの取得
-        shorts_items = fetch_youtube_api(youtube, query, shorts_limit, region_code, order, published_after, "short")
-        # 長編・通常動画の取得 (4分〜20分を想定して medium を指定)
-        long_items = fetch_youtube_api(youtube, query, long_limit, region_code, order, published_after, "medium")
+        shorts_items = fetch_youtube_api(key_manager, query, shorts_limit, region_code, order, published_after, "short")
+        long_items = fetch_youtube_api(key_manager, query, long_limit, region_code, order, published_after, "medium")
         
         videos = []
         
-        # Shortsの処理（言語割合による制限）
         shorts_jp_limit = int(shorts_limit * jp_ratio)
         shorts_foreign_limit = shorts_limit - shorts_jp_limit
         shorts_jp_count = 0
@@ -285,7 +250,6 @@ def get_youtube_trends(config, mode="latest", yt_manager=None):
             title = snippet.get("title", "")
             if should_exclude(title, exclude_words): continue
             
-            # 言語判定と上限チェック
             if is_japanese(title):
                 if shorts_jp_count >= shorts_jp_limit: continue
                 shorts_jp_count += 1
@@ -302,7 +266,6 @@ def get_youtube_trends(config, mode="latest", yt_manager=None):
                 "video_type": "Shorts"
             })
             
-        # 通常動画の処理（言語割合による制限）
         long_jp_limit = int(long_limit * jp_ratio)
         long_foreign_limit = long_limit - long_jp_limit
         long_jp_count = 0
@@ -314,7 +277,6 @@ def get_youtube_trends(config, mode="latest", yt_manager=None):
             title = snippet.get("title", "")
             if should_exclude(title, exclude_words): continue
             
-            # 言語判定と上限チェック
             if is_japanese(title):
                 if long_jp_count >= long_jp_limit: continue
                 long_jp_count += 1
@@ -333,7 +295,6 @@ def get_youtube_trends(config, mode="latest", yt_manager=None):
             
         results[query] = videos
 
-    # Notionから特定チャンネルを読み込んで動画を確実に追加する
     notion_api_key = os.getenv("NOTION_API_KEY")
     channels_db_id = os.getenv("NOTION_CHANNELS_DB_ID")
     target_channels = yt_config.get("target_channels", [])
@@ -345,7 +306,6 @@ def get_youtube_trends(config, mode="latest", yt_manager=None):
             "Notion-Version": "2022-06-28"
         }
         notion_channels = get_target_channels_from_notion(headers, channels_db_id)
-        # config.jsonとNotionの両方のリストを合体させる
         target_channels = list(set(target_channels + notion_channels))
 
     if target_channels and mode == "latest":
@@ -353,7 +313,7 @@ def get_youtube_trends(config, mode="latest", yt_manager=None):
         channel_videos = []
         for ch_id in target_channels:
             print(f"    - Fetching channel: {ch_id}")
-            ch_items = fetch_channel_latest_videos(youtube, ch_id, max_results=5)
+            ch_items = fetch_channel_latest_videos(key_manager, ch_id, max_results=5)
             for item in ch_items:
                 snippet = item.get("snippet", {})
                 
@@ -532,14 +492,11 @@ def main():
     
     config = load_config()
     
-    # 複数APIキーを束ねる自動キースワップ機能の起動
-    yt_manager = YouTubeKeyManager()
-    
     print("\n[1] Fetching LATEST YouTube trends (85% Shorts, 15% Normal)...")
-    latest_data = get_youtube_trends(config, mode="latest", yt_manager=yt_manager)
+    latest_data = get_youtube_trends(config, mode="latest")
     
     print("\n[2] Fetching POPULAR YouTube trends from past 7 days (85% Shorts, 15% Normal)...")
-    popular_data = get_youtube_trends(config, mode="popular_weekly", yt_manager=yt_manager)
+    popular_data = get_youtube_trends(config, mode="popular_weekly")
     
     collected_data = {
         "youtube": {
