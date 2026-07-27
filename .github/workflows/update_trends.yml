@@ -2,19 +2,23 @@ name: Update YouTube Trends
 
 on:
   schedule:
-    - cron: '0 */1 * * *' # 毎日1時間おき（1日24回、全自動フル回転起動）
-  workflow_dispatch: # 手動実行用ボタン（GitHub画面から）
+    - cron: '27 */1 * * *' # 混雑を逃れる毎時27分の設定（全世界の00分集中ピークによるスキップや数時間遅延の被害を激減！）
+  workflow_dispatch: # 手動実行用ボタン
   repository_dispatch:
-    types: [trigger-scraper] # Webアプリ側からのAPI経由での実行トリガー
+    types: [trigger-scraper] # WebアプリからのAPI経由での実行トリガー
 
 jobs:
   run-scraper:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: write # 必須：作成した logs.json をGitHubリポジトリへPush保存できるようにする権限！
+      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        
+        with:
+          fetch-depth: 0
+          
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -41,7 +45,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add scraper/logs.json || true
+          git add scraper/logs.json
           git commit -m "[Auto-Log] Update trend collector logs [skip ci]" || echo "No log changes to commit"
           git pull --rebase origin main || true
-          git push origin main || echo "Failed to push log update"
+          git push origin main
