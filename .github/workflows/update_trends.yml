@@ -1,12 +1,10 @@
 name: Update YouTube Trends
 
 on:
-  schedule:
-    # 毎時1回だとGitHubの過負荷回避アルゴリズムに間引かれ数時間に1回に落とされるため、20分おき (毎時17,37,57分) の3段弾幕指定にして確実に1日24回以上の通過数をもぎ取ります！
-    - cron: '17,37,57 * * * *'
   workflow_dispatch: # 手動実行用ボタン
   repository_dispatch:
-    types: [trigger-scraper] # WebアプリからのAPI経由での実行トリガー
+    types: [trigger-scraper] # Webアプリ・外部からのAPI経由での実行トリガー
+
 
 
 jobs:
