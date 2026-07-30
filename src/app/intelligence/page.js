@@ -10,7 +10,7 @@ export default function IntelligenceStudioPage() {
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [filter, setFilter] = useState('すべて');
   const [copied, setCopied] = useState(false);
-  const [gridCols, setGridCols] = useState(2); // ズーム列数：初期2列
+  const [gridCols, setGridCols] = useState(2); // ズーム列数：初期は標準の2列
   const scrollAreaRef = useRef(null);
 
   useEffect(() => {
@@ -53,12 +53,12 @@ export default function IntelligenceStudioPage() {
 
   // ズーム（列の増減）ハンドラ
   const zoomIn = () => {
-    // ズームイン ➔ 大きくする ➔ 列数を減らす (最小1列)
+    // ズームイン ➔ 文字やサイズを大きくする ➔ 列数を減らす (最小1列)
     setGridCols((prev) => Math.max(1, prev - 1));
   };
 
   const zoomOut = () => {
-    // ズームアウト ➔ 一望を広げる ➔ 列数を増やす (最大4列)
+    // ズームアウト ➔ 一望できるように小さくする ➔ 列数を増やす (最大4列)
     setGridCols((prev) => Math.min(4, prev + 1));
   };
 
@@ -74,19 +74,20 @@ export default function IntelligenceStudioPage() {
     }
   };
 
-  // グリッドスタイル動的最適化
+  // どんな広い大解像度モニターでも「選択した数字＝実際の表示列数」として
+  // 100%厳密に一致させるための直列割り当て構文 ( repeat(N, 1fr) )
   const getGridStyle = () => {
     switch (gridCols) {
       case 1:
-        return { gridTemplateColumns: '1fr', gap: '1rem' };
+        return { gridTemplateColumns: 'repeat(1, 1fr)', gap: '1.1rem' };
       case 2:
-        return { gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '0.9rem' };
+        return { gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.9rem' };
       case 3:
-        return { gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))', gap: '0.7rem' };
+        return { gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem' };
       case 4:
-        return { gridTemplateColumns: 'repeat(auto-fill, minmax(165px, 1fr))', gap: '0.55rem' };
+        return { gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.6rem' };
       default:
-        return { gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' };
+        return { gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.9rem' };
     }
   };
 
@@ -99,7 +100,7 @@ export default function IntelligenceStudioPage() {
           </Link>
           <div className={styles.titleArea}>
             <h1>📚 AIショート動画台本 ＆ ネタ発掘ライブラリ</h1>
-            <p>1日数百件の海外Reddit(完全和訳)やSNSトレンドから選抜されたゴールデン台本スタジオ</p>
+            <p>海外Reddit(和訳済)やSNS急上昇から厳選収集！【1日約250〜300件 究極選抜モード】</p>
           </div>
         </div>
         <div className={styles.headerActions}>

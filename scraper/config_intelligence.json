@@ -104,7 +104,7 @@
     }
   ],
   "settings": {
-    "target_items_per_run": 25,
+    "target_items_per_run": 12,
     "min_score_threshold": 60,
     "enable_gemini_summary": true,
     "auto_source_expansion": true
