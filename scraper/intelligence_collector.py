@@ -199,6 +199,13 @@ class IntelligenceEngine:
                     for w in words:
                         if len(w) >= 2 and w not in ["鳴潮", "動画", "解説", "最強", "紹介"]:
                             self.trending_keywords.add(w)
+                    
+                    # ★最重要：ご本人のチャンネル(@Diachannel等)の動画はトレンドキーワードの学習・方針コントロールにのみ
+                    # 100%徹底利用し、「自分の動画をネタとして自動提示する」失態を絶対に防ぐ隔離ガード！
+                    ch_title_lower = str(ch_name).lower() + str(title).lower()
+                    if "diachannel" in ch_title_lower or "dia" in str(ch_name).lower() or "自チャンネル" in str(ch_name):
+                        continue
+                        
                     self.collected_raw_items.append({
                         "title": f"【競合バズ実績】{title}",
                         "summary": f"{ch_name} で現在 {view_count:,} 再生 / 高評価 {like_count:,} の注目テーマ",
@@ -209,7 +216,7 @@ class IntelligenceEngine:
         print(f"  [Analytics Complete] Extracted {len(self.trending_keywords)} trending buzzwords!")
 
     def crawl_web_sources(self):
-        print("\n=== [Phase 2] Crawling Multi-Platform Web Sources (Selective Foreign-Only Translation) ===")
+        print("\n=== [Phase 2] Crawling Multi-Platform Web Sources (Selective Foreign-Only Translation & Pure Direct URLs) ===")
         headers_web = {
             "User-Agent": "WutheringTrendsIntelligenceEngine/2.0 (YouTube Content Curator; by @Diachannel12345)",
             "Accept": "application/rss+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -217,7 +224,6 @@ class IntelligenceEngine:
         }
         
         def is_already_japanese(text):
-            # ひらがな、カタカナ、または一般的な日本の漢字が3文字以上含まれていれば純日本の生記事と認定！
             kana_kanji_count = len(re.findall(r'[ぁ-んァ-ヶー一-龠]', str(text)))
             return kana_kanji_count >= 3
 
@@ -241,8 +247,6 @@ class IntelligenceEngine:
                             summary_txt = getattr(entry, 'summary', raw_title)
                             summary_clean = re.sub(r'<[^>]+>', '', str(summary_txt))[:140]
                             
-                            # 日本のサイトや既に日本語で書かれた記事は絶対に翻訳にかけず純生データを尊重し、
-                            # Redditなど海外の英語圏テキストだけにピンポイントで綺麗な自動翻訳を実行！
                             if is_already_japanese(raw_title):
                                 title_ja = raw_title
                                 summary_ja = summary_clean if summary_clean != raw_title else raw_title
@@ -250,16 +254,16 @@ class IntelligenceEngine:
                                 title_ja = translate_if_needed(raw_title)
                                 summary_ja = translate_if_needed(summary_clean) if summary_clean != raw_title else title_ja
                             
-                            # リダイレクト400エラーが起きる可能性のあるURLは、クリックした瞬間に誰の環境でも
-                            # 一発で記事に到達できるスマートな正規URL（生リンク or 安全検索リンク）へ徹底自動クレンジング！
-                            safe_url = link
-                            if not link or "news.google.com" in link or not link.startswith("http"):
-                                safe_url = f"https://www.google.com/search?q={requests.utils.quote(title_ja[:35])}"
+                            # ★検索欄(Google Search)へのダミー置き換えを全廃止！
+                            # 攻略記事やRedditなど、ユーザー様がクリックした瞬間に確実に実物の記事URLへ
+                            # ダイレクトにアクセスできる本物の「一次リンク」だけを100%厳格選抜！
+                            if not link or not str(link).startswith("http") or "google.com/search" in str(link):
+                                continue
                                 
                             self.collected_raw_items.append({
                                 "title": title_ja,
                                 "summary": summary_ja,
-                                "url": safe_url,
+                                "url": link,
                                 "source_type": name[:30],
                                 "score": 75
                             })
@@ -271,18 +275,71 @@ class IntelligenceEngine:
         print(f"  [Crawl Complete] Total collected raw items across all networks: {len(self.collected_raw_items)}")
 
     def generate_and_filter_ideas(self):
-        print("\n=== [Phase 3] Generating & Filtering Video Topics ===")
-        target_count = self.config.get("settings", {}).get("target_items_per_run", 15)
+        print("\n=== [Phase 3] Generating, Deduplicating & Filtering Video Topics ===")
+        target_count = self.config.get("settings", {}).get("target_items_per_run", 12)
+        
+        # ★ダブり排除(Deduplication)バリア：過去に登録したカードのURLとタイトルを取り出す！
+        existing_urls = set()
+        existing_titles = set()
+        
+        # 1. ローカルキャッシュからの既出収集
+        try:
+            cache_path = os.path.join(os.path.dirname(__file__), "../src/data/intelligence_cache.json")
+            if os.path.exists(cache_path):
+                with open(cache_path, "r", encoding="utf-8") as cf:
+                    cdata = json.load(cf)
+                    for item in cdata.get("items", []):
+                        u = str(item.get("sourceUrl", "")).strip()
+                        t = str(item.get("title", "")).strip().lower()
+                        if u and "http" in u: existing_urls.add(u)
+                        if t: existing_titles.add(t)
+        except Exception:
+            pass
+
+        # 2. Notion API から直近100件の既出収集
+        if NOTION_API_KEY and NOTION_INTELLIGENCE_DB_ID:
+            try:
+                headers = {"Authorization": f"Bearer {NOTION_API_KEY}", "Content-Type": "application/json", "Notion-Version": "2022-06-28"}
+                res_db = requests.post(f"https://api.notion.com/v1/databases/{NOTION_INTELLIGENCE_DB_ID}/query", headers=headers, json={"page_size": 100}, timeout=8)
+                if res_db.status_code == 200:
+                    for page in res_db.json().get("results", []):
+                        props = page.get("properties", {})
+                        u_prop = props.get("一次URL", {})
+                        if u_prop and u_prop.get("url"):
+                            existing_urls.add(str(u_prop["url"]).strip())
+                        t_prop = props.get("名前") or props.get("Name") or props.get("title")
+                        if t_prop and t_prop.get("title") and len(t_prop["title"]) > 0:
+                            existing_titles.add(str(t_prop["title"][0]["plain_text"]).strip().lower())
+            except Exception:
+                pass
+
+        print(f"  [Deduplication Shield] Registered {len(existing_urls)} existing URLs and {len(existing_titles)} existing titles in prevention memory.")
+        
+        unique_raw_items = []
+        seen_in_batch_url = set()
+        seen_in_batch_title = set()
         
         for item in self.collected_raw_items:
+            i_url = str(item.get("url", "")).strip()
+            i_title = str(item.get("title", "")).strip().lower()
+            
+            # 全く同じURL、または全く同じタイトル、バッチ内の二重登用があれば即ダブり排除！
+            if i_url in existing_urls or i_title in existing_titles or i_url in seen_in_batch_url or i_title in seen_in_batch_title:
+                continue
+            
+            if i_url and "http" in i_url: seen_in_batch_url.add(i_url)
+            seen_in_batch_title.add(i_title)
+            
             combined = (item["title"] + " " + item.get("summary", "")).lower()
             for kw in self.trending_keywords:
                 if kw.lower() in combined:
                     item["score"] = min(100, item.get("score", 60) + 15)
                     item["match_kw"] = kw
                     break
+            unique_raw_items.append(item)
 
-        sorted_items = sorted(self.collected_raw_items, key=lambda x: x.get("score", 0), reverse=True)[:35]
+        print(f"  [Deduplication Complete] Filtered down from {len(self.collected_raw_items)} raw grabs to {len(unique_raw_items)} distinct, fresh candidates.")
+        sorted_items = sorted(unique_raw_items, key=lambda x: x.get("score", 0), reverse=True)[:35]
         if not sorted_items:
             print("  [Info] No candidate items found above criteria in this run.")
             return []
