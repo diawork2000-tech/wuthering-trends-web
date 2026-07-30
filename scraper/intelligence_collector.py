@@ -292,18 +292,21 @@ class IntelligenceEngine:
             prompt = (
                 "あなたはチャンネル@Diachannel12345専属のYouTubeショート＆動画クリエイティブ責任者です。\n"
                 "以下の回収ニュースとバズ状況のリストから、冒頭3秒で視聴者の関心を強烈に惹く"
-                f"優れた動画ネタ企画を 【 最大 {target_count} 件 】 選出および加工構築してください。\n"
-                "海外の記事や英語圏の議論も含まれますが、すべて【 100% 自然な美しい日本語 】で構成・要約してください。\n"
+                f"優れた動画ネタ企画を 【 最大 {target_count} 件 】 選出および加工構築してください。\n\n"
+                "【⚠️最重要・絶対指令⚠️】\n"
+                "1. 海外Reddit等の英語や外国語の記事が含まれる場合は、必ず【100% 自然で熱量ある純日本語の見出し・要約・台本】に完全意訳・翻訳すること。\n"
+                "2. タイトルや本文に英語をそのまま放置・直訳状態にして出力することは堅く禁ずる。\n"
+                "3. 「〜についてご存じですか？！」のような陳腐で機械的なお決まり文句は一切使わず、視聴者が思わず目を奪われるリアルで知的なバズ台本骨格に作成せよ。\n\n"
                 "出力は必ず【純粋なJSONフォーマットの配列】のみを返し、Markdownコードブロックや不要な解説文は入れないでください。\n\n"
                 "JSONの形式基準:\n"
                 "[\n"
                 "  {\n"
-                '    "topic_title": "ショートで注目を浴びる見出し要点",\n'
-                '    "summary": "何が盛り上がっているのかの要約(日本語)",\n'
+                '    "topic_title": "100%日本語：ショートで圧倒的注目を浴びる激アツ見出し",\n'
+                '    "summary": "何が盛り上がっているのかの熱狂要因要約(純日本語)",\n'
                 '    "source_url": "提供リスト内に記載された正確な元URL(厳格)",\n'
                 '    "source_type": "提供リストのメディア種別",\n'
-                '    "script_outline": "導入3秒 ➔ 話題核心 ➔ まとめ論点の3行骨子",\n'
-                '    "reason": "なぜこのネタがファン層にバズるかの簡潔な見立て"\n'
+                '    "script_outline": "導入3秒(インパクトある問題提起) ➔ 話題解説(事実と本質) ➔ オチとまとめ",\n'
+                '    "reason": "なぜこの企画がターゲットファンに響き再生数が伸びるかの見立て"\n'
                 "  }\n"
                 "]\n\n"
                 "素材リスト:\n" + json.dumps(sorted_items[:25], ensure_ascii=False)
@@ -313,25 +316,37 @@ class IntelligenceEngine:
                 raw_txt = ai_res.text.strip()
                 raw_txt = re.sub(r'^```(json)?|```$', '', raw_txt, flags=re.MULTILINE).strip()
                 ideas_list = json.loads(raw_txt)
-                print(f"  [Gemini Success] Successfully generated {len(ideas_list)} curated Notion topic cards in pure Japanese!")
-                return ideas_list[:target_count]
+                
+                # 英語未翻訳または陳腐な機械テンプレート混入を防衛する最終品質フィルター！
+                clean_ideas = []
+                for idea in ideas_list:
+                    tt = str(idea.get("topic_title", ""))
+                    to = str(idea.get("script_outline", ""))
+                    # 日本語(仮名・漢字)がちゃんと含まれ、怪しい英文放置がないカードだけを選定！
+                    if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', tt)) >= 2 and "についてご存じですか" not in to:
+                        clean_ideas.append(idea)
+                print(f"  [Gemini Success] Successfully generated & filtering {len(clean_ideas)} high-purity Japanese topic cards!")
+                return clean_ideas[:target_count]
             except Exception as e:
-                print(f"  [Warning] Gemini generation failed ({e}). Falling back to algorithmic translation formatting.")
+                print(f"  [Warning] Gemini generation failed ({e}). Falling back to advanced algorithm.")
 
         out_ideas = []
         for item in sorted_items[:target_count]:
             kw_match = item.get("match_kw", "注目トレンド")
             t_title = translate_if_needed(item.get("title", "無題のトレンドネタ"))
             t_sum = translate_if_needed(item.get("summary", ""))
+            # 日本語翻訳に失敗して英語のままになっている場合は品質保持のため除外する！
+            if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', t_title)) < 2:
+                continue
             out_ideas.append({
                 "topic_title": t_title,
                 "summary": t_sum,
                 "source_url": item.get("url", ""),
                 "source_type": item.get("source_type", "Web調査"),
-                "script_outline": f"【冒頭3秒】：『{t_title[:25]}…についてご存じですか？！』➔ 証拠と詳細をテンポ解説 ➔ まとめ",
+                "script_outline": f"【冒頭3秒】：『{t_title[:22]}！この裏にある重大な真実を見抜いた？！』➔ 決定的証拠と背景の考察 ➔ まとめと今後の対策",
                 "reason": f"熱狂度足切り通過およびキーワード「{kw_match}」による評価抽出"
             })
-        print(f"  [Algorithm Ready] Formatted {len(out_ideas)} items using algorithmic pipeline.")
+        print(f"  [Algorithm Ready] Formatted {len(out_ideas)} items using advanced algorithmic pipeline.")
         return out_ideas
 
     def push_to_notion(self, ideas):
@@ -429,22 +444,49 @@ class IntelligenceEngine:
             res = requests.post(url_query, headers=headers, json=payload_query, timeout=12)
             if res.status_code != 200:
                 print(f"  [Warning] Failed to query old pages: {res.text}")
-                return
-            
-            pages = res.json().get("results", [])
-            if not pages:
-                print("  [Cleanup] Zero cards exceeded the 7-day shelf-life limit. Database is perfectly fresh!")
-                return
-                
-            archived_cnt = 0
-            for pg in pages:
-                page_id = pg["id"]
-                url_patch = f"https://api.notion.com/v1/pages/{page_id}"
-                del_res = requests.patch(url_patch, headers=headers, json={"archived": True}, timeout=8)
-                if del_res.status_code in [200, 201]:
-                    archived_cnt += 1
-                time.sleep(0.2)
-            print(f"  [Cleanup Success] Automatically archived and wiped {archived_cnt} outdated cards to maintain optimal speed and prevent overflow!")
+            else:
+                pages = res.json().get("results", [])
+                if not pages:
+                    print("  [Cleanup] Zero cards exceeded the 7-day shelf-life limit. Database is perfectly fresh!")
+                else:
+                    archived_cnt = 0
+                    for pg in pages:
+                        page_id = pg["id"]
+                        url_patch = f"https://api.notion.com/v1/pages/{page_id}"
+                        del_res = requests.patch(url_patch, headers=headers, json={"archived": True}, timeout=8)
+                        if del_res.status_code in [200, 201]:
+                            archived_cnt += 1
+                        time.sleep(0.2)
+                    print(f"  [Cleanup Success] Automatically archived and wiped {archived_cnt} outdated cards!")
+
+            # 続いて！！ 現在Notionに残留してしまっている【 未翻訳(英語のまま) 】や【 陳腐な機械的テンプレート 】の品質未達カードを自発的にお掃除！
+            print("\n=== [Phase 5-B] 🛡️ Quality Patrol: Purging Un-Translated English & Mechanical Boilerplate Cards ===")
+            res_all = requests.post(url_query, headers=headers, json={"page_size": 100}, timeout=12)
+            if res_all.status_code == 200:
+                all_pages = res_all.json().get("results", [])
+                purged_cnt = 0
+                for pg in all_pages:
+                    pid = pg["id"]
+                    props = pg.get("properties", {})
+                    
+                    # タイトルの抽出
+                    t_str = ""
+                    t_prop = props.get(self.notion_title_prop_name) or props.get("名前") or props.get("Name") or props.get("title")
+                    if t_prop and t_prop.get("title") and len(t_prop["title"]) > 0:
+                        t_str = t_prop["title"][0]["plain_text"]
+                        
+                    # 台本の抽出
+                    o_str = ""
+                    o_prop = props.get("ショート台本骨格", {})
+                    if o_prop and o_prop.get("rich_text") and len(o_prop["rich_text"]) > 0:
+                        o_str = o_prop["rich_text"][0]["plain_text"]
+                        
+                    # ひらがな・カタカナ・日常漢字が極端に少ない(純英語状態) または 「についてご存じですか？！」などの機械的文字列が含まれている場合は徹底削除！
+                    if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', t_str)) < 2 or "についてご存じですか" in o_str or "Bro had one job" in t_str or "Reddit -" in o_str:
+                        requests.patch(f"https://api.notion.com/v1/pages/{pid}", headers=headers, json={"archived": True}, timeout=10)
+                        purged_cnt += 1
+                        print(f"    -> Purged sub-quality un-translated card: '{t_str[:35]}...'")
+                print(f"  [Quality Patrol Complete] Successfully scrubbed {purged_cnt} un-translated or mechanical cards from Notion!")
         except Exception as e:
             print(f"  [Error during cleanup] {e}")
 
