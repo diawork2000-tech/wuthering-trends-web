@@ -98,7 +98,31 @@ export async function GET() {
       };
     });
 
-    return NextResponse.json({ success: true, items: items.length > 0 ? items : getFallbackData().items });
+    // ★新・極上のUXハック：メディア多様性ラウンドロビン・シャッフル (Alternating Sort)
+    // 「YouTube競合」の連続投入等によってブラウザ上部の表示が偏るのを完全に防ぐため
+    // 各プラットフォーム(Reddit/YouTube/攻略・SNS)の記事を1枚ずつ交互に美しく織り交ぜて配置する！
+    const groups = { reddit: [], youtube: [], other: [] };
+    items.forEach(item => {
+      const st = String(item.sourceType || '').toLowerCase();
+      const su = String(item.sourceUrl || '').toLowerCase();
+      if (st.includes('reddit') || su.includes('reddit')) {
+        groups.reddit.push(item);
+      } else if (st.includes('youtube') || su.includes('youtube') || su.includes('youtu.be')) {
+        groups.youtube.push(item);
+      } else {
+        groups.other.push(item);
+      }
+    });
+
+    const alternatedItems = [];
+    const maxLen = Math.max(groups.reddit.length, groups.youtube.length, groups.other.length);
+    for (let i = 0; i < maxLen; i++) {
+      if (groups.reddit[i]) alternatedItems.push(groups.reddit[i]);
+      if (groups.other[i]) alternatedItems.push(groups.other[i]);
+      if (groups.youtube[i]) alternatedItems.push(groups.youtube[i]);
+    }
+
+    return NextResponse.json({ success: true, items: alternatedItems.length > 0 ? alternatedItems : getFallbackData().items });
   } catch (error) {
     console.error('Error fetching intelligence items, switching to failsafe cache:', error);
     return NextResponse.json(getFallbackData());
