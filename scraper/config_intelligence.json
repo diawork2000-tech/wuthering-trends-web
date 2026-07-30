@@ -54,21 +54,21 @@
   ],
   "target_web_sources": [
     {
-      "name": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "url": "https://www.reddit.com/r/WutheringWaves/.rss",
+      "name": "海外Reddit 鳴潮 Hotトピック",
+      "url": "https://www.reddit.com/r/WutheringWaves/hot/.rss?limit=15",
       "type": "rss",
       "enabled": true
     },
     {
-      "name": "海外Redditフォーラム ガチャゲー最前線 (公式純リンクRSS)",
-      "url": "https://www.reddit.com/r/gachagaming/.rss",
+      "name": "海外Reddit ガチャゲー最前線 Hot",
+      "url": "https://www.reddit.com/r/gachagaming/hot/.rss?limit=10",
       "type": "rss",
       "enabled": true
     },
     {
-      "name": "Twitter(X) 話題まとめ Togetter (公式タグ純リンクRSS)",
-      "url": "https://togetter.com/rss/tag/%E9%B3%B4%E6%BD%AE",
-      "type": "rss",
+      "name": "鳴潮 最強攻略＆トレンドまとめハブ",
+      "url": "https://news.google.com/rss/search?q=%E9%B3%B4%E6%BD%AE+%E6%9C%80%E5%BC%B7+OR+%E6%94%BB%E7%95%A5+OR+%E3%83%86%E3%82%A3%E3%82%A2+when:7d&hl=ja&gl=JP&ceid=JP:ja",
+      "type": "rss_safe_unwrap",
       "enabled": true
     }
   ],

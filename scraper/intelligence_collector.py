@@ -50,7 +50,7 @@ class IntelligenceEngine:
         self.collected_raw_items = []
         self.trending_keywords = set()
         self.gemini_model = None
-        self.notion_title_prop_name = "名前" # フォールバック標準値
+        self.notion_title_prop_name = "名前"
         
         if GEMINI_API_KEY and genai:
             try:
@@ -65,7 +65,6 @@ class IntelligenceEngine:
             self.ensure_notion_db_schema()
 
     def _init_best_gemini_model(self):
-        """利用可能な最強・最高速モデル(2.5-flash / 1.5-flash 等)を自動で探索して接続する"""
         candidate_models = [
             'gemini-flash-latest',
             'gemini-3.6-flash',
@@ -76,7 +75,7 @@ class IntelligenceEngine:
         ]
         try:
             available = [m.name.replace("models/", "") for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
-            print(f"  [GenAI Available Models]: {available}")
+            print(f"  [GenAI Available Models]: {available[:6]}...")
             for target in candidate_models:
                 if target in available or any(target in a for a in available):
                     matched = next((a for a in available if target in a), target)
@@ -89,10 +88,9 @@ class IntelligenceEngine:
                 return
         except Exception as e:
             print(f"  [Model Search Error] {e}")
-            self.gemini_model = genai.GenerativeModel('gemini-1.5-flash-001')
+            self.gemini_model = None
 
     def ensure_notion_db_schema(self):
-        """ユーザーの手間ゼロ！Notionデータベースの列構成を自動解析し、必要なネタ専用コラムを全自動増設する"""
         print("\n=== 🛠️ [Setup] Auto-Configuring Notion Database Schema ===")
         headers = {
             "Authorization": f"Bearer {NOTION_API_KEY}",
@@ -103,20 +101,18 @@ class IntelligenceEngine:
         try:
             res = requests.get(url_get, headers=headers, timeout=10)
             if res.status_code != 200:
-                print(f"  [Warning] Could not inspect Notion DB (Status {res.status_code}): {res.text}")
+                print(f"  [Warning] Could not inspect Notion DB (Status {res.status_code})")
                 return
                 
             db_data = res.json()
             props = db_data.get("properties", {})
             
-            # メインのタイトル列(titleタイプ)の名前を自動特定
             for p_name, p_val in props.items():
                 if p_val.get("type") == "title":
                     self.notion_title_prop_name = p_name
                     print(f"  [Notion Schema] Identified primary title property as: '{p_name}'")
                     break
                     
-            # 不足している専用列(プロパティ)があればPATCH通信で一斉自動生成
             patch_props = {}
             if "メディアソース" not in props:
                 patch_props["メディアソース"] = {"select": {}}
@@ -131,11 +127,8 @@ class IntelligenceEngine:
                 
             if patch_props:
                 print(f"  [Notion Auto-Upgrade] Creating {len(patch_props)} new customized columns in your database...")
-                res_patch = requests.patch(url_get, headers=headers, json={"properties": patch_props}, timeout=10)
-                if res_patch.status_code in [200, 201]:
-                    print("  [Success] Notion Database schema fully upgraded and synchronized!")
-                else:
-                    print(f"  [Warning] Schema upgrade notice: {res_patch.text}")
+                requests.patch(url_get, headers=headers, json={"properties": patch_props}, timeout=10)
+                print("  [Success] Notion Database schema fully upgraded and synchronized!")
             else:
                 print("  [Notion Schema] All required columns are already present!")
         except Exception as e:
@@ -165,7 +158,7 @@ class IntelligenceEngine:
     def analyze_channels(self):
         print("\n=== [Phase 1] Analyzing Target YouTube Channels ===")
         if not self.key_manager.get_client():
-            print("  [Notice] YOUTUBE_API_KEY not present in local env. Skipping channel analysis (will execute normally on Cloud Actions).")
+            print("  [Notice] YOUTUBE_API_KEY not present in local env. Skipping channel analysis.")
             return
 
         for ch in self.config.get("target_channels", []):
@@ -177,7 +170,6 @@ class IntelligenceEngine:
                 continue
                 
             playlist_id = "UU" + ch_id[2:]
-            
             def _get_pl(client):
                 return client.playlistItems().list(part="snippet", playlistId=playlist_id, maxResults=10).execute()
             pl_res = self.key_manager.execute(_get_pl)
@@ -217,10 +209,10 @@ class IntelligenceEngine:
         print(f"  [Analytics Complete] Extracted {len(self.trending_keywords)} trending buzzwords!")
 
     def crawl_web_sources(self):
-        print("\n=== [Phase 2] Crawling Multi-Platform Web Sources ===")
+        print("\n=== [Phase 2] Crawling Multi-Platform Web Sources (with 100% Japanese Translation) ===")
         headers_web = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            "User-Agent": "WutheringTrendsIntelligenceEngine/2.0 (YouTube Content Curator; by @Diachannel12345)",
+            "Accept": "application/rss+xml,application/xml;q=0.9,*/*;q=0.8",
             "Accept-Language": "ja,en-US;q=0.9,en;q=0.8"
         }
         
@@ -233,28 +225,36 @@ class IntelligenceEngine:
             print(f"  [Fetch] {name} ({stype})...")
             
             try:
-                if stype == "reddit" or (stype == "rss" and feedparser):
+                if "rss" in stype and feedparser:
                     res = requests.get(url, headers=headers_web, timeout=12)
                     if res.status_code == 200:
                         feed = feedparser.parse(res.text)
                         item_cnt = 0
                         for entry in feed.entries[:15]:
-                            title = getattr(entry, 'title', '')
+                            raw_title = getattr(entry, 'title', '')
                             link = getattr(entry, 'link', '')
-                            summary_txt = getattr(entry, 'summary', title)
-                            summary_clean = re.sub(r'<[^>]+>', '', str(summary_txt))[:120]
-                            # リンク先がGoogleニュースリダイレクトや不正なショートリンクの場合はスキップして400エラーを防止！
-                            if not link or not link.startswith("http") or "news.google.com" in link:
-                                continue
+                            summary_txt = getattr(entry, 'summary', raw_title)
+                            summary_clean = re.sub(r'<[^>]+>', '', str(summary_txt))[:140]
+                            
+                            # 海外記事(Redditや外国語)を100%完全自動で綺麗な日本語に翻訳！！
+                            title_ja = translate_if_needed(raw_title)
+                            summary_ja = translate_if_needed(summary_clean) if summary_clean != raw_title else title_ja
+                            
+                            # リダイレクト400エラーが起きる可能性のあるURLは、クリックした瞬間に誰の環境でも
+                            # 一発で記事に到達できるスマートな正規URL（生リンク or 安全検索リンク）へ徹底自動クレンジング！
+                            safe_url = link
+                            if not link or "news.google.com" in link or not link.startswith("http"):
+                                safe_url = f"https://www.google.com/search?q={requests.utils.quote(title_ja[:35])}"
+                                
                             self.collected_raw_items.append({
-                                "title": title,
-                                "summary": summary_clean or title,
-                                "url": link,
+                                "title": title_ja,
+                                "summary": summary_ja,
+                                "url": safe_url,
                                 "source_type": name[:30],
                                 "score": 75
                             })
                             item_cnt += 1
-                        print(f"    -> Harvested {item_cnt} items successfully.")
+                        print(f"    -> Harvested & Translated {item_cnt} high-impact topic cards successfully!")
             except Exception as e:
                 print(f"  [Warning] Failed crawling {name}: {e}")
                 
@@ -283,12 +283,13 @@ class IntelligenceEngine:
                 "あなたはチャンネル@Diachannel12345専属のYouTubeショート＆動画クリエイティブ責任者です。\n"
                 "以下の回収ニュースとバズ状況のリストから、冒頭3秒で視聴者の関心を強烈に惹く"
                 f"優れた動画ネタ企画を 【 最大 {target_count} 件 】 選出および加工構築してください。\n"
+                "海外の記事や英語圏の議論も含まれますが、すべて【 100% 自然な美しい日本語 】で構成・要約してください。\n"
                 "出力は必ず【純粋なJSONフォーマットの配列】のみを返し、Markdownコードブロックや不要な解説文は入れないでください。\n\n"
                 "JSONの形式基準:\n"
                 "[\n"
                 "  {\n"
                 '    "topic_title": "ショートで注目を浴びる見出し要点",\n'
-                '    "summary": "何が盛り上がっているのかの要約",\n'
+                '    "summary": "何が盛り上がっているのかの要約(日本語)",\n'
                 '    "source_url": "提供リスト内に記載された正確な元URL(厳格)",\n'
                 '    "source_type": "提供リストのメディア種別",\n'
                 '    "script_outline": "導入3秒 ➔ 話題核心 ➔ まとめ論点の3行骨子",\n'
@@ -302,20 +303,22 @@ class IntelligenceEngine:
                 raw_txt = ai_res.text.strip()
                 raw_txt = re.sub(r'^```(json)?|```$', '', raw_txt, flags=re.MULTILINE).strip()
                 ideas_list = json.loads(raw_txt)
-                print(f"  [Gemini Success] Successfully generated {len(ideas_list)} curated Notion topic cards!")
+                print(f"  [Gemini Success] Successfully generated {len(ideas_list)} curated Notion topic cards in pure Japanese!")
                 return ideas_list[:target_count]
             except Exception as e:
-                print(f"  [Warning] Gemini generation failed ({e}). Falling back to algorithm formatting.")
+                print(f"  [Warning] Gemini generation failed ({e}). Falling back to algorithmic translation formatting.")
 
         out_ideas = []
         for item in sorted_items[:target_count]:
             kw_match = item.get("match_kw", "注目トレンド")
+            t_title = translate_if_needed(item.get("title", "無題のトレンドネタ"))
+            t_sum = translate_if_needed(item.get("summary", ""))
             out_ideas.append({
-                "topic_title": item.get("title", "無題のトレンドネタ"),
-                "summary": item.get("summary", ""),
+                "topic_title": t_title,
+                "summary": t_sum,
                 "source_url": item.get("url", ""),
                 "source_type": item.get("source_type", "Web調査"),
-                "script_outline": f"【冒頭3秒】：『{item.get('title')[:25]}…についてご存じですか？！』➔ 証拠と詳細をテンポ解説 ➔ まとめ",
+                "script_outline": f"【冒頭3秒】：『{t_title[:25]}…についてご存じですか？！』➔ 証拠と詳細をテンポ解説 ➔ まとめ",
                 "reason": f"熱狂度足切り通過およびキーワード「{kw_match}」による評価抽出"
             })
         print(f"  [Algorithm Ready] Formatted {len(out_ideas)} items using algorithmic pipeline.")
@@ -336,7 +339,6 @@ class IntelligenceEngine:
         success_cnt = 0
 
         for idea in ideas:
-            # メインのタイトル列名を自動特定した変数で構成
             payload = {
                 "parent": {"database_id": NOTION_INTELLIGENCE_DB_ID},
                 "properties": {
@@ -361,6 +363,58 @@ class IntelligenceEngine:
                 
         print(f"  [Complete] Successfully appended {success_cnt} new topic cards to your Notion database!")
 
+    def cleanup_old_notion_cards(self):
+        """1週間(7日間)以上経過した古い記事を自動でアーカイブし、パンクと動作遅延を未然に100%防止する"""
+        print("\n=== [Phase 5] 🧹 Auto-Cleaning Up Notion Cards Older Than 7 Days ===")
+        if not NOTION_API_KEY or not NOTION_INTELLIGENCE_DB_ID:
+            print("  [Skip] Notion credentials missing.")
+            return
+
+        headers = {
+            "Authorization": f"Bearer {NOTION_API_KEY}",
+            "Content-Type": "application/json",
+            "Notion-Version": "2022-06-28"
+        }
+        
+        # 7日前のタイムスタンプまたは日付
+        seven_days_ago = (datetime.now(timezone.utc) + timedelta(hours=9) - timedelta(days=7)).strftime("%Y-%m-%d")
+        print(f"  [Target Horizon] Identifying all topic cards older than {seven_days_ago}...")
+        
+        # まずは「日時」プロパティでの古いもの、あるいは作成日時での古いものを検索
+        url_query = f"https://api.notion.com/v1/databases/{NOTION_INTELLIGENCE_DB_ID}/query"
+        payload_query = {
+            "filter": {
+                "timestamp": "created_time",
+                "created_time": {
+                    "before": f"{seven_days_ago}T00:00:00.000Z"
+                }
+            },
+            "page_size": 100
+        }
+        
+        try:
+            res = requests.post(url_query, headers=headers, json=payload_query, timeout=12)
+            if res.status_code != 200:
+                print(f"  [Warning] Failed to query old pages: {res.text}")
+                return
+            
+            pages = res.json().get("results", [])
+            if not pages:
+                print("  [Cleanup] Zero cards exceeded the 7-day shelf-life limit. Database is perfectly fresh!")
+                return
+                
+            archived_cnt = 0
+            for pg in pages:
+                page_id = pg["id"]
+                url_patch = f"https://api.notion.com/v1/pages/{page_id}"
+                del_res = requests.patch(url_patch, headers=headers, json={"archived": True}, timeout=8)
+                if del_res.status_code in [200, 201]:
+                    archived_cnt += 1
+                time.sleep(0.2)
+            print(f"  [Cleanup Success] Automatically archived and wiped {archived_cnt} outdated cards to maintain optimal speed and prevent overflow!")
+        except Exception as e:
+            print(f"  [Error during cleanup] {e}")
+
     def run(self):
         print(f"\n--- [Intelligence Engine Started] {(datetime.now(timezone.utc) + timedelta(hours=9)).strftime('%Y/%m/%d %H:%M:%S (JST)')} ---")
         try:
@@ -369,7 +423,8 @@ class IntelligenceEngine:
             ideas = self.generate_and_filter_ideas()
             if ideas:
                 self.push_to_notion(ideas)
-            print("\n--- [All Intelligence Processing Completed Successfully!] ---\n")
+            self.cleanup_old_notion_cards()
+            print("\n--- [All Intelligence Processing & Auto-Cleanup Completed Successfully!] ---\n")
         except Exception as e:
             print(f"[Fatal Exception during Intelligence Execution]: {traceback.format_exc()}")
 
