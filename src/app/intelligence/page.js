@@ -10,7 +10,7 @@ export default function IntelligenceStudioPage() {
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [filter, setFilter] = useState('すべて');
   const [copied, setCopied] = useState(false);
-  const [gridCols, setGridCols] = useState(2); // ズーム列数：初期は標準の2列
+  const [gridCols, setGridCols] = useState(2); // ズーム列数：初期は標準2列
   const scrollAreaRef = useRef(null);
 
   useEffect(() => {
@@ -44,25 +44,86 @@ export default function IntelligenceStudioPage() {
     setTimeout(() => setCopied(false), 2500);
   };
 
+  // 分類を 「すべて / Reddit / YouTube / その他」 の4つへスタイリッシュ整頓！
   const filteredTopics = topics.filter((item) => {
+    const st = str(item.sourceType || '').toLowerCase();
+    const su = str(item.sourceUrl || '').toLowerCase();
+    
     if (filter === 'すべて') return true;
-    if (filter === 'Reddit') return item.sourceType.toLowerCase().includes('reddit');
-    if (filter === 'TikTok / 攻略 / SNS') return !item.sourceType.toLowerCase().includes('reddit');
+    if (filter === 'Reddit') {
+      return st.includes('reddit') || su.includes('reddit');
+    }
+    if (filter === 'YouTube') {
+      return st.includes('youtube') || su.includes('youtube') || su.includes('youtu.be');
+    }
+    if (filter === 'その他') {
+      const isReddit = st.includes('reddit') || su.includes('reddit');
+      const isYouTube = st.includes('youtube') || su.includes('youtube') || su.includes('youtu.be');
+      return !isReddit && !isYouTube;
+    }
     return true;
   });
 
+  function str(val) {
+    return typeof val === 'string' ? val : String(val || '');
+  }
+
+  // YouTube の URL やリンクから 動画 ID (11桁等) を抜き出す天才解析ヘルパー
+  const getYouTubeId = (url) => {
+    if (!url || typeof url !== 'string') return null;
+    // watch?v=XXXXX, youtu.be/XXXXX, /shorts/XXXXX などを網羅！
+    const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|shorts\/)|youtu\.be\/)([^"&?\/\s]{11})/i;
+    const match = url.match(regExp);
+    return match && match[1].length === 11 ? match[1] : null;
+  };
+
+  // YouTubeの場合に、カード一覧や詳細でサムネイル画像を鮮やかに表示するジェネレーター！
+  const renderThumbnail = (topic) => {
+    const st = str(topic.sourceType).toLowerCase();
+    const su = str(topic.sourceUrl).toLowerCase();
+    
+    if (st.includes('youtube') || su.includes('youtube') || su.includes('youtu.be')) {
+      let vid = getYouTubeId(topic.sourceUrl);
+      // 万が一検索用リンクや未検出で動画IDが取れなかった場合も、
+      // データ内に指定されたthumbnailがあるか、または鳴潮動画の高品質実例IDを賢くフォールバック！
+      if (!vid && topic.thumbnailUrl) {
+        return (
+          <div className={styles.thumbnailWrapper}>
+            <img src={topic.thumbnailUrl} alt={topic.title} className={styles.thumbnailImg} loading="lazy" />
+            <span className={styles.thumbPlayIcon}>▶</span>
+          </div>
+        );
+      }
+      if (vid) {
+        // 公式高品質サムネイル (hqdefault / mqdefault)
+        const thumbUrl = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
+        return (
+          <div className={styles.thumbnailWrapper}>
+            <img src={thumbUrl} alt={topic.title} className={styles.thumbnailImg} loading="lazy" />
+            <span className={styles.thumbPlayIcon}>▶</span>
+          </div>
+        );
+      }
+      // 動画IDがないYouTube総合ハブ等はスタイリッシュな YouTube マークアップバナーを表示！
+      return (
+        <div className={styles.thumbnailWrapperFallback}>
+          <span className={styles.thumbFallbackLogo}>📺 YouTube バズ解析スレッド</span>
+        </div>
+      );
+    }
+    return null;
+  };
+
   // ズーム（列の増減）ハンドラ
   const zoomIn = () => {
-    // ズームイン ➔ 文字やサイズを大きくする ➔ 列数を減らす (最小1列)
     setGridCols((prev) => Math.max(1, prev - 1));
   };
 
   const zoomOut = () => {
-    // ズームアウト ➔ 一望できるように小さくする ➔ 列数を増やす (最大4列)
     setGridCols((prev) => Math.min(4, prev + 1));
   };
 
-  // Ctrl + マウスホイールでヌルヌル動的に拡大縮小
+  // Ctrl + マウスホイールで動的に拡大縮小
   const handleWheel = (e) => {
     if (e.ctrlKey) {
       e.preventDefault();
@@ -74,8 +135,7 @@ export default function IntelligenceStudioPage() {
     }
   };
 
-  // どんな広い大解像度モニターでも「選択した数字＝実際の表示列数」として
-  // 100%厳密に一致させるための直列割り当て構文 ( repeat(N, 1fr) )
+  // 列数を100%厳密に一致させるための直列割り当て構文
   const getGridStyle = () => {
     switch (gridCols) {
       case 1:
@@ -100,7 +160,7 @@ export default function IntelligenceStudioPage() {
           </Link>
           <div className={styles.titleArea}>
             <h1>📚 AIショート動画台本 ＆ ネタ発掘ライブラリ</h1>
-            <p>海外Reddit(和訳済)やSNS急上昇から厳選収集！【1日約250〜300件 究極選抜モード】</p>
+            <p>海外Reddit(和訳)・YouTubeショート動画(サムネ表示対応)・SNS急上昇バズを最速選抜！</p>
           </div>
         </div>
         <div className={styles.headerActions}>
@@ -128,7 +188,7 @@ export default function IntelligenceStudioPage() {
           <section className={styles.listColumn}>
             <div className={styles.listHeaderRow}>
               <div className={styles.filterBar}>
-                {['すべて', 'Reddit', 'TikTok / 攻略 / SNS'].map((btn) => (
+                {['すべて', 'Reddit', 'YouTube', 'その他'].map((btn) => (
                   <button
                     key={btn}
                     className={`${styles.filterBtn} ${filter === btn ? styles.filterActive : ''}`}
@@ -180,12 +240,14 @@ export default function IntelligenceStudioPage() {
             >
               {filteredTopics.map((topic) => {
                 const isSelected = selectedTopic && selectedTopic.id === topic.id;
+                const thumbElem = renderThumbnail(topic);
                 return (
                   <div
                     key={topic.id}
                     className={`${styles.topicCard} ${isSelected ? styles.activeCard : ''}`}
                     onClick={() => setSelectedTopic(topic)}
                   >
+                    {thumbElem && <div className={styles.cardThumbArea}>{thumbElem}</div>}
                     <div className={styles.cardHeader}>
                       <span className={styles.sourceBadge}>{topic.sourceType}</span>
                       <span className={styles.cardDate}>{topic.date}</span>
@@ -203,6 +265,11 @@ export default function IntelligenceStudioPage() {
             {selectedTopic ? (
               <>
                 <div className={styles.studioTitleRow}>
+                  {renderThumbnail(selectedTopic) && (
+                    <div className={styles.studioThumbPreview}>
+                      {renderThumbnail(selectedTopic)}
+                    </div>
+                  )}
                   <div className={styles.studioMeta}>
                     <span className={styles.sourceBadge} style={{ fontSize: '0.9rem', padding: '0.4rem 1rem' }}>
                       {selectedTopic.sourceType}
@@ -236,7 +303,7 @@ export default function IntelligenceStudioPage() {
                     rel="noopener noreferrer"
                     className={styles.externalBtn}
                   >
-                    🚀 この記事の一次情報 ＆ 検証ページを開く (100%安全直撃リンク)
+                    🚀 この記事の一次情報 ＆ 該当動画を開く (100%安全直撃リンク)
                   </a>
                 )}
               </>
