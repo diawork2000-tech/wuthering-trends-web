@@ -209,13 +209,18 @@ class IntelligenceEngine:
         print(f"  [Analytics Complete] Extracted {len(self.trending_keywords)} trending buzzwords!")
 
     def crawl_web_sources(self):
-        print("\n=== [Phase 2] Crawling Multi-Platform Web Sources (with 100% Japanese Translation) ===")
+        print("\n=== [Phase 2] Crawling Multi-Platform Web Sources (Selective Foreign-Only Translation) ===")
         headers_web = {
             "User-Agent": "WutheringTrendsIntelligenceEngine/2.0 (YouTube Content Curator; by @Diachannel12345)",
             "Accept": "application/rss+xml,application/xml;q=0.9,*/*;q=0.8",
             "Accept-Language": "ja,en-US;q=0.9,en;q=0.8"
         }
         
+        def is_already_japanese(text):
+            # ひらがな、カタカナ、または一般的な日本の漢字が3文字以上含まれていれば純日本の生記事と認定！
+            kana_kanji_count = len(re.findall(r'[ぁ-んァ-ヶー一-龠]', str(text)))
+            return kana_kanji_count >= 3
+
         for src in self.config.get("target_web_sources", []):
             if not src.get("enabled", True):
                 continue
@@ -236,9 +241,14 @@ class IntelligenceEngine:
                             summary_txt = getattr(entry, 'summary', raw_title)
                             summary_clean = re.sub(r'<[^>]+>', '', str(summary_txt))[:140]
                             
-                            # 海外記事(Redditや外国語)を100%完全自動で綺麗な日本語に翻訳！！
-                            title_ja = translate_if_needed(raw_title)
-                            summary_ja = translate_if_needed(summary_clean) if summary_clean != raw_title else title_ja
+                            # 日本のサイトや既に日本語で書かれた記事は絶対に翻訳にかけず純生データを尊重し、
+                            # Redditなど海外の英語圏テキストだけにピンポイントで綺麗な自動翻訳を実行！
+                            if is_already_japanese(raw_title):
+                                title_ja = raw_title
+                                summary_ja = summary_clean if summary_clean != raw_title else raw_title
+                            else:
+                                title_ja = translate_if_needed(raw_title)
+                                summary_ja = translate_if_needed(summary_clean) if summary_clean != raw_title else title_ja
                             
                             # リダイレクト400エラーが起きる可能性のあるURLは、クリックした瞬間に誰の環境でも
                             # 一発で記事に到達できるスマートな正規URL（生リンク or 安全検索リンク）へ徹底自動クレンジング！
@@ -254,7 +264,7 @@ class IntelligenceEngine:
                                 "score": 75
                             })
                             item_cnt += 1
-                        print(f"    -> Harvested & Translated {item_cnt} high-impact topic cards successfully!")
+                        print(f"    -> Harvested & Selective-Translated {item_cnt} high-impact topic cards successfully!")
             except Exception as e:
                 print(f"  [Warning] Failed crawling {name}: {e}")
                 
