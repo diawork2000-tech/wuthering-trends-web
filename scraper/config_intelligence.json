@@ -1,14 +1,56 @@
 {
   "target_channels": [
-    {"name": "Diachannel12345 (自身のチャンネル)", "url": "https://www.youtube.com/@Diachannel12345", "enabled": true},
-    {"name": "ノタルch", "url": "https://www.youtube.com/@ノタルch", "enabled": true},
-    {"name": "セリーナ鳴潮メイン", "url": "https://www.youtube.com/@セリーナ鳴潮メイン", "enabled": true},
-    {"name": "鳴潮スタジオ", "url": "https://www.youtube.com/@鳴潮スタジオ", "enabled": true},
-    {"name": "ぷにお-game", "url": "https://www.youtube.com/@ぷにお-game", "enabled": true},
-    {"name": "deoxy.y", "url": "https://www.youtube.com/@deoxy.y", "enabled": true},
-    {"name": "pamunogekijou", "url": "https://www.youtube.com/@pamunogekijou", "enabled": true},
-    {"name": "hiragi-e4x", "url": "https://www.youtube.com/@hiragi-e4x", "enabled": true},
-    {"name": "sabchbch", "url": "https://www.youtube.com/@sabchbch", "enabled": true}
+    {
+      "name": "Diachannel12345 (自身のチャンネル)",
+      "url": "https://www.youtube.com/@Diachannel12345",
+      "enabled": true
+    },
+    {
+      "name": "ノタルch",
+      "url": "https://www.youtube.com/@ノタルch",
+      "enabled": true,
+      "id": "UC5Sbfo5LfDBHPHAULDeGkVQ"
+    },
+    {
+      "name": "セリーナ鳴潮メイン",
+      "url": "https://www.youtube.com/@セリーナ鳴潮メイン",
+      "enabled": true,
+      "id": "UCQHeJxhIjIaidTP9Lg1XiqA"
+    },
+    {
+      "name": "鳴潮スタジオ",
+      "url": "https://www.youtube.com/@鳴潮スタジオ",
+      "enabled": true,
+      "id": "UCzIeu8c_w__YfPXfr-OZfYg"
+    },
+    {
+      "name": "ぷにお-game",
+      "url": "https://www.youtube.com/@ぷにお-game",
+      "enabled": true,
+      "id": "UC_g6tbc6zXHfXs7L4aHcUHw"
+    },
+    {
+      "name": "deoxy.y",
+      "url": "https://www.youtube.com/@deoxy.y",
+      "enabled": true,
+      "id": "UCD5cpQZG02uqO7bJW-xvCIQ"
+    },
+    {
+      "name": "pamunogekijou",
+      "url": "https://www.youtube.com/@pamunogekijou",
+      "enabled": true
+    },
+    {
+      "name": "hiragi-e4x",
+      "url": "https://www.youtube.com/@hiragi-e4x",
+      "enabled": true,
+      "id": "UCCsbqG58UCd9LT1fP4Hbr8w"
+    },
+    {
+      "name": "sabchbch",
+      "url": "https://www.youtube.com/@sabchbch",
+      "enabled": true
+    }
   ],
   "target_web_sources": [
     {
