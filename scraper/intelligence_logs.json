@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2026-07-30 20:15:20",
+    "status": "Success",
+    "total_harvested": 82,
+    "final_selected": 16,
+    "breakdown": {
+      "海外Reddit 鳴潮 Hotトピック": 4,
+      "YouTube競合 (別枠枠)": 4,
+      "YouTube 鳴潮総合 ＆ 急上昇": 3,
+      "TikTok バズ動画・ショート急上昇": 2,
+      "鳴潮 最強攻略＆ティア掲示板": 2,
+      "Twitter(X) 話題まとめ最高峰": 1
+    }
+  },
+  {
     "timestamp": "2026-07-30 19:55:12",
     "status": "Success",
     "total_harvested": 68,
@@ -11,19 +25,6 @@
       "鳴潮 最強攻略＆ティア掲示板": 2,
       "YouTube 競合＆神プレイ急上昇": 2,
       "Twitter(X) 話題まとめ最高峰": 1
-    }
-  },
-  {
-    "timestamp": "2026-07-30 19:35:05",
-    "status": "Success",
-    "total_harvested": 74,
-    "final_selected": 12,
-    "breakdown": {
-      "海外Reddit 鳴潮 Hotトピック": 4,
-      "YouTube 競合＆神プレイ急上昇": 3,
-      "鳴潮 最強攻略＆ティア掲示板": 2,
-      "Yahoo!ニュース・リアルタイム トレンド": 2,
-      "TikTok バズ動画・ショート急上昇": 1
     }
   }
 ]

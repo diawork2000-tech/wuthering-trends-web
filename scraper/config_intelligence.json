@@ -102,6 +102,12 @@
       "url": "https://news.google.com/rss/search?q=%E9%B3%B4%E6%BD%AE+%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88+OR+%E8%A7%A3%E8%AA%AC+OR+%E7%A5%9E%E3%83%97%E3%83%AC%E3%82%A4+when:7d&hl=ja&gl=JP&ceid=JP:ja",
       "type": "rss_safe_unwrap",
       "enabled": true
+    },
+    {
+      "name": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハブ発掘版)",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC_g6tbc6zXHfXs7L4aHcUHw",
+      "type": "rss",
+      "enabled": true
     }
   ],
   "settings": {

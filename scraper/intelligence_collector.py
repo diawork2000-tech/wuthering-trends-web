@@ -48,6 +48,7 @@ class IntelligenceEngine:
         self.config = load_intelligence_config()
         self.key_manager = YouTubeKeyManager()
         self.collected_raw_items = []
+        self.competitor_raw_items = []  # ★最重要：競合チャンネル動向専用の独立収容ラック（別枠カウント）！
         self.trending_keywords = set()
         self.gemini_model = None
         self.notion_title_prop_name = "名前"
@@ -130,7 +131,7 @@ class IntelligenceEngine:
                 requests.patch(url_get, headers=headers, json={"properties": patch_props}, timeout=10)
                 print("  [Success] Notion Database schema fully upgraded and synchronized!")
             else:
-                print("  [Notion Schema] All required columns are already present!")
+                print(f"  [Notion Schema] All required columns are already present!")
         except Exception as e:
             print(f"  [Error] Notion schema auto-configuration error: {e}")
 
@@ -156,7 +157,7 @@ class IntelligenceEngine:
         return None
 
     def analyze_channels(self):
-        print("\n=== [Phase 1] Analyzing Target YouTube Channels ===")
+        print("\n=== [Phase 1] Analyzing Target YouTube Channels (Separate Competitor Track) ===")
         if not self.key_manager.get_client():
             print("  [Notice] YOUTUBE_API_KEY not present in local env. Skipping channel analysis.")
             return
@@ -200,20 +201,20 @@ class IntelligenceEngine:
                         if len(w) >= 2 and w not in ["鳴潮", "動画", "解説", "最強", "紹介"]:
                             self.trending_keywords.add(w)
                     
-                    # ★最重要：ご本人のチャンネル(@Diachannel等)の動画はトレンドキーワードの学習・方針コントロールにのみ
-                    # 100%徹底利用し、「自分の動画をネタとして自動提示する」失態を絶対に防ぐ隔離ガード！
+                    # ご本人のチャンネル(@Diachannel等)はキーワード学習のみで企画にはしない隔離ガード！
                     ch_title_lower = str(ch_name).lower() + str(title).lower()
                     if "diachannel" in ch_title_lower or "dia" in str(ch_name).lower() or "自チャンネル" in str(ch_name):
                         continue
                         
-                    self.collected_raw_items.append({
+                    # ★Web巡回とは完全に隔離した専用ラックへ保存！
+                    self.competitor_raw_items.append({
                         "title": f"【競合バズ実績】{title}",
                         "summary": f"{ch_name} で現在 {view_count:,} 再生 / 高評価 {like_count:,} の注目テーマ",
                         "url": f"https://www.youtube.com/watch?v={video['id']}",
                         "source_type": "YouTube競合動向",
-                        "score": 85
+                        "score": 88
                     })
-        print(f"  [Analytics Complete] Extracted {len(self.trending_keywords)} trending buzzwords!")
+        print(f"  [Analytics Complete] Extracted {len(self.trending_keywords)} keywords and locked {len(self.competitor_raw_items)} competitor videos in separate track!")
 
     def crawl_web_sources(self):
         print("\n=== [Phase 2] Crawling Multi-Platform Web Sources (Selective Foreign-Only Translation & Pure Direct URLs) ===")
@@ -346,6 +347,30 @@ class IntelligenceEngine:
             print("  [Info] No candidate items found above criteria in this run.")
             return []
 
+        # ★【新・仕様変更：一石二鳥の競合別枠監視ハブ】
+        # Web巡回(Reddit/TikTok/Web版YouTube等)からの12件選出に加え、競合チャンネル監視の最新ヒット動画を
+        # 別枠(最大5件)で確約同時抽出！両者をダブりゼロで融合(共存合体)させる！
+        competitor_cards = []
+        for comp in sorted(self.competitor_raw_items, key=lambda x: x.get("score", 0), reverse=True):
+            c_url = str(comp.get("url", "")).strip()
+            c_title = str(comp.get("title", "")).strip().lower()
+            if c_url in existing_urls or c_title in existing_titles or c_url in seen_in_batch_url:
+                continue
+            if c_url and "http" in c_url: seen_in_batch_url.add(c_url)
+            
+            competitor_cards.append({
+                "topic_title": translate_if_needed(comp.get("title", "競合注目テーマ")),
+                "summary": translate_if_needed(comp.get("summary", "")),
+                "source_url": comp.get("url", ""),
+                "source_type": "YouTube競合 (別枠枠)",
+                "script_outline": f"【競合動向リサーチ】：『{str(comp.get('title',''))[:22]}』が注目続行！ ➔ 競合動画の伸びたポイント解析 ➔ 自分独自のオリジナリティ論点を付加して超バズショート化！",
+                "reason": "【別枠監視・自動確約】競合チャンネルにおいて高再生・高評価マークを達成した決定的な実績証拠"
+            })
+            if len(competitor_cards) >= 5:
+                break
+                
+        print(f"  [Competitor Track Unified] Successfully prepared {len(competitor_cards)} distinct competitor topics to combine with Web harvest!")
+
         if self.gemini_model and len(sorted_items) > 0:
             print(f"  [Gemini Batch] Sending batch request to Gemini AI with {len(sorted_items)} items to format high-impact video ideas...")
             prompt = (
@@ -381,11 +406,11 @@ class IntelligenceEngine:
                 for idea in ideas_list:
                     tt = str(idea.get("topic_title", ""))
                     to = str(idea.get("script_outline", ""))
-                    # 日本語(仮名・漢字)がちゃんと含まれ、怪しい英文放置がないカードだけを選定！
                     if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', tt)) >= 2 and "についてご存じですか" not in to:
                         clean_ideas.append(idea)
                 print(f"  [Gemini Success] Successfully generated & filtering {len(clean_ideas)} high-purity Japanese topic cards!")
-                return clean_ideas[:target_count]
+                # ★Web巡回からの厳選(最高12件) ＋ 競合別枠(最高5件)を 一撃無敵の同時リターン！
+                return clean_ideas[:target_count] + competitor_cards
             except Exception as e:
                 print(f"  [Warning] Gemini generation failed ({e}). Falling back to advanced algorithm.")
 
@@ -394,7 +419,6 @@ class IntelligenceEngine:
             kw_match = item.get("match_kw", "注目トレンド")
             t_title = translate_if_needed(item.get("title", "無題のトレンドネタ"))
             t_sum = translate_if_needed(item.get("summary", ""))
-            # 日本語翻訳に失敗して英語のままになっている場合は品質保持のため除外する！
             if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', t_title)) < 2:
                 continue
             out_ideas.append({
@@ -406,7 +430,8 @@ class IntelligenceEngine:
                 "reason": f"熱狂度足切り通過およびキーワード「{kw_match}」による評価抽出"
             })
         print(f"  [Algorithm Ready] Formatted {len(out_ideas)} items using advanced algorithmic pipeline.")
-        return out_ideas
+        # ★アルゴリズム時も同じく Web巡回枠 ＋ 競合別枠 の両者を同時リターン！
+        return out_ideas + competitor_cards
 
     def push_to_notion(self, ideas):
         print(f"\n=== [Phase 4] Pushing {len(ideas)} Cards to Notion ===")
@@ -579,7 +604,7 @@ class IntelligenceEngine:
                 new_log_entry = {
                     "timestamp": (datetime.now(timezone.utc) + timedelta(hours=9)).strftime('%Y-%m-%d %H:%M:%S'),
                     "status": "Success",
-                    "total_harvested": len(self.collected_raw_items),
+                    "total_harvested": len(self.collected_raw_items) + len(self.competitor_raw_items),
                     "final_selected": len(ideas or []),
                     "breakdown": source_breakdown
                 }
