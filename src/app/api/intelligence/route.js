@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 function getFallbackData() {
   try {
@@ -33,10 +34,10 @@ function getFallbackData() {
 
 export async function GET() {
   const NOTION_API_KEY = process.env.NOTION_API_KEY;
-  const NOTION_INTELLIGENCE_DB_ID = process.env.NOTION_INTELLIGENCE_DB_ID || "3ad82a7701b08067bf5de4694df49d9b";
+  // ★最重要：Vercelサーバー環境上の変数設定のズレや古さを防衛し、確実に「ご本人が見つめる真のNotion DB」へ直結ロックインする！
+  const NOTION_INTELLIGENCE_DB_ID = "3ad82a7701b08067bf5de4694df49d9b";
 
   if (!NOTION_API_KEY) {
-    // Vercelサーバー上などにNotionのインテグレーション秘密鍵(Secret)がまだ未到達の場合は、絶対にエラーを返さず安心のダブルバッファから即座に美麗カードを返却する！
     console.log('[Notice] NOTION_API_KEY not found in server env. Using local intelligent cache seamlessly.');
     return NextResponse.json(getFallbackData());
   }
@@ -50,6 +51,7 @@ export async function GET() {
         'Authorization': `Bearer ${NOTION_API_KEY}`,
         'Content-Type': 'application/json',
         'Notion-Version': '2022-06-28',
+        'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate',
       },
       body: JSON.stringify({
         page_size: 100,
@@ -60,7 +62,7 @@ export async function GET() {
           }
         ]
       }),
-      next: { revalidate: 60 }
+      cache: 'no-store'
     });
 
     if (!res.ok) {
