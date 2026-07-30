@@ -347,9 +347,9 @@ class IntelligenceEngine:
             print("  [Info] No candidate items found above criteria in this run.")
             return []
 
-        # ★【新・仕様変更：一石二鳥の競合別枠監視ハブ】
-        # Web巡回(Reddit/TikTok/Web版YouTube等)からの12件選出に加え、競合チャンネル監視の最新ヒット動画を
-        # 別枠(最大5件)で確約同時抽出！両者をダブりゼロで融合(共存合体)させる！
+        # ★【新・仕様変更：一石二鳥＆競合全権アンチダブリ監視システム】
+        # Web巡回(Reddit/TikTok/Web版YouTube等)からの12件選出に加え、競合チャンネル監視の最新ヒット動画は
+        # 「ダブりさえなければ何件でも全て余すことなくピックアップ・収録する」無敵全採掘モード！
         competitor_cards = []
         for comp in sorted(self.competitor_raw_items, key=lambda x: x.get("score", 0), reverse=True):
             c_url = str(comp.get("url", "")).strip()
@@ -362,14 +362,13 @@ class IntelligenceEngine:
                 "topic_title": translate_if_needed(comp.get("title", "競合注目テーマ")),
                 "summary": translate_if_needed(comp.get("summary", "")),
                 "source_url": comp.get("url", ""),
-                "source_type": "YouTube競合 (別枠枠)",
-                "script_outline": f"【競合動向リサーチ】：『{str(comp.get('title',''))[:22]}』が注目続行！ ➔ 競合動画の伸びたポイント解析 ➔ 自分独自のオリジナリティ論点を付加して超バズショート化！",
-                "reason": "【別枠監視・自動確約】競合チャンネルにおいて高再生・高評価マークを達成した決定的な実績証拠"
+                "source_type": "YouTube競合 (別枠全件枠)",
+                "script_outline": f"【競合動向リサーチ】：『{str(comp.get('title',''))[:22]}』がバズ発動！ ➔ 競合動画の伸びている勝因解剖 ➔ 自チャンネルの独自強みをプラスして最強バズショート化！",
+                "reason": "【別枠監視・ダブりゼロ全件採掘】競合チャンネルにおいて高再生・高評価マークを誇る決定的な実績エビデンス"
             })
-            if len(competitor_cards) >= 5:
-                break
+            # ★上限キャップを全撤廃！ダブりなしであれば全動画を確実に合流ピックアップ！
                 
-        print(f"  [Competitor Track Unified] Successfully prepared {len(competitor_cards)} distinct competitor topics to combine with Web harvest!")
+        print(f"  [Competitor Track Unlimited] Successfully locked {len(competitor_cards)} non-duplicate competitor hit videos for full immersion!")
 
         if self.gemini_model and len(sorted_items) > 0:
             print(f"  [Gemini Batch] Sending batch request to Gemini AI with {len(sorted_items)} items to format high-impact video ideas...")
