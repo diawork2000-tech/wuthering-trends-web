@@ -1,0 +1,48 @@
+name: Run Intelligence Topic Generator
+
+on:
+  workflow_dispatch: # 手動テストボタン
+  repository_dispatch:
+    types: [trigger-intelligence] # Webやcron-job.org(30分おき等)からの着信トリガー
+
+jobs:
+  run-intelligence:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # 必須：キャッシュID等更新後の設定ファイルを自動保存するため
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          
+      - name: Install dependencies
+        run: |
+          cd scraper
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: Run Intelligence Collector
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_INTELLIGENCE_DB_ID: ${{ secrets.NOTION_INTELLIGENCE_DB_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          cd scraper
+          python intelligence_collector.py
+
+      - name: Commit and Push Updated Cache & Config back to repository
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scraper/config_intelligence.json || true
+          git commit -m "[Auto-Cache] Save resolved channel IDs and intelligence state [skip ci]" || echo "No changes to commit"
+          git pull --rebase origin main || true
+          git push origin main || true

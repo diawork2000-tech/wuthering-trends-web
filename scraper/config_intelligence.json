@@ -1,0 +1,44 @@
+{
+  "target_channels": [
+    {"name": "Diachannel12345 (自身のチャンネル)", "url": "https://www.youtube.com/@Diachannel12345", "enabled": true},
+    {"name": "ノタルch", "url": "https://www.youtube.com/@ノタルch", "enabled": true},
+    {"name": "セリーナ鳴潮メイン", "url": "https://www.youtube.com/@セリーナ鳴潮メイン", "enabled": true},
+    {"name": "鳴潮スタジオ", "url": "https://www.youtube.com/@鳴潮スタジオ", "enabled": true},
+    {"name": "ぷにお-game", "url": "https://www.youtube.com/@ぷにお-game", "enabled": true},
+    {"name": "deoxy.y", "url": "https://www.youtube.com/@deoxy.y", "enabled": true},
+    {"name": "pamunogekijou", "url": "https://www.youtube.com/@pamunogekijou", "enabled": true},
+    {"name": "hiragi-e4x", "url": "https://www.youtube.com/@hiragi-e4x", "enabled": true},
+    {"name": "sabchbch", "url": "https://www.youtube.com/@sabchbch", "enabled": true}
+  ],
+  "target_web_sources": [
+    {
+      "name": "海外Redditフォーラム 注目熱狂スレッド (GoogleNewsバイパス網)",
+      "url": "https://news.google.com/rss/search?q=site:reddit.com/r/WutheringWaves+when:3d&hl=en-US&gl=US&ceid=US:en",
+      "type": "rss",
+      "enabled": true
+    },
+    {
+      "name": "Twitter(X) 話題まとめ最高峰 Togetter (鳴潮トレンド)",
+      "url": "https://news.google.com/rss/search?q=site:togetter.com+%E9%B3%B4%E6%BD%AE&hl=ja&gl=JP&ceid=JP:ja",
+      "type": "rss",
+      "enabled": true
+    },
+    {
+      "name": "Google リアルタイムバズニュース (鳴潮 攻略・最強・ティア)",
+      "url": "https://news.google.com/rss/search?q=%E9%B3%B4%E6%BD%AE+%E6%9C%80%E5%BC%B7+OR+%E6%94%BB%E7%95%A5+OR+Tier+when:2d&hl=ja&gl=JP&ceid=JP:ja",
+      "type": "rss",
+      "enabled": true
+    },
+    {
+      "name": "TikTok バズ動画・ショート急上昇レーダー (Googleトレンド索引)",
+      "url": "https://news.google.com/rss/search?q=site:tiktok.com/@+OR+site:tiktok.com/t/+%E9%B3%B4%E6%BD%AE&hl=ja&gl=JP&ceid=JP:ja",
+      "type": "rss",
+      "enabled": true
+    }
+  ],
+  "settings": {
+    "target_items_per_run": 15,
+    "min_score_threshold": 60,
+    "enable_gemini_summary": true
+  }
+}

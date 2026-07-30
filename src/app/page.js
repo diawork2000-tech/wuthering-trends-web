@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import VideoCard from './components/VideoCard';
+import IntelligenceConfigModal from './components/IntelligenceConfigModal';
 import styles from './page.module.css';
 
 export default function Home() {
+  const [showIntelligenceModal, setShowIntelligenceModal] = useState(false);
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -302,13 +304,22 @@ export default function Home() {
           </div>
         </div>
         <p className={styles.subtitle}>Daily updated gallery of popular and latest videos.</p>
-        <button 
-          className={styles.syncButton} 
-          onClick={handleSync} 
-          disabled={isSyncing}
-        >
-          {isSyncing ? '起動中...' : '🔄 最新情報を収集'}
-        </button>
+        <div style={{ display: 'flex', gap: '0.8rem', justifyContent: 'center', marginTop: '1rem', flexWrap: 'wrap' }}>
+          <button 
+            className={styles.syncButton} 
+            onClick={handleSync} 
+            disabled={isSyncing}
+          >
+            {isSyncing ? '起動中...' : '🔄 最新情報を収集'}
+          </button>
+          <button 
+            className={styles.intelligenceBtn || styles.syncButton} 
+            style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', color: '#000', fontWeight: '700', boxShadow: '0 0 15px rgba(245, 158, 11, 0.4)' }}
+            onClick={() => setShowIntelligenceModal(true)} 
+          >
+            🌐 AI調査ソース ＆ 競合チャネル管理
+          </button>
+        </div>
       </div>
 
       <div className={styles.tabsContainer}>
@@ -583,6 +594,11 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      <IntelligenceConfigModal
+        isOpen={showIntelligenceModal}
+        onClose={() => setShowIntelligenceModal(false)}
+      />
     </main>
   );
 }
