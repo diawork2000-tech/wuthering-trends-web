@@ -12,26 +12,20 @@
   ],
   "target_web_sources": [
     {
-      "name": "海外Redditフォーラム 注目熱狂スレッド (GoogleNewsバイパス網)",
-      "url": "https://news.google.com/rss/search?q=site:reddit.com/r/WutheringWaves+when:3d&hl=en-US&gl=US&ceid=US:en",
+      "name": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "url": "https://www.reddit.com/r/WutheringWaves/.rss",
       "type": "rss",
       "enabled": true
     },
     {
-      "name": "Twitter(X) 話題まとめ最高峰 Togetter (鳴潮トレンド)",
-      "url": "https://news.google.com/rss/search?q=site:togetter.com+%E9%B3%B4%E6%BD%AE&hl=ja&gl=JP&ceid=JP:ja",
+      "name": "海外Redditフォーラム ガチャゲー最前線 (公式純リンクRSS)",
+      "url": "https://www.reddit.com/r/gachagaming/.rss",
       "type": "rss",
       "enabled": true
     },
     {
-      "name": "Google リアルタイムバズニュース (鳴潮 攻略・最強・ティア)",
-      "url": "https://news.google.com/rss/search?q=%E9%B3%B4%E6%BD%AE+%E6%9C%80%E5%BC%B7+OR+%E6%94%BB%E7%95%A5+OR+Tier+when:2d&hl=ja&gl=JP&ceid=JP:ja",
-      "type": "rss",
-      "enabled": true
-    },
-    {
-      "name": "TikTok バズ動画・ショート急上昇レーダー (Googleトレンド索引)",
-      "url": "https://news.google.com/rss/search?q=site:tiktok.com/@+OR+site:tiktok.com/t/+%E9%B3%B4%E6%BD%AE&hl=ja&gl=JP&ceid=JP:ja",
+      "name": "Twitter(X) 話題まとめ Togetter (公式タグ純リンクRSS)",
+      "url": "https://togetter.com/rss/tag/%E9%B3%B4%E6%BD%AE",
       "type": "rss",
       "enabled": true
     }

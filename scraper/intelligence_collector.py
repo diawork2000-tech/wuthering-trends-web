@@ -243,15 +243,17 @@ class IntelligenceEngine:
                             link = getattr(entry, 'link', '')
                             summary_txt = getattr(entry, 'summary', title)
                             summary_clean = re.sub(r'<[^>]+>', '', str(summary_txt))[:120]
-                            if title and link and link.startswith("http"):
-                                self.collected_raw_items.append({
-                                    "title": title,
-                                    "summary": summary_clean or title,
-                                    "url": link,
-                                    "source_type": name[:30],
-                                    "score": 75
-                                })
-                                item_cnt += 1
+                            # リンク先がGoogleニュースリダイレクトや不正なショートリンクの場合はスキップして400エラーを防止！
+                            if not link or not link.startswith("http") or "news.google.com" in link:
+                                continue
+                            self.collected_raw_items.append({
+                                "title": title,
+                                "summary": summary_clean or title,
+                                "url": link,
+                                "source_type": name[:30],
+                                "score": 75
+                            })
+                            item_cnt += 1
                         print(f"    -> Harvested {item_cnt} items successfully.")
             except Exception as e:
                 print(f"  [Warning] Failed crawling {name}: {e}")
