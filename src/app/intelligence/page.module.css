@@ -73,7 +73,35 @@
 .headerActions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+/* ★ 活動ログ切り替えボタン ★ */
+.logToggleBtn {
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid #38bdf8;
+  color: #38bdf8;
+  padding: 0.55rem 1.1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+.logToggleBtn:hover {
+  background: #38bdf8;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+.logToggleActive {
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+  color: #fff !important;
+  font-weight: 800;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
 }
 
 .badge {
@@ -107,6 +135,119 @@
 .refreshBtn:hover {
   transform: translateY(-2px);
   filter: brightness(1.15);
+}
+
+/* ★ 美麗・ログダッシュボードセクション ★ */
+.logDashboard {
+  margin: 1.5rem 2rem 0 2rem;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+  animation: slideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.logHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.8rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.logHeader h3 {
+  margin: 0;
+  color: #38bdf8;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.logSubText {
+  color: #94a3b8;
+  font-size: 0.82rem;
+}
+
+.logTableContainer {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.noLogsText {
+  color: #64748b;
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.95rem;
+}
+
+.logTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.logTable th {
+  background: rgba(30, 41, 59, 0.9);
+  color: #e2e8f0;
+  text-align: left;
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.logTable td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+}
+
+.logTable tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.logTimeCell {
+  font-family: monospace;
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+.logStatusSuccess {
+  color: #10b981;
+  font-weight: 700;
+}
+
+.logCountCell {
+  color: #94a3b8;
+}
+
+.selectedHighlight {
+  color: #facc15;
+  font-weight: 800;
+}
+
+.breakdownTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.mediaTag {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(250, 204, 21, 0.25);
+  color: #fef08a;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.76rem;
 }
 
 .mainBody {
@@ -245,7 +386,6 @@
   font-weight: 800;
 }
 
-/* ズームレベル可変・カードスクロールエリア */
 .cardScrollArea {
   display: grid;
   max-height: calc(100vh - 195px);
@@ -281,7 +421,6 @@
   box-shadow: 0 6px 25px rgba(250, 204, 21, 0.28);
 }
 
-/* ★ サムネイル専用プレミアムデザイン ★ */
 .cardThumbArea {
   width: 100%;
   margin-bottom: 0.2rem;
@@ -290,7 +429,7 @@
 .thumbnailWrapper {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 アスペクト比 */
+  padding-top: 56.25%;
   border-radius: 8px;
   overflow: hidden;
   background: #000;
@@ -367,7 +506,6 @@
   padding-top: 52%;
 }
 
-/* カードヘッダー情報 */
 .cardHeader {
   display: flex;
   justify-content: space-between;
@@ -415,7 +553,6 @@
   line-height: 1.45;
 }
 
-/* ズームレベルによる密度の自動調整・スタイリング (3列＆4列でスリムダウン！) */
 .zoomLevel3 .topicCard {
   padding: 0.75rem;
   border-radius: 10px;
@@ -467,7 +604,6 @@
   font-size: 0.65rem;
 }
 
-/* 右側スタジオ・メインエディター */
 .studioColumn {
   flex: 1;
   min-width: 380px;
@@ -643,5 +779,9 @@
   }
   .cardScrollArea {
     max-height: none;
+  }
+  .logDashboard {
+    margin: 1rem;
+    padding: 1rem;
   }
 }

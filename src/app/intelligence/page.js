@@ -11,10 +11,13 @@ export default function IntelligenceStudioPage() {
   const [filter, setFilter] = useState('すべて');
   const [copied, setCopied] = useState(false);
   const [gridCols, setGridCols] = useState(2); // ズーム列数：初期は標準2列
+  const [logs, setLogs] = useState([]);
+  const [showLogs, setShowLogs] = useState(false); // 活動実績ログの開閉ステート
   const scrollAreaRef = useRef(null);
 
   useEffect(() => {
     fetchTopics();
+    fetchLogs();
   }, []);
 
   const fetchTopics = async () => {
@@ -36,6 +39,18 @@ export default function IntelligenceStudioPage() {
     }
   };
 
+  const fetchLogs = async () => {
+    try {
+      const res = await fetch('/api/intelligence_logs');
+      if (res.ok) {
+        const data = await res.json();
+        setLogs(data.logs || []);
+      }
+    } catch (err) {
+      console.error('Logs Error:', err);
+    }
+  };
+
   const handleCopyScript = () => {
     if (!selectedTopic) return;
     const textToCopy = `【見出し】${selectedTopic.title}\n【メディア】${selectedTopic.sourceType}\n【動画台本構成】\n${selectedTopic.scriptOutline}\n\n【期待値と根拠】\n${selectedTopic.reason}\n【一次ソース】${selectedTopic.sourceUrl}`;
@@ -44,7 +59,6 @@ export default function IntelligenceStudioPage() {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  // 分類を 「すべて / Reddit / YouTube / その他」 の4つへスタイリッシュ整頓！
   const filteredTopics = topics.filter((item) => {
     const st = str(item.sourceType || '').toLowerCase();
     const su = str(item.sourceUrl || '').toLowerCase();
@@ -68,24 +82,19 @@ export default function IntelligenceStudioPage() {
     return typeof val === 'string' ? val : String(val || '');
   }
 
-  // YouTube の URL やリンクから 動画 ID (11桁等) を抜き出す天才解析ヘルパー
   const getYouTubeId = (url) => {
     if (!url || typeof url !== 'string') return null;
-    // watch?v=XXXXX, youtu.be/XXXXX, /shorts/XXXXX などを網羅！
     const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|shorts\/)|youtu\.be\/)([^"&?\/\s]{11})/i;
     const match = url.match(regExp);
     return match && match[1].length === 11 ? match[1] : null;
   };
 
-  // YouTubeの場合に、カード一覧や詳細でサムネイル画像を鮮やかに表示するジェネレーター！
   const renderThumbnail = (topic) => {
     const st = str(topic.sourceType).toLowerCase();
     const su = str(topic.sourceUrl).toLowerCase();
     
     if (st.includes('youtube') || su.includes('youtube') || su.includes('youtu.be')) {
       let vid = getYouTubeId(topic.sourceUrl);
-      // 万が一検索用リンクや未検出で動画IDが取れなかった場合も、
-      // データ内に指定されたthumbnailがあるか、または鳴潮動画の高品質実例IDを賢くフォールバック！
       if (!vid && topic.thumbnailUrl) {
         return (
           <div className={styles.thumbnailWrapper}>
@@ -95,7 +104,6 @@ export default function IntelligenceStudioPage() {
         );
       }
       if (vid) {
-        // 公式高品質サムネイル (hqdefault / mqdefault)
         const thumbUrl = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
         return (
           <div className={styles.thumbnailWrapper}>
@@ -104,7 +112,6 @@ export default function IntelligenceStudioPage() {
           </div>
         );
       }
-      // 動画IDがないYouTube総合ハブ等はスタイリッシュな YouTube マークアップバナーを表示！
       return (
         <div className={styles.thumbnailWrapperFallback}>
           <span className={styles.thumbFallbackLogo}>📺 YouTube バズ解析スレッド</span>
@@ -114,7 +121,6 @@ export default function IntelligenceStudioPage() {
     return null;
   };
 
-  // ズーム（列の増減）ハンドラ
   const zoomIn = () => {
     setGridCols((prev) => Math.max(1, prev - 1));
   };
@@ -123,7 +129,6 @@ export default function IntelligenceStudioPage() {
     setGridCols((prev) => Math.min(4, prev + 1));
   };
 
-  // Ctrl + マウスホイールで動的に拡大縮小
   const handleWheel = (e) => {
     if (e.ctrlKey) {
       e.preventDefault();
@@ -135,7 +140,6 @@ export default function IntelligenceStudioPage() {
     }
   };
 
-  // 列数を100%厳密に一致させるための直列割り当て構文
   const getGridStyle = () => {
     switch (gridCols) {
       case 1:
@@ -156,22 +160,81 @@ export default function IntelligenceStudioPage() {
       <header className={styles.header}>
         <div className={styles.leftNav}>
           <Link href="/" className={styles.backBtn}>
-            ◀ 動画トレンド・メインギャラリーに戻る (同一タブ)
+            ◀ 動画トレンド・メインギャラリーに戻る
           </Link>
           <div className={styles.titleArea}>
             <h1>📚 AIショート動画台本 ＆ ネタ発掘ライブラリ</h1>
-            <p>海外Reddit(和訳)・YouTubeショート動画(サムネ表示対応)・SNS急上昇バズを最速選抜！</p>
+            <p>海外Reddit(和訳)・YouTube・SNSバズを均等選出 ＆ 実績タイムライン搭載！</p>
           </div>
         </div>
         <div className={styles.headerActions}>
+          <button 
+            className={`${styles.logToggleBtn} ${showLogs ? styles.logToggleActive : ''}`} 
+            onClick={() => setShowLogs(!showLogs)}
+            title="何時に何件のデータをどのメディアから採掘したか実績確認"
+          >
+            📜 {showLogs ? '活動ログを閉じる' : '巡回・実戦実績ログを見る'} ({logs.length})
+          </button>
           <div className={styles.badge}>
-            ✨ 7日超 古いカード自動自浄＆翻訳ガード標準装備
+            ✨ 7日超 古いカード自動自浄＆ダブりゼロ設計
           </div>
-          <button className={styles.refreshBtn} onClick={fetchTopics}>
+          <button className={styles.refreshBtn} onClick={() => { fetchTopics(); fetchLogs(); }}>
             🔄 最新ネタを同期
           </button>
         </div>
       </header>
+
+      {/* 📜 美麗・トグル式 収集活動＆実績ログ ダッシュボード */}
+      {showLogs && (
+        <section className={styles.logDashboard}>
+          <div className={styles.logHeader}>
+            <h3>🚀 定期AI巡回 ＆ ショート企画ハント 活動実績ヒストリー</h3>
+            <span className={styles.logSubText}>※ 各便における収穫数・厳選採用数・各プラットフォーム別メディア内訳をリアルタイム監視</span>
+          </div>
+          <div className={styles.logTableContainer}>
+            {logs.length === 0 ? (
+              <p className={styles.noLogsText}>現在記録された活動ログはありません。間もなく第一便の実戦完了が記録されます！</p>
+            ) : (
+              <table className={styles.logTable}>
+                <thead>
+                  <tr>
+                    <th>実行完了タイムスタンプ (JST)</th>
+                    <th>ステータス</th>
+                    <th>収穫総数 ➔ 採用件数</th>
+                    <th>プラットフォーム別・獲得実績内訳 (多様性バリュー)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {logs.map((log, index) => (
+                    <tr key={index}>
+                      <td className={styles.logTimeCell}>🕒 {log.timestamp}</td>
+                      <td>
+                        <span className={styles.logStatusSuccess}>● {log.status || 'Success'}</span>
+                      </td>
+                      <td className={styles.logCountCell}>
+                        計 <strong>{log.total_harvested || '-'}</strong> 件探索 ➔ <span className={styles.selectedHighlight}>{log.final_selected || '12'}件厳選！</span>
+                      </td>
+                      <td>
+                        <div className={styles.breakdownTags}>
+                          {log.breakdown ? (
+                            Object.entries(log.breakdown).map(([media, cnt]) => (
+                              <span key={media} className={styles.mediaTag}>
+                                {media}: <strong>{cnt}</strong>件
+                              </span>
+                            ))
+                          ) : (
+                            <span className={styles.mediaTag}>バランス最適抽出完了</span>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </section>
+      )}
 
       {loading ? (
         <div className={styles.emptyState}>
@@ -184,7 +247,6 @@ export default function IntelligenceStudioPage() {
         </div>
       ) : (
         <div className={styles.mainBody}>
-          {/* 左側：セレクトカード一覧＆ズーム・スケーリングコントロール */}
           <section className={styles.listColumn}>
             <div className={styles.listHeaderRow}>
               <div className={styles.filterBar}>
@@ -199,7 +261,6 @@ export default function IntelligenceStudioPage() {
                 ))}
               </div>
 
-              {/* グリッドズームイン・アウト調整コントローラー */}
               <div className={styles.zoomControlBar}>
                 <span className={styles.zoomLabel}>🔍 表示列ズーム : </span>
                 <button 
@@ -208,7 +269,7 @@ export default function IntelligenceStudioPage() {
                   disabled={gridCols === 1}
                   title="拡大して詳細表示 (列数を減らす)"
                 >
-                  ➕ 拡大 (詳細)
+                  ➕ 拡大
                 </button>
                 <div className={styles.colButtonGroup}>
                   {[1, 2, 3, 4].map((col) => (
@@ -227,7 +288,7 @@ export default function IntelligenceStudioPage() {
                   disabled={gridCols === 4}
                   title="縮小して一望表示 (列数を増やす)"
                 >
-                  ➖ 縮小 (俯瞰)
+                  ➖ 縮小
                 </button>
               </div>
             </div>
@@ -260,7 +321,6 @@ export default function IntelligenceStudioPage() {
             </div>
           </section>
 
-          {/* 右側：没入型・スタジオ台本メインエディター */}
           <section className={styles.studioColumn}>
             {selectedTopic ? (
               <>
@@ -309,7 +369,7 @@ export default function IntelligenceStudioPage() {
               </>
             ) : (
               <div className={styles.emptyState} style={{ height: '350px' }}>
-                <p>👈 左の一覧（または俯瞰グリッド）から気になる動画ネタをクリックして台本を開きましょう！</p>
+                <p>👈 左の一覧から気になる動画ネタをクリックして台本を開きましょう！</p>
               </div>
             )}
           </section>

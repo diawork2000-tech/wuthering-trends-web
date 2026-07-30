@@ -254,9 +254,6 @@ class IntelligenceEngine:
                                 title_ja = translate_if_needed(raw_title)
                                 summary_ja = translate_if_needed(summary_clean) if summary_clean != raw_title else title_ja
                             
-                            # ★検索欄(Google Search)へのダミー置き換えを全廃止！
-                            # 攻略記事やRedditなど、ユーザー様がクリックした瞬間に確実に実物の記事URLへ
-                            # ダイレクトにアクセスできる本物の「一次リンク」だけを100%厳格選抜！
                             if not link or not str(link).startswith("http") or "google.com/search" in str(link):
                                 continue
                                 
@@ -265,10 +262,10 @@ class IntelligenceEngine:
                                 "summary": summary_ja,
                                 "url": link,
                                 "source_type": name[:30],
-                                "score": 75
+                                "score": 92
                             })
                             item_cnt += 1
-                        print(f"    -> Harvested & Selective-Translated {item_cnt} high-impact topic cards successfully!")
+                        print(f"    -> Harvested & Selective-Translated {item_cnt} high-impact pure-link topic cards!")
             except Exception as e:
                 print(f"  [Warning] Failed crawling {name}: {e}")
                 
@@ -278,11 +275,9 @@ class IntelligenceEngine:
         print("\n=== [Phase 3] Generating, Deduplicating & Filtering Video Topics ===")
         target_count = self.config.get("settings", {}).get("target_items_per_run", 12)
         
-        # ★ダブり排除(Deduplication)バリア：過去に登録したカードのURLとタイトルを取り出す！
         existing_urls = set()
         existing_titles = set()
         
-        # 1. ローカルキャッシュからの既出収集
         try:
             cache_path = os.path.join(os.path.dirname(__file__), "../src/data/intelligence_cache.json")
             if os.path.exists(cache_path):
@@ -296,7 +291,6 @@ class IntelligenceEngine:
         except Exception:
             pass
 
-        # 2. Notion API から直近100件の既出収集
         if NOTION_API_KEY and NOTION_INTELLIGENCE_DB_ID:
             try:
                 headers = {"Authorization": f"Bearer {NOTION_API_KEY}", "Content-Type": "application/json", "Notion-Version": "2022-06-28"}
@@ -323,7 +317,6 @@ class IntelligenceEngine:
             i_url = str(item.get("url", "")).strip()
             i_title = str(item.get("title", "")).strip().lower()
             
-            # 全く同じURL、または全く同じタイトル、バッチ内の二重登用があれば即ダブり排除！
             if i_url in existing_urls or i_title in existing_titles or i_url in seen_in_batch_url or i_title in seen_in_batch_title:
                 continue
             
@@ -339,7 +332,16 @@ class IntelligenceEngine:
             unique_raw_items.append(item)
 
         print(f"  [Deduplication Complete] Filtered down from {len(self.collected_raw_items)} raw grabs to {len(unique_raw_items)} distinct, fresh candidates.")
-        sorted_items = sorted(unique_raw_items, key=lambda x: x.get("score", 0), reverse=True)[:35]
+        
+        web_items = [x for x in unique_raw_items if "youtube" not in str(x.get("source_type", "")).lower() and "youtube" not in str(x.get("url", "")).lower()]
+        yt_items = [x for x in unique_raw_items if "youtube" in str(x.get("source_type", "")).lower() or "youtube" in str(x.get("url", "")).lower()]
+        
+        web_sorted = sorted(web_items, key=lambda x: x.get("score", 0), reverse=True)[:28]
+        yt_sorted = sorted(yt_items, key=lambda x: x.get("score", 0), reverse=True)[:5]
+        
+        sorted_items = sorted(web_sorted + yt_sorted, key=lambda x: x.get("score", 0), reverse=True)
+        print(f"  [Diversity Balance] Selected {len(web_sorted)} Web/Reddit sources and {len(yt_sorted)} YouTube sources into final pool.")
+        
         if not sorted_items:
             print("  [Info] No candidate items found above criteria in this run.")
             return []
@@ -548,15 +550,49 @@ class IntelligenceEngine:
             print(f"  [Error during cleanup] {e}")
 
     def run(self):
-        print(f"\n--- [Intelligence Engine Started] {(datetime.now(timezone.utc) + timedelta(hours=9)).strftime('%Y/%m/%d %H:%M:%S (JST)')} ---")
+        now_str = (datetime.now(timezone.utc) + timedelta(hours=9)).strftime('%Y/%m/%d %H:%M:%S (JST)')
+        print(f"\n--- [Intelligence Engine Started] {now_str} ---")
         try:
             self.analyze_channels()
             self.crawl_web_sources()
             ideas = self.generate_and_filter_ideas()
+            
+            # 各ソースごとの収集実績内訳をカウント
+            source_breakdown = {}
+            for idx, item in enumerate(ideas or []):
+                st = str(item.get("source_type", "一般Web")).strip()
+                source_breakdown[st] = source_breakdown.get(st, 0) + 1
+                
             if ideas:
                 self.push_to_notion(ideas)
             self.cleanup_old_notion_cards()
-            print("\n--- [All Intelligence Processing & Auto-Cleanup Completed Successfully!] ---\n")
+            
+            # ★活動ログ(Activity Log)の自動保存処理：いつ・どれだけ集まったかを記録！
+            try:
+                log_path = os.path.join(os.path.dirname(__file__), "intelligence_logs.json")
+                logs_data = []
+                if os.path.exists(log_path):
+                    with open(log_path, "r", encoding="utf-8") as lf:
+                        try: logs_data = json.load(lf)
+                        except Exception: logs_data = []
+                
+                new_log_entry = {
+                    "timestamp": (datetime.now(timezone.utc) + timedelta(hours=9)).strftime('%Y-%m-%d %H:%M:%S'),
+                    "status": "Success",
+                    "total_harvested": len(self.collected_raw_items),
+                    "final_selected": len(ideas or []),
+                    "breakdown": source_breakdown
+                }
+                logs_data.insert(0, new_log_entry)
+                logs_data = logs_data[:50]  # 最新50件の実績ログをスッキリ整理保持
+                
+                with open(log_path, "w", encoding="utf-8") as lf:
+                    json.dump(logs_data, lf, ensure_ascii=False, indent=2)
+                print(f"  [Activity Log Recorded] Saved operational stats ({len(ideas or [])} cards selected) into intelligence_logs.json!")
+            except Exception as le:
+                print(f"  [Log Warning] Failed to write intelligence logs: {le}")
+
+            print("\n--- [All Intelligence Processing, Auto-Cleanup & Logging Completed Successfully!] ---\n")
         except Exception as e:
             print(f"[Fatal Exception during Intelligence Execution]: {traceback.format_exc()}")
 
