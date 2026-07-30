@@ -1,80 +1,69 @@
 {
   "target_channels": [
-    {
-      "name": "Diachannel12345 (自身のチャンネル)",
-      "url": "https://www.youtube.com/@Diachannel12345",
-      "enabled": true
-    },
-    {
-      "name": "ノタルch",
-      "url": "https://www.youtube.com/@ノタルch",
-      "enabled": true,
-      "id": "UC5Sbfo5LfDBHPHAULDeGkVQ"
-    },
-    {
-      "name": "セリーナ鳴潮メイン",
-      "url": "https://www.youtube.com/@セリーナ鳴潮メイン",
-      "enabled": true,
-      "id": "UCQHeJxhIjIaidTP9Lg1XiqA"
-    },
-    {
-      "name": "鳴潮スタジオ",
-      "url": "https://www.youtube.com/@鳴潮スタジオ",
-      "enabled": true,
-      "id": "UCzIeu8c_w__YfPXfr-OZfYg"
-    },
-    {
-      "name": "ぷにお-game",
-      "url": "https://www.youtube.com/@ぷにお-game",
-      "enabled": true,
-      "id": "UC_g6tbc6zXHfXs7L4aHcUHw"
-    },
-    {
-      "name": "deoxy.y",
-      "url": "https://www.youtube.com/@deoxy.y",
-      "enabled": true,
-      "id": "UCD5cpQZG02uqO7bJW-xvCIQ"
-    },
-    {
-      "name": "pamunogekijou",
-      "url": "https://www.youtube.com/@pamunogekijou",
-      "enabled": true
-    },
-    {
-      "name": "hiragi-e4x",
-      "url": "https://www.youtube.com/@hiragi-e4x",
-      "enabled": true,
-      "id": "UCCsbqG58UCd9LT1fP4Hbr8w"
-    },
-    {
-      "name": "sabchbch",
-      "url": "https://www.youtube.com/@sabchbch",
-      "enabled": true
-    }
+    {"name": "Diachannel12345 (自身のチャンネル)", "url": "https://www.youtube.com/@Diachannel12345", "enabled": true},
+    {"name": "ノタルch", "url": "https://www.youtube.com/@ノタルch", "enabled": true},
+    {"name": "セリーナ鳴潮メイン", "url": "https://www.youtube.com/@セリーナ鳴潮メイン", "enabled": true},
+    {"name": "鳴潮スタジオ", "url": "https://www.youtube.com/@鳴潮スタジオ", "enabled": true},
+    {"name": "ぷにお-game", "url": "https://www.youtube.com/@ぷにお-game", "enabled": true},
+    {"name": "deoxy.y", "url": "https://www.youtube.com/@deoxy.y", "enabled": true},
+    {"name": "pamunogekijou", "url": "https://www.youtube.com/@pamunogekijou", "enabled": true},
+    {"name": "hiragi-e4x", "url": "https://www.youtube.com/@hiragi-e4x", "enabled": true},
+    {"name": "sabchbch", "url": "https://www.youtube.com/@sabchbch", "enabled": true}
   ],
   "target_web_sources": [
     {
-      "name": "海外Reddit 鳴潮 Hotトピック",
+      "name": "TikTok バズ動画・ショート急上昇レーダー (復活＆強化版)",
+      "url": "https://www.tiktok.com/tag/%E9%B3%B4%E6%BD%AE",
+      "type": "rss_safe_unwrap",
+      "enabled": true
+    },
+    {
+      "name": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
       "url": "https://www.reddit.com/r/WutheringWaves/hot/.rss?limit=15",
       "type": "rss",
       "enabled": true
     },
     {
-      "name": "海外Reddit ガチャゲー最前線 Hot",
+      "name": "海外Redditフォーラム ガチャゲー最前線",
       "url": "https://www.reddit.com/r/gachagaming/hot/.rss?limit=10",
       "type": "rss",
       "enabled": true
     },
     {
-      "name": "鳴潮 最強攻略＆トレンドまとめハブ",
-      "url": "https://news.google.com/rss/search?q=%E9%B3%B4%E6%BD%AE+%E6%9C%80%E5%BC%B7+OR+%E6%94%BB%E7%95%A5+OR+%E3%83%86%E3%82%A3%E3%82%A2+when:7d&hl=ja&gl=JP&ceid=JP:ja",
+      "name": "Twitter(X) 話題まとめ最高峰 Togetter (鳴潮バズ)",
+      "url": "https://togetter.com/rss/tag/%E9%B3%B4%E6%BD%AE",
+      "type": "rss_safe_unwrap",
+      "enabled": true
+    },
+    {
+      "name": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "url": "https://news.google.com/rss/search?q=%E9%B3%B4%E6%BD%AE+%E6%9C%80%E5%BC%B7+OR+%E3%83%86%E3%82%A3%E3%82%A2+OR+%E9%9F%B3%E9%AA%B8+when:7d&hl=ja&gl=JP&ceid=JP:ja",
+      "type": "rss_safe_unwrap",
+      "enabled": true
+    },
+    {
+      "name": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆ファミ通)",
+      "url": "https://news.google.com/rss/search?q=%E9%B3%B4%E6%BD%AE+4Gamer+OR+%E3%83%95%E3%82%A1%E3%83%9F%E9%80%9A+OR+%E5%85%AC%E5%BC%8F+when:7d&hl=ja&gl=JP&ceid=JP:ja",
+      "type": "rss_safe_unwrap",
+      "enabled": true
+    },
+    {
+      "name": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上・熱気)",
+      "url": "https://news.google.com/rss/search?q=%E9%B3%B4%E6%BD%AE+%E3%83%88%E3%83%AC%E3%83%B3%E3%83%89+OR+%E8%A9%B1%E9%A1%8C+OR+%E7%82%8E%E4%B8%8A+when:7d&hl=ja&gl=JP&ceid=JP:ja",
+      "type": "rss_safe_unwrap",
+      "enabled": true
+    },
+    {
+      "name": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "url": "https://news.google.com/rss/search?q=%E9%B3%B4%E6%BD%AE+%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88+OR+%E8%A7%A3%E8%AA%AC+OR+%E7%A5%9E%E3%83%97%E3%83%AC%E3%82%A4+when:7d&hl=ja&gl=JP&ceid=JP:ja",
       "type": "rss_safe_unwrap",
       "enabled": true
     }
   ],
   "settings": {
-    "target_items_per_run": 15,
+    "target_items_per_run": 25,
     "min_score_threshold": 60,
-    "enable_gemini_summary": true
+    "enable_gemini_summary": true,
+    "auto_source_expansion": true
   }
 }

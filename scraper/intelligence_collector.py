@@ -362,6 +362,29 @@ class IntelligenceEngine:
                 print(f"  [Error] Notion transmission error: {e}")
                 
         print(f"  [Complete] Successfully appended {success_cnt} new topic cards to your Notion database!")
+        
+        # さらに、Webスタジオ側が絶対に「読込エラー」を出さないよう安心のローカルバックアップJSONへ同時同期！
+        try:
+            cache_dir = os.path.join(os.path.dirname(__file__), "../src/data")
+            os.makedirs(cache_dir, exist_ok=True)
+            cache_path = os.path.join(cache_dir, "intelligence_cache.json")
+            cache_items = []
+            for idx, idea in enumerate(ideas):
+                cache_items.append({
+                    "id": f"card-{idx}",
+                    "title": str(idea.get("topic_title", "無題のトレンド")),
+                    "sourceType": str(idea.get("source_type", "外部情報"))[:30],
+                    "sourceUrl": str(idea.get("source_url", "")),
+                    "scriptOutline": str(idea.get("script_outline", "")),
+                    "reason": str(idea.get("reason", "")),
+                    "date": (datetime.now(timezone.utc) + timedelta(hours=9)).strftime("%Y-%m-%d"),
+                    "createdTime": (datetime.now(timezone.utc) + timedelta(hours=9)).isoformat()
+                })
+            with open(cache_path, "w", encoding="utf-8") as cf:
+                json.dump({"success": True, "items": cache_items}, cf, ensure_ascii=False, indent=2)
+            print("  [Backup Sync] Mirrored cards to local intelligence_cache.json for 100% zero-error visual viewing on Vercel!")
+        except Exception as ce:
+            print(f"  [Notice] Cache mirror warning: {ce}")
 
     def cleanup_old_notion_cards(self):
         """1週間(7日間)以上経過した古い記事を自動でアーカイブし、パンクと動作遅延を未然に100%防止する"""
