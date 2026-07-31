@@ -1,5 +1,14 @@
 [
   {
+    "timestamp": "2026-07-31 17:47:14",
+    "status": "Success",
+    "total_harvested": 94,
+    "final_selected": 5,
+    "breakdown": {
+      "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 5
+    }
+  },
+  {
     "timestamp": "2026-07-31 17:34:24",
     "status": "Success",
     "total_harvested": 155,
