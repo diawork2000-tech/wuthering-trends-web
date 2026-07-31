@@ -333,10 +333,10 @@ export default function IntelligenceStudioPage() {
                         <div className={styles.studioVideoContainer}>
                           <iframe
                             className={styles.youtubeIframe}
-                            src={`https://www.youtube.com/embed/${ytId}?autoplay=1`}
+                            src={`https://www.youtube.com/embed/${ytId}?rel=0`}
                             title="YouTube video player"
                             frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowFullScreen
                           ></iframe>
                         </div>
@@ -361,7 +361,7 @@ export default function IntelligenceStudioPage() {
 
                 <div className={styles.scriptSection}>
                   <div className={styles.sectionHeading}>
-                    <span>📄 動画・記事の詳細要約</span>
+                    <span>📄 動画・記事の網羅的詳細 (全容解説)</span>
                   </div>
                   <div className={styles.scriptBox}>{selectedTopic.scriptOutline}</div>
                 </div>

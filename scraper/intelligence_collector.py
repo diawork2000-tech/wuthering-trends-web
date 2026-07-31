@@ -249,7 +249,7 @@ class IntelligenceEngine:
                             raw_title = getattr(entry, 'title', '')
                             link = getattr(entry, 'link', '')
                             summary_txt = getattr(entry, 'summary', raw_title)
-                            summary_clean = re.sub(r'<[^>]+>', '', str(summary_txt))[:140]
+                            summary_clean = re.sub(r'<[^>]+>', '', str(summary_txt))[:1500]
                             
                             if is_already_japanese(raw_title):
                                 title_ja = raw_title
@@ -380,26 +380,27 @@ class IntelligenceEngine:
         print(f"  [Competitor Track Unlimited] Successfully locked {len(competitor_cards)} non-duplicate competitor hit videos for full immersion!")
 
         if self.gemini_model and len(sorted_items) > 0:
-            print(f"  [Gemini Batch] Sending batch request to Gemini AI with {len(sorted_items)} items to analyze topic details...")
+            print(f"  [Gemini Batch] Sending batch request to Gemini AI with {len(sorted_items)} items to compile comprehensive full breakdowns...")
             prompt = (
                 "あなたはゲーム『鳴潮』情報のアナリストおよびコンテンツ最高責任者です。\n"
                 "以下の回収リストから注目すべきトピックを【 最大 " + str(target_count) + " 件 】選出し、"
-                "記事や動画の【具体的な詳細内容】を正確かつ明瞭に要約・分析して構成してください。\n\n"
+                "記事や動画の【網羅的で完全な詳細内容（論旨の全容解説）】を正確かつ精緻に構築してください。\n\n"
                 "【⚠️最重要・絶対指令⚠️】\n"
-                "1. 記事や動画の「中身の詳細（何が書いてあるか/どんな結論か）」を明確に記述すること。\n"
-                "   例：ガチャ確・育成優先度であれば「どのキャラクター・音骸を推奨し、理由は何なのか」の詳細、\n"
-                "   アプデ情報・Reddit議論であれば「どのような事実・考察・不満・熱烈な論点が語られているか」の詳細。\n"
-                "2. 「冒頭3秒」「〜をご存じですか？！」「➔ まとめ」のような陳腐で人工的なショート動画台本テンプレートや、中身のない抽象的なお決まり文句は堅く禁ずる。\n"
-                "3. 海外Reddit等の英語記事が含まれる場合は、必ず【100% 自然な純日本語による高品質な詳細解説】へ意訳・翻訳すること。\n\n"
+                "1. 単なる「要約（短いあらすじ）」で終わらせることは堅く禁ずる。\n"
+                "2. 読者が「元記事や動画のリンクを開いてわざわざ確認に行かなくても、このテキストを一読するだけですべての内容・結論・理由・具体的数値を完全に把握できる」水準まで詳細かつ濃密に解説・徹底記述すること。\n"
+                "   例：ガチャ・育成動画であれば「誰をどの音骸・サブステータスで組み、なぜ今すぐ引くべきか/スルーすべきかの結論と理由」の完全解説、\n"
+                "   海外掲示板やリーク考察であれば「どんな背景・事実があり、プレイヤーたちがどのような肯否意見で熱狂論争しているかの全様」を徹底詳説。\n"
+                "3. 「冒頭3秒」「〜をご存じですか？！」などの定型的な台本テンプレートや、中身を省略する言動は一切 proibit とする。\n"
+                "4. 海外Reddit等の英語記事が含まれる場合は、必ず【100% 自然で滑らかな純日本語による超高品質な網羅的詳細】へ完全翻訳すること。\n\n"
                 "出力は必ず【純粋なJSONフォーマットの配列】のみを返し、Markdownコードブロックや不要な解説は除外してください。\n\n"
                 "JSONの形式基準:\n"
                 "[\n"
                 "  {\n"
                 '    "topic_title": "100%純日本語の的確で魅力的なトピック見出し",\n'
-                '    "summary": "事象の背景概要(純日本語)",\n'
+                '    "summary": "事象の核心ポイント(純日本語)",\n'
                 '    "source_url": "提供リスト内に記載された正確な元URL",\n'
                 '    "source_type": "提供リストのメディア種別",\n'
-                '    "script_outline": "【動画・記事の内容詳細】：(ここにガチャ優先度の根拠や結論、議論の核心、ビルド詳細や検証結果を濃密に分かりやすく記す)",\n'
+                '    "script_outline": "【動画・記事の完全論説・網羅的詳細】：\n(元サイトに行かなくても完全に全容を理解できるよう、ここで結論、根拠、キャラクター名やパーティ戦略、具体的な議論の細流や検証ステータスを余すことなく長尺で徹底解説せよ)",\n'
                 '    "reason": "なぜこの情報がプレイヤー層において重要視されているかの注目ポイント"\n'
                 "  }\n"
                 "]\n\n"
@@ -411,14 +412,13 @@ class IntelligenceEngine:
                 raw_txt = re.sub(r'^```(json)?|```$', '', raw_txt, flags=re.MULTILINE).strip()
                 ideas_list = json.loads(raw_txt)
                 
-                # 英語未翻訳または陳腐な機械テンプレート混入を防衛する最終品質フィルター！
                 clean_ideas = []
                 for idea in ideas_list:
                     tt = str(idea.get("topic_title", ""))
                     to = str(idea.get("script_outline", ""))
                     if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', tt)) >= 2 and "についてご存じですか" not in to:
                         clean_ideas.append(idea)
-                print(f"  [Gemini Success] Successfully generated & filtered {len(clean_ideas)} high-purity detail summary cards!")
+                print(f"  [Gemini Success] Successfully generated & filtered {len(clean_ideas)} high-purity comprehensive breakdown cards!")
                 return clean_ideas[:target_count] + competitor_cards
             except Exception as e:
                 print(f"  [Warning] Gemini generation failed ({e}). Falling back to advanced algorithm.")
@@ -432,10 +432,10 @@ class IntelligenceEngine:
                 continue
             out_ideas.append({
                 "topic_title": t_title,
-                "summary": t_sum,
+                "summary": t_sum[:100],
                 "source_url": item.get("url", ""),
                 "source_type": item.get("source_type", "Web調査"),
-                "script_outline": f"【記事・動画の詳細要約】：\n{t_sum if len(t_sum) > 15 else f'「{t_title}」にて提起されたビルドや戦略、イベント情報および熱烈な議論詳細の要約。'}",
+                "script_outline": f"【動画・記事の完全論説・網羅的詳細】：\n{t_sum if len(t_sum) > 15 else f'「{t_title}」にて提起されたビルド方針や戦略、イベント攻略情報および熱烈な議論詳細の全容。'}",
                 "reason": f"注目トレンドおよびキーワード「{kw_match}」による反響検出"
             })
         print(f"  [Algorithm Ready] Formatted {len(out_ideas)} items using advanced algorithm.")
@@ -462,8 +462,8 @@ class IntelligenceEngine:
                     self.notion_title_prop_name: {"title": [{"text": {"content": str(idea.get("topic_title", ""))[:100]}}]},
                     "メディアソース": {"select": {"name": str(idea.get("source_type", "外部情報"))[:50]}},
                     "一次URL": {"url": str(idea.get("source_url", ""))[:200] if str(idea.get("source_url", "")).startswith("http") else None},
-                    "ショート台本骨格": {"rich_text": [{"text": {"content": str(idea.get("script_outline", ""))[:400]}}]},
-                    "合致根拠と期待値": {"rich_text": [{"text": {"content": str(idea.get("reason", ""))[:300]}}]},
+                    "ショート台本骨格": {"rich_text": [{"text": {"content": str(idea.get("script_outline", ""))[:2000]}}]},
+                    "合致根拠と期待値": {"rich_text": [{"text": {"content": str(idea.get("reason", ""))[:400]}}]},
                     "日時": {"date": {"start": (datetime.now(timezone.utc) + timedelta(hours=9)).strftime("%Y-%m-%d")}}
                 }
             }
