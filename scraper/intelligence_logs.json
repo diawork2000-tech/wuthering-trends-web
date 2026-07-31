@@ -1,5 +1,16 @@
 [
   {
+    "timestamp": "2026-07-31 20:16:31",
+    "status": "Success",
+    "total_harvested": 177,
+    "final_selected": 28,
+    "breakdown": {
+      "海外Redditフォーラム ガチャゲー最前線": 7,
+      "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)": 5,
+      "YouTube競合 (別枠全件枠)": 16
+    }
+  },
+  {
     "timestamp": "2026-07-31 20:01:53",
     "status": "Success",
     "total_harvested": 166,
