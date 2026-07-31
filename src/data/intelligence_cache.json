@@ -3,283 +3,263 @@
   "items": [
     {
       "id": "card-0",
-      "title": "【鳴潮】穂穂(スイスイ)の評価とおすすめパーティ編成・音骸・武器 - GameWith",
+      "title": "【鳴潮】音骸（Echo）厳選の完全攻略ガイド：効率的な周回手順とステータス厳選基準の徹底解説",
       "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5jOVpoTk9xN2REMnhQUzhfT3hpSUdXQkNYY21VQWFaWHY2aTc3ZEwxTGlWamh0SjBJLTM3NGNXcUY4SnBETW1qYXYxdEp4T0padEhZ?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】穂穂(スイスイ)の評価とおすすめパーティ編成・音骸・武器&nbsp;&nbsp;GameWith",
-      "reason": "注目トレンドおよびキーワード「スイスイ」による反響検出",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBIWE1ITVVOWkFSX2RhNmNvNjBCZ3hCY01wcTVXUFBQM2ZEaEZtVnRXZTJoREZCVGFqRC1hNzZFU1loYmU5UGxlUFROa1NEVjJmVjBJ?oc=5",
+      "scriptOutline": "【音骸厳選の完全解説と徹底攻略】\n\n1. 音骸厳選の前提条件とデータドックレベル：\n音骸厳選を本格化する最大の前提は「データドックレベル15以上（最高品質である星5音骸がドロップ開始）」への到達であり、推奨は「レベル20（星5ドロップ率100%）」です。レベルが低い段階でチューナーや経験値素材を消費するのは極めて非効率的なため、まずは図鑑埋め（未獲得の音骸・低レアリティの吸収）を進めてデータドックレベルを限界まで引き上げてください。\n\n2. 基本のコスト構成（4-3-3-1-1）：\nキャラクターの音骸スロット（合計コスト12）の基本構成は「コスト4 × 1、コスト3 × 2、コスト1 × 2」の4-3-3-1-1が最もバランス良く火力を伸ばせます。\n・コスト4：メインアタッカーなら「クリティカル率」または「クリティカルダメージ」。ヒーラーなら「治療効果向上」や「HP%」。\n・コスト3：キャラの属性に合わせた「属性ダメージブースト（例：凝縮傷害アップなど）」×2枚が基本。サブステや武器で属性バフが過剰な場合は「属性ダメージ＋攻撃力%」も選択肢。\n・コスト1：「攻撃力%」（耐久キャラならHP%や防御力%）。\n\n3. サブステータス（チューニング）の厳選優先度：\n音骸をレベル5上げるごとに1つ開放されるサブステータス（最大5枠）の優先度は以下の通りです。\n・最優先（SS判定）：クリティカル率、クリティカルダメージ\n・優先（S判定）：共鳴効率（多くのキャラで120%〜140%の確保が共鳴解放の回転率を高めるため必須）、攻撃力%\n・妥協枠（A判定）：共鳴スキルダメージアップ、共鳴解放ダメージアップ、通常攻撃/重撃ダメージアップ（キャラの主力火力ソースに依存）\n\n4. 効率的な厳選・素材節約テクニック：\nレベル25まで一気に強化するのではなく、まずは「レベル5〜10」まで強化して1〜2枠目のサブステータスを開放します。ここでクリティカル系や共鳴効率などの必須ステータスが付かなかった場合は即座に撤退し、次の音骸の強化素材（経験値の80%が戻る）として再利用するのが素材枯渇を防ぐ最適解です。",
+      "reason": "エンドコンテンツである「深境の塔」や高難易度ボスの攻略において、音骸のステータス最適化はキャラクターの戦闘力を数倍以上に跳ね上げる最重要要素であるため。",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406366+00:00"
+      "createdTime": "2026-08-01T00:18:08.688901+00:00"
     },
     {
       "id": "card-1",
-      "title": "【Steam(7/31)】「遺志を紡ぐは剣、夢に響くは歌」アップデート『鳴潮』首位 『星の翼』TOP3浮上 新作『Mistfall Hunter』4位登場 - gamebiz【ゲームビズ】",
-      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiREFVX3lxTE9DclgteTVEMWR2X0pOUTdWTE82WFozRVlqXzZjZ2FobUhMcWRjU0Q5YjZNSHRILUNMazk1V3prSmNpMC1R?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【Steam(7/31)】「遺志を紡ぐは剣、夢に響くは歌」アップデート『鳴潮』首位 『星の翼』TOP3浮上 新作『Mistfall Hunter』4位登場&nbsp;&nbsp;gamebiz【ゲームビズ】",
-      "reason": "注目トレンドおよびキーワード「is」による反響検出",
+      "title": "【鳴潮】追憶の響きガチャ（復刻ピックアップ）おすすめキャラ優先度と引くべきかの徹底分析",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBTUHpDT2l5dXVDZ0Y1cW9wUWpHal9xejBmdU9fUWlwbVoza1ZGZUdlMzc5TGdaZkRKVmItXzZDaUhGa2NGOGxoWkJyZE1pMmFwMU9Z?oc=5",
+      "scriptOutline": "【追憶の響きガチャ完全解説：誰を引くべきか】\n\n1. ガチャシステムの基本ルールと前提：\nキャラクターガチャの天井は80連で、初回星5排出時のピックアップ確率は50%（すり抜けあり）。すり抜けた場合、次の星5は100%限定キャラ確定となります。一方、武器ガチャは天井80連で「100%ピックアップ武器確定（すり抜けなし）」という極めて良心的な仕様になっています。\n\n2. 優先度SSランク：万能サポーター・ヒーラー（ショアキーパー、ヴェリーナ等）\n・引くべき理由：火力バフ、クリティカル補正、HP回復、中断耐性付与などを1体で完結できるサポーターは、どのメインアタッカーと組ませても腐ることがなく、パーティーの底上げ性能が最高峰です。特に2編成・3編成が必要となる「深境の塔」攻略において最優先で確保すべき存在です。\n\n3. 優先度Sランク：属性特化型ハイパーキャリー（今汐、忌炎、長離など）\n・今汐（光属性）：共鳴スキルによる瞬間風圧火力が全キャラ中トップクラス。特殊スタックを溜める立ち回りが必要ですが、単体ボス戦において無類の強さを誇ります。\n・忌炎（気動属性）：共鳴解放中の広範囲通常攻撃連打が非常に強力で、雑魚敵の一網打尽からボス戦まで扱いやすさNo.1アタッカー。\n・長離（熱融属性）：高頻度の共鳴スキルと空中コンボが特徴。終奏スキルで次に登場するキャラの熱融ダメージと共鳴解放ダメージを強化できるため、サブアタッカー兼バッファーとしても超優秀。\n\n4. 無課金・微課金層向けガチャ戦略の結論：\n手持ちに強力なメインアタッカーが不足している場合は「今汐」や「忌炎」などのメインアタッカーを1体確保。既にアタッカーが揃っている場合はサポーターを狙うか、確定で入手できる強力な「モチーフ武器」の確保に石を分配するのが最も費用対効果が高い戦略となります。",
+      "reason": "限られた星声（ガチャ石）をどのキャラクターや武器に投資すべきか、プレイヤーが最も損をしないための決断を下す必須情報であるため。",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406392+00:00"
+      "createdTime": "2026-08-01T00:18:08.688929+00:00"
     },
     {
       "id": "card-2",
-      "title": "アナログ式でも比較的安価な磁気ホール式キースイッチ採用10キーレスキーボード「Huntsman V3 HE Magnetic 8KHz」がRazerから - 4Gamer.net",
-      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE96dk44VnlFOU9HYWNLamxKVnRwYkh6ZmxNbnc0TWFXUFZnS2NUWnBiYlJaX2VBUko2VFN4c1RlYTNtZW5CTXlDRzZGY2VsTGNnWlAwOWpIOEJrNjQwdkpMMDRnbw?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nアナログ式でも比較的安価な磁気ホール式キースイッチ採用10キーレスキーボード「Huntsman V3 HE Magnetic 8KHz」がRazerから&nbsp;&nbsp;4Gamer.net",
-      "reason": "注目トレンドおよびキーワード「RAZER」による反響検出",
+      "title": "【鳴潮】緋雪（ひゆき）の完全評価：最強ビルド、おすすめ音骸・武器・理想パーティ編成",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1EdFE2eVVmT3phZzN5a3VDOFZsbko1OG5XYk9nck9yTDRYZUd5VWdtNk5wTjA1c3pGczdxRTFaY0FtcDhURUlBNXhZbzhoV0lzdTRB?oc=5",
+      "scriptOutline": "【緋雪（ひゆき）性能評価および完全育成解説】\n\n1. キャラクター概要と強み：\n緋雪は高頻度の共鳴スキルと、共鳴解放による圧倒的な範囲・瞬間火力を兼ね備えたアタッカー/サブアタッカーです。固有のゲージ（特殊スタック）を通常攻撃やスキルで溜め、強化重撃や強化スキルを叩き込む高スピードなバトルスタイルが特徴です。\n\n2. 最適武器ランキング：\n・モチーフ星5武器：メインステータスでクリティカル率が上昇し、武器効果で共鳴スキルおよび共鳴解放のダメージが大幅アップ（24%〜48%）。文句なしの最適解。\n・千古の晄（星5恒常）：共鳴効率と攻撃力がバランスよく上昇し、必殺技の回転率を高めつつ高火力を維持可能。\n・星4代替武器：ラジオ武器（先導電台報酬）や、共鳴スキル使用時に攻撃力が上昇する鍛造武器が推奨。\n\n3. おすすめ音骸構成とビルド：\n・ハーモニー効果：「凝縮の凛風」5セット（凝縮ダメージアップ＋重撃/スキル使用後の凝縮ダメージ追加強化）または「無音の暗雲」5セット（サブアタッカー運用時）。\n・メイン音骸（コスト4）：輝きを失った巨像などの高火力メイン音骸（メインステータス：クリティカル率 or クリティカルダメージ）。\n・目標ステータス値：攻撃力2000以上、クリティカル率70%以上、クリティカルダメージ240%以上、共鳴効率125%〜135%。\n\n4. 理想のパーティ編成：\n・ハイパーキャリー編成：緋雪（メインアタッカー） ＋ 散華（通常攻撃バフ＆終奏スキルで凝縮ブースト） ＋ ヴェリーナ/ショアキーパー（全体火力バフ＆回復）。散華の変奏・終奏コンボから緋雪へ繋ぐことで、瞬間火力を極限まで高めることが可能です。",
+      "reason": "新キャラクターや注目キャラクターの実装に伴い、入手したプレイヤーが即座に戦力化するための具体的な育成指示書が必要とされているため。",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406406+00:00"
+      "createdTime": "2026-08-01T00:18:08.688941+00:00"
     },
     {
       "id": "card-3",
-      "title": "『ゼンレスゾーンゼロ』エレン・ジョー、儀玄、浮波柚葉のフィギュア原型を展示！さらに『アークナイツ』『アズレン』『鳴潮』などの最新フィギュアも！【ワンフェス2026夏速報レポート】APEXTOYS（エーペックストイズ） - 電撃ホビーウェブ",
+      "title": "【鳴潮】限定イベント「秘玉帰巣記」の完全攻略：ギミック解除手順と全報酬回収ガイド",
       "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5xM0VQTG9LV3poZTJsZEN1OGhUZVlQajRadnVzR3BrSnphNkV4cXc1aDFRdDBUVVRpRnZQeFVNeFh0Q3FsZFJrVS1zWlZpbE00bkE?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n『ゼンレスゾーンゼロ』エレン・ジョー、儀玄、浮波柚葉のフィギュア原型を展示！さらに『アークナイツ』『アズレン』『鳴潮』などの最新フィギュアも！【ワンフェス2026夏速報レポート】APEXTOYS（エーペックストイズ）&nbsp;&nbsp;電撃ホビーウェブ",
-      "reason": "注目トレンドおよびキーワード「最新」による反響検出",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE56dHNFTkNzY2x6U3lWVnItSldmZHVSaWlRX0NaVmdKd2xFaVE2dDFHZ1JQekYxUTU1SFBkR01XN281aVdPdW90VExvc1BIcERQX0p3?oc=5",
+      "scriptOutline": "【秘玉帰巣記 イベント完全攻略】\n\n1. イベント概要と開放条件：\n本イベントは指定の遺跡エリアを探索し、特殊な光線照射ギミックや台座パズルを解き明かしながら、解放された高難易度戦闘試練をクリアしていく探索・戦闘一体型イベントです。ユニオンレベル22以上および指定のメインストーリークリアが参加条件となります。\n\n2. ギミック解体手順（謎解き）：\n・光線屈折ギミック：マップ上に配置された「光導の台座」を回転させ、受光部に正しく光を誘導します。障害物がある場合は音骸の攻撃や重力ギミックでブロックを移動させる必要があります。\n・圧力プレート：キャラクターだけでなく、音骸の召喚体やフィールド上の岩石オブジェクトを設置して重量を固定することで扉が開きます。\n\n3. 戦闘試練の効率的な立ち回り：\n・各ステージには全3ウェーブのエネミーが登場。ステージごとに「共鳴スキルダメージ+50%」などの強力な「ステージバフ」が設定されているため、バフに適したパーティ（例：スキル主体のキャラ）を選ぶことが時間短縮の鍵です。\n・集敵スキルのあるキャラ（ヤンヤンや特化音骸）を活用して雑魚敵を一括処理し、タイムロスを防ぎましょう。\n\n4. 獲得可能報酬の一覧：\n全ステージで最高評価（星3）を獲得することで、合計「星声 × 400〜600個」、大量の「高級密音筒（音骸経験値）」、「シェルコイン」、および各種上限突破素材をすべて取り切ることができます。",
+      "reason": "期間限定イベントで獲得できるガチャ石（星声）や貴重な音骸強化素材を、取りこぼしなく短時間で効率的に回収するため。",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406418+00:00"
+      "createdTime": "2026-08-01T00:18:08.688951+00:00"
     },
     {
       "id": "card-4",
-      "title": "【Google Play(7/31)】星5共鳴者「穂穂」が登場の『鳴潮』が4位に急浮上 拡張パック「天空の支配者」を追加の『ポケポケ』は17位に - gamebiz【ゲームビズ】",
-      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiREFVX3lxTFBpcmZvVV9EVjZsVmhSV0FTaEc4TDlTUkpObXZhYV9aWnVtSFZ4WUlaR2hfeEpZQmRXNEhzaHdhSlpYZmV5?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【Google Play(7/31)】星5共鳴者「穂穂」が登場の『鳴潮』が4位に急浮上 拡張パック「天空の支配者」を追加の『ポケポケ』は17位に&nbsp;&nbsp;gamebiz【ゲームビズ】",
-      "reason": "注目トレンドおよびキーワード「穂穂」による反響検出",
+      "title": "【鳴潮】潮汐任務4章-第2幕「荒波鎮めるは玄翎の声」ボス攻略とストーリー完全チャート",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1rUF9vbjZpazlYdllxOTFCQU4wbnFpSWFMYk9rLXZGVWQtd2lVSlBNbjdiN1VCdWtfeTRqTlZMMzRpWTVqQjg3OUhwYTJLU183UG5Z?oc=5",
+      "scriptOutline": "【4章-第2幕「荒波鎮めるは玄翎の声」詳細攻略】\n\n1. ストーリー概要と進行フロー：\n本幕では新地域における異常現象の真相を追い、主人公（漂泊者）の秘められた力と新勢力の思惑が交差する怒涛の展開が描かれます。フィールド上の高低差がある危険エリアを鉤縄（フック）や滑空を駆使して進行します。\n\n2. ボス戦「玄翎の影」徹底攻略：\n・属性耐性：気動および導電属性に対して高い耐性を持ちます。攻略には「凝縮」「熱融」「消滅」属性のアタッカーを起用するのが攻略速度を高めるポイントです。\n・注意すべき危険攻撃：広範囲に波状攻撃を打ち出す全画面衝撃波。タイミングよくジャンプ＋滑空を行うか、回避（ジャスト回避）で無敵時間を合わせる必要があります。\n・パリィタイミング（重要）：ボスの目が黄色く光る「パリィリング」が表示される大技の直前、共鳴スキルまたは重撃を合わせるとボスの共鳴値を大きく削り、即座にダウン（ブレイク状態）へ追い込むことができます。\n\n3. クリア後の解放要素：\nクリアすることで新エリアのファストトラベルポイントが全開し、新たな音骸周回ルートおよび週ボス（討伐素材ドロップ）へのアクセスが可能となります。",
+      "reason": "メインストーリーの進行は新エリアや新ボスの開放に直結しており、つまずきやすいボス戦の攻略法を提示することで進行不能を防ぐため。",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406430+00:00"
+      "createdTime": "2026-08-01T00:18:08.688960+00:00"
     },
     {
       "id": "card-5",
-      "title": "【コスプレ】吸い込まれそうな大きな瞳とスレンダーなスタイルの再現度がすごい！『鳴潮』ツバキの危険な香り漂う表情に見惚れる【写真9枚】 - ｄメニューニュース",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPa0VLQ2Y4Si1iT05GbWtvRWlNU2VVcVg5aXZVRTJBVk4xUkE5RU9TcldzdExPclY3TUNCWVdOLTFPNlNkUk5PV2dycHBSMzZzVXpXN2F2UUd1QzFJckhrZVRwamRQZEdZLU5JcWxpZGdmamZyX2lCRktONXU1VkFwcEp30gGHAUFVX3lxTE15RU56MFc0YVlOVFlDSHVTbGdBY2hoLWhGemxXSXp3QXlJaTRWUndEcmFod2xOSjlFcE01X2RtSlZMc1BDUkhTaTlxTDRBQl9FSm44WTJJR2ROLXRyb0ptVWpwU0xQM3UzN3RyYmExRVIzSDNybnJudEFfRkQzV0xYNFJLcU5oVQ?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【コスプレ】吸い込まれそうな大きな瞳とスレンダーなスタイルの再現度がすごい！『鳴潮』ツバキの危険な香り漂う表情に見惚れる【写真9枚】&nbsp;&nbsp;ｄメニューニュース",
-      "reason": "注目トレンドおよびキーワード「スタ」による反響検出",
+      "title": "【鳴潮】メインストーリー（潮汐任務）全体攻略チャート：ユニオンレベル上げと解放要素まとめ",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5CZlBwdU9nellucVZ4TXJGb1lFN3l5TmhoczI0c0RLakJ1TkhKR3N1clN5YmdEcTNONnd3OS05cVhKdzREdmhrdXNTWG1YVTFDdHRv?oc=5",
+      "scriptOutline": "【潮汐任務 全体進行ロードマップ】\n\n1. ストーリー進行とユニオンレベル制限：\nストーリーを進行する際、特定の節で「ユニオンレベル（プレイヤーアカウントレベル）」の制限がかかります。進行が止まった場合は、以下の優先順位で経験値を稼ぐのが最短です。\n・1位：スタミナ（結晶波片）の消費（擬似波形や音骸周回）\n・2位：ソラガイドのデイリー任務（毎日必ず全回収）\n・3位：先導電台（バトルパス）課題およびフィールドの宝箱（潮汐の遺物）開封\n\n2. 各章ごとの主な解放コンテンツ：\n・1章クリア：デイリー任務、ガチャ機能、マルチプレイ（レベル22〜）の開放\n・2章〜3章クリア：音骸データドックの上限解放、高難易度コンテンツ「深境の塔」「仮想訓練」開放\n・4章クリア：最新マップの全開放、最高レア度武器・音骸育成素材ダンジョンの最高難易度開放\n\n3. 効率的な育成と並行作業：\nストーリー中に訪れる各地域の「ファストトラベル用ビーコン」は必ず開放しながら進めましょう。後からのマップ探索や音骸周回が大幅に効率化されます。",
+      "reason": "新規プレイヤーや復帰プレイヤーが迷わず最速でゲームの全コンテンツ（マルチや限定イベント）に追いつくための完全導線となるため。",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406442+00:00"
+      "createdTime": "2026-08-01T00:18:08.688968+00:00"
     },
     {
       "id": "card-6",
-      "title": "【コスプレ】『アズールプロミリア』から『鳴潮』まで抜群のスタイルで魅せる！「2026漫画博覧会」百花繚乱の台湾美女12選【写真37枚】 - ｄメニューニュース",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOZGRhMHlPZG9zNTZHb05SUnh6Q2hqNklLY2FGcFFEcVVMUHdQRHRiWHF4dFJJT3RJQ1NvUzlLdkVfaVRmLW80RGdLNUM1YndSRlhvT0gtRTVuUU5xcnh6N2dSV3Z6UmVINGt4N095RDRNVmk5MW5CUmxiRmVsQS1RbzR30gGHAUFVX3lxTE9VTlNrcDdxdm5vN1gxa3k0UVp6R3NKRFdSaTZId1F6NlhjelFSN0tYdDVnenZyOTh5OC0xdUxZU1Bnc0ZIcnF2U0VxTU9NTXZkZWNYbUthdVdMOEVRMHRiMkZVeGxKRVBGTldBS3E0cXdBSHBaT2p1aFZjTzMtQkIxVVFxbl8zYw?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【コスプレ】『アズールプロミリア』から『鳴潮』まで抜群のスタイルで魅せる！「2026漫画博覧会」百花繚乱の台湾美女12選【写真37枚】&nbsp;&nbsp;ｄメニューニュース",
-      "reason": "注目トレンドおよびキーワード「スタ」による反響検出",
+      "title": "【鳴潮】潮汐任務4章-幕間「霊響の契り、冥々の定め」ギミック解析とボスラッシュ攻略",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFB3djBnR1dta0tsaXFBN1JyVjhiZ1FGbkZUTEQwcG5WaHVRNGxfSktFcm9SUHMxbEJBRmZmTGlQcXpqTW9sUVUzOVNCQ1pKN1hVUWow?oc=5",
+      "scriptOutline": "【4章-幕間ストーリー完全攻略】\n\n1. 幕間ストーリーの位置づけ：\n本幕間は4章本編のクライマックス直後の後日談であり、次回バージョンへの伏線を含んだ重要シナリオです。特定のキャラクターの掘り下げと、特殊なフィールドギミック攻略が主体となります。\n\n2. 「霊響の柱」パズルギミックの解法：\n・音骸の感知機能（Tキー/L1＋ボタン）を使用すると、空間内に透明化された「音ノ刻印」が浮かび上がります。\n・刻印の共鳴周波数を合わせるため、柱を正しい順番（青→黄→赤の順など、刻印の輝き方で判断）で攻撃・起動することで道が開きます。\n\n3. 連続ボスラッシュ戦闘のコツ：\n・試練の終盤では強化された精鋭エネミーが2体同時に出現します。敵同士の位置をカメラ内で常に把握し、壁際に追い込まれないようフックやジャスト回避を駆使してヒット＆アウェイを徹底してください。\n・回復アイテムの使用制限があるため、パーティに1体はヒーラー（ヴェリーナや白芷）を編成することが安定クリアの鍵です。",
+      "reason": "本編の合間に位置する幕間任務のストーリー補完と、複雑化するフィールドパズルのスムーズな解体方法を提供するため。",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406452+00:00"
+      "createdTime": "2026-08-01T00:18:08.688977+00:00"
     },
     {
       "id": "card-7",
-      "title": "『めっちゃカメレオン』と『8番出口』のコラボ開催か。開発者のXにて「カメレオンを見逃さないこと」の一文とともに画像が投稿 - ニコニコニュース",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE04SlB0Rl9yY0o2QmhQNjEwUkdnR0Q0bHRtdTllbkVUd3MxMjdjMkstRjdpcHVSbTRMaUZnRGJMckNhRU5GWDBHM0xnandhV3RGdXd4Rw?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n『めっちゃカメレオン』と『8番出口』のコラボ開催か。開発者のXにて「カメレオンを見逃さないこと」の一文とともに画像が投稿&nbsp;&nbsp;ニコニコニュース",
-      "reason": "注目トレンドおよびキーワード「コラボ」による反響検出",
+      "title": "【鳴潮】推理イベント「明慎事件簿」の全回答と証拠照合の手順：星声を最速入手",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5JN0hfNWRIOWRPVzRqaHdSVFNremdEYTZ4Y2NzX3Q1NFh1NlVtbjFvOUNSYTdGQUpnY1pGdWJFV25jSGU4SXFYNGxMSmRDdGttbWp3?oc=5",
+      "scriptOutline": "【明慎事件簿 イベント正解チャート】\n\n1. イベント概要：\n街中で発生した不可解な事件を解決するため、プレイヤーが探偵となりNPCへの聞き込みと現場検証を行い、矛盾を暴く推理型ミニイベントです。\n\n2. ステージごとの証言と証拠の集め方：\n・現場検証：光る調査ポイント（3箇所）を調べ、「足跡の痕跡」「破損した置物」「時間の記録」を手がかりとしてリストに登録します。\n・聞き込み：容疑者・目撃者3名と会話して「アリバイ証言」を獲得します。\n\n3. 推理パート（論破）の正解ルート：\n・問い1：「容疑者のアリバイの矛盾を示す証拠は？」 → 正解：『時間の記録』を選択。\n・問い2：「現場に残された決定的な証拠品は？」 → 正解：『破損した置物』を選択。\n・問い3：「真犯人の動機を特定する証言は？」 → 正解：目撃者Bの証言を選択。\n※正しい組み合わせを選択することで、1度のミスもなく即座にシナリオが完了します。\n\n4. イベント報酬：\n事件をすべて解決することで、合計「星声 × 400個」、キャラクター育成素材、音骸チューナーを即座に受領可能です。",
+      "reason": "選択肢を間違えると進行に時間を要する推理イベントにおいて、ストレスなく一発で最高評価と全報酬を回収してもらうため。",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406463+00:00"
+      "createdTime": "2026-08-01T00:18:08.688985+00:00"
     },
     {
       "id": "card-8",
-      "title": "【コスプレ】まるで実写版のような抜群のスタイルと衣装がすごい！『ゼンゼロ』オルペウスの躍動感溢れるポーズで魅せる美女レイヤー【写真8枚】 - ｄメニューニュース",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPT1VqQS12U0dzekc2ZnN5NS1OdklwZkZESW8wMmxfSWthRU1DRTRSWEhEZHl6WFBPOHN0MjBLSDNXSmVZeEFBbXRkdmFhbjhoNUEwWGdoM2JQOHBpOXFfc0RqVmFoNmxwQzI5bGdPY3k1ZE5paUsyZEZCa0liS085Q1NLYmJEbUHSAYcBQVVfeXFMT09VakEtdlNHc3pHNmZzeTUtTnZJcGZGRElvMDJsX0lrYUVNQ0U0UlhIRGR5elhQTzhzdDIwS0gzV0plWXhBQW10ZHZhYW44aDVBMFhnaDNiUDhwaTlxX3NEalZhaDZscEMyOWxnT2N5NWROaWlLMmRGQmtJYktPOUNTS2JiRG1B?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【コスプレ】まるで実写版のような抜群のスタイルと衣装がすごい！『ゼンゼロ』オルペウスの躍動感溢れるポーズで魅せる美女レイヤー【写真8枚】&nbsp;&nbsp;ｄメニューニュース",
-      "reason": "注目トレンドおよびキーワード「躍動感」による反響検出",
+      "title": "【鳴潮】撮影イベント「色褪せぬ面影」全撮影スポット・時間・アクション条件完全ガイド",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBqa1BaeXl5NDRrSzFNNXNfMGVjZFlXaEd0d0Y4aTIxUV83Y181ejJ6WjZYYnlSOFdVaHo2TWZIU3dSU0lZb0t5cC1fNlZGU2F1SkJB?oc=5",
+      "scriptOutline": "【色褪せぬ面影 撮影コンプリートガイド】\n\n1. イベントの基本ルール：\n指定されたマップ上の撮影ポイントに行き、指定された「時間帯」「画角（カメラアングル）」「キャラクターの動作」の条件をすべて満たして写真を撮影するカジュアルイベントです。\n\n2. 撮影条件の満たし方（共通手順）：\n・手順1：メニューの「時計アイコン」からゲーム内時間を指定の時間（例：12:00や20:00）に変更する。\n・手順2：指定の光る撮影用アイコン（ターゲットマーク）の前に立つ。\n・手順3：ゲーム内フォトモードを起動し、カメラの拡大率（ズーム）や画角を調整して、画面上に「緑色のチェックマーク」が表示される状態にする。\n\n3. 各お題のアクション達成テクニック：\n・「共鳴スキル/解放の発動中」の条件：フォトモードではなく、便利アイテムの「カメラ」をショートカットに登録し、スキルボタンを押した瞬間にカメラボタンを連打することで簡単にモーション中の撮影が可能です。\n・「待機モーション中」の条件：キャラクターを数十秒間操作せずに放置し、固有の待機アニメーションが始まった瞬間に撮影ボタンを押します。\n\n4. 報酬：\n全お題達成で「星声 × 300個」、シェルコイン、各種強化素材を獲得できます。",
+      "reason": "撮影条件の判定（特にモーション中の撮影や時間変更）に苦戦するプレイヤーが多く、確実かつ素早く全条件をクリアする手法が提示されているため。",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406474+00:00"
+      "createdTime": "2026-08-01T00:18:08.688994+00:00"
     },
     {
       "id": "card-9",
-      "title": "【コスプレ】豪華絢爛な和服から覗く美脚が圧巻すぎる！美女レイヤーが魅せる『崩スタ』帰忘の流離人の優美な瞳に吸い込まれそう【写真9枚】 - ｄメニューニュース",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQdWhlRUhpN3hDT0hXdThacTM3M0RJVFF3Y0t4RDA5RG1scWtGWHpaUTgtNGdzTFExYWs2TTVOQl9iMmlPeWEwZm5oQjBDZWxqajJNZWpCa3FFUmJZNUtHUDJvVjZTbzJOZXZKMFdRd1VBMHVLVWljaXI2TTNRYkNxU2JmY0xtZmvSAYcBQVVfeXFMUHVoZUVIaTd4Q09IV3U4WnEzNzNESVRRd2NLeEQwOURtbHFrRlh6WlE4LTRnc0xRMWFrNk01TkJfYjJpT3lhMGZuaEIwQ2VsamoyTWVqQmtxRVJiWTVLR1Ayb1Y2U28yTmV2SjBXUXdVQTB1S1VpY2lyNk0zUWJDcVNiZmNMbWZr?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【コスプレ】豪華絢爛な和服から覗く美脚が圧巻すぎる！美女レイヤーが魅せる『崩スタ』帰忘の流離人の優美な瞳に吸い込まれそう【写真9枚】&nbsp;&nbsp;ｄメニューニュース",
-      "reason": "注目トレンドおよびキーワード「スタ」による反響検出",
+      "title": "穂穂（スイスイ）の実戦アクションとモーション解析",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=bE3NmBFORZM",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n穂穂（スイスイ）の実機プレイにおいて特筆すべきは、独特の浮遊感と素早い回避派生攻撃。回路ゲージの溜めやすさと、短時間で終奏バフを起動できる流暢なスキルモーションが強み。ビルドにおいては共鳴効率260%の確保が最優先とされ、ハーモニー音骸にはサポート性能を高めるセット（協奏・サポート系）が推奨される。特に秧秧玄翎や緋雪とのシナジーが高く、変奏スキルからの即座なバフ付与によってパーティ全体のスキル回転率とDPSを大幅に跳ね上げる。",
+      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406484+00:00"
+      "createdTime": "2026-08-01T00:18:08.689002+00:00"
     },
     {
       "id": "card-10",
-      "title": "【鳴潮】歳主級のキャラは全員女性キャラな件【Wuthering Waves】#鳴潮",
-      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
-      "sourceUrl": "https://www.youtube.com/shorts/Fn-nEGQT5BY",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nチャンネル登録と高評価お願いします\n一人は欲しい\n#新キャラ#鳴潮 #wutheringwaves #エイメス#wuwa#ダーニャ#シグリカ#緋雪#景燃#カルテジア",
-      "reason": "注目トレンドおよびキーワード「wutheringwaves」による反響検出",
+      "title": "鳴潮ストーリーにおける印象的な名台詞と世界観の深掘り考察",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=tPbiJ01K5kY",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n本作のストーリー体験を象徴する衝撃的なセリフ3選を分析。単なる演出にとどまらず、キャラクターの過去のトラウマや運命の重み、共鳴者としての使命感が凝縮されたシーンを厳選。特にメインストーリー終盤での決意の台詞や、特定の共鳴者同士の信頼関係を示す対話は、キャラの魅力を一層高めている。ゲームプレイ面でもキャラクターへの愛着を高め、編成や育成のモチベーションに直結するコンテンツとして高く評価されている。",
+      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406496+00:00"
+      "createdTime": "2026-08-01T00:18:08.689011+00:00"
     },
     {
       "id": "card-11",
-      "title": "【鳴潮】鳴潮の物理エンジンが最高な件【Wuthering Waves】#鳴潮",
-      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
-      "sourceUrl": "https://www.youtube.com/shorts/VwlGYN6zhwQ",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nチャンネル登録と高評価お願いします\n呼吸で\n#新キャラ#鳴潮 #wutheringwaves #エイメス#wuwa#ダーニャ#シグリカ#緋雪#景燃#カルテジア",
-      "reason": "注目トレンドおよびキーワード「エンジン」による反響検出",
+      "title": "卓越したスピード感と躍動感を誇る共鳴者アクションの徹底検証",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=TVDlTYhCvsQ",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n圧倒的な移動速度と空中・地上を縦横無尽に駆け巡る連撃モーションを持つキャラクターのアクション性を徹底解剖。キャンセルのタイミングやスワップ（キャラ切り替え）との相性が抜群であり、フレーム単位での隙消しが可能な立ち回りを推奨。音骸メインステータスにはクリティカル系または属性ダメージUPを配置し、素早い通常・重撃ループから共鳴解放を叩き込むことで高難易度コンテンツ（深層エリア等）でもトップクラスの瞬間火力と回避性能を両立させる戦術を結論づけている。",
+      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406506+00:00"
+      "createdTime": "2026-08-01T00:18:08.689018+00:00"
     },
     {
       "id": "card-12",
-      "title": "【競合バズ実績】With Suisui, I finally have the strongest mono Glacio team #wutheringwaves #wuwa #wuwacreator #fyp",
+      "title": "穂穂（スイスイ）の天然キャラクター性と見逃せない見どころ解説",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=meTWUXz3-9s",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nWuthering waves mono glacio team showcase hiyuki,Suisui,Lucilla #鳴潮 #鸣潮 #kurogames #shorts #명조: 워더링 웨이브 #wuwashorts\n\n（📊 バズ実績: deoxy.y にて現在 3,424 再生 / 高評価 233 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=TFiif9liy08",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n穂穂の魅力の核心である「天然ボケ」な言動と、戦闘時のクールな立ち回りとのギャップを深掘り。待機モーションや会話イベントで見せるコミカルな仕草はコミュニティでも大きな話題となっており、ストーリーへの没入感を高める要因となっている。性能面でもその愛らしさに反して超優秀な汎用バッファーであり、終奏スキルによる攻撃力50%バフや共鳴効率の補助など、見た目と実力（パーティ貢献度）のギャップがキャラ人気の高さを後押ししている。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406517+00:00"
+      "createdTime": "2026-08-01T00:18:08.689026+00:00"
     },
     {
       "id": "card-13",
-      "title": "【競合バズ実績】Suisui keeps performing off-field even after her Liberation #wuwa #wuwacreator #wuwacontest35 #fyp",
+      "title": "天女を思わせる美しき落下攻撃アクションと空宙バトルの立ち回り",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=plQ3Bj7BPdY",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nWuthering waves Suisui off field animation #鳴潮 #鸣潮 #kurogames #shorts #명조: 워더링 웨이브 #wuwashorts\n\n（📊 バズ実績: deoxy.y にて現在 44,992 再生 / 高評価 2,080 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=pX0RqqwYGxg",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n空中からの滑らかな落下攻撃と広範囲への属性攻撃を繰り出すキャラクターの立ち回りを分析。高度を維持しながらのコンボや、スキルキャンセルを利用した滞空バトルの強みを検証。音骸ビルドでは空中攻撃・落下攻撃ダメージの上昇やハーモニー効果を優先し、メインステータスにはクリティカル率/ダメージを推奨。敵の範囲攻撃を空中回避で完封しつつ、上空から一気に叩きつける安全かつ高火力の立ち回りパターンが最強の運用法として示されている。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406527+00:00"
+      "createdTime": "2026-08-01T00:18:08.689034+00:00"
     },
     {
       "id": "card-14",
-      "title": "【競合バズ実績】0.067 sec after getting Suisui #wutheringwaves #wuwa #wuwacreator #fyp",
+      "title": "特定キャラ同士の特別な掛け合いボイスとパーティシナジー解説",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=G2wfsO04DxI",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nWuthering waves Suisui gameplay #鳴潮 #鸣潮 #kurogames #shorts #명조: 워더링 웨이브 #wuwashorts\n\n（📊 バズ実績: deoxy.y にて現在 40,875 再生 / 高評価 2,043 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=QJjMYvl3F_o",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nキャラクター同士の人間関係や絆を反映した専用掛け合いボイスをピックアップし、その発生条件と世界観の背景を解説。単なるフレーバー要素にとどまらず、実際にその2者を編成に組み込んだ際のアウトロ/インロースキル（変奏・終奏）の噛み合い、相互バフの相乗効果を論証。例えばバッファーとメインアタッカーの連携時における属性ダメバフと攻撃バフの乗算計算により、通常編成以上の爆発的なパーティDPSを引き出す運用術が導き出されている。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406537+00:00"
+      "createdTime": "2026-08-01T00:18:08.689042+00:00"
     },
     {
       "id": "card-15",
-      "title": "【競合バズ実績】Bro pulled for Adult Aemeath #zenlesszonezero #zzz #hoyoverse #mihoyo #remielle",
+      "title": "新キャラクター声優予想と配役から紐解くキャラ性能考察",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=8_t1vcM_R5M",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nZenless zone zero Remielle Dan\n\n（📊 バズ実績: deoxy.y にて現在 3,037 再生 / 高評価 215 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=gmzH6_PDVKk",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n新キャラクターの声をサンプル音声やティザーPVから徹底検証し、CVを担当する豪華声優陣を予想。声質や演技のトーンからキャラクターの属性（クール系、熱血系、サポート系など）やストーリー内での立ち位置を分析。さらに、担当声優の傾向から戦闘スタイルの予測（高速連撃型か、一撃重火力の召喚・魔法型か）を立て、実装時に備えてどの音骸セットや育成素材（共鳴効率・属性ビルド）を準備すべきかの戦略的指針を提示している。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406548+00:00"
+      "createdTime": "2026-08-01T00:18:08.689050+00:00"
     },
     {
       "id": "card-16",
-      "title": "【競合バズ実績】Imagine a tacet mark animation before convene animation🔥 #wutheringwaves #wuwa #wuwacreator #fyp",
+      "title": "二度と味わえない限定イベント・ストーリーの名シーン回顧",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=5HRJ9MG0HgE",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nWuthering waves tacet mark animation before pull animation #鳴潮 #鸣潮 #kurogames #shorts #명조: 워더링 웨이브 #wuwashorts\n\n（📊 バズ実績: deoxy.y にて現在 195,786 再生 / 高評価 8,505 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=gXsHWT_5sCw",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n一度プレイすると再確認が難しい期間限定演出や重要なストーリー分岐点の名シーンを濃密に解説。プレイヤーに強い感情揺さぶりを与えた演出手法や、劇中で提示された伏線（未来の共鳴者や世界の謎）を深掘り。戦闘面においても、特定のストーリー限定バフが乗った爽快なボス戦の振り返りや、その体験を踏まえた今後の新キャラ・新音骸に対する期待値・育成準備の重要性が熱く語られている。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406558+00:00"
+      "createdTime": "2026-08-01T00:18:08.689057+00:00"
     },
     {
       "id": "card-17",
-      "title": "【競合バズ実績】「トロッコ問題」の解決方法ｗｗ #崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ #starrail #shorts",
+      "title": "穂穂と秧秧の過去・幼少期設定の深掘りとエモい関係性解説",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=terixsmw2Xc",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n「トロッコ問題」の解決方法ｗｗ #崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ #starrail #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: pamunogekijou にて現在 7,320 再生 / 高評価 198 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=hBIvewe7BE0",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n穂穂と秧秧の強い絆を示す幼少期のエピソードやデザインの対比・共通点を徹底解剖。幼い頃の体験が現在の彼女たちの戦う理由や性格形成にどう影響したかを考察。さらにゲーム内での編成シナジーにおいても、秧秧（または秧秧玄翎）と穂穂を同時に編成することで発生する変奏スキルのスムーズな繋がりと、互いを補完し合う共鳴ゲージ回復・攻撃バフの強力なシナジーが実戦的にも極めて強力であることが結論づけられている。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406567+00:00"
+      "createdTime": "2026-08-01T00:18:08.689065+00:00"
     },
     {
       "id": "card-18",
-      "title": "【競合バズ実績】ギルガメッシュの人間関係 #崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ #starrail #shorts",
+      "title": "穂穂公式PVの徹底解剖とカットイン・スキルの秘められた性能",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=vdTV1ZRuFQ4",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nギルガメッシュの人間関係 #崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ #starrail #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: pamunogekijou にて現在 195,233 再生 / 高評価 3,224 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=-YNP3FNgYbk",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n穂穂のPV映像をコマ送りレベルで徹底解析し、スキルのヒット数、範囲、キャンセルタイミング、共鳴回路のストック仕様を完全紐解き。PV内で披露されたエフェクトから属性バフや味方へのサポート性能の高さを確証。推奨音骸ハーモニーやメインステータス（共鳴効率＋属性ダメ/クリティカル）の事前ビルド方針を提示し、実装初日から最前線で投入するための準備リストと戦術的立ち回りを提示している。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406577+00:00"
+      "createdTime": "2026-08-01T00:18:08.689073+00:00"
     },
     {
       "id": "card-19",
-      "title": "【競合バズ実績】どこにでもいる男 #崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ #starrail #shorts",
+      "title": "異常汎用バッファー「穂穂/スイスイ」完全攻略・ビルド＆ローテ網羅解説",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=vC3g0ZJGQEQ",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nどこにでもいる男 #崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ #starrail #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: pamunogekijou にて現在 7,915 再生 / 高評価 206 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=OtwLujlphiQ",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n穂穂（スイスイ）は味方全体に破格の攻撃50%UPバフや属性強化を提供する異常な汎用性を持つ超強力サポーターと結論。ビルドの最優先課題は「共鳴効率260%」の到達であり、音骸メインステータスには共鳴効率を採用、ハーモニーは協奏・サポート系セットが最適。武器は共鳴効率が大幅に伸びるモチーフまたは星4効率武器を推奨。千咲と比較してもバフ倍率とスキル回転の早さで勝る場面が多く、特に緋雪・ルシラー・穂穂や秧秧玄翎・千咲・穂穂といった編成で最高クラスのパーティDPSを叩き出す。基本コンボは変奏スキル引き継ぎから共鳴スキル→回路解放→重撃キャンセル→共鳴解放で即座に終奏スキルへと繋ぐ爆速ローテーションが最強。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406586+00:00"
+      "createdTime": "2026-08-01T00:18:08.689081+00:00"
     },
     {
       "id": "card-20",
-      "title": "【競合バズ実績】温和な表情の温度差#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts",
+      "title": "Ver3.5後半「穂穂/スイスイ」実装直後最速育成＆立ち回り徹底検証",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=bPB8pcN2lpM",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n温和な表情の温度差#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: pamunogekijou にて現在 42,845 再生 / 高評価 793 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=NEsLoAbCGag",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nVer3.5後半で実装された穂穂の使い勝手を実戦検証。秧秧玄翎や緋雪などの既存アタッカーと組ませた際、終奏スキルの攻撃力50%バフが乗ることで編成全体の火力が極めて大幅に底上げされることを確認。ローテーションにおいては、穂穂が場に出ている時間を最小限に抑えつつ協奏エネルギーを最速で溜めるテクニック（スキル→クイックキャンセル→音骸スキル）が必須。音骸は共鳴効率を盛りつつサブステでクリティカルと攻撃%を確保。編成の柔軟性が非常に高く、引くべき優先度が極めて高い「引いて損なし」の殿堂入りキャラと結論。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406596+00:00"
+      "createdTime": "2026-08-01T00:18:08.689089+00:00"
     },
     {
       "id": "card-21",
-      "title": "【競合バズ実績】顔パスなんだって！#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts",
+      "title": "Ver3.5最新版「エイメス」完全解説・理想ステータス＆最適ローテーション",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=tb-JqIxVXsI",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n顔パスなんだって！#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: pamunogekijou にて現在 29,249 再生 / 高評価 564 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=4RwTKRY3y_g",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nVer3.5環境におけるエイメスの完全ガイド。モダリティーと共鳴回路の仕様を整理し、最大火力を出すための理想ステータス（クリティカル率75%以上、クリティカルダメージ240%以上、共鳴効率130%〜140%）を明示。おすすめ武器はモチーフ武器が圧倒的トップ、音骸は属性特化ハーモニー5セットにメイン音骸はスキル回転に優れるボス音骸を配置。共鳴チェーン（凸）は1凸・2凸の火力上昇幅が大きく、モチーフ武器との確保優先度では「無凸モチーフ武器 > 1凸」の順で推奨。ローテーションでは変奏からスキル・回路全解放後の斉爆コンボを叩き込む動きが最強で、他アタッカーを凌駕する超高DPSを維持できる。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406606+00:00"
+      "createdTime": "2026-08-01T00:18:08.689096+00:00"
     },
     {
       "id": "card-22",
-      "title": "【競合バズ実績】引き運の格差#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts",
+      "title": "Ver3.5復刻ガチャおすすめキャラ5選＆確保優先度徹底比較",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=HRv_BeeduEU",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n引き運の格差#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: pamunogekijou にて現在 176,568 再生 / 高評価 3,834 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=BoxiR5RvJRc",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n復刻ガチャで確保すべき最強キャラ5選を徹底解説。第1位は圧倒的な汎用ヒーラー・バッファーである「ショアキーパー」（全編成に組み込める壊れ性能）。第2位は「千咲」（強力なバフとダメージサポートで景燃・清宵とも好相性）。第3位は「緋雪」（高火力メインアタッカー/サブアタッカーとして現環境トップクラス）。第4位は「ルパ」、第5位は「リンネー」。確保方針として「強力なサポーター1体確保＞無凸モチーフ武器＞アタッカーの凸」を提唱。バフ性能比較表から、自身の所持キャラに合わせてショアキーパーまたは千咲を最優先で引くべきと結論づけている。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406616+00:00"
+      "createdTime": "2026-08-01T00:18:08.689104+00:00"
     },
     {
       "id": "card-23",
-      "title": "【競合バズ実績】一人だけ重労働すぎる#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts",
+      "title": "「穂穂/スイスイ」実装直前レシート公開＆事前育成・音骸準備の決定版",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=myhfSKkK5vA",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n一人だけ重労働すぎる#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: pamunogekijou にて現在 64,413 再生 / 高評価 1,284 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=H7w-6hPUvQ8",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n穂穂（スイスイ）を実装初日にレベルMAX・スキル完凸で即戦力化するための準備レシート。育成に必要な各種突破素材、共鳴スキル素材の必要数を完全リスト化。音骸準備としては、目標となる共鳴効率260%を早期達成するために43311構成の3コステステータスで共鳴効率を2個確保する選択肢や、サブステータスでの効率・クリティカル厳選ラインを論証。さらに実装後の実戦PVを交え、立ち回りの基本コンボ（スキル即キャンセルと共鳴解放の差し込み）をあらかじめ想定しておくことで、育成後すぐに高難易度で運用可能になる事前準備の全容を解説。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406625+00:00"
+      "createdTime": "2026-08-01T00:18:08.689111+00:00"
     },
     {
       "id": "card-24",
-      "title": "【競合バズ実績】見た目属性 vs 実際属性#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts",
+      "title": "穂穂1凸の性能検証＆各異常編成（秧秧玄翎/緋雪/エイメス/ザンニー）DPS分析",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=oxcrRACOiP8",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n見た目属性 vs 実際属性#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: pamunogekijou にて現在 323,826 再生 / 高評価 3,024 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=rpxcvvx1TiY",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n穂穂の1凸性能と編成DPSへの影響を徹底考察。結論として「1凸によって協奏エネルギー獲得が劇的にスムーズになり、スワップ（キャンセルキャラ変え）の自由度が飛躍的に上昇する」。千咲と比較した際、穂穂は攻撃50%UPバフを即座かつ広範囲に撒けるため、特に「秧秧玄翎編成」「緋雪編成」「エイメス斉爆編成」「ザンニー編成」の全てにおいてパーティ全巡のDPSが10%〜15%上昇。特にエイメスやザンニーとのスワップ相性が良く、1凸の確保優先度は無凸モチーフ武器確保と同等以上の価値があると結論づけている。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406635+00:00"
+      "createdTime": "2026-08-01T00:18:08.689119+00:00"
     },
     {
       "id": "card-25",
-      "title": "【競合バズ実績】特別仕様の必殺ゲージ#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts",
+      "title": "『白銀の城（Silver Palace）』二分法テストプレイ＆システム徹底調査",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=gdDgjVKzUhI",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n特別仕様の必殺ゲージ#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: pamunogekijou にて現在 109,437 再生 / 高評価 1,121 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=lnGmk0shh2k",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n新作オープンワールドRPG『白銀の城（Silver Palace）』の二分法テスト（CBT）プレイレビュー。19世紀イギリス風の重厚なグラフィックと探偵調査システム、スタイリッシュなアクションバトルを徹底解剖。ガチャ（天井仕様や排出率）は鳴潮等の主要オープンワールドゲームと同等の設計となっており、無課金・微課金でも楽しめる作り。戦闘システムはジャスト回避やスキル連携が重要視されており、『鳴潮』プレイヤーにとっても親しみやすく完成度が極めて高いタイトルとして期待作であると締めくくっている。",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406645+00:00"
-    },
-    {
-      "id": "card-26",
-      "title": "【競合バズ実績】列車組の支援ボイス#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=JDZhYGVcbak",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n列車組の支援ボイス#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: pamunogekijou にて現在 89,779 再生 / 高評価 1,387 を記録！）",
-      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
-      "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406655+00:00"
-    },
-    {
-      "id": "card-27",
-      "title": "【競合バズ実績】【鳴潮】データで分かる!「穂穂/スイスイ」育成ガイド!★凸/武器別最適メインステから理想ステータス、編成DPSや凸・モチーフ優先度、千咲との比較まで詳細に数値付きで徹底解説!【WuWa/めいちょう】",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=DBhrT0l8B6A",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nDiscordはこちらから!:https://discord.com/invite/XDuHqb5FGe メンバーシップ:https://www.youtube.com/channel/UCpuVSgupgphwhBNmNYhZsnQ/join Twitter(X):https://x.com/Sabchg 0:00 導入 1:00 共鳴効率260%達成方法 1:43 武器候補と奇妙バリエーションのローテについて 3:08 武器編成DPS比較 3:56 武器別最適メインステ(モチーフ/キバリ) 5:46 凸効果の振り返り 6:47 凸別最適メインステとDPS上昇 7:27 おすすめハーモニー 8:22 千咲ハーモニー比較 9:42 サブステとダメージ伸び率 10:48 サブステ優先度と要求共鳴効率 11:35 スキル育成優先度/ビルドまとめ 12:08 武器別理想ステータス 13:16 パーティー編成例 14:16 編成DPS比較 16:13 各編成のDPS推移(スライド再掲) 18:40 凸orモチーフ優先度 19:24 緋雪の最適コスト3 19:54 緋雪凸別最適編成比較 20:32 終わりに #鳴潮 #wutheringwaves #アクションrpg #新作ゲーム #オープンワールド #アクションrpg #おすすめ #解説 #プロジェクトwave #鳴潮rally #夢州 #穂穂 -------------------------- アンコ、凌陽/リンヨウ、カカロ、ヴェリーナ、鑑心/カンシン、忌炎/キエン、インリン、散華/サンカ、タンキン、 ヤンヤン、シカ、アールト、淵武/エンブ、ビャクシ、モルトフィー、 桃折/タオキ、今汐/コンシ、長離/チョウリ、折枝/オリエ、相理要/ソウリヨウ、ユウゴ、ショアキーパー、ツバキ、灯灯/トウトウ,フィービー、ブラント、ロココ、ザンニー、カルロッタ、カンタレラ、カルテジア、シャコンヌ/ルパ、フローヴァ、千咲(チサ)、仇遠(キュウエン)、ユーノ、ガルブレーナ、オーガスタ、モーニエ、ルシラー、シグリカ、リューク・ヘルセン、リンネ―、エイメス、緋雪(ヒユキ)、ダーニャ、ルーシー,レベッカ、秧秧玄翎（ヤンヤンゲンレイ）、穂穂（スイスイ）、鎖暝（サメイ）、景燃（ジンラン）、清宵（セイショウ）、心（シン） ※コピペパレット\n\n（📊 バズ実績: sabchbch にて現在 2,501 再生 / 高評価 72 を記録！）",
-      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
-      "date": "2026-08-01",
-      "createdTime": "2026-08-01T00:01:46.406664+00:00"
+      "createdTime": "2026-08-01T00:18:08.689126+00:00"
     }
   ]
 }
