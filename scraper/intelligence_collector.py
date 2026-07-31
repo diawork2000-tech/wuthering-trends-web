@@ -26,12 +26,15 @@ except ImportError:
 
 from trend_collector import YouTubeKeyManager, translate_if_needed
 
-load_dotenv()
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(BASE_DIR, ".env"))
+load_dotenv(os.path.join(BASE_DIR, "../.env.local"))
 
-CONFIG_FILE = "config_intelligence.json"
+CONFIG_FILE = os.path.join(BASE_DIR, "config_intelligence.json")
 NOTION_API_KEY = os.getenv("NOTION_API_KEY")
 NOTION_INTELLIGENCE_DB_ID = os.getenv("NOTION_INTELLIGENCE_DB_ID")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY") or os.getenv("YOUTUBE_API_KEYS")
 
 def load_intelligence_config():
     if not os.path.exists(CONFIG_FILE):

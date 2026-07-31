@@ -2,96 +2,124 @@
   "success": true,
   "items": [
     {
-      "id": "yt-001",
-      "title": "【鳴潮】誰も気づいていない！ショートで大爆発する「ツバキ」超絶空中コンボとバグ級火力",
-      "sourceType": "YouTube 競合＆神プレイ急上昇",
-      "sourceUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
-      "scriptOutline": "【冒頭3秒】：『ツバキの空中攻撃、連射するとボスの攻撃を100%回避できる神裏ワザ知ってる？！』➔ 滞空ゲージ維持のループ入力術 ➔ まとめと最強パーティ編成",
-      "reason": "ショート動画において「空中浮遊の超絶スタイリッシュ操作」は圧倒的な再生率と「どうやるの？」というコメントラッシュを誘発するため。",
-      "date": "2026-07-30",
-      "createdTime": "2026-07-30T18:35:00.000Z"
-    },
-    {
-      "id": "yt-002",
-      "title": "【YouTube徹底検証】無課金でも余裕で10万ダメージ突破！熾霞（しか）メインアタッカー最適ビルド",
-      "sourceType": "YouTubeショート 攻略解説",
-      "sourceUrl": "https://www.youtube.com/shorts/5qap5aO4i9A",
-      "thumbnailUrl": "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80",
-      "scriptOutline": "【冒頭3秒】：『無料キャラの熾霞（しか）を倉庫番にしてる人は人生半分損してます！』➔ 簡単な音骸厳選とクリティカル率底上げの罠 ➔ まとめ",
-      "reason": "無課金向けの高火力解説動画はすべての層から根強く支持され、チャンネル登録への高換算ルートとなるため。",
-      "date": "2026-07-30",
-      "createdTime": "2026-07-30T18:32:00.000Z"
-    },
-    {
-      "id": "reddit-001",
-      "title": "【海外Reddit考察】第2幕クリア後に発覚した主人公の正体に関する巨大な伏線",
-      "sourceType": "海外Reddit 鳴潮 Hotトピック",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/hot_theory/",
-      "scriptOutline": "【冒頭3秒】：『第2幕の背景で主人公だけが口にしたあのセリフの意味に気付いた？！』➔ 海外Redditで1800超の高評価を集める新説考察 ➔ まとめと今後のストーリー予想",
-      "reason": "海外コミュニティで白熱している深遠なストーリー考察であり、日本のプレイヤーも最も気になっているトピックのため。",
-      "date": "2026-07-30",
-      "createdTime": "2026-07-30T18:30:00.000Z"
-    },
-    {
-      "id": "reddit-002",
-      "title": "【Reddit激論】「千傀の重楼」やホロタクティクス高難易度を劇的に快適にする神オプション",
-      "sourceType": "海外Reddit ガチャゲー最前線",
-      "sourceUrl": "https://www.reddit.com/r/gachagaming/",
-      "scriptOutline": "【冒頭3秒】：『敵の攻撃が見えずに即死してる人は、今すぐゲーム内の設定をここだけ変えろ！』➔ 視野角とカメラ調整の最強カスタム術 ➔ まとめ",
-      "reason": "プレイフィール改善の実用ハックは、どの国のショート動画界隈でも圧倒的ないいね＆保存数を爆撃するため。",
-      "date": "2026-07-30",
-      "createdTime": "2026-07-30T18:28:00.000Z"
-    },
-    {
       "id": "card-0",
-      "title": "引かないと絶対後悔する？「追憶の響き」ガチャの罠と神引きキャラ解体新書",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板",
-      "sourceUrl": "https://gamewith.jp/wutheringwaves/article/show/445892",
-      "scriptOutline": "【冒頭3秒】：『追憶の響きガチャ、何も考えずに回すとマジで大爆死する罠に気づいた？！』➔ 最も優先度が抜ける必須級キャラの正体 ➔ まとめ：誰を狙うべきか結論",
-      "reason": "ガチャ選択で後悔したくない慎重なプレイヤー層からの検索アクセスが爆発的に集中しているため。",
-      "date": "2026-07-30",
-      "createdTime": "2026-07-30T18:27:00.000Z"
+      "title": "星5共鳴者「穂穂」実装でGoogle Playセルラン4位へ急浮上！売上躍進の背景と影響分析",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiREFVX3lxTFBpcmZvVV9EVjZsVmhSV0FTaEc4TDlTUkpObXZhYV9aWnVtSFZ4WUlaR2hfeEpZQmRXNEhzaHdhSlpYZmV5?oc=5",
+      "scriptOutline": "【詳細内容】：新星5キャラ「穂穂」のガチャ実装直後、Google Playストアの売上ランキングにおいて前日から一気に4位まで急上昇。魅力的なビジュアルと強力な戦闘性能（属性バフおよび追撃性能の優秀さ）がユーザーの購買意欲を強烈に刺激した結果と分析されます。限定ピックアップ武器ガチャの併設もセルラン押し上げに大きく寄与しており、アクティブユーザーの熱量と集金力の高さを実証する結果となりました。",
+      "reason": "新キャラクター実装時の売上トレンドはキャラクターの注目度と現在のゲームのアクティブ熱量を測る重要指標であり、今後のガチャ戦略の参考になるため。",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T15:09:54.799539+00:00"
     },
     {
       "id": "card-1",
-      "title": "なぜ未だに最強なのか？インリン（吟霖）の変幻自在なサブDPS性能と完璧な音骸ビルド",
-      "sourceType": "Twitter(X) 話題まとめ最高峰",
-      "sourceUrl": "https://togetter.com/t/%E9%B3%B4%E6%BD%AE",
-      "scriptOutline": "【冒頭3秒】：『新キャラが出てもインリンだけが絶対に腐らない本当の理由を知ってる？！』➔ 超高速の裏打撃とバフ性能 ➔ まとめ",
-      "reason": "連鎖する攻撃モーションの美しさと強さを捉えたショート動画がSNS上で驚異的な保存数を叩き出しているため。",
-      "date": "2026-07-30",
-      "createdTime": "2026-07-30T18:25:00.000Z"
+      "title": "Steam売り上げ首位を獲得！新大型アプデ「遺志を紡ぐは剣、夢に響くは歌」の圧倒的反響",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiREFVX3lxTE9DclgteTVEMWR2X0pOUTdWTE82WFozRVlqXzZjZ2FobUhMcWRjU0Q5YjZNSHRILUNMazk1V3prSmNpMC1R?oc=5",
+      "scriptOutline": "【詳細内容】：新バージョン「遺志を紡ぐは剣、夢に響くは歌」のリリースに伴い、PC（Steam）プラットフォームにおける売上・同時接続者数がピークに達しランキング1位を記録。新ストーリーの圧倒的なクオリティ、新エリアの探索要素、および同時実装された限定キャラクター・モチーフ武器の魅力がプレイヤー層から極めて高い評価を受けていることが数字として証明されました。",
+      "reason": "PC環境での爆発的な人気を示す指標であり、新規・復帰プレイヤーが急増しているタイミングの把握に不可欠なデータであるため。",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T15:09:54.799539+00:00"
     },
     {
       "id": "card-2",
-      "title": "配布キャラと侮るな！熾霞（しか）をメインアタッカーに極める爆速育成術と無双プレイ",
-      "sourceType": "TikTok バズ動画・ショート急上昇",
-      "sourceUrl": "https://www.tiktok.com/tag/%E9%B3%B4%E6%BD%AE",
-      "scriptOutline": "【冒頭3秒】：『熾霞（しか）を限界まで覚醒させたら、ボスがただの的場になった件！』➔ 初心者でも真似できる理想音骸とスキル回し ➔ まとめ",
-      "reason": "低レアリティの無課金キャラによる神プレイ無双はショート動画界隈の最大手バズテンプレートであるため。",
-      "date": "2026-07-30",
-      "createdTime": "2026-07-30T18:22:00.000Z"
+      "title": "Ver3.5ガチャは誰を引くべき？優先度ランキングと確保推奨キャラ徹底解説",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5SYWt1WFdZV3FGcnN2TlFZdUp6Wm83UEpnNE4xckxWUWZtYWVRamdyOUxoV1EwLUM1c0RpS1VuYzBvUUQ0SF9kTGFLcHJIT2llRlBZ?oc=5",
+      "scriptOutline": "【詳細内容】：Ver3.5ガチャの結論として、汎用性の高いアタッカー・バッファーである「穂穂」の確保を最優先に推奨。次点で特定属性パーティのパーツとして強力な限定キャラが続きます。星4枠のピックアップラインナップやモチーフ武器の依存度まで比較し、無課金・微課金のプレイヤーは単体で完結しやすいメインアタッカーを、高難易度コンテンツ（深境）を見据える層はサブDPS・サポーターを優先すべき理由を論理的に解説しています。",
+      "reason": "限られた星声（ガチャ石）をどのガチャに投入すべきか迷う全プレイヤーにとって最重要かつ需要の高い攻略情報であるため。",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T15:09:54.799539+00:00"
+    },
+    {
+      "id": "card-3",
+      "title": "新キャラ「穂穂(スイスイ)」は引くべき？性能評価・強み・確保優先度の完全アナライズ",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1pZ3V2RUlfbV9GLW1wdTJ1aHRyaHFnrE5lTU5DRE9Yd0lHZnNfc0ducEV2YThMZXh0S0xzMG41RER1NGFBZGhXeGl5LWIzMVRsa0c4?oc=5",
+      "scriptOutline": "【詳細内容】：結論から言えば「無凸でも引く価値が非常に高い」キャラです。高い瞬間火力と扱いやすい範囲攻撃、味方へのバフ性能を兼ね備えており、特に終の型や協奏スキルの回転率が優秀。モチーフ武器があれば火力が約15〜20%上昇しますが、既存の星5代替武器でも十分に高難易度をクリア可能なため、キャラクター単体の確保だけでも強力な戦力補強になります。",
+      "reason": "新実装キャラの性能が環境に与える影響や、引きに行くべきかどうかの投資判断基準を明確にするため。",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T15:09:54.799539+00:00"
     },
     {
       "id": "card-4",
-      "title": "まるでゲームから飛び出した再現度！『鳴潮』ツバキの神級コスプレが話題沸騰",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド",
-      "sourceUrl": "https://search.yahoo.co.jp/realtime/search?p=%E9%B3%B4%E6%BD%AE+%E3%83%84%E3%83%90%E3%82%AD",
-      "scriptOutline": "【冒頭3秒】：『リアルツバキが降臨？！ネットを揺らす神クオリティコスプレが凄すぎる！』➔ ファンも舌を巻く圧倒的衣装＆造形 ➔ まとめ",
-      "reason": "キャラクターのビジュアル強度とファンカルチャーを扱う内容は、エンタメ性を刺激してバイラル拡散を誘発しやすいため。",
-      "date": "2026-07-30",
-      "createdTime": "2026-07-30T18:18:00.000Z"
+      "title": "【鳴潮】穂穂(スイスイ)の最強ビルド：おすすめパーティ編成・音骸・武器セット徹底解説",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5jOVpoTk9xN2REMnhQUzhfT3hpSUdXQkNYY21VQWFaWHY2aTc3ZEwxTGlWamh0SjBJLTM3NGNXcUY4SnBETW1qYXYxdEp4T0padEhZ?oc=5",
+      "scriptOutline": "【詳細内容】：穂穂の最適音骸はハーモニー効果を活かしたメイン音骸の選定と「クリティカル率/ダメージ・属性与ダメージ・攻撃力」のサブステータス厳選が推奨されます。武器は無解な専用モチーフ武器がトップですが、恒常星5や高精錬の星4武器でも妥協可能。パーティ編成では協奏効果を噛み合わせられるサブアタッカーやヒーラー（ショアキーパーやヴェリーナ等）との組み合わせで火力が最大化されます。",
+      "reason": "キャラを入手したプレイヤーが即座に実践投入できるように、育成や編成の最適解を提示する必要があるため。",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T15:09:54.799539+00:00"
     },
     {
       "id": "card-5",
-      "title": "【速報】Ver3.6アプデはいつ？最新ロードマップと今から準備すべき極意",
-      "sourceType": "鳴潮 アップデート＆公式発表",
-      "sourceUrl": "https://www.4gamer.net/games/633/G063383/",
-      "scriptOutline": "【冒頭3秒】：『Ver3.6のアップデート情報、まさか何も知らないまま待ってる？！』➔ 実装候補の新エリアと素材先取り ➔ まとめ",
-      "reason": "最新アップデートの予測動画は、すべての現役プレイヤーに高い視聴需要を持ち、検索で上位露出し続ける強力なカードのため。",
-      "date": "2026-07-30",
-      "createdTime": "2026-07-30T18:15:00.000Z"
+      "title": "新形態「秧秧・玄翎」ガチャは引くべき？性能の変化と入手・育成の推奨ライン",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBoQTdpLUNfTHkxT04zU0w4ajE3SDdKSUpHMVVkdG54UHE3MlBxLUZXQV9aOUhRV08zU082Y3FDaWFNWEZlWllqamkzTWlfM0JjU3Ew?oc=5",
+      "scriptOutline": "【詳細内容】：初期キャラの秧秧から大幅な性能刷新が図られた「秧秧・玄翎」。風動属性・気動属性での集敵性能やスキルサイクルの速さが強化されており、特に集団戦での雑魚処理性能と共奏エネルギー供給役として優秀です。限定アタッカーを既に揃えているプレイヤーにとっては必須ではないものの、特定デバフや牽引スキルを必要とする深境の塔の特定層で特効レベルの活躍を見せます。",
+      "reason": "新バリエーションキャラのガチャ優先度を正しく評価し、引くべき層と見送るべき層を明確に分離するため。",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T15:09:54.799539+00:00"
+    },
+    {
+      "id": "card-6",
+      "title": "「秧秧・玄翎」の最新評価：おすすめ音骸セット・武器・最適パーティ構築ガイド",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE82RGl1NGFtWVAtS2ZOUzNzSExDalNlUjJBTFJkVS1WQ2haSllGYjdpRW5iU2dnWFhacmk5MEhuUWNsY2ZITThFSkRUUWlMSk9KanFJ?oc=5",
+      "scriptOutline": "【詳細内容】：メイン音骸には気動ダメージ・共鳴効率を高めるハーモニーを装着し、共鳴解放の回転率を高めるビルドが最適です。武器は共鳴効率が付与できる迅刀が推奨。パーティ構築においては、秧秧・玄翎の集敵能力と共鳴解放エネルギー回復能力を活かし、広範囲重撃を持つメインアタッカーと組ませることでスムーズなスキル回しが可能になります。",
+      "reason": "キャラを獲得したユーザーの運用方法に関する疑問を解消し、実践的な戦法を分かりやすく示すため。",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T15:09:54.799539+00:00"
+    },
+    {
+      "id": "card-7",
+      "title": "「追憶の響き」ガチャのおすすめキャラ：過去限定共鳴者の復刻優先度まとめ",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBTUHpDT2l5dXVDZ0Y1cW9wUWpHal9xejBmdU9fUWlwbVoza1ZGZUdlMzc5TGdaZkRKVmItXzZDaUhGa2NGOGxoWkJyZE1pMmFwMU9Z?oc=5",
+      "scriptOutline": "【詳細内容】：「追憶の響き」ガチャでは過去の強力な限定キャラが復刻されています。結論として、汎用サポーターや強力なメインアタッカー未所持のプレイヤーにとっては絶好の引き時。特に最新環境でもティア上位に位置するキャラクター（インリン等）を所持していない場合、新キャラガチャよりもこちらの復刻枠を優先して確保する方がアカウント全体の総戦力が高まります。",
+      "reason": "新キャラガチャと復刻ガチャのどちらを優先すべきかというプレイヤーの長期的育成戦略に直接答える内容であるため。",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T15:09:54.799539+00:00"
+    },
+    {
+      "id": "card-8",
+      "title": "【鳴潮】インリン(吟霖)の最新評価：電導サブDPSの最高峰ビルドと相性抜群の編成",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5FcmJoZkxhQk1SWHFUR2g5YWVWem9lSndFeTYwo1RLNXRGcGkwcE9BRXBrb25fQkw5TTktNGNHcnJVN1B5ZDRSdy1mT0UzZE9KVDRv?oc=5",
+      "scriptOutline": "【詳細内容】：インリンは控えからの追撃（磁気付与）と電導・共鳴解放ダメージバフにより、電導メインアタッカー（相里要やカルロッタ等）と組み合わせた際に環境トップクラスのDPSを叩き出します。音骸は「ヴォイドの雷」5セット、メイン音骸は「雲閃の鱗」または「鷺」が推奨。モチーフ武器「吟霖の手」依存度は高めですが、恒常武器でも十分に一線級のサブDPSとして機能します。",
+      "reason": "復刻や恒常での獲得機会において、インリンの育成価値と現在の環境における強みを再確認させるため。",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T15:09:54.800038+00:00"
+    },
+    {
+      "id": "card-9",
+      "title": "主人公(電導)の性能評価と育成優先度：無課金・初心者必見の最適ビルド解説",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1mVFBMY0xXXzI4Qy14d1BUdHFGRENXMDVKQ0xVaVJZNHNLUTlrbjBvVmF1OUlBcWdHaTJtdEtDUnFTVnBTRUktMXduWkQtQUFUa2c4?oc=5",
+      "scriptOutline": "【詳細内容】：主人公（電導）は凸を進めやすく、コストがかからない優秀なサブアタッカー/サポーターです。電導属性耐性ダウンや自己エナジー回復を持ち、限定キャラが不足している序盤〜中盤のコンテンツ攻略で大活躍します。育成時には電導ダメージバフを高める音骸セットを選び、手軽に手に入る星4迅刀を装備させることで、無課金でも高難易度の足がかりとして機能します。",
+      "reason": "ガチャ石を消費せずに育成できる主人公キャラの強みと具体的な運用方法を提供し、幅広いプレイヤーに役立つため。",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T15:09:54.800038+00:00"
+    },
+    {
+      "id": "card-10",
+      "title": "イベント「秘玉帰巣記」の最効率攻略法と限定報酬回収ルートまとめ",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE56dHNFTkNzY2x6U3lWVnItSldmZHVSaWlRX0NaVmdKd2xFaVE2dDFHZ1JQekYxUTU1SFBkR01XN281aVdPdW90VExvc1BIcERQX0p3?oc=5",
+      "scriptOutline": "【詳細内容】：イベント「秘玉帰巣記」は指定のマップ探索と特殊な戦闘試練を解き明かしていく内容です。攻略のコツはステージ固有の環境バフ（特定属性のダメージアップ等）に合わせたパーティを選択すること。クリアすることで星声（ガチャ石）、高級育成素材、限定名刺・称号などを最効率で回収できます。時間効率を重視した最短進行ルートも示されています。",
+      "reason": "期間限定イベントの報酬を漏らさず獲得するための実用的なガイドラインとして、即効性が極めて高いため。",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T15:09:54.800038+00:00"
+    },
+    {
+      "id": "card-11",
+      "title": "Ver3.6アップデートはいつ配信？Ver3.5最新情報と次回アプデのスケジュール予測",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5PbFlrWEViS3pqb2kxQWx4eW10c2xNSGFXX0oySTNxNmlNTjdFQU5KT0VXY3BZV2pBOXZYZ29hY1JRUDlnR29rMUlkVG85RWV2NkFR?oc=5",
+      "scriptOutline": "【詳細内容】：これまでのアップデート周期（約6週間周期）に基づき、Ver3.6の配信予定日および生放送（予告番組）の実施タイミングを予測。Ver3.5後半のイベント開催スケジュールと照らし合わせ、ガチャの更新日やリソース配分計画をどのように立てるべきかをアドバイスしています。また、次期バージョンで噂される新エリア拡張や新キャラの伏線についても考察。",
+      "reason": "中長期的な星声の節約・消費計画を立てたいプレイヤーにとって、アプデ周期の情報は非常に重要であるため。",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T15:09:54.800038+00:00"
     }
   ]
 }
