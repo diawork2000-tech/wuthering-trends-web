@@ -1,5 +1,18 @@
 [
   {
+    "timestamp": "2026-07-31 22:02:30",
+    "status": "Success",
+    "total_harvested": 152,
+    "final_selected": 27,
+    "breakdown": {
+      "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)": 3,
+      "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ": 6,
+      "YouTubeショート 伸び悩み＆神プレイ解説フォーラム": 2,
+      "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 1,
+      "YouTube競合 (別枠全件枠)": 15
+    }
+  },
+  {
     "timestamp": "2026-07-31 21:46:18",
     "status": "Success",
     "total_harvested": 154,
