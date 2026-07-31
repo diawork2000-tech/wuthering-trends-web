@@ -1,5 +1,16 @@
 [
   {
+    "timestamp": "2026-07-31 18:48:44",
+    "status": "Success",
+    "total_harvested": 180,
+    "final_selected": 32,
+    "breakdown": {
+      "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)": 8,
+      "海外Redditフォーラム ガチャゲー最前線": 4,
+      "YouTube競合 (別枠全件枠)": 20
+    }
+  },
+  {
     "timestamp": "2026-07-31 18:32:29",
     "status": "Success",
     "total_harvested": 153,
