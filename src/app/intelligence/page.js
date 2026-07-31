@@ -13,12 +13,33 @@ export default function IntelligenceStudioPage() {
   const [gridCols, setGridCols] = useState(2); // ズーム列数：初期は標準2列
   const [logs, setLogs] = useState([]);
   const [showLogs, setShowLogs] = useState(false); // 活動実績ログの開閉ステート
+  const [triggering, setTriggering] = useState(false);
+  const [triggerMsg, setTriggerMsg] = useState('');
   const scrollAreaRef = useRef(null);
 
   useEffect(() => {
     fetchTopics();
     fetchLogs();
   }, []);
+
+  const handleManualTrigger = async () => {
+    if (triggering) return;
+    setTriggering(true);
+    setTriggerMsg('⏳ クラウド自動発掘エンジンへ即時起動シグナルを送信中...');
+    try {
+      const res = await fetch('/api/intelligence_cron', { method: 'POST', cache: 'no-store' });
+      if (res.ok) {
+        setTriggerMsg('🚀 起動成功！現在クラウドAIがバックグラウンドで全力全巡回を開始しました！1〜2分後にお手元の「🔄 更新」ボタンを押して最新カードをお確かめください！');
+      } else {
+        setTriggerMsg('❌ 起動シグナル送信に問題が発生しました。しばらく時間をおいてから再度お試しください。');
+      }
+    } catch (e) {
+      setTriggerMsg('❌ ネットワーク通信エラーが発生しました。');
+    } finally {
+      setTriggering(false);
+      setTimeout(() => setTriggerMsg(''), 15000);
+    }
+  };
 
   const fetchTopics = async () => {
     setLoading(true);
@@ -170,6 +191,14 @@ export default function IntelligenceStudioPage() {
         </div>
         <div className={styles.headerActions}>
           <button 
+            className={styles.triggerBtn} 
+            onClick={handleManualTrigger} 
+            disabled={triggering}
+            title="ワンクリックで今すぐクラウド発掘とAI深層解析を実行します"
+          >
+            {triggering ? '⚡ 起動発信中...' : '⚡ 今すぐ即時発掘を実行'}
+          </button>
+          <button 
             className={`${styles.logToggleBtn} ${showLogs ? styles.logToggleActive : ''}`} 
             onClick={() => setShowLogs(!showLogs)}
             title="活動実績と内訳ログを確認"
@@ -184,6 +213,12 @@ export default function IntelligenceStudioPage() {
           </button>
         </div>
       </header>
+
+      {triggerMsg && (
+        <div className={styles.triggerBanner}>
+          {triggerMsg}
+        </div>
+      )}
 
       {/* 📜 美麗・トグル式 収集活動＆実績ログ ダッシュボード */}
       {showLogs && (

@@ -77,6 +77,56 @@
   flex-wrap: wrap;
 }
 
+/* ★ 今すぐ発掘・ワンクリック手動即時起動ボタン ★ */
+.triggerBtn {
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.3rem;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 18px rgba(236, 72, 153, 0.45);
+}
+
+.triggerBtn:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.15);
+  box-shadow: 0 6px 22px rgba(236, 72, 153, 0.6);
+}
+
+.triggerBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  filter: grayscale(0.3);
+}
+
+.triggerBanner {
+  margin: 1rem auto;
+  max-width: 1200px;
+  padding: 0.95rem 1.5rem;
+  background: linear-gradient(90deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border: 1px solid #ec4899;
+  border-left: 5px solid #ec4899;
+  border-radius: 10px;
+  color: #fce7f3;
+  font-weight: 700;
+  font-size: 0.96rem;
+  box-shadow: 0 4px 20px rgba(236, 72, 153, 0.25);
+  animation: fadeIn 0.3s ease;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ★ 活動ログ切り替えボタン ★ */
 .logToggleBtn {
   background: rgba(30, 41, 59, 0.85);
