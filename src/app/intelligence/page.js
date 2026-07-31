@@ -23,7 +23,11 @@ export default function IntelligenceStudioPage() {
   const fetchTopics = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/intelligence');
+      const timestamp = new Date().getTime();
+      const res = await fetch(`/api/intelligence?_t=${timestamp}`, {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate' }
+      });
       if (res.ok) {
         const data = await res.json();
         const items = data.items || [];
@@ -41,7 +45,11 @@ export default function IntelligenceStudioPage() {
 
   const fetchLogs = async () => {
     try {
-      const res = await fetch('/api/intelligence_logs');
+      const timestamp = new Date().getTime();
+      const res = await fetch(`/api/intelligence_logs?_t=${timestamp}`, {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate' }
+      });
       if (res.ok) {
         const data = await res.json();
         setLogs(data.logs || []);
