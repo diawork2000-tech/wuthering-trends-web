@@ -204,18 +204,20 @@ class IntelligenceEngine:
                         if len(w) >= 2 and w not in ["鳴潮", "動画", "解説", "最強", "紹介"]:
                             self.trending_keywords.add(w)
                     
-                    # ご本人のチャンネル(@Diachannel等)はキーワード学習のみで企画にはしない隔離ガード！
                     ch_title_lower = str(ch_name).lower() + str(title).lower()
                     if "diachannel" in ch_title_lower or "dia" in str(ch_name).lower() or "自チャンネル" in str(ch_name):
                         continue
+
+                    desc_raw = re.sub(r'\s+', ' ', str(snippet.get("description", ""))).strip()
+                    desc_clean = desc_raw[:1500] if desc_raw else f"{title} に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。"
+                    full_summary = f"【動画の概要と発信内容詳細】\n{desc_clean}\n\n（📊 バズ実績: {ch_name} にて現在 {view_count:,} 再生 / 高評価 {like_count:,} を記録！）"
                         
-                    # ★Web巡回とは完全に隔離した専用ラックへ保存！
                     self.competitor_raw_items.append({
                         "title": f"【競合バズ実績】{title}",
-                        "summary": f"{ch_name} で現在 {view_count:,} 再生 / 高評価 {like_count:,} の注目テーマ",
+                        "summary": full_summary,
                         "url": f"https://www.youtube.com/watch?v={video['id']}",
-                        "source_type": "YouTube競合動向",
-                        "score": 88
+                        "source_type": "YouTube競合 (別枠全件枠)",
+                        "score": 98
                     })
         print(f"  [Analytics Complete] Extracted {len(self.trending_keywords)} keywords and locked {len(self.competitor_raw_items)} competitor videos in separate track!")
 
@@ -365,19 +367,49 @@ class IntelligenceEngine:
             det_jp = translate_if_needed(det_raw)
             c_title_jp = translate_if_needed(comp.get("title", "競合注目テーマ"))
             
-            detail_summary = f"【動画内容とバズ要因の詳細】\n{det_jp if len(det_jp) > 15 else f'『{c_title_jp}』の動画内容詳細：視聴者を惹きつける構成と、取り上げられているキャラや戦略の核心解説。競合チャンネルでの高再生エビデンスに基づく重要トピック。'}"
+            detail_summary = f"【動画・記事の完全論説・網羅的詳細】：\n{det_jp if len(det_jp) > 15 else f'『{c_title_jp}』における攻略戦略やビルド意図、および界隈へのインパクト詳細。'}"
 
             competitor_cards.append({
                 "topic_title": c_title_jp,
-                "summary": det_jp,
+                "summary": det_jp[:100],
                 "source_url": comp.get("url", ""),
                 "source_type": "YouTube競合 (別枠全件枠)",
                 "script_outline": detail_summary,
-                "reason": "競合チャンネルにおいて際立つ反響を獲得している実績データに基づく抽出"
+                "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出"
             })
-            # ★上限キャップを全撤廃！ダブりなしであれば全動画を確実に合流ピックアップ！
                 
         print(f"  [Competitor Track Unlimited] Successfully locked {len(competitor_cards)} non-duplicate competitor hit videos for full immersion!")
+
+        # 競合動画に対しても再生数表記だけで済ませないよう、AIで動画内容の「完全な網羅的詳細」を強力解剖！！
+        if self.gemini_model and len(competitor_cards) > 0:
+            print(f"  [Gemini Competitor Deep-Dive] Sending {len(competitor_cards)} competitor videos to Gemini for full technical breakdown...")
+            comp_prompt = (
+                "あなたはゲーム『鳴潮』情報と競合YouTubeチャンネル分析の最高責任者です。\n"
+                "以下の競合チャンネル動画リストについて、動画概要欄のデータから読み取れる【 具体的な動画の内容・キャラ評価・音骸・ビルド戦略や結論の詳細 】を徹底解説してください。\n\n"
+                "【⚠️絶対指令⚠️】\n"
+                "1. 単に「OO再生の注目テーマです」のような数字紹介や手抜き言説を徹底廃止。\n"
+                "2. 動画リンクを開いて再生しなくても、「この動画で何が主張され、どのキャラが最強と結論づけられ、どう戦うべきなのか」の具体的な全容を読者が完璧に把握できるように濃密解説せよ。\n"
+                "3. リスト内にある動画件数は削がずに全件出力すること。\n\n"
+                "純粋なJSONフォーマットの配列のみを返してください。Markdownのコードブロックは不可。\n"
+                "[\n  {\n"
+                '    "topic_title": "魅力的な見出し(純日本語)",\n'
+                '    "summary": "動画の核心ポイント(純日本語)",\n'
+                '    "source_url": "提供リスト内にある元動画URLを正確に代入",\n'
+                '    "source_type": "YouTube競合 (別枠全件枠)",\n'
+                '    "script_outline": "【動画・記事の完全論説・網羅的詳細】：\\n(元動画を見なくても内容が100%把握できるように結論・ビルド方針・強さを長文で徹底解説)",\n'
+                '    "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出"\n'
+                "  }\n]\n\n"
+                "動画素材リスト:\n" + json.dumps(competitor_cards[:25], ensure_ascii=False)
+            )
+            try:
+                c_res = self.gemini_model.generate_content(comp_prompt)
+                c_txt = re.sub(r'^```(json)?|```$', '', c_res.text.strip(), flags=re.MULTILINE).strip()
+                c_list = json.loads(c_txt)
+                if len(c_list) > 0:
+                    competitor_cards = c_list
+                    print(f"  [Gemini Success] Upgraded {len(competitor_cards)} competitor cards with deep content breakdowns!")
+            except Exception as e:
+                print(f"  [Warning] Competitor deep-dive fallback to native description text ({e}).")
 
         if self.gemini_model and len(sorted_items) > 0:
             print(f"  [Gemini Batch] Sending batch request to Gemini AI with {len(sorted_items)} items to compile comprehensive full breakdowns...")
