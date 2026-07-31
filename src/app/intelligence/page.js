@@ -51,14 +51,6 @@ export default function IntelligenceStudioPage() {
     }
   };
 
-  const handleCopyScript = () => {
-    if (!selectedTopic) return;
-    const textToCopy = `【見出し】${selectedTopic.title}\n【メディア】${selectedTopic.sourceType}\n【動画台本構成】\n${selectedTopic.scriptOutline}\n\n【期待値と根拠】\n${selectedTopic.reason}\n【一次ソース】${selectedTopic.sourceUrl}`;
-    navigator.clipboard.writeText(textToCopy);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
-
   const filteredTopics = topics.filter((item) => {
     const st = str(item.sourceType || '').toLowerCase();
     const su = str(item.sourceUrl || '').toLowerCase();
@@ -68,7 +60,8 @@ export default function IntelligenceStudioPage() {
       return st.includes('reddit') || su.includes('reddit');
     }
     if (filter === 'YouTube') {
-      return st.includes('youtube') || su.includes('youtube') || su.includes('youtu.be');
+      const isYouTube = st.includes('youtube') || su.includes('youtube') || su.includes('youtu.be');
+      return isYouTube;
     }
     if (filter === 'その他') {
       const isReddit = st.includes('reddit') || su.includes('reddit');
@@ -114,7 +107,7 @@ export default function IntelligenceStudioPage() {
       }
       return (
         <div className={styles.thumbnailWrapperFallback}>
-          <span className={styles.thumbFallbackLogo}>📺 YouTube バズ解析スレッド</span>
+          <span className={styles.thumbFallbackLogo}>📺 YouTube バズ解析</span>
         </div>
       );
     }
@@ -160,26 +153,26 @@ export default function IntelligenceStudioPage() {
       <header className={styles.header}>
         <div className={styles.leftNav}>
           <Link href="/" className={styles.backBtn}>
-            ◀ 動画トレンド・メインギャラリーに戻る
+            ◀ メインギャラリーへ
           </Link>
           <div className={styles.titleArea}>
-            <h1>📚 AIショート動画台本 ＆ ネタ発掘ライブラリ</h1>
-            <p>海外Reddit(和訳)・YouTube・SNSバズを均等選出 ＆ 実績タイムライン搭載！</p>
+            <h1>📚 鳴潮トレンド・ネタ自動発掘スタジオ</h1>
+            <p>海外Reddit・YouTube競合動向・最強攻略をダブりゼロで継続発掘</p>
           </div>
         </div>
         <div className={styles.headerActions}>
           <button 
             className={`${styles.logToggleBtn} ${showLogs ? styles.logToggleActive : ''}`} 
             onClick={() => setShowLogs(!showLogs)}
-            title="何時に何件のデータをどのメディアから採掘したか実績確認"
+            title="活動実績と内訳ログを確認"
           >
-            📜 {showLogs ? '活動ログを閉じる' : '巡回・実戦実績ログを見る'} ({logs.length})
+            📜 {showLogs ? 'ログを閉じる' : '活動実績ログ'} ({logs.length})
           </button>
           <div className={styles.badge}>
-            ✨ 7日超 古いカード自動自浄＆ダブりゼロ設計
+            ✨ 自動更新 ＆ ダブり排除稼働中
           </div>
           <button className={styles.refreshBtn} onClick={() => { fetchTopics(); fetchLogs(); }}>
-            🔄 最新ネタを同期
+            🔄 更新
           </button>
         </div>
       </header>
@@ -262,7 +255,7 @@ export default function IntelligenceStudioPage() {
               </div>
 
               <div className={styles.zoomControlBar}>
-                <span className={styles.zoomLabel}>🔍 表示列ズーム : </span>
+                <span className={styles.zoomLabel}>🔍 列数切替 : </span>
                 <button 
                   className={styles.zoomBtn} 
                   onClick={zoomIn} 
@@ -325,17 +318,34 @@ export default function IntelligenceStudioPage() {
             {selectedTopic ? (
               <>
                 <div className={styles.studioTitleRow}>
-                  {renderThumbnail(selectedTopic) && (
-                    <div className={styles.studioThumbPreview}>
-                      {renderThumbnail(selectedTopic)}
-                    </div>
-                  )}
+                  {(() => {
+                    const ytId = getYouTubeId(selectedTopic.sourceUrl);
+                    if (ytId) {
+                      return (
+                        <div className={styles.studioVideoContainer}>
+                          <iframe
+                            className={styles.youtubeIframe}
+                            src={`https://www.youtube.com/embed/${ytId}?autoplay=1`}
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                          ></iframe>
+                        </div>
+                      );
+                    }
+                    return renderThumbnail(selectedTopic) ? (
+                      <div className={styles.studioThumbPreview}>
+                        {renderThumbnail(selectedTopic)}
+                      </div>
+                    ) : null;
+                  })()}
                   <div className={styles.studioMeta}>
-                    <span className={styles.sourceBadge} style={{ fontSize: '0.9rem', padding: '0.4rem 1rem' }}>
+                    <span className={styles.sourceBadge} style={{ fontSize: '0.85rem', padding: '0.35rem 0.85rem' }}>
                       {selectedTopic.sourceType}
                     </span>
-                    <span style={{ color: '#94a3b8', fontSize: '0.9rem' }}>
-                      🕒 登録日 : {selectedTopic.date}
+                    <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
+                      🕒 {selectedTopic.date}
                     </span>
                   </div>
                   <h2 className={styles.studioTitle}>{selectedTopic.title}</h2>
@@ -343,16 +353,13 @@ export default function IntelligenceStudioPage() {
 
                 <div className={styles.scriptSection}>
                   <div className={styles.sectionHeading}>
-                    <span>🎬 冒頭 3 秒 ＆ 3行ショート台本骨格</span>
-                    <button className={styles.copyBtn} onClick={handleCopyScript}>
-                      {copied ? '✅ クリップボードへ保存しました！' : '📋 この台本＆論点をコピー'}
-                    </button>
+                    <span>📄 動画・記事の詳細要約</span>
                   </div>
                   <div className={styles.scriptBox}>{selectedTopic.scriptOutline}</div>
                 </div>
 
                 <div className={styles.reasonSection}>
-                  <div className={styles.reasonTitle}>💡 なぜこのトピックがファン層にバズるかの見立て</div>
+                  <div className={styles.reasonTitle}>💡 バズ予測と注目ポイント</div>
                   <p className={styles.reasonText}>{selectedTopic.reason}</p>
                 </div>
 
@@ -363,13 +370,13 @@ export default function IntelligenceStudioPage() {
                     rel="noopener noreferrer"
                     className={styles.externalBtn}
                   >
-                    🚀 この記事の一次情報 ＆ 該当動画を開く (100%安全直撃リンク)
+                    {getYouTubeId(selectedTopic.sourceUrl) ? '📺 YouTubeで開く ↗' : '🌐 元サイトを開く ↗'}
                   </a>
                 )}
               </>
             ) : (
               <div className={styles.emptyState} style={{ height: '350px' }}>
-                <p>👈 左の一覧から気になる動画ネタをクリックして台本を開きましょう！</p>
+                <p>👈 左のリストから気になるトピックを選択すると、動画の自動再生や記事詳細を確認できます</p>
               </div>
             )}
           </section>

@@ -358,38 +358,46 @@ class IntelligenceEngine:
                 continue
             if c_url and "http" in c_url: seen_in_batch_url.add(c_url)
             
+            det_raw = str(comp.get("summary", "")).strip()
+            det_jp = translate_if_needed(det_raw)
+            c_title_jp = translate_if_needed(comp.get("title", "競合注目テーマ"))
+            
+            detail_summary = f"【動画内容とバズ要因の詳細】\n{det_jp if len(det_jp) > 15 else f'『{c_title_jp}』の動画内容詳細：視聴者を惹きつける構成と、取り上げられているキャラや戦略の核心解説。競合チャンネルでの高再生エビデンスに基づく重要トピック。'}"
+
             competitor_cards.append({
-                "topic_title": translate_if_needed(comp.get("title", "競合注目テーマ")),
-                "summary": translate_if_needed(comp.get("summary", "")),
+                "topic_title": c_title_jp,
+                "summary": det_jp,
                 "source_url": comp.get("url", ""),
                 "source_type": "YouTube競合 (別枠全件枠)",
-                "script_outline": f"【競合動向リサーチ】：『{str(comp.get('title',''))[:22]}』がバズ発動！ ➔ 競合動画の伸びている勝因解剖 ➔ 自チャンネルの独自強みをプラスして最強バズショート化！",
-                "reason": "【別枠監視・ダブりゼロ全件採掘】競合チャンネルにおいて高再生・高評価マークを誇る決定的な実績エビデンス"
+                "script_outline": detail_summary,
+                "reason": "競合チャンネルにおいて際立つ反響を獲得している実績データに基づく抽出"
             })
             # ★上限キャップを全撤廃！ダブりなしであれば全動画を確実に合流ピックアップ！
                 
         print(f"  [Competitor Track Unlimited] Successfully locked {len(competitor_cards)} non-duplicate competitor hit videos for full immersion!")
 
         if self.gemini_model and len(sorted_items) > 0:
-            print(f"  [Gemini Batch] Sending batch request to Gemini AI with {len(sorted_items)} items to format high-impact video ideas...")
+            print(f"  [Gemini Batch] Sending batch request to Gemini AI with {len(sorted_items)} items to analyze topic details...")
             prompt = (
-                "あなたはチャンネル@Diachannel12345専属のYouTubeショート＆動画クリエイティブ責任者です。\n"
-                "以下の回収ニュースとバズ状況のリストから、冒頭3秒で視聴者の関心を強烈に惹く"
-                f"優れた動画ネタ企画を 【 最大 {target_count} 件 】 選出および加工構築してください。\n\n"
+                "あなたはゲーム『鳴潮』情報のアナリストおよびコンテンツ最高責任者です。\n"
+                "以下の回収リストから注目すべきトピックを【 最大 " + str(target_count) + " 件 】選出し、"
+                "記事や動画の【具体的な詳細内容】を正確かつ明瞭に要約・分析して構成してください。\n\n"
                 "【⚠️最重要・絶対指令⚠️】\n"
-                "1. 海外Reddit等の英語や外国語の記事が含まれる場合は、必ず【100% 自然で熱量ある純日本語の見出し・要約・台本】に完全意訳・翻訳すること。\n"
-                "2. タイトルや本文に英語をそのまま放置・直訳状態にして出力することは堅く禁ずる。\n"
-                "3. 「〜についてご存じですか？！」のような陳腐で機械的なお決まり文句は一切使わず、視聴者が思わず目を奪われるリアルで知的なバズ台本骨格に作成せよ。\n\n"
-                "出力は必ず【純粋なJSONフォーマットの配列】のみを返し、Markdownコードブロックや不要な解説文は入れないでください。\n\n"
+                "1. 記事や動画の「中身の詳細（何が書いてあるか/どんな結論か）」を明確に記述すること。\n"
+                "   例：ガチャ確・育成優先度であれば「どのキャラクター・音骸を推奨し、理由は何なのか」の詳細、\n"
+                "   アプデ情報・Reddit議論であれば「どのような事実・考察・不満・熱烈な論点が語られているか」の詳細。\n"
+                "2. 「冒頭3秒」「〜をご存じですか？！」「➔ まとめ」のような陳腐で人工的なショート動画台本テンプレートや、中身のない抽象的なお決まり文句は堅く禁ずる。\n"
+                "3. 海外Reddit等の英語記事が含まれる場合は、必ず【100% 自然な純日本語による高品質な詳細解説】へ意訳・翻訳すること。\n\n"
+                "出力は必ず【純粋なJSONフォーマットの配列】のみを返し、Markdownコードブロックや不要な解説は除外してください。\n\n"
                 "JSONの形式基準:\n"
                 "[\n"
                 "  {\n"
-                '    "topic_title": "100%日本語：ショートで圧倒的注目を浴びる激アツ見出し",\n'
-                '    "summary": "何が盛り上がっているのかの熱狂要因要約(純日本語)",\n'
-                '    "source_url": "提供リスト内に記載された正確な元URL(厳格)",\n'
+                '    "topic_title": "100%純日本語の的確で魅力的なトピック見出し",\n'
+                '    "summary": "事象の背景概要(純日本語)",\n'
+                '    "source_url": "提供リスト内に記載された正確な元URL",\n'
                 '    "source_type": "提供リストのメディア種別",\n'
-                '    "script_outline": "導入3秒(インパクトある問題提起) ➔ 話題解説(事実と本質) ➔ オチとまとめ",\n'
-                '    "reason": "なぜこの企画がターゲットファンに響き再生数が伸びるかの見立て"\n'
+                '    "script_outline": "【動画・記事の内容詳細】：(ここにガチャ優先度の根拠や結論、議論の核心、ビルド詳細や検証結果を濃密に分かりやすく記す)",\n'
+                '    "reason": "なぜこの情報がプレイヤー層において重要視されているかの注目ポイント"\n'
                 "  }\n"
                 "]\n\n"
                 "素材リスト:\n" + json.dumps(sorted_items[:25], ensure_ascii=False)
@@ -407,8 +415,7 @@ class IntelligenceEngine:
                     to = str(idea.get("script_outline", ""))
                     if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', tt)) >= 2 and "についてご存じですか" not in to:
                         clean_ideas.append(idea)
-                print(f"  [Gemini Success] Successfully generated & filtering {len(clean_ideas)} high-purity Japanese topic cards!")
-                # ★Web巡回からの厳選(最高12件) ＋ 競合別枠(最高5件)を 一撃無敵の同時リターン！
+                print(f"  [Gemini Success] Successfully generated & filtered {len(clean_ideas)} high-purity detail summary cards!")
                 return clean_ideas[:target_count] + competitor_cards
             except Exception as e:
                 print(f"  [Warning] Gemini generation failed ({e}). Falling back to advanced algorithm.")
@@ -417,7 +424,7 @@ class IntelligenceEngine:
         for item in sorted_items[:target_count]:
             kw_match = item.get("match_kw", "注目トレンド")
             t_title = translate_if_needed(item.get("title", "無題のトレンドネタ"))
-            t_sum = translate_if_needed(item.get("summary", ""))
+            t_sum = translate_if_needed(item.get("summary", "")).strip()
             if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', t_title)) < 2:
                 continue
             out_ideas.append({
@@ -425,11 +432,10 @@ class IntelligenceEngine:
                 "summary": t_sum,
                 "source_url": item.get("url", ""),
                 "source_type": item.get("source_type", "Web調査"),
-                "script_outline": f"【冒頭3秒】：『{t_title[:22]}！この裏にある重大な真実を見抜いた？！』➔ 決定的証拠と背景の考察 ➔ まとめと今後の対策",
-                "reason": f"熱狂度足切り通過およびキーワード「{kw_match}」による評価抽出"
+                "script_outline": f"【記事・動画の詳細要約】：\n{t_sum if len(t_sum) > 15 else f'「{t_title}」にて提起されたビルドや戦略、イベント情報および熱烈な議論詳細の要約。'}",
+                "reason": f"注目トレンドおよびキーワード「{kw_match}」による反響検出"
             })
-        print(f"  [Algorithm Ready] Formatted {len(out_ideas)} items using advanced algorithmic pipeline.")
-        # ★アルゴリズム時も同じく Web巡回枠 ＋ 競合別枠 の両者を同時リターン！
+        print(f"  [Algorithm Ready] Formatted {len(out_ideas)} items using advanced algorithm.")
         return out_ideas + competitor_cards
 
     def push_to_notion(self, ideas):
