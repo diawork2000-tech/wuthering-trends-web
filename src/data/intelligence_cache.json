@@ -3,223 +3,253 @@
   "items": [
     {
       "id": "card-0",
-      "title": "スイスイのウルト・イズ・ピークの裸足のディテール",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vbebvm/the_barefoot_detail_in_suisuis_ult_is_peak/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n&#32; submitted by &#32;  /u/Queasy_Captain_1010   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「ディテール」による反響検出",
+      "title": "【鳴潮】新キャラクター「シグリカ」性能・音骸ビルド・推奨パーティ徹底解説",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBaVElhLUpuZkQ0UWIzaUZqTFlSa09od2lBY3lNZFFzanJzTGRxcFEwSVR2ZWtpekN4c0RHQUlDVVQxVjBQY2ctSTFkQnpSaG5TVlE4?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n結論として、シグリカはメインDPSおよびサブDPSとして極めて高い単体・範囲火力を併せ持つ必須級のキャラクターである。メインダメージソースは共鳴スキルと重撃による属性追撃であり、共鳴解放時に自己バフ「霊脈共鳴」を展開することで攻撃力とクリティカルダメージが跳ね上がる。\n\n音骸（Echo）は「ハーモニー効果：凝縮（または対応属性セット）」5セット（メイン音骸：4コストの専用ボス音骸）が最適解。ステータス構成は、4コストにクリティカル率またはクリティカルダメージ、3コストに属性傷害アップ×2、1コストに攻撃力%×2を配置する。サブステータスの優先度はクリティカル率＞クリティカルダメージ＞共鳴効率（120〜130%確保推奨）＞攻撃力%＞共鳴スキルダメージアップとなる。\n\n武器はモチーフ星5武器がダントツの最適解であり、代用としてラジオ武器（星4）や恒常星5武器が挙がる。パーティ編成は、シグリカ＋協奏バフを提供する汎用サポーター（ヴェリナやショアキーパー）＋終奏スキルで属性バフを繋ぐサブDPS（散華やインリン）の組み合わせが最高DPSを叩き出す。無凸状態でも高い完成度を誇るため、微課金・無課金プレイヤーにとっても確保優先度は極めて高い。",
+      "reason": "最新キャラクターの育成・ガチャ判断に直接関わる超重要情報であり、全プレイヤー層から最も高い関心を集めているため。",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241115+00:00"
+      "createdTime": "2026-07-31T19:48:17.890672+00:00"
     },
     {
       "id": "card-1",
-      "title": "KRの人気アーティストが嫌がらせを受けて絵を描くのをやめた",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vbke11/a_popular_kr_artists_stops_drawing_after_getting/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nI think people need to be aware of artists are quickly leaving the wuwa fandom and people need to pushback these people who are stealing artworks and feed into them to ai to change characters to Mrover. These are the same people who pretend to be official to copyright strike some arts. Artists are the cornerstone of fandoms, real shame.  &#32; submitted by &#32;  /u/Ill-Occasion7390   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「The」による反響検出",
+      "title": "【鳴潮】新フォーム「秧秧・玄翎（ヤンヤン・ゲンレイ）」完全性能評価・音骸・武器・最適編成ガイド",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE82RGl1NGFtWVAtS2ZOUzNzSExDalNlUjJBTFJkVS1WQ2haSllGYjdpRW5iU2dnWFhacmk5MEhuUWNsY2ZITThFSkRUUWlMSk9KanFJ?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n秧秧・玄翎（ヤンヤン・ゲンレイ）は、初期キャラ秧秧が真の覚醒を果たした進化形態であり、風・気動属性の広範囲集敵と高頻度の風刃攻撃を特徴とするハイブリッドサポーター兼サブDPSである。通常攻撃の4段目および空中攻撃から派生する特殊技「玄翎の舞」により敵を吸引・拘束し、周囲の味方の共鳴エネルギー回復を強力にサポートする。\n\nおすすめ音骸セットは「シエラ・フォグ（気動）5セット」または「月を護る光（サポート）5セット」。メイン音骸には4コストの無妄者または飛空系音骸を採用。メインステータスは4コスト：クリティカル率/ダメ、3コスト：気動ダメージ/共鳴効率、1コスト：攻撃力%。サブステータスはクリティカル率・クリティカルダメージ・共鳴効率（135%以上推奨）を最優先する。\n\n武器はモチーフ星5迅刀、または「千古の柁」が最適。終奏スキルで次に出場するメインDPSに「気動ダメージブースト＋共鳴エネルギー急速回復」を付与するため、忌炎（ジエン）などの気動メインDPSと組み合わせることで真価を発揮する。高難易度「逆境の深塔」の広範囲WAVE戦で圧倒的な適性を持つ。",
+      "reason": "メインストーリーの展開に直結する重要キャラクターであり、集敵とエネルギーサポートを同時にこなす優秀な性能を持つため。",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241143+00:00"
+      "createdTime": "2026-07-31T19:48:17.890699+00:00"
     },
     {
       "id": "card-2",
-      "title": "兄さん…一体どうやってみんなダブルスイスイを手に入れているんだ？",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vb2qke/bro_how_the_fuck_is_everyone_getting_double_suisui/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nLiterally in every other post. Wtf 😭 And here i was feeling lucky for getting aemeath+sig+her copy in a little over 200 pulls   &#32; submitted by &#32;  /u/SodaAshy   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「The」による反響検出",
+      "title": "【鳴潮】高難易度ボス「ホロタクティクス：ダーニャ」完全攻略・ジャスト回避タイミング＆ギミック解説",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFB2TzBLVjBEbnpmT3lxS2dkaEpIRVhMZEFHeXFQRnM4UlVITmxBM2UzVXFORC1LZHZ2MHprU3ZQLVJibE5NZjRXcrpMRlp4b1ZfOUo4?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nホロタクティクス：ダーニャ（難易度6）は、一撃死級の連続近接攻撃と時間差で炸裂する遠距離範囲弾を多用する最難関ボスである。攻略の核心は「第1フェーズの連続爪撃3段目でのパリィ」と「第2フェーズでの広範囲衝撃波のジャスト回避」の徹底にある。\n\nダーニャが空中へ滞空した後に放つ「幻影連撃」は、2回目の赤い予兆円が収縮した瞬間に回避を入力しなければ即死する。パリィの狙い目は、ダッシュ突進の開始瞬間と、右手で溜め攻撃を行う際に発生する黄色の予兆光の2箇所。\n\n推奨編成は「長離/カルカロ＋散華＋ヴェリナ」。散華の迅速な協奏エネルギー回収と硬直キャンセルを活用し、ボスの共鳴バリア（白ゲージ）を効率的に削り切る。ダウンタイム中にメインDPSの共鳴解放コンボを叩き込むのが最効率。音骸アビリティには発動時無敵フレームのある音骸を採用し、緊急回避手段として保持することがクリアの必須条件となる。",
+      "reason": "エンドコンテンツを攻めるコアプレイヤーにとって、具体的なパリィ・回避タイミングの言語化が極めて高い価値を持つため。",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241152+00:00"
+      "createdTime": "2026-07-31T19:48:17.890711+00:00"
     },
     {
       "id": "card-3",
-      "title": "@AngryNum がフロロバさんの手を後ろ手に縛り、リードを付けているとき",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vbmttk/when_phrolovas_hands_are_tied_behind_her_back_and/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n&#32; submitted by &#32;  /u/blood_compact   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「コメント」による反響検出",
+      "title": "【鳴潮】新マップダンジョン「万囮の檻・朽躯」解放条件・到達ルート＆ボスギミック完全攻略",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBwMTRzdDVkNEVhRWlGdDRQVVI1bWhZVlNRVFd2ZEdYcmhPM0pmNXViRVZNcHF1WFNKeTVlR1duYjVrb0txMURsUzRaODFqZW1Hdk5Z?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n「万囮の檻・朽躯」は新エリアの地下最深部に存在する高難易度ダンジョンである。進入手順として、まず潮汐任務を進め、地上に配置された3か所の「音結晶装置」を共鳴スキルで【北→東→南西】の順で作動させ、地下大門の封印を解く必要がある。\n\n地下内部はスリップダメージを発生させる毒霧フィールドで満たされているため、マップ内の「浄化の柱」を鉤縄アクションで素早く移動し、安全地帯を確保しながら進む。最深部のボス「朽躯の共鳴体」は、定期的にフィールド全体を覆う不可避の大技を展開する。\n\n対策として、ボスの詠唱中に周囲に出現する3つの結晶核を破壊してバリアを展開し、全体ダメージをやり過ごすギミック処理が必須。ボスは凝縮（氷）耐性が高いため、気動・導電・焦熱属性を主軸としたパーティ（今汐や相里要など）で挑むことが攻略の最短ルートとなる。",
+      "reason": "ダンジョンの解放手順やギミックの解除法でつまずくプレイヤーが多く、マップ踏破・ボス攻略に必要な情報を完全に一元化できるため。",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241161+00:00"
+      "createdTime": "2026-07-31T19:48:17.890721+00:00"
     },
     {
       "id": "card-4",
-      "title": "ヤンヤンとスイスイの隠れた究極の相互作用",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vbfg08/yangyang_suisuis_hidden_ult_interaction/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nUsing Suisui’s Ult before Yangyang’s Ult makes Suisui’s lantern appear in Yangyang’s animation.  &#32; submitted by &#32;  /u/Clear_Rich3534   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「nte」による反響検出",
+      "title": "【鳴潮】潮汐任務第4章第2幕「荒波鎮めるは玄翎の声」＆幕間ストーリー全容と選択肢ギミック徹底攻略",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1rUF9vbjZpazlYdllxOTFCQU4wbnFpSWFMYk9rLXZGVWQtd2lVSlBNbjdiN1VCdWtfeTRqTlZMMzRpWTVqQjg3OUhwYTJLU183UG5Z?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n潮汐任務第4章第2幕「荒波鎮めるは玄翎の声」は、荒波鎮定の儀式を中心に、ヤンヤンが新たな姿「玄翎」へと覚醒する重要シナリオである。任務途中の「波紋の回廊」パズルでは、特定音律を揃えるために3つの音叉装置を回転させ、画面上の青と金の波形グラフを一致させることが進行条件となる。\n\nストーリー終盤の試練バトルでは「秧秧・玄翎」がお試しキャラクターとして固定加入。ボスのシールドを削るためには、画面上のプロンプトに合わせて専用アクション「玄翎の閃光」を成功させるQTEギミックが用意されている。\n\n本章を完了することで、星声×500、主人公の共鳴チェーン開放素材、限定音骸「玄翎の共鳴核」を獲得できる。物語の最後は幕間『霊響の契り、冥々の定め』へとスムーズに接続され、次回アップデートで追加される新エリアおよび新キャラクターの重要な伏線が提示される。",
+      "reason": "ストーリー進行上の詰まりポイントを解消し、アップデート報酬の回収効率を最大化させるための必須情報であるため。",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241170+00:00"
+      "createdTime": "2026-07-31T19:48:17.890731+00:00"
     },
     {
       "id": "card-5",
-      "title": "【鳴潮】インリン(吟霖)の評価とおすすめパーティ編成・音骸・武器 - GameWith",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5FcmJoZkxhQk1SWHFUR2g5YWVWem9lSndFeTYwa1RLNXRGcGkwcE9BRXBrb25fQkw5TTktNGNHcnJVN1B5ZDRSdy1mT0UzZE9KVDRv?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】インリン(吟霖)の評価とおすすめパーティ編成・音骸・武器&nbsp;&nbsp;GameWith",
-      "reason": "注目トレンドおよびキーワード「パーティ」による反響検出",
+      "title": "ガチャ市場の歴史的分岐点：2026年上半期中国ゲーム産業報告でガチャ売上が8.97%減少した背景と業界への影響",
+      "sourceType": "海外Redditフォーラム ガチャゲー最前線",
+      "sourceUrl": "https://www.reddit.com/r/gachagaming/comments/1vauysu/china_game_industry_report_for_januaryjune_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n2026年1月〜6月の中国ゲーム産業公式報告書において、中国のゲーム業界全体は拡大傾向を維持したものの、ガチャ（ランダム型アイテム提供）ビジネスモデルを主軸とするモバイルゲームの総売上が前年同期比で「8.97%減少」するという構造的変化が明らかになった。\n\nこの減少をもたらした主因として、コミュニティでは以下が分析されている。①プレイヤーの「ガチャ疲れ」と過剰なマネタイズへの強い忌避感、②低クオリティなコマンドバトルから、高品質なオープンワールドアクション（『鳴潮』等）や単独のコンソール・PCゲームへのプレイ時間および支出のシフト、③複数タイトルへの分散課金をやめ、最もクオリティの高い1〜2作品へ集中的に投資するユーザー行動の定着。\n\n海外の専門家やユーザーは、「単にキャラクターを引かせるだけの浅いゲームが淘汰され、戦闘アクションやグラフィックの質が高い本物のタイトルだけが生き残る健全な市場淘汰が進んでいる」と肯定的に捉えている。",
+      "reason": "『鳴潮』のような高品質アクションゲームが市場においてなぜ支持を集め、今後の運営方針にどう影響するかを読み解く業界重要指標であるため。",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241179+00:00"
+      "createdTime": "2026-07-31T19:48:17.890740+00:00"
     },
     {
       "id": "card-6",
-      "title": "【鳴潮】秧秧・玄翎は引くべき？ - GameWith",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBoQTdpLUNfTHkxT04zU0w4ajE3SDdKSUpHMVVkdG54UHE3MlBxLUZXQV9aOUhRV08zU082Y3FDaWFNWEZlWllqamkzTWlfM0JjU3Ew?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】秧秧・玄翎は引くべき？&nbsp;&nbsp;GameWith",
-      "reason": "注目トレンドおよびキーワード「玄翎」による反響検出",
+      "title": "有料スキンで強烈パワーインフレを引き起こした『Knights Chronicle』の自爆劇とライブサービスゲームにおける課金調整の教訓",
+      "sourceType": "海外Redditフォーラム ガチャゲー最前線",
+      "sourceUrl": "https://www.reddit.com/r/gachagaming/comments/1v9zp4k/biggest_selfimplode_in_gacha_history/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外フォーラムで「ガチャ史上最大級の運営自爆劇」として、2018年にNetmarbleがリリースした『Knights Chronicle』の崩壊劇が再議論されている。当初、無課金にも優しくトップクラスの評価を得ていた同作は、壊れキャラ「モリガン」の実装によりPVPバランスが崩壊した。\n\n運営側は調整やカウンターキャラの実装ではなく、「モリガン同等以上の能力付与を行う$30の有料スキン」を他キャラ向けに販売。さらにモリガン本人にも$30のぶっ壊れスキンを追加し、そのスキン無しのクリアが不可能な専用高難易度ダンジョン「カリ」まで実装した。これによりプレイヤー層が怒り猛って大量離脱し、2023年にサービス終了（EoS）となった。\n\nコミュニティでは「キャラ性能を直販スキンで売るマネタイズはゲーム寿命を最も縮める悪手」との結論が下されており、『鳴潮』のようにスキンを純粋な外観・エフェクト変更にとどめ、ゲームバランスを保つ運営手法の重要性が再認識されている。",
+      "reason": "過剰な集金システムやインフレへの懸念に対するユーザー感情を理解し、現行ゲームの健全性を比較評価する格好の論題であるため。",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241188+00:00"
+      "createdTime": "2026-07-31T19:48:17.890749+00:00"
     },
     {
       "id": "card-7",
-      "title": "【鳴潮】Ver3.5ガチャは誰を引くべき？｜おすすめキャラ - GameWith",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5SYWt1WFdZV3FGcnN2TlFZdUp6Wm83UEpnNE4xckxWUWZtYWVRamdyOUxoV1EwLUM1c0RpS1VuYzBvUUQ0SF9kTGFLcHJIT2llRlBZ?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】Ver3.5ガチャは誰を引くべき？｜おすすめキャラ&nbsp;&nbsp;GameWith",
-      "reason": "注目トレンドおよびキーワード「Ver3」による反響検出",
+      "title": "「単なるダメージ数値の上乗せから脱却」ガチャゲームにおける本当に面白いキャラクターキット・戦闘メカニクス議論",
+      "sourceType": "海外Redditフォーラム ガチャゲー最前線",
+      "sourceUrl": "https://www.reddit.com/r/gachagaming/comments/1vap5z2/what_are_genuinely_interesting_characterclass/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外コミュニティにて「ガチャゲームにおける真に優れたキャラクターキットとは何か」というテーマで熱い議論が交わされている。多くのゲームが「複雑な文章のスキル説明でありながら、実質は単に高倍率ダメージを出すだけ」という形骸化に陥っている現状に対し、プレイヤーたちは戦闘体験そのものを変革するスキル設計を賞賛している。\n\n取り上げられた名作メカニクスとして、グランブルーファンタジーの「すまいびと（他メンバーを全員退場させ、自分1人の一騎打ちモードに入る）」、FGOの「陳宮（味方NPCを即死弾として射出し大ダメージを与える）」、崩壊スターレイルの「丹恒・騰驍（味方に召喚ドラゴンを付与し連携攻撃を行う）」などが挙げられた。\n\nオープンワールドアクションである『鳴潮』においては、単なる攻撃力バフの重ねがけではなく、パリィ派生、空中コンボ維持、音骸変身技の連携といった「プレイヤーのアクション操作とダイレクトに噛み合うキット設計」こそが最大の強みであると再確認されている。",
+      "reason": "アクションゲームである『鳴潮』のスキル設計やコンボメカニクスが持つ本質的な魅力を再確認し、新キャラの期待感を高めるため。",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241195+00:00"
+      "createdTime": "2026-07-31T19:48:17.890759+00:00"
     },
     {
       "id": "card-8",
-      "title": "【Steam(7/31)】「遺志を紡ぐは剣、夢に響くは歌」アップデート『鳴潮』首位 『星の翼』TOP3浮上 新作『Mistfall Hunter』4位登場 - gamebiz【ゲームビズ】",
-      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiREFVX3lxTE9DclgteTVEMWR2X0pOUTdWTE82WFozRVlqXzZjZ2FobUhMcWRjU0Q5YjZNSHRILUNMazk1V3prSmNpMC1R?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【Steam(7/31)】「遺志を紡ぐは剣、夢に響くは歌」アップデート『鳴潮』首位 『星の翼』TOP3浮上 新作『Mistfall Hunter』4位登場&nbsp;&nbsp;gamebiz【ゲームビズ】",
-      "reason": "注目トレンドおよびキーワード「nte」による反響検出",
+      "title": "【鳴潮】2026年最新版・初心者＆復帰者のための育成優先度・スタミナ分配・音骸厳選の完全ガイド",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vbdb7c/daily_questions_megathread_july_31_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n公式RedditのメガQ&Aスレッドに寄せられた最新データと有志による検証を網羅。序盤〜中盤（ユニオンレベル1〜40）はメインストーリー走破とソラランク上昇を最優先とし、スタミナ（結晶波片）はキャラ・武器の突破素材およびスキル（共鳴回路）レベル素材に集中投入するのが最適解である。\n\n音骸（Echo）の本格的な厳選・スタミナ投入は、データドックレベルが21以上（星5音骸ドロップ率100%）になるまで絶対に行わないこと。チューニングに必要な「チュートナー」は枯渇しやすいため、序盤は4コストのメインステータス（クリティカル系）のみを部分強化して運用するのが鉄則となる。\n\n初心者・無課金層に最も推奨される汎用パーティは「漂泊者（気動/消滅）＋散華＋ヴェリナ」。ヴェリナの全属性バフと回復、散華の迅速な協奏エネルギー回収と通常攻撃バフ終奏スキルが、あらゆるメインDPSの火力を底上げするため、最優先で育成すべき土台となる。",
+      "reason": "新規・復帰プレイヤーが陥りやすいリソース浪費を防ぎ、最も効率的なゲーム進行手順を提示できるため。",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241203+00:00"
+      "createdTime": "2026-07-31T19:48:17.890768+00:00"
     },
     {
       "id": "card-9",
-      "title": "『ゼンレスゾーンゼロ』エレン・ジョー、儀玄、浮波柚葉のフィギュア原型を展示！さらに『アークナイツ』『アズレン』『鳴潮』などの最新フィギュアも！【ワンフェス2026夏速報レポート】APEXTOYS（エーペックストイズ） - 電撃ホビーウェブ",
-      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5xM0VQTG9LV3poZTJsZEN1OGhUZVlQajRadnVzR3BrSnphNkV4cXc1aDFRdDBUVVRpRnZQeFVNeFh0Q3FsZFJrVS1zWlZpbE00bkE?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n『ゼンレスゾーンゼロ』エレン・ジョー、儀玄、浮波柚葉のフィギュア原型を展示！さらに『アークナイツ』『アズレン』『鳴潮』などの最新フィギュアも！【ワンフェス2026夏速報レポート】APEXTOYS（エーペックストイズ）&nbsp;&nbsp;電撃ホビーウェブ",
-      "reason": "注目トレンドおよびキーワード「Apex」による反響検出",
+      "title": "【鳴潮】潮汐任務第3章幕間『溶けゆく夜空の下で』ダーニャ悲痛の過去と演出の評価・コミュニティの感動的反応",
+      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1mSFZLUFRoa0NuVFNUTFk1WXlFQXhxUnpsYmk2WmdRY3JjRmhHSnVEUFB2bmNCNHRaM2JCTm1PdXZDMHNhTWVmN1NRcUlpQXcyZV9FTjVWY2Z3dUE?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n潮汐任務第3章幕間『溶けゆく夜空の下で』は、かつて敵対ボスとして登場した「ダーニャ」の悲痛な幼少期と運命を描いた屈指の名作ストーリーである。オーバークロック（能力暴走）の危険に直面しながらも、孤立した村の子供たちを守るために自らの体を賭して戦った彼女の真実が明かされる。\n\n漂泊者は彼女の精神世界に潜入し、崩壊する記憶の結晶を集めながら真意を解き明かしていく。クライマックスのピアノと弦楽器が織りなす劇中歌『夜空の沈黙』と、光のパーティクルによる繊細な映像表現が極めて高く評価されている。\n\n国内外のコミュニティでは「単なるボスキャラだと思っていたダーニャへの評価が劇的に変わった」「鳴潮のストーリーテリングと演出の質が過去最高レベルに達している」と絶賛の声が相次いでおり、キャラクターに対する深い感情移入を生み出すことに成功している。",
+      "reason": "『鳴潮』のストーリー体験の進化を象徴する重要エピソードであり、ユーザーの満足度とキャラクター人気を支える核心であるため。",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241212+00:00"
+      "createdTime": "2026-07-31T19:48:17.890776+00:00"
     },
     {
       "id": "card-10",
-      "title": "【Google Play(7/31)】星5共鳴者「穂穂」が登場の『鳴潮』が4位に急浮上 拡張パック「天空の支配者」を追加の『ポケポケ』は17位に - gamebiz【ゲームビズ】",
-      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiREFVX3lxTFBpcmZvVV9EVjZsVmhSV0FTaEc4TDlTUkpObXZhYV9aWnVtSFZ4WUlaR2hfeEpZQmRXNEhzaHdhSlpYZmV5?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【Google Play(7/31)】星5共鳴者「穂穂」が登場の『鳴潮』が4位に急浮上 拡張パック「天空の支配者」を追加の『ポケポケ』は17位に&nbsp;&nbsp;gamebiz【ゲームビズ】",
-      "reason": "注目トレンドおよびキーワード「登場」による反響検出",
+      "title": "実装当初強すぎると思ったキャラ3選の性能・戦術解説",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=Ig8dbNYQJ0A",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n実装初期から圧倒的な火力と戦闘適正を見せた「強すぎるキャラ3選」を徹底検証。特に忌炎（重撃による圧倒的範囲攻撃と集敵性能）、吟霖（オフフィールドからの協奏・追撃火力サポート）、今汐（竜の力を活かした一発の瞬間超火力）など、各属性の基盤となったアタッカー・サポーターの特徴を網羅。音骸には属性ダメージと攻撃力を最優先したメイン4コスト音骸（飛廉の長や雲の守護者等）を装着し、共鳴効率を調整して必殺技・共鳴回路の回転率を最大化させる戦術が提示されている。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241219+00:00"
+      "createdTime": "2026-07-31T19:48:17.890788+00:00"
     },
     {
       "id": "card-11",
-      "title": "【コスプレ】吸い込まれそうな大きな瞳とスレンダーなスタイルの再現度がすごい！『鳴潮』ツバキの危険な香り漂う表情に見惚れる【写真9枚】 - インサイド",
-      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBaMDhnZHdFcnA1cDYyVDQzTU8tSERiV3RINnNGcDBIOTdOdFozV3VDSzA1Uzd6ajl5SXJfZHRObzlNcHg4YUtRWlFybjZyVUZvR2xwV1UxR3lZNGVXcVY1TXdYcUVPU29zYWc?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【コスプレ】吸い込まれそうな大きな瞳とスレンダーなスタイルの再現度がすごい！『鳴潮』ツバキの危険な香り漂う表情に見惚れる【写真9枚】&nbsp;&nbsp;インサイド",
-      "reason": "注目トレンドおよびキーワード「スタ」による反響検出",
+      "title": "鳴潮キャラのコラボイラスト最高すぎる件の視覚・デザイン検証",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=zy523gYQ8vU",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮の公式コラボイラストやタイアップ企画におけるキャラクター描写の完成度を徹底フォーカス。普段のサイバー・ファンタジー調のゲーム内モデルとは異なる、現代的かつストリートファッション風の着こなしやカフェコラボ衣装など、視覚的アピール要素を詳細に分析。キャラクター個々の性格を反映したポージングや小物のこだわりを紐解き、コミュニティで高い評価を得た理由を提示している。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241226+00:00"
+      "createdTime": "2026-07-31T19:48:17.890801+00:00"
     },
     {
       "id": "card-12",
-      "title": "【競合バズ実績】【鳴潮】穂穂を引くべき人の特徴3選【Wuthering Waves】",
+      "title": "鳴潮とApexのサイバーパンクコラボ比較分析",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=IS70hN6JeG8",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 37,195 再生 / 高評価 733 を記録！）",
-      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
+      "sourceUrl": "https://www.youtube.com/watch?v=gEYgSgu7LN0",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n『鳴潮』が持つSFポストアポカリプス的質感と『Apex Legends』におけるサイバーパンクイベントのデザイン言語を対比分析。モデルのポリゴン密度、ライティング表現、ネオンカラーの配色バランス、キャラクターのモデリング精度やモーションの滑らかさを比較し、鳴潮がいかにスタイリッシュなアクションゲームとして海外FPSファン層にも訴求するデザインを行っているかを考察している。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241234+00:00"
+      "createdTime": "2026-07-31T19:48:17.890810+00:00"
     },
     {
       "id": "card-13",
-      "title": "【競合バズ実績】【鳴潮】あまり使われない幻の攻撃3選【Wuthering Waves】",
+      "title": "穂穂（フェイフェイ）の表情モーションと魅力徹底解析",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=DXf090fEeDE",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 35,014 再生 / 高評価 474 を記録！）",
-      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
+      "sourceUrl": "https://www.youtube.com/watch?v=q9Gb9-kiAUA",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nキャラクター「穂穂」の待機アニメーションやスキル演出内に組み込まれた「ウィンク」のコマ送り解析。鳴潮の開発陣（Kuro Games）が誇る細やかな表情フェイシャルキャプチャ技術と、キャラクター性（愛らしさと素早さ）を両立させた演出技法を解説。視覚的満足度を高める要素としてファンから絶大な支持を得ているポイントを明らかにしている。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241242+00:00"
+      "createdTime": "2026-07-31T19:48:17.890818+00:00"
     },
     {
       "id": "card-14",
-      "title": "【競合バズ実績】【鳴潮】癖がありすぎるキャラクター3選【Wuthering Waves】",
+      "title": "1人だけダンス音痴？鳴潮キャラの待機・イベントモーション比較",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=O3WHgrEeTso",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 18,958 再生 / 高評価 427 を記録！）",
-      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
+      "sourceUrl": "https://www.youtube.com/watch?v=JXCr-15n7pg",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n特定のイベントやモーション検証において、華麗なステップを踏む他キャラの中で唯一リズムに乗れていない・ぎこちない動きを見せるキャラクター（カルカロ等）の動作をピックアップして比較検証。開発が意図的に仕込んだキャラクターのギャップ萌えやパーソナリティの演出について、モーション比較映像とともにコミカルに徹底解説している。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241249+00:00"
+      "createdTime": "2026-07-31T19:48:17.890826+00:00"
     },
     {
       "id": "card-15",
-      "title": "【競合バズ実績】【鳴潮】玄方地界で見れる小ネタ3選【Wuthering Waves】",
+      "title": "プレイヤーを魅了する鳴潮キャラ（妻・娘枠）のシナリオ・演出考察",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=m00eb1r6F-8",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 38,133 再生 / 高評価 612 を記録！）",
-      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
+      "sourceUrl": "https://www.youtube.com/watch?v=48bQRlUVxJ4",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nストーリーや親密度ボイスにおいて、漂泊者に対して深い情愛を示すヒロインキャラクター（今汐、長離、秧秧など）を「妻枠」、守ってあげたくなる可愛らしさを持つキャラクター（アンコ、ヴェリーナなど）を「娘枠」として分類・解説。専用のカメラアングルや繊細なボイス演技がどのようにプレイヤーの没入感を高めているかを具体例を挙げて論証している。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241256+00:00"
+      "createdTime": "2026-07-31T19:48:17.890835+00:00"
     },
     {
       "id": "card-16",
-      "title": "【競合バズ実績】【鳴潮考察】秧秧さんガチで最初の女神かも？【Wuthering Waves】",
+      "title": "鳴潮のオープンワールド背景建築「橋」の細密モデリング検証",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=46b9bRrJbDI",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 31,763 再生 / 高評価 597 を記録！）",
-      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
+      "sourceUrl": "https://www.youtube.com/watch?v=Oh1_Z-kqUG4",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n『鳴潮』のマップ上に配置された特定の橋や建造物にスポットを当て、石材・金属の質感表現、摩耗具合のテクスチャ、欄干の装飾、グラップリングや壁走りに対応したコリジョン設定の精密さを徹底解説。背景グラフィック単体としてもAAA級のクオリティを誇り、オープンワールドとしての探索体験の質を引き上げている技術的こだわりを紐解く。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241263+00:00"
+      "createdTime": "2026-07-31T19:48:17.890844+00:00"
     },
     {
       "id": "card-17",
-      "title": "【競合バズ実績】【鳴潮】Ver3.5潮汐任務の好きなシーン3選【Wuthering Waves】【第四章第一幕/第二幕/幕間】",
+      "title": "街中に潜む個性的NPC「台パンをするNPC」の挙動・イースターエッグ解説",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=eEyYYqXKJf4",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 15,579 再生 / 高評価 430 を記録！）",
-      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
+      "sourceUrl": "https://www.youtube.com/watch?v=79WF2itMGp4",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n街中に存在する特定のNPCが見せるコミカルな動作「台パン（台を激しく叩く行動）」を発見・検証。プレイヤーが近付いたり特定の状況で観察することで見られるユニークなAIの挙動や、開発陣がマップ各地に散りばめた生活感演出・イースターエッグの一端として徹底紹介している。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241271+00:00"
+      "createdTime": "2026-07-31T19:48:17.890853+00:00"
     },
     {
       "id": "card-18",
-      "title": "【競合バズ実績】【鳴潮】Ver3.5潮汐任務について思ったこと3選【Wuthering Waves】【第四章第一幕/第二幕/幕間】",
+      "title": "秧秧（ヤンヤン）の抜刀・攻撃アニメーションにおける物理シミュレーション解析",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=yIRFQo_U1Sc",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 12,170 再生 / 高評価 236 を記録！）",
-      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
+      "sourceUrl": "https://www.youtube.com/watch?v=8yUUfFfak1Y",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n初期配布キャラクター「秧秧（ヤンヤン）」の迅刀攻撃時における剣身の「しなり」や残留軌跡のアニメーション演出をコマ送りで徹底検証。一瞬の切り払いの中に組み込まれた柔軟な物理演算と、視覚的爽快感を生み出すアニメーション補間技術の高さを解説し、初期キャラから一切の手抜きがないクオリティの高さを絶賛している。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241278+00:00"
+      "createdTime": "2026-07-31T19:48:17.890861+00:00"
     },
     {
       "id": "card-19",
-      "title": "【競合バズ実績】【鳴潮】実は潮汐任務に1度も出ていないキャラ3選【Wuthering Waves】",
+      "title": "鳴潮キャラクターのコラボ限定衣装・アナザーデザイン徹底分析",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=OyXP8GM6qi0",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 16,433 再生 / 高評価 299 を記録！）",
-      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
+      "sourceUrl": "https://www.youtube.com/watch?v=CXLokiEnID8",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nゲーム外コラボ（飲食店やアパレル等）で制作されたキャラクターたちの特別衣装イラストを徹底分析。ゲーム内の重厚な戦闘服とは一味違うカジュアルウェアやフォーマルドレス姿の魅力、デザインのルーツ、キャラクターのカラーリングをいかしたコーディネートを細かくレビューし、今後のスキン実装への期待も含めて論証している。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241285+00:00"
+      "createdTime": "2026-07-31T19:48:17.890870+00:00"
     },
     {
       "id": "card-20",
-      "title": "【競合バズ実績】【鳴潮】RAZER×鳴潮コラボ商品!「ダーニャマウス＆キーボード」買いました! 質問、コメント大歓迎!★せっかくなので装飾や使用感などを見ながら遊びます!【WuWa/めいちょう】",
+      "title": "穂穂（フェイフェイ）を確保したプレイヤーが得られる二大特権とフィールド・戦闘における優位性",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=nqvOpVudsWs",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nDLはこちらから:https://wutheringwaves.kurogames.com/jp/main discord:https://discord.gg/rs6mQ3HwYN メンバーシップ:https://www.youtube.com/channel/UCpuVSgupgphwhBNmNYhZsnQ/join ★コメントについてのお願い★ 基本的に自由でOKですが、リークと非公開テストの内容については公言しないようよろしくお願いします！ ★スーパーチャットについて★ 万が一にもスーパーチャットを投げてくださる場合は、大変申し訳ないのですが、金額に見合ったリターンをサブチが提供するのが困難である可能性が高いです。もしそれでもよろしいのであればよろしくお願いしますm(_ _\"m) #鳴潮 #Wuthering Waves #新作ゲーム #オープンワールド #アクションrpg #おすすめ #解説 #スマホゲーム #プロジェクトwave #鳴潮rally twitter: https://twitter.com/Sabchg 公式YouTube：@wutheringwaves3352 公式X（Twitter）：https://twitter.com/WW_JP_Official --------------------------- アンコ、凌陽/リンヨウ、カカロ、ヴェリーナ、鑑心/カンシン、忌炎/キエン、インリン、散華/サンカ、タンキン、 ヤンヤン、シカ、アールト、淵武/エンブ、ビャクシ、モルトフィー、 桃折/タオキ、今汐/コンシ、長離/チョウリ、折枝/オリエ、相理要/ソウリヨウ、ユウゴ、ショアキーパー、ツバキ、灯灯/トウトウ,フィービー、ブラント、ロココ、ザンニー、カルロッタ、カンタレラ、カルテジア、シャコンヌ/ルパ、フローヴァ、千咲(チサ)、仇遠(キュウエン)、ユーノ、ガルブレーナ、オーガスタ、モーニエ、ルシラー、シグリカ、リューク・ヘルセン、リンネ―、エイメス、緋雪(ヒユキ)、ダーニャ、ルーシー,レベッカ、秧秧玄翎（ヤンヤンゲンレイ）、穂穂（スイスイ）、鎖暝（サメイ）、景燃（ジンラン）、清宵（セイショウ）、心（シン）\n\n（📊 バズ実績: sabchbch にて現在 2,947 再生 / 高評価 43 を記録！）",
-      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
+      "sourceUrl": "https://www.youtube.com/watch?v=3wfva72kXT0",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n穂穂（フェイフェイ）を入手したプレイヤーだけが享受できる「2大特権」を解説。第1に、フィールド探索や移動において圧倒的快適性をもたらす高速移動（スイスイ）アクションにより、日課や鉱石・素材集めの効率が劇的に向上する点。第2に、特定の空中コンボや属性シナジーを活かした独自の立ち回り（空中判定を保持したままの連続攻撃）により、敵の地上強力攻撃を無効化しながら一方的に火力を叩き込める戦闘上の圧倒的アドバンテージを結論づけている。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241291+00:00"
+      "createdTime": "2026-07-31T19:48:17.890879+00:00"
     },
     {
       "id": "card-21",
-      "title": "【競合バズ実績】【鳴潮】Yes・Noチャートで分かる!「Ver3.5ガチャ確保」優先度★各キャラの現在の評価からパーティー編成例/モチーフ・凸のおすすめや凸/最適サブ確保優先度まで解説!【WuWa/めいちょう】",
+      "title": "穂穂（フェイフェイ）ガチャを引かないと後悔する3つの理由：性能・移動・将来性",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=B-Ch8lAPbr4",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n追憶集音解説:https://youtu.be/tCw0u0XKufY Discordはこちらから!:https://discord.com/invite/XDuHqb5FGe メンバーシップ:https://www.youtube.com/channel/UCpuVSgupgphwhBNmNYhZsnQ/join Twitter(X):https://x.com/Sabchg 0:00 導入 0:50 各キャラの性能紹介/編成例:秧秧玄翎 2:18 リンネー 3:20 リュークヘルセン 4:00 穂穂 5:21 余談:穂穂は異常編成の最適サポになる? 6:21 エイメス 7:19 現在の評価:評価基準 8:16 秧秧玄翎/リンネー 9:44 リュークヘルセン/エイメス 10:26 忌炎/インリン/今汐 11:25 長離/折枝/相里要 12:29 編成dps比較 13:18 確保優先度Yes/Noチャート:アタッカー 15:40 サブアタッカーが欲しい方 17:04 サポーターが欲しい方 18:02 モチーフ武器確保優先度 19:23 おすすめ凸まとめ 20:19 何凸で最新編成に追いつける? 20:55 凸、モチーフ、最適サブ•サポ優先度まとめ 22:16 終わりに #鳴潮 #wutheringwaves #アクションrpg #新作ゲーム #オープンワールド #アクションrpg #おすすめ #解説 #プロジェクトwave #鳴潮rally #夢州 #秧秧玄翎 #リンネー #リューク #エイメス -------------------------- アンコ、凌陽/リンヨウ、カカロ、ヴェリーナ、鑑心/カンシン、忌炎/キエン、インリン、散華/サンカ、タンキン、 ヤンヤン、シカ、アールト、淵武/エンブ、ビャクシ、モルトフィー、 桃折/タオキ、今汐/コンシ、長離/チョウリ、折枝/オリエ、相理要/ソウリヨウ、ユウゴ、ショアキーパー、ツバキ、灯灯/トウトウ,フィービー、ブラント、ロココ、ザンニー、カルロッタ、カンタレラ、カルテジア、シャコンヌ/ルパ、フローヴァ、千咲(チサ)、仇遠(キュウエン)、ユーノ、ガルブレーナ、オーガスタ、モーニエ、ルシラー、シグリカ、リューク・ヘルセン、リンネ―、エイメス、緋雪(ヒユキ)、ダーニャ、ルーシー,レベッカ、秧秧玄翎（ヤンヤンゲンレイ）、穂穂（スイスイ）、鎖暝（サメイ）、景燃（ジンラン）、清宵（セイショウ）、心（シン） ※コピペパレット\n\n（📊 バズ実績: sabchbch にて現在 21,430 再生 / 高評価 201 を記録！）",
-      "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
+      "sourceUrl": "https://www.youtube.com/watch?v=wuF4GBrLpvU",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n新キャラ「穂穂」を引かないと後悔する理由として①「フィールド移動の常識を変えるスイスイ機能による探索ストレスの根絶」、②「短時間で協奏エネルギーを溜められる優れたサブアタッカー/サポーター性能と協奏スキルの汎用性」、③「今後実装される同属性メインアタッカーとの組み合わせで必須級となる高い将来性」の3点を提示。音骸は共鳴効率や属性バフを重視した構成が推奨され、引き逃すと復刻までゲームの快適度に決定的な差がつくと結論づけている。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
       "date": "2026-07-31",
-      "createdTime": "2026-07-31T19:31:54.241298+00:00"
+      "createdTime": "2026-07-31T19:48:17.890887+00:00"
+    },
+    {
+      "id": "card-22",
+      "title": "鳴潮で忘れ去られがちな放置コンテンツ・非効率要素3選と改善要望の徹底分析",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=bBiYytG2Ub0",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n『鳴潮』内でコンテンツの追加に伴い影が薄くなってしまった「放置されがちな要素3選」（初期エリアの特定のデイリーギミック、報酬効率の低いミニゲーム、過度に周回が必要な旧素材コンテンツ等）を検証。何故プレイされなくなったのか（スタミナ効率の悪さ、報酬の不釣り合い、移動の手間）を論理的に分析し、今後のアップデートによるUI改修や報酬上方修正への課題と期待を整理している。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T19:48:17.890896+00:00"
+    },
+    {
+      "id": "card-23",
+      "title": "ver3.5時点における鳴潮「正妻ランキング」最新版考察とキャラクター人気構造",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=EvPBhAh6lBo",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n最新アップデートを踏まえた漂泊者（主人公）との「正妻度（ストーリー上のメインヒロイン性・親密さ・絆イベントの重厚さ）」ランキングを徹底発表。新ストーリーでの怒濤の活躍を見せる最新ヒロインや、常に根強い支持を集める今汐・長離・ツバキ等の位置付けを詳細解説。各キャラのストーリー中での見せ場やセリフ、漂泊者に対する感情の深さを比較し、誰が最も正妻にふさわしいかを熱弁・結論づけている。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T19:48:17.890905+00:00"
+    },
+    {
+      "id": "card-24",
+      "title": "秧秧（ヤンヤン）と穂穂（フェイフェイ）の掛け合いボイス・掛け合い演出徹底検証",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=9rFPJaNdHHo",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n特定のキャラクター同士をPTに編入した際やキャラクター交替（クイック切替）時に発生する「秧秧」と「穂穂」の掛け合いボイス・対話演出にフォーカス。二人のキャラクター性（生真面目で包容力のある秧秧と、元気で素早い穂穂）が織りなす軽妙なやり取りや、ボイスの細かいディティールをピックアップ。戦闘中の交代がより楽しくなる要素として、キャラゲーとしての完成度の高さを論証している。",
+      "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出",
+      "date": "2026-07-31",
+      "createdTime": "2026-07-31T19:48:17.890913+00:00"
     }
   ]
 }
