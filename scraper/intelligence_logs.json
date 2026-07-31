@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-08-01 03:01:49",
+    "status": "Success",
+    "total_harvested": 169,
+    "final_selected": 27,
+    "breakdown": {
+      "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)": 1,
+      "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)": 8,
+      "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ": 3,
+      "YouTube競合 (別枠全件枠)": 15
+    }
+  },
+  {
     "timestamp": "2026-08-01 02:46:28",
     "status": "Success",
     "total_harvested": 169,
