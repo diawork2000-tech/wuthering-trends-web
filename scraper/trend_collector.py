@@ -553,95 +553,102 @@ def get_flat_video_list(data_dict):
 
 def main():
     print("--- Wuthering Waves Trend Collector (Advanced) ---")
+    logger.log("🚀 YouTubeトレンド収集ツールの自動実行プロセス始動")
     
-    # 起動時のDiscord通知
-    send_to_discord("🚀 **[情報収集開始]** 鳴潮トレンド収集ツールの自動実行がスタートしました！\n数分後に完了結果をお知らせします。")
-    logger.log("🚀 Discordへ開始通知を送信完了")
-    
-    config = load_config()
-    logger.log(f"📋 検索設定ロード: キーワード {len(config.get('youtube', {}).get('search_queries', []))}個 / 1ワード最大 {config.get('youtube', {}).get('max_results_per_query', 50)} 件")
-    
-    print("\n[1] Fetching LATEST YouTube trends (85% Shorts, 15% Normal)...")
-    logger.log("🆕 [ステップ1] 「最新トレンド (Shorts & 長尺)」の検索・回収処理をスタート...")
-    latest_data = get_youtube_trends(config, mode="latest")
-    
-    print("\n[2] Fetching POPULAR YouTube trends from past 7 days (85% Shorts, 15% Normal)...")
-    logger.log("🔥 [ステップ2] 「週間人気ランキング (直近7日間)」の回収処理をスタート...")
-    popular_data = get_youtube_trends(config, mode="popular_weekly")
-    
-    collected_data = {
-        "youtube": {
-            "latest": latest_data,
-            "popular_weekly": popular_data
+    try:
+        config = load_config()
+        logger.log(f"📋 検索設定ロード: キーワード {len(config.get('youtube', {}).get('search_queries', []))}個 / 1ワード最大 {config.get('youtube', {}).get('max_results_per_query', 50)} 件")
+        
+        print("\n[1] Fetching LATEST YouTube trends (85% Shorts, 15% Normal)...")
+        logger.log("🆕 [ステップ1] 「最新トレンド (Shorts & 長尺)」の検索・回収処理をスタート...")
+        latest_data = get_youtube_trends(config, mode="latest")
+        
+        print("\n[2] Fetching POPULAR YouTube trends from past 7 days (85% Shorts, 15% Normal)...")
+        logger.log("🔥 [ステップ2] 「週間人気ランキング (直近7日間)」の回収処理をスタート...")
+        popular_data = get_youtube_trends(config, mode="popular_weekly")
+        
+        collected_data = {
+            "youtube": {
+                "latest": latest_data,
+                "popular_weekly": popular_data
+            }
         }
-    }
-    
-    output_file = "trends_output.json"
-    with open(output_file, "w", encoding="utf-8") as f:
-        json.dump(collected_data, f, ensure_ascii=False, indent=2)
         
-    md_output_file = "video_list.md"
-    with open(md_output_file, "w", encoding="utf-8") as f:
-        f.write("# Wuthering Waves Collected Videos\n\n")
-        
-        def write_section(title, data_dict):
-            f.write(f"## {title}\n\n")
-            for query, videos in data_dict.items():
-                if isinstance(videos, list) and videos:
-                    f.write(f"### Keyword: {query}\n\n")
-                    f.write("| Thumbnail | Title & Link | Channel |\n")
-                    f.write("| :---: | :--- | :--- |\n")
-                    for video in videos:
-                        thumb_md = f"![Thumbnail]({video['thumbnail']})" if video['thumbnail'] else "No Image"
-                        display_title = video['title']
-                        if video['title'] != video['original_title']:
-                            display_title += f"<br>*(Orig: {video['original_title']})*"
-                        title_md = f"[{display_title}]({video['url']})"
-                        f.write(f"| {thumb_md} | {title_md} | {video['channel']} |\n")
-                    f.write("\n")
+        output_file = "trends_output.json"
+        with open(output_file, "w", encoding="utf-8") as f:
+            json.dump(collected_data, f, ensure_ascii=False, indent=2)
+            
+        md_output_file = "video_list.md"
+        with open(md_output_file, "w", encoding="utf-8") as f:
+            f.write("# Wuthering Waves Collected Videos\n\n")
+            
+            def write_section(title, data_dict):
+                f.write(f"## {title}\n\n")
+                for query, videos in data_dict.items():
+                    if isinstance(videos, list) and videos:
+                        f.write(f"### Keyword: {query}\n\n")
+                        f.write("| Thumbnail | Title & Link | Channel |\n")
+                        f.write("| :---: | :--- | :--- |\n")
+                        for video in videos:
+                            thumb_md = f"![Thumbnail]({video['thumbnail']})" if video['thumbnail'] else "No Image"
+                            display_title = video['title']
+                            if video['title'] != video['original_title']:
+                                display_title += f"<br>*(Orig: {video['original_title']})*"
+                            title_md = f"[{display_title}]({video['url']})"
+                            f.write(f"| {thumb_md} | {title_md} | {video['channel']} |\n")
+                        f.write("\n")
+                        
+            write_section("🔥 Popular Trends in Past 7 Days", popular_data)
+            write_section("🆕 Latest Trends", latest_data)
                     
-        write_section("🔥 Popular Trends in Past 7 Days", popular_data)
-        write_section("🆕 Latest Trends", latest_data)
-                
-    print(f"\nDone. Results have been saved to {output_file} and {md_output_file}")
-    
-    print("\n[3] Uploading to Notion Database...")
-    logger.log("📤 [ステップ3] Notionデータベースへの差分・新規アップロード検証を開始...")
-    target_channel_videos = []
-    if "★Target Channels" in latest_data:
-        target_channel_videos = latest_data.pop("★Target Channels")
+        print(f"\nDone. Results have been saved to {output_file} and {md_output_file}")
+        
+        print("\n[3] Uploading to Notion Database...")
+        logger.log("📤 [ステップ3] Notionデータベースへの差分・新規アップロード検証を開始...")
+        target_channel_videos = []
+        if "★Target Channels" in latest_data:
+            target_channel_videos = latest_data.pop("★Target Channels")
 
-    latest_flat = get_flat_video_list(latest_data)
-    popular_flat = get_flat_video_list(popular_data)
-    
-    notion_api_key = os.getenv("NOTION_API_KEY")
-    database_id = os.getenv("NOTION_DATABASE_ID")
-    if notion_api_key and notion_api_key != "your_notion_api_key_here" and database_id and database_id != "your_notion_database_id_here":
-        headers = {
-            "Authorization": f"Bearer {notion_api_key}",
-            "Content-Type": "application/json",
-            "Notion-Version": "2022-06-28"
-        }
-        existing_urls = get_existing_notion_urls(headers, database_id)
+        latest_flat = get_flat_video_list(latest_data)
+        popular_flat = get_flat_video_list(popular_data)
         
-        send_to_notion([v for v in popular_flat if v.get("video_type") == "Shorts"], "週間人気 (Shorts)", existing_urls)
-        send_to_notion([v for v in popular_flat if v.get("video_type") == "通常"], "週間人気 (通常)", existing_urls)
-        send_to_notion([v for v in latest_flat if v.get("video_type") == "Shorts"], "最新 (Shorts)", existing_urls)
-        send_to_notion([v for v in latest_flat if v.get("video_type") == "通常"], "最新 (通常)", existing_urls)
+        notion_api_key = os.getenv("NOTION_API_KEY")
+        database_id = os.getenv("NOTION_DATABASE_ID")
+        if notion_api_key and notion_api_key != "your_notion_api_key_here" and database_id and database_id != "your_notion_database_id_here":
+            headers = {
+                "Authorization": f"Bearer {notion_api_key}",
+                "Content-Type": "application/json",
+                "Notion-Version": "2022-06-28"
+            }
+            existing_urls = get_existing_notion_urls(headers, database_id)
+            
+            send_to_notion([v for v in popular_flat if v.get("video_type") == "Shorts"], "週間人気 (Shorts)", existing_urls)
+            send_to_notion([v for v in popular_flat if v.get("video_type") == "通常"], "週間人気 (通常)", existing_urls)
+            send_to_notion([v for v in latest_flat if v.get("video_type") == "Shorts"], "最新 (Shorts)", existing_urls)
+            send_to_notion([v for v in latest_flat if v.get("video_type") == "通常"], "最新 (通常)", existing_urls)
+            
+            if target_channel_videos:
+                target_flat = get_flat_video_list({"dummy": target_channel_videos})
+                send_to_notion(target_flat, "登録チャンネル", existing_urls)
+        else:
+            print("Notion API is not configured. Skipping upload.")
+            logger.log("ℹ️ Notion設定不備のためアップロードスキップ")
         
-        if target_channel_videos:
-            target_flat = get_flat_video_list({"dummy": target_channel_videos})
-            send_to_notion(target_flat, "登録チャンネル", existing_urls)
-    else:
-        print("Notion API is not configured. Skipping upload.")
-        logger.log("ℹ️ Notion設定不備のためアップロードスキップ")
-    
-    completion_msg = "**✅ [鳴潮トレンド収集完了]**\n本日の最新動画一覧と人気ランキングの収集が完了しました！添付のMarkdownファイルをご確認ください。\n※Notionアプリのギャラリービューからサムネイル付きで綺麗にご覧いただけます！"
-    send_to_discord(completion_msg, md_output_file)
-    
-    logger.log(f"✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: {logger.log_data['new_items_count']} 件)")
-    logger.set_summary(f"正常完了 (新着Notion追加: {logger.log_data['new_items_count']} 件)")
-    logger.save_to_json()
+        logger.log(f"✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: {logger.log_data['new_items_count']} 件)")
+        logger.set_summary(f"正常完了 (新着Notion追加: {logger.log_data['new_items_count']} 件)")
+        logger.save_to_json()
+        
+    except Exception as e:
+        err_detail = str(e)
+        print(f"\n[CRITICAL ERROR] {err_detail}")
+        logger.log(f"💥 致命的エラー発生により中断: {err_detail}")
+        logger.set_summary("異常終了 (エラー検出)", is_error=True)
+        logger.save_to_json()
+        
+        # ⚠️ エラーが出た場合のみ、Discordへ直接SOS警告アラートを送信！！
+        alert_msg = f"⚠️ **【YouTubeトレンド収集 エラー検知】** ⚠️\n自動巡回プロセス中に致命的なエラーまたは例外を検出しました。\n\n**詳細:** `{err_detail}`\nスタジオ活動実績ログまたは GitHub Actions コンソールをご確認ください。"
+        send_to_discord(alert_msg)
+        raise e
 
 if __name__ == "__main__":
     main()
