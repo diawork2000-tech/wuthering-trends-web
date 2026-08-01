@@ -182,11 +182,11 @@ export default function IntelligenceStudioPage() {
       <header className={styles.header}>
         <div className={styles.leftNav}>
           <Link href="/" className={styles.backBtn}>
-            ◀ メインギャラリーへ
+            ◀ 🎥 YouTubeトレンド収集 へ戻る
           </Link>
           <div className={styles.titleArea}>
-            <h1>📚 鳴潮トレンド・ネタ自動発掘スタジオ</h1>
-            <p>海外Reddit・YouTube競合動向・最強攻略をダブりゼロで継続発掘</p>
+            <h1>🌐 マルチメディア収集 スタジオ</h1>
+            <p>YouTube・各種SNS・海外Reddit・最強攻略サイトの注目話題を全網羅発掘</p>
           </div>
         </div>
         <div className={styles.headerActions}>

@@ -286,7 +286,7 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.header}>
         <div className={styles.topBar}>
-          <h1 className={styles.title}>Wuthering Trends</h1>
+          <h1 className={styles.title}>🎥 YouTubeトレンド収集 ダッシュボード</h1>
           <div className={styles.topControls}>
             <div className={styles.zoomControl}>
               <span title="動画サイズを縮小">➖</span>
@@ -304,7 +304,7 @@ export default function Home() {
             <button className={styles.settingsIconBtn} onClick={openSettings} title="システム設定">⚙️</button>
           </div>
         </div>
-        <p className={styles.subtitle}>Daily updated gallery of popular and latest videos.</p>
+        <p className={styles.subtitle}>『鳴潮』YouTube専門トレンド情報 ＆ 競合チャンネル実績データの全自動追跡センター</p>
         <div style={{ display: 'flex', gap: '0.8rem', justifyContent: 'center', marginTop: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
           <button 
             className={styles.syncButton} 
@@ -318,7 +318,7 @@ export default function Home() {
               className={styles.syncButton} 
               style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: '#fff', fontWeight: '700', boxShadow: '0 0 18px rgba(16, 185, 129, 0.45)', border: '1px solid rgba(255,255,255,0.2)' }}
             >
-              📚 動画ネタ＆AI台本 ライブラリへ進む
+              🌐 マルチメディア収集 スタジオへ進む
             </button>
           </Link>
           <button 
@@ -326,7 +326,7 @@ export default function Home() {
             style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', color: '#000', fontWeight: '700', boxShadow: '0 0 15px rgba(245, 158, 11, 0.4)' }}
             onClick={() => setShowIntelligenceModal(true)} 
           >
-            🌐 AI調査ソース ＆ 競合チャネル管理
+            ⚙️ マルチメディア収集ソース ＆ 競合設定
           </button>
         </div>
       </div>
