@@ -39,3 +39,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# python
+__pycache__/
+*.pyc
+
+# ローカル作業用の一時ファイル・デバッグ出力（誤コミット防止）
+/action_log.txt
+/logs.zip
+/logs/
+/test.js
+/scraper/test_trans.py
+/scraper/trends_output.json
+/scraper/video_list.md

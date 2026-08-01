@@ -11,6 +11,9 @@ export default function IntelligenceConfigModal({ isOpen, onClose }) {
   
   const [targetChannels, setTargetChannels] = useState([]);
   const [targetWebSources, setTargetWebSources] = useState([]);
+  // settings は画面に出さないが、保存時に丸ごと書き戻すので取得した値を保持しておく。
+  // ここを固定値で組み直すと auto_source_expansion などが保存のたびに消えてしまう。
+  const [settings, setSettings] = useState(null);
 
   // 新規登録用の入力State
   const [newChName, setNewChName] = useState('');
@@ -34,6 +37,7 @@ export default function IntelligenceConfigModal({ isOpen, onClose }) {
         if (data.config) {
           setTargetChannels(data.config.target_channels || []);
           setTargetWebSources(data.config.target_web_sources || []);
+          setSettings(data.config.settings || null);
         }
       } else {
         alert('設定の取得に失敗しました。時間をおいて再試行してください。');
@@ -52,10 +56,11 @@ export default function IntelligenceConfigModal({ isOpen, onClose }) {
         config: {
           target_channels: targetChannels,
           target_web_sources: targetWebSources,
-          settings: {
-            target_items_per_run: 15,
+          settings: settings || {
+            target_items_per_run: 12,
             min_score_threshold: 60,
-            enable_gemini_summary: true
+            enable_gemini_summary: true,
+            auto_source_expansion: true
           }
         },
         sha: sha

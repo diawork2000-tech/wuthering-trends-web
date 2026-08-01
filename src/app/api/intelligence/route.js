@@ -34,8 +34,10 @@ function getFallbackData() {
 
 export async function GET() {
   const NOTION_API_KEY = process.env.NOTION_API_KEY;
-  // ★最重要：Vercelサーバー環境上の変数設定のズレや古さを防衛し、確実に「ご本人が見つめる真のNotion DB」へ直結ロックインする！
-  const NOTION_INTELLIGENCE_DB_ID = "3ad82a7701b08067bf5de4694df49d9b";
+  // Vercel 側の環境変数が未設定・古いままでも動くよう、実運用中の DB ID をフォールバックとして残す。
+  // DB を作り直したときは環境変数を入れ替えるだけで済み、再デプロイは不要。
+  const NOTION_INTELLIGENCE_DB_ID =
+    process.env.NOTION_INTELLIGENCE_DB_ID || '3ad82a7701b08067bf5de4694df49d9b';
 
   if (!NOTION_API_KEY) {
     console.log('[Notice] NOTION_API_KEY not found in server env. Using local intelligent cache seamlessly.');

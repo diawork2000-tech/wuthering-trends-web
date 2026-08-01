@@ -32,12 +32,28 @@ def is_japanese(text):
     return bool(re.search(r'[ぁ-んァ-ヶ]', text))
 
 def should_exclude(title, exclude_words):
-    """タイトルが除外ワード（完全一致）を含んでいるか判定"""
+    """タイトルが除外ワードを含んでいるか判定
+
+    英数字の語だけ単語境界 \\b を付け、日本語の語は素の部分一致で見る。
+    日本語は文字同士が地続き（どちらも \\w 扱い）で境界が生まれないため、
+    以前のように一律 \\b を付けると「鳴潮切り抜き集めてみた」「ホロライブの配信」等が
+    素通りし、【】や空白で囲まれた時だけ偶然効く状態になっていた。
+    """
     if not exclude_words:
         return False
+
     for ew in exclude_words:
-        # 単語境界 \b を用いて完全一致検索（大文字小文字区別なし）
-        if re.search(r'\b' + re.escape(ew) + r'\b', title, re.IGNORECASE):
+        if not ew:
+            continue
+
+        pattern = re.escape(ew)
+        # 半角英数字で始まる/終わる語のみ、部分一致の暴発を防ぐため境界を付ける
+        if re.match(r'[A-Za-z0-9_]', ew[0]):
+            pattern = r'\b' + pattern
+        if re.match(r'[A-Za-z0-9_]', ew[-1]):
+            pattern = pattern + r'\b'
+
+        if re.search(pattern, title, re.IGNORECASE):
             return True
     return False
 
