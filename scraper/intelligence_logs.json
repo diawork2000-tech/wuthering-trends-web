@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-08-01 16:03:18",
+    "status": "Success",
+    "total_harvested": 154,
+    "final_selected": 23,
+    "breakdown": {
+      "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ": 2,
+      "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上": 1,
+      "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 5,
+      "YouTube競合 (別枠全件枠)": 15
+    }
+  },
+  {
     "timestamp": "2026-08-01 15:50:16",
     "status": "Success",
     "total_harvested": 139,
@@ -595,18 +607,6 @@
       "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)": 3,
       "YouTubeショート 伸び悩み＆神プレイ解説フォーラム": 1,
       "YouTube競合 (別枠全件枠)": 18
-    }
-  },
-  {
-    "timestamp": "2026-08-01 03:32:16",
-    "status": "Success",
-    "total_harvested": 169,
-    "final_selected": 29,
-    "breakdown": {
-      "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)": 5,
-      "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上": 3,
-      "YouTubeショート 伸び悩み＆神プレイ解説フォーラム": 4,
-      "YouTube競合 (別枠全件枠)": 17
     }
   }
 ]
