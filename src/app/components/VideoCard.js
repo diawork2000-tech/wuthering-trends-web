@@ -6,8 +6,9 @@ import styles from './VideoCard.module.css';
 export default function VideoCard({ video }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const cardRef = useRef(null);
+  const timerRef = useRef(null);
 
-  // Intersection Observer for mobile scroll auto-play
+  // Intersection Observer for mobile scroll auto-play with intelligent hold delay
   useEffect(() => {
     // マウスでホバー可能なPC環境ではスクロール再生（Observer）を無効化
     const isHoverable = window.matchMedia('(hover: hover)').matches;
@@ -16,17 +17,26 @@ export default function VideoCard({ video }) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // 画面の中央付近（intersection ratioが高い）で再生開始
+          // 画面中央領域にしっかり定着した場合のみ、1.3秒じっくり待ってからスマートに自動再生開始
           if (entry.isIntersecting && entry.intersectionRatio >= 0.7) {
-            setIsPlaying(true);
+            if (!timerRef.current) {
+              timerRef.current = setTimeout(() => {
+                setIsPlaying(true);
+              }, 1300); // 1.3秒間 画面中央に留まり続けたときだけ発火！
+            }
           } else {
+            // スクロールによる素通りや画面外への離脱時は、即座にタイマーをキャンセルし再生させない
+            if (timerRef.current) {
+              clearTimeout(timerRef.current);
+              timerRef.current = null;
+            }
             setIsPlaying(false);
           }
         });
       },
       {
         root: null,
-        rootMargin: '-10% 0px -10% 0px', // 画面の上下10%を除外した領域
+        rootMargin: '-22% 0px -22% 0px', // スマホ画面の上下22%ずつを除外した確信の「中央フォーカスゾーン」
         threshold: [0, 0.7], // 70%見えたらトリガー
       }
     );
@@ -39,12 +49,24 @@ export default function VideoCard({ video }) {
       if (cardRef.current) {
         observer.unobserve(cardRef.current);
       }
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
     };
   }, []);
 
   // Hover handlers for PC
-  const handleMouseEnter = () => setIsPlaying(true);
-  const handleMouseLeave = () => setIsPlaying(false);
+  const handleMouseEnter = () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => setIsPlaying(true), 200);
+  };
+  const handleMouseLeave = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    setIsPlaying(false);
+  };
 
   return (
     <div 
