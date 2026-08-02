@@ -20,7 +20,8 @@ except ImportError:
     feedparser = None
 
 try:
-    import google.generativeai as genai
+    # google-generativeai は開発終了(EOL)のため後継 SDK の google-genai へ移行済み。
+    from google import genai
 except ImportError:
     genai = None
 
@@ -54,15 +55,19 @@ class IntelligenceEngine:
         self.collected_raw_items = []
         self.competitor_raw_items = []  # ★最重要：競合チャンネル動向専用の独立収容ラック（別枠カウント）！
         self.trending_keywords = set()
-        self.gemini_model = None
+        # google-genai では「モデル」はクライアント越しに名前で呼び出す方式のため、
+        # 以前の GenerativeModel インスタンスの代わりに Client + モデル名の組で保持する。
+        self.gemini_client = None
+        self.gemini_model_name = None
         self.notion_title_prop_name = "名前"
-        
+
         if GEMINI_API_KEY and genai:
             try:
-                genai.configure(api_key=GEMINI_API_KEY)
+                self.gemini_client = genai.Client(api_key=GEMINI_API_KEY)
                 self._init_best_gemini_model()
             except Exception as e:
                 print(f"  [Warning] Gemini configuration failed: {e}")
+                self.gemini_client = None
         else:
             print("  [Info] Gemini API key not set. Running in high-speed algorithmic fallback mode.")
 
@@ -79,21 +84,24 @@ class IntelligenceEngine:
             'gemini-pro-latest'
         ]
         try:
-            available = [m.name.replace("models/", "") for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
+            available = [
+                m.name.replace("models/", "") for m in self.gemini_client.models.list()
+                if "generateContent" in (m.supported_actions or [])
+            ]
             print(f"  [GenAI Available Models]: {available[:6]}...")
             for target in candidate_models:
                 if target in available or any(target in a for a in available):
                     matched = next((a for a in available if target in a), target)
-                    self.gemini_model = genai.GenerativeModel(matched)
+                    self.gemini_model_name = matched
                     print(f"  [Info] Gemini AI Auto-Locked on Model: {matched}!")
                     return
             if available:
-                self.gemini_model = genai.GenerativeModel(available[0])
+                self.gemini_model_name = available[0]
                 print(f"  [Info] Gemini AI Connected to default available Model: {available[0]}!")
                 return
         except Exception as e:
             print(f"  [Model Search Error] {e}")
-            self.gemini_model = None
+            self.gemini_model_name = None
 
     def ensure_notion_db_schema(self):
         print("\n=== 🛠️ [Setup] Auto-Configuring Notion Database Schema ===")
@@ -382,7 +390,7 @@ class IntelligenceEngine:
         print(f"  [Competitor Track Unlimited] Successfully locked {len(competitor_cards)} non-duplicate competitor hit videos for full immersion!")
 
         # 競合動画に対しても再生数表記だけで済ませないよう、AIで動画内容の「完全な網羅的詳細」を強力解剖！！
-        if self.gemini_model and len(competitor_cards) > 0:
+        if self.gemini_model_name and len(competitor_cards) > 0:
             print(f"  [Gemini Competitor Deep-Dive] Sending {len(competitor_cards)} competitor videos to Gemini for full technical breakdown...")
             comp_prompt = (
                 "あなたはゲーム『鳴潮』情報と競合YouTubeチャンネル分析の最高責任者です。\n"
@@ -403,7 +411,9 @@ class IntelligenceEngine:
                 "動画素材リスト:\n" + json.dumps(competitor_cards[:25], ensure_ascii=False)
             )
             try:
-                c_res = self.gemini_model.generate_content(comp_prompt)
+                c_res = self.gemini_client.models.generate_content(
+                    model=self.gemini_model_name, contents=comp_prompt
+                )
                 c_txt = re.sub(r'^```(json)?|```$', '', c_res.text.strip(), flags=re.MULTILINE).strip()
                 c_list = json.loads(c_txt)
                 if len(c_list) > 0:
@@ -412,7 +422,7 @@ class IntelligenceEngine:
             except Exception as e:
                 print(f"  [Warning] Competitor deep-dive fallback to native description text ({e}).")
 
-        if self.gemini_model and len(sorted_items) > 0:
+        if self.gemini_model_name and len(sorted_items) > 0:
             print(f"  [Gemini Batch] Sending batch request to Gemini AI with {len(sorted_items)} items to compile comprehensive full breakdowns...")
             prompt = (
                 "あなたはゲーム『鳴潮』情報のアナリストおよびコンテンツ最高責任者です。\n"
@@ -440,7 +450,9 @@ class IntelligenceEngine:
                 "素材リスト:\n" + json.dumps(sorted_items[:25], ensure_ascii=False)
             )
             try:
-                ai_res = self.gemini_model.generate_content(prompt)
+                ai_res = self.gemini_client.models.generate_content(
+                    model=self.gemini_model_name, contents=prompt
+                )
                 raw_txt = ai_res.text.strip()
                 raw_txt = re.sub(r'^```(json)?|```$', '', raw_txt, flags=re.MULTILINE).strip()
                 ideas_list = json.loads(raw_txt)
