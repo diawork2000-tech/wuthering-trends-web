@@ -110,6 +110,23 @@ export default function IntelligenceStudioPage() {
     }
   };
 
+  // Gemini が実際に成功したか、無料枠制限等で代替アルゴリズムに落ちていたかを
+  // 稼働ログから一目で確認できるようにする（「本当に毎回効いているのか」を検証するため）
+  const renderGeminiStatus = (label, status) => {
+    const map = {
+      success: { text: '成功', cls: styles.geminiOk },
+      failed: { text: '代替アルゴリズム', cls: styles.geminiFail },
+      no_items: { text: '対象0件', cls: styles.geminiNeutral },
+      not_configured: { text: '未設定', cls: styles.geminiNeutral },
+    };
+    const info = map[status] || { text: status || '不明', cls: styles.geminiNeutral };
+    return (
+      <div className={`${styles.geminiStatusRow} ${info.cls}`}>
+        {label}: {info.text}
+      </div>
+    );
+  };
+
   const daysUntil = (dateStr) => {
     if (!dateStr) return null;
     const target = new Date(`${dateStr}T00:00:00+09:00`);
@@ -344,6 +361,7 @@ export default function IntelligenceStudioPage() {
                   <tr>
                     <th>実行完了タイムスタンプ (JST)</th>
                     <th>ステータス</th>
+                    <th>Gemini AI 状況</th>
                     <th>収穫総数 ➔ 採用件数</th>
                     <th>プラットフォーム別・獲得実績内訳 (多様性バリュー)</th>
                   </tr>
@@ -354,6 +372,10 @@ export default function IntelligenceStudioPage() {
                       <td className={styles.logTimeCell}>🕒 {log.timestamp}</td>
                       <td>
                         <span className={styles.logStatusSuccess}>● {log.status || 'Success'}</span>
+                      </td>
+                      <td>
+                        {renderGeminiStatus('トピック', log.gemini_topic_status)}
+                        {renderGeminiStatus('競合', log.gemini_competitor_status)}
                       </td>
                       <td className={styles.logCountCell}>
                         計 <strong>{log.total_harvested || '-'}</strong> 件探索 ➔ <span className={styles.selectedHighlight}>{log.final_selected || '12'}件厳選！</span>

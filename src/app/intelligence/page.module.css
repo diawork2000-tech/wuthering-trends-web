@@ -340,6 +340,23 @@
   color: #94a3b8;
 }
 
+.geminiStatusRow {
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.geminiOk {
+  color: #34d399;
+}
+
+.geminiFail {
+  color: #f87171;
+}
+
+.geminiNeutral {
+  color: #64748b;
+}
+
 .selectedHighlight {
   color: #facc15;
   font-weight: 800;

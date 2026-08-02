@@ -113,8 +113,8 @@
   ],
   "schedule_sources": [
     {
-      "name": "Game8 鳴潮バナースケジュール (現行＆次バージョン予定)",
-      "url": "https://game8.co/games/Wuthering-Waves/archives/453303",
+      "name": "ゲームエイト 鳴潮ガチャスケジュールとおすすめ (現行＆次バージョン予定)",
+      "url": "https://game8.jp/meicho/610590",
       "enabled": true
     },
     {
@@ -123,8 +123,8 @@
       "enabled": true
     },
     {
-      "name": "Game8 鳴潮イベント一覧 (現在開催中＆開催予定・同時多発イベント)",
-      "url": "https://game8.co/games/Wuthering-Waves/archives/453473",
+      "name": "ゲームエイト 鳴潮イベント最新情報まとめ (現在開催中＆開催予定・同時多発イベント)",
+      "url": "https://game8.jp/meicho/611684",
       "enabled": true
     }
   ],

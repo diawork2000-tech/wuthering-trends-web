@@ -64,6 +64,10 @@ class IntelligenceEngine:
         # 以前の GenerativeModel インスタンスの代わりに Client + モデル名の組で保持する。
         self.gemini_client = None
         self.gemini_model_name = None
+        # Gemini が実際に成功したか、無料枠制限等で代替アルゴリズムに落ちたかを
+        # 毎回のログに残すためのステータス。値: not_configured / no_items / success / failed
+        self.gemini_topic_status = "not_configured"
+        self.gemini_competitor_status = "not_configured"
         self.notion_title_prop_name = "名前"
 
         if GEMINI_API_KEY and genai:
@@ -356,7 +360,9 @@ class IntelligenceEngine:
             "であれば『現在開催中』として必ず含める。\n"
             "5. category は \"character\"(キャラ実装/バナー) / \"weapon\"(武器バナー) / \"version\"(バージョン更新) / "
             "\"event\"(期間限定イベント) / \"story\"(ストーリー章) のいずれかで分類する。\n"
-            "6. キャラクター名・イベント名は日本語表記があればそれを優先し、なければ原文表記のまま。\n"
+            "6. character・event は必ず日本語で出力すること。情報源に英語表記しかない場合でも、"
+            "公式の日本語ローカライズ名（判明していれば）またはカタカナ表記に翻訳し、英語の原文を"
+            "そのまま出力してはならない（開発者・閲覧者は日本語話者のため）。\n"
             "7. 同一の出来事が複数ソースに重複して出てきた場合は1件にまとめる。\n"
             "8. イベント一覧ページには同時に10件以上のイベントが載っていることがある。代表的なものだけを"
             "抜粋せず、日付が読み取れるものは可能な限り全件拾うこと。件数上限は設けない。\n\n"
@@ -494,8 +500,14 @@ class IntelligenceEngine:
                 
         print(f"  [Competitor Track Unlimited] Successfully locked {len(competitor_cards)} non-duplicate competitor hit videos for full immersion!")
 
+        if not self.gemini_model_name:
+            self.gemini_competitor_status = "not_configured"
+        elif len(competitor_cards) == 0:
+            self.gemini_competitor_status = "no_items"
+
         # 競合動画に対しても再生数表記だけで済ませないよう、AIで動画内容の「完全な網羅的詳細」を強力解剖！！
         if self.gemini_model_name and len(competitor_cards) > 0:
+            self.gemini_competitor_status = "failed"  # 例外/0件時はこのまま failed として記録される
             print(f"  [Gemini Competitor Deep-Dive] Sending {len(competitor_cards)} competitor videos to Gemini for full technical breakdown...")
             comp_prompt = (
                 "あなたはゲーム『鳴潮』情報と競合YouTubeチャンネル分析の最高責任者です。\n"
@@ -523,11 +535,18 @@ class IntelligenceEngine:
                 c_list = json.loads(c_txt)
                 if len(c_list) > 0:
                     competitor_cards = c_list
+                    self.gemini_competitor_status = "success"
                     print(f"  [Gemini Success] Upgraded {len(competitor_cards)} competitor cards with deep content breakdowns!")
             except Exception as e:
                 print(f"  [Warning] Competitor deep-dive fallback to native description text ({e}).")
 
+        if not self.gemini_model_name:
+            self.gemini_topic_status = "not_configured"
+        elif len(sorted_items) == 0:
+            self.gemini_topic_status = "no_items"
+
         if self.gemini_model_name and len(sorted_items) > 0:
+            self.gemini_topic_status = "failed"  # 例外/0件時はこのまま failed として記録される
             print(f"  [Gemini Batch] Sending batch request to Gemini AI with {len(sorted_items)} items to compile comprehensive full breakdowns...")
             prompt = (
                 "あなたはゲーム『鳴潮』情報のアナリストおよびコンテンツ最高責任者です。\n"
@@ -568,6 +587,7 @@ class IntelligenceEngine:
                     to = str(idea.get("script_outline", ""))
                     if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', tt)) >= 2 and "についてご存じですか" not in to:
                         clean_ideas.append(idea)
+                self.gemini_topic_status = "success"
                 print(f"  [Gemini Success] Successfully generated & filtered {len(clean_ideas)} high-purity comprehensive breakdown cards!")
                 return clean_ideas[:target_count] + competitor_cards
             except Exception as e:
@@ -776,7 +796,9 @@ class IntelligenceEngine:
                     "status": "Success",
                     "total_harvested": len(self.collected_raw_items) + len(self.competitor_raw_items),
                     "final_selected": len(ideas or []),
-                    "breakdown": source_breakdown
+                    "breakdown": source_breakdown,
+                    "gemini_topic_status": self.gemini_topic_status,
+                    "gemini_competitor_status": self.gemini_competitor_status
                 }
                 logs_data.insert(0, new_log_entry)
                 logs_data = logs_data[:50]  # 最新50件の実績ログをスッキリ整理保持

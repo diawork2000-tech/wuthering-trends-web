@@ -1,26 +1,26 @@
 {
-  "updated_at": "2026-08-02T13:00:00.000000+00:00",
+  "updated_at": "2026-08-02T14:00:00.000000+00:00",
   "events": [
     {
-      "character": "Qingxiao",
+      "character": "清宵",
       "event": "バナー開始",
       "category": "character",
       "start_date": "2026-08-20",
       "end_date": null,
       "confirmed": false,
-      "notes": "Version 3.6での実装予想（気動/剣）"
+      "notes": "Version 3.6での実装予想（気動/剣）。属性・武器種は公式発表済み、実装日は未確定"
     },
     {
-      "character": "Jingran",
+      "character": "景燃",
       "event": "バナー開始",
       "category": "character",
       "start_date": "2026-08-20",
       "end_date": null,
       "confirmed": false,
-      "notes": "Version 3.6での実装予想（熱融/長刃）"
+      "notes": "Version 3.6での実装予想（熱融/長刃）。属性・武器種は公式発表済み、実装日は未確定"
     },
     {
-      "character": "Version 3.6",
+      "character": "バージョン3.6",
       "event": "バージョンアップデート",
       "category": "version",
       "start_date": "2026-08-20",
@@ -29,49 +29,13 @@
       "notes": "Version 3.5（8月19日終了予定）の直後に配信予定と推測"
     },
     {
-      "character": "In Search of Lost Jade",
+      "character": "ラメントリコン：サイレントクライシス",
       "event": "期間限定イベント開催中",
       "category": "event",
-      "start_date": "2026-07-30",
-      "end_date": "2026-08-13",
-      "confirmed": true,
-      "notes": "Union Level 8以上で参加可能"
-    },
-    {
-      "character": "Virtual Crisis: Quadrant Trials",
-      "event": "期間限定イベント開催中",
-      "category": "event",
-      "start_date": "2026-07-30",
+      "start_date": "2026-07-11",
       "end_date": "2026-08-19",
       "confirmed": true,
-      "notes": "Union Level 14で参加可能"
-    },
-    {
-      "character": "Recaptured: Action Highlights",
-      "event": "期間限定イベント開催中",
-      "category": "event",
-      "start_date": "2026-07-16",
-      "end_date": "2026-08-06",
-      "confirmed": true,
-      "notes": "Union Level 14で参加可能"
-    },
-    {
-      "character": "Lollo Campaign: New Journey",
-      "event": "期間限定イベント開催予定",
-      "category": "event",
-      "start_date": "2026-08-06",
-      "end_date": "2026-08-19",
-      "confirmed": true,
-      "notes": "Version 3.5後半で開催予定"
-    },
-    {
-      "character": "Chord Cleansing",
-      "event": "期間限定イベント開催予定",
-      "category": "event",
-      "start_date": "2026-08-12",
-      "end_date": "2026-08-19",
-      "confirmed": true,
-      "notes": "Version 3.5終盤に開催予定"
+      "notes": "ローグライク風ミニゲームイベント。星声・限定プロフィール・限定アイコンを獲得可能"
     }
   ]
 }
