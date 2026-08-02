@@ -114,8 +114,6 @@
 
 .eventChip {
   font-size: 0.62rem;
-  background: rgba(96, 165, 250, 0.25);
-  color: #dbeafe;
   border-radius: 4px;
   padding: 1px 4px;
   white-space: nowrap;
@@ -123,6 +121,19 @@
   text-overflow: ellipsis;
 }
 
+/* 重要項目（キャラ実装・武器・バージョン更新・ストーリー章） */
+.importantChip {
+  background: rgba(96, 165, 250, 0.25);
+  color: #dbeafe;
+}
+
+/* ゲーム内で開催される期間限定イベント。重要項目と見分けやすいよう別系統の色にする */
+.eventCategoryChip {
+  background: rgba(52, 211, 153, 0.22);
+  color: #d1fae5;
+}
+
+/* 未確定(リーク・予想)は種別に関わらず警告色を最優先で表示する */
 .unconfirmedChip {
   background: rgba(251, 191, 36, 0.2);
   color: #fde68a;
@@ -153,6 +164,10 @@
 
 .legendDot:first-child {
   margin-left: 0;
+}
+
+.legendDotEvent {
+  background: rgba(52, 211, 153, 0.7);
 }
 
 .legendDotUnconfirmed {

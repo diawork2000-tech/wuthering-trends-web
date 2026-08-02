@@ -334,7 +334,7 @@ class IntelligenceEngine:
                     print(f"  [Warning] {src.get('name')}: HTTP {res.status_code}")
                     continue
                 text = BeautifulSoup(res.text, "html.parser").get_text(separator=" ", strip=True) if BeautifulSoup else res.text
-                combined_text += f"\n\n=== 情報源: {src.get('name')} ({src['url']}) ===\n{text[:15000]}"
+                combined_text += f"\n\n=== 情報源: {src.get('name')} ({src['url']}) ===\n{text[:20000]}"
             except Exception as e:
                 print(f"  [Warning] {src.get('name')} の取得に失敗: {e}")
 
@@ -344,18 +344,22 @@ class IntelligenceEngine:
 
         prompt = (
             "あなたはゲーム『鳴潮 (Wuthering Waves)』の情報整理担当です。\n"
-            "以下は攻略Wiki等から取得した生テキストです。ここから「今後実装予定のキャラクター・武器・バージョン・"
-            "イベント・ストーリー章」のスケジュールを可能な限り幅広く抽出してください。\n\n"
+            "以下は攻略Wiki・イベント一覧ページ等から取得した生テキストです。ここから「今後実装予定・および現在"
+            "開催中のキャラクター・武器・バージョン・期間限定イベント・ストーリー章」のスケジュールを抽出してください。\n\n"
             "【指示】\n"
             "1. 日付は可能なら YYYY-MM-DD 形式に正規化する。年が不明なら文脈から補い、それでも不明なら null。\n"
-            "2. わかる場合は end_date（バナー終了日等）も入れる。不明なら null。\n"
-            "3. 公式発表済みか、リーク・非公式情報かを confirmed (true/false) で必ず区別する。判断がつかない場合は false（非公式扱い）。\n"
-            "4. 過去の日付（既に実装済みの内容）は含めない。今後の予定のみ。\n"
+            "2. わかる場合は end_date（バナー終了日・イベント終了日等）も入れる。不明なら null。\n"
+            "3. 公式発表済みか、リーク・非公式情報かを confirmed (true/false) で必ず区別する。イベント一覧ページに"
+            "具体的な開始・終了日として明記されているものは confirmed:true でよい。未来のキャラ実装のような"
+            "リーク・予想情報は confirmed:false とする。\n"
+            "4. 「開始日・終了日ともに今日より過去」のものだけを除外する。開始日が今日より前でも終了日が今日以降"
+            "であれば『現在開催中』として必ず含める。\n"
             "5. category は \"character\"(キャラ実装/バナー) / \"weapon\"(武器バナー) / \"version\"(バージョン更新) / "
             "\"event\"(期間限定イベント) / \"story\"(ストーリー章) のいずれかで分類する。\n"
             "6. キャラクター名・イベント名は日本語表記があればそれを優先し、なければ原文表記のまま。\n"
             "7. 同一の出来事が複数ソースに重複して出てきた場合は1件にまとめる。\n"
-            "8. 情報が乏しい場合は無理に埋めず、件数を絞ってよい。件数上限は特に設けないので、拾えるものは全て拾う。\n\n"
+            "8. イベント一覧ページには同時に10件以上のイベントが載っていることがある。代表的なものだけを"
+            "抜粋せず、日付が読み取れるものは可能な限り全件拾うこと。件数上限は設けない。\n\n"
             "出力は必ず【純粋なJSONフォーマットの配列】のみ。Markdownコードブロックや解説文は禁止。\n"
             "[\n  {\n"
             '    "character": "キャラクター名・武器名・イベント名など",\n'
@@ -366,7 +370,7 @@ class IntelligenceEngine:
             '    "confirmed": true または false,\n'
             '    "notes": "補足（フェーズ、根拠等）を1行程度で"\n'
             "  }\n]\n\n"
-            "生テキスト:\n" + combined_text[:60000]
+            "生テキスト:\n" + combined_text[:90000]
         )
 
         try:

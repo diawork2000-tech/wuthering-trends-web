@@ -67,15 +67,18 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
             return (
               <div key={idx} className={`${styles.dayCell} ${isToday ? styles.todayCell : ''}`}>
                 <span className={styles.dayNum}>{d}</span>
-                {dayEvents.slice(0, 3).map((ev, i) => (
-                  <div
-                    key={i}
-                    className={`${styles.eventChip} ${!ev.confirmed ? styles.unconfirmedChip : ''}`}
-                    title={`${ev.character}（${ev.event}）${ev.confirmed ? '' : ' [未確定]'}`}
-                  >
-                    {ev.character}
-                  </div>
-                ))}
+                {dayEvents.slice(0, 3).map((ev, i) => {
+                  const isEvent = ev.category === 'event';
+                  return (
+                    <div
+                      key={i}
+                      className={`${styles.eventChip} ${isEvent ? styles.eventCategoryChip : styles.importantChip} ${!ev.confirmed ? styles.unconfirmedChip : ''}`}
+                      title={`${ev.character}（${ev.event}）${ev.confirmed ? '' : ' [未確定]'}`}
+                    >
+                      {ev.character}
+                    </div>
+                  );
+                })}
                 {dayEvents.length > 3 && (
                   <div className={styles.moreLabel}>+{dayEvents.length - 3}件</div>
                 )}
@@ -85,7 +88,8 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
         </div>
 
         <p className={styles.legend}>
-          <span className={styles.legendDot} /> 公式確定
+          <span className={styles.legendDot} /> 重要項目（キャラ/武器/バージョン）
+          <span className={`${styles.legendDot} ${styles.legendDotEvent}`} /> ゲーム内イベント
           <span className={`${styles.legendDot} ${styles.legendDotUnconfirmed}`} /> 未確定（リーク・予想）
         </p>
       </div>

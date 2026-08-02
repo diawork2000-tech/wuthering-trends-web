@@ -302,6 +302,10 @@ export default function IntelligenceStudioPage() {
         <div className={styles.scheduleStrip}>
           <span className={styles.scheduleStripLabel}>🗓️ 今後の実装予定</span>
           {scheduleEvents
+            // ゲーム内の期間限定イベント(category:event)はここでは扱わず、
+            // 新キャラ・武器・バージョン更新等の重要項目だけに絞る。
+            // イベントの方はカレンダー表示側で確認できる。
+            .filter((ev) => ev.category !== 'event')
             .map((ev) => ({ ...ev, _days: daysUntil(ev.start_date) }))
             .filter((ev) => ev._days === null || ev._days >= 0)
             .sort((a, b) => (a._days ?? 999) - (b._days ?? 999))

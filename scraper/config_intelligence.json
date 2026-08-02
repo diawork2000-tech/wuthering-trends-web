@@ -121,6 +121,11 @@
       "name": "GameWith 鳴潮アップデート最新情報 (Ver3.5/3.6詳細)",
       "url": "https://gamewith.jp/wutheringwaves/456100",
       "enabled": true
+    },
+    {
+      "name": "Game8 鳴潮イベント一覧 (現在開催中＆開催予定・同時多発イベント)",
+      "url": "https://game8.co/games/Wuthering-Waves/archives/453473",
+      "enabled": true
     }
   ],
   "settings": {
