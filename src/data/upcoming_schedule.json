@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-02T14:00:00.000000+00:00",
+  "updated_at": "2026-08-02T15:00:00.000000+00:00",
   "events": [
     {
       "character": "清宵",
@@ -29,13 +29,58 @@
       "notes": "Version 3.5（8月19日終了予定）の直後に配信予定と推測"
     },
     {
-      "character": "ラメントリコン：サイレントクライシス",
-      "event": "期間限定イベント開催中",
+      "character": "余音のプレゼント",
+      "event": "ログインボーナス開催中",
       "category": "event",
-      "start_date": "2026-07-11",
+      "start_date": "2026-07-10",
       "end_date": "2026-08-19",
       "confirmed": true,
-      "notes": "ローグライク風ミニゲームイベント。星声・限定プロフィール・限定アイコンを獲得可能"
+      "notes": "金髄の波模様・唱喚の渦模様を獲得可能"
+    },
+    {
+      "character": "ラメントリコン：サイレントクライシス",
+      "event": "常設戦闘コンテンツ",
+      "category": "event",
+      "start_date": "2026-07-10",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.5アップデート後より常設。星声・限定プロフィール・限定アイコンを獲得可能"
+    },
+    {
+      "character": "続・光と影の刹那",
+      "event": "戦闘フォトセッション開催中",
+      "category": "event",
+      "start_date": "2026-07-16",
+      "end_date": "2026-08-06",
+      "confirmed": true,
+      "notes": "星声400を獲得可能"
+    },
+    {
+      "character": "虚無領域のクライシス・クアドラント拡張",
+      "event": "演習挑戦イベント開催中",
+      "category": "event",
+      "start_date": "2026-07-30",
+      "end_date": "2026-08-19",
+      "confirmed": true,
+      "notes": "星声500・称号「虚無領域の道標」を獲得可能"
+    },
+    {
+      "character": "ブブ企画・旅立",
+      "event": "依頼イベント開催予定",
+      "category": "event",
+      "start_date": "2026-08-06",
+      "end_date": "2026-08-19",
+      "confirmed": true,
+      "notes": "星声400・唱喚の渦模様5を獲得可能"
+    },
+    {
+      "character": "響き渡る音弦",
+      "event": "無音区報酬2倍イベント開催予定",
+      "category": "event",
+      "start_date": "2026-08-12",
+      "end_date": "2026-08-19",
+      "confirmed": true,
+      "notes": "1日3回まで「無音区」報酬が2倍になる"
     }
   ]
 }
