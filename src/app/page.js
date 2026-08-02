@@ -44,6 +44,10 @@ export default function Home() {
   // ズーム機能用の状態 (カード幅: 200px 〜 500px 程度)
   const [zoomLevel, setZoomLevel] = useState(300);
 
+  // 検索・並び替え用の状態
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortOrder, setSortOrder] = useState('newest'); // newest | oldest | title | channel
+
   const tabs = ['すべて', '最新 (Shorts)', '最新 (通常)', '週間人気 (Shorts)', '週間人気 (通常)', '登録チャンネル'];
 
   const fetchLogs = async () => {
@@ -343,6 +347,29 @@ export default function Home() {
         ))}
       </div>
 
+      <div className={styles.searchBar}>
+        <input
+          type="text"
+          className={styles.searchInput}
+          placeholder="🔍 タイトル・チャンネル名で検索..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        {searchQuery && (
+          <button className={styles.searchClearBtn} onClick={() => setSearchQuery('')} title="検索をクリア">×</button>
+        )}
+        <select
+          className={styles.sortSelect}
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+        >
+          <option value="newest">新しい順</option>
+          <option value="oldest">古い順</option>
+          <option value="title">タイトル順</option>
+          <option value="channel">チャンネル順</option>
+        </select>
+      </div>
+
       {loading ? (
         <div className={styles.loadingContainer}>
           <div className={styles.spinner}></div>
@@ -356,6 +383,27 @@ export default function Home() {
         <div className={styles.gallery} style={{ '--card-width': `${zoomLevel}px` }}>
           {videos
             .filter((video) => activeTab === 'すべて' || video.category === activeTab)
+            .filter((video) => {
+              if (!searchQuery.trim()) return true;
+              const q = searchQuery.trim().toLowerCase();
+              return (
+                video.title?.toLowerCase().includes(q) ||
+                video.channel?.toLowerCase().includes(q)
+              );
+            })
+            .sort((a, b) => {
+              switch (sortOrder) {
+                case 'oldest':
+                  return new Date(a.created_time) - new Date(b.created_time);
+                case 'title':
+                  return (a.title || '').localeCompare(b.title || '', 'ja');
+                case 'channel':
+                  return (a.channel || '').localeCompare(b.channel || '', 'ja');
+                case 'newest':
+                default:
+                  return new Date(b.created_time) - new Date(a.created_time);
+              }
+            })
             .map((video) => (
               <VideoCard key={video.id} video={video} />
           ))}

@@ -41,6 +41,15 @@ jobs:
           cd scraper
           python trend_collector.py
 
+      - name: Purge videos matching exclude words (retroactive cleanup)
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        run: |
+          cd scraper
+          python purge_excluded.py --apply
+        continue-on-error: true # 掃除処理の失敗で本体の収集成功を無駄にしないため
+
       - name: Commit and Push Execution Logs back to repository
         run: |
           git config --global user.name "github-actions[bot]"

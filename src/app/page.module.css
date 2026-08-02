@@ -131,6 +131,62 @@
   transform: translateY(-2px);
 }
 
+.searchBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.searchInput {
+  flex: 1;
+  max-width: 420px;
+  min-width: 220px;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.searchInput::placeholder {
+  color: #888;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: rgba(139, 92, 246, 0.6);
+}
+
+.searchClearBtn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ccc;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.searchClearBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.sortSelect {
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(var(--card-width, 320px), 1fr));

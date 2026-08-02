@@ -21,6 +21,7 @@ import requests
 from dotenv import load_dotenv
 
 from trend_collector import should_exclude
+from notion_utils import notion_request
 
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     try:
@@ -128,9 +129,10 @@ def main():
     print(f"\nアーカイブを実行します...")
     ok = 0
     for page_id, title, _, _ in hits:
-        res = requests.patch(
+        res = notion_request(
+            "PATCH",
             f"https://api.notion.com/v1/pages/{page_id}",
-            headers=HEADERS,
+            HEADERS,
             json={"archived": True},
             timeout=10,
         )

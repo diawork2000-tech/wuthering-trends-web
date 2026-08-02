@@ -7,6 +7,7 @@ from datetime import datetime, timedelta, timezone
 from googleapiclient.discovery import build
 from dotenv import load_dotenv
 from deep_translator import GoogleTranslator
+from notion_utils import notion_request
 
 # Load environment variables
 load_dotenv()
@@ -512,7 +513,7 @@ def send_to_notion(video_list, category, existing_urls):
         }
         
         try:
-            res = requests.post("https://api.notion.com/v1/pages", headers=headers, json=payload)
+            res = notion_request("POST", "https://api.notion.com/v1/pages", headers, json=payload)
             if res.status_code == 200:
                 success_count += 1
                 existing_urls.add(video["url"]) # 今回追加した分もセットに入れておく

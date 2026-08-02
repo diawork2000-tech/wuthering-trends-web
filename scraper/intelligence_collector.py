@@ -25,6 +25,7 @@ except ImportError:
     genai = None
 
 from trend_collector import YouTubeKeyManager, translate_if_needed
+from notion_utils import notion_request
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(os.path.join(BASE_DIR, ".env"))
@@ -500,7 +501,7 @@ class IntelligenceEngine:
                 }
             }
             try:
-                res = requests.post(url_post, headers=headers_notion, json=payload, timeout=8)
+                res = notion_request("POST", url_post, headers_notion, json=payload, timeout=8)
                 if res.status_code in [200, 201]:
                     success_cnt += 1
                     print(f"  [Notion OK] Placed card: {idea.get('topic_title')[:35]}...")
@@ -577,7 +578,7 @@ class IntelligenceEngine:
                     for pg in pages:
                         page_id = pg["id"]
                         url_patch = f"https://api.notion.com/v1/pages/{page_id}"
-                        del_res = requests.patch(url_patch, headers=headers, json={"archived": True}, timeout=8)
+                        del_res = notion_request("PATCH", url_patch, headers, json={"archived": True}, timeout=8)
                         if del_res.status_code in [200, 201]:
                             archived_cnt += 1
                         time.sleep(0.2)
@@ -607,7 +608,7 @@ class IntelligenceEngine:
                         
                     # ひらがな・カタカナ・日常漢字が極端に少ない(純英語状態) または 「についてご存じですか？！」などの機械的文字列が含まれている場合は徹底削除！
                     if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', t_str)) < 2 or "についてご存じですか" in o_str or "Bro had one job" in t_str or "Reddit -" in o_str:
-                        requests.patch(f"https://api.notion.com/v1/pages/{pid}", headers=headers, json={"archived": True}, timeout=10)
+                        notion_request("PATCH", f"https://api.notion.com/v1/pages/{pid}", headers, json={"archived": True}, timeout=10)
                         purged_cnt += 1
                         print(f"    -> Purged sub-quality un-translated card: '{t_str[:35]}...'")
                 print(f"  [Quality Patrol Complete] Successfully scrubbed {purged_cnt} un-translated or mechanical cards from Notion!")
