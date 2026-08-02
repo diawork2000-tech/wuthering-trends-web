@@ -2,9 +2,13 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import IntelligenceConfigModal from '../components/IntelligenceConfigModal';
+import ScheduleCalendarModal from '../components/ScheduleCalendarModal';
 import styles from './page.module.css';
 
 export default function IntelligenceStudioPage() {
+  const [showConfigModal, setShowConfigModal] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
   const [topics, setTopics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedTopic, setSelectedTopic] = useState(null);
@@ -115,6 +119,14 @@ export default function IntelligenceStudioPage() {
     todayJst.setHours(0, 0, 0, 0);
     const diffDays = Math.round((target - todayJst) / (1000 * 60 * 60 * 24));
     return diffDays;
+  };
+
+  // 「あと18日」だけだと直感的に分かりにくいとの指摘を受け、実日付を主表示にした
+  const formatMonthDay = (dateStr) => {
+    if (!dateStr) return '時期未定';
+    const target = new Date(`${dateStr}T00:00:00+09:00`);
+    if (Number.isNaN(target.getTime())) return '時期未定';
+    return `${target.getMonth() + 1}月${target.getDate()}日`;
   };
 
   const handleManualTrigger = async () => {
@@ -267,6 +279,13 @@ export default function IntelligenceStudioPage() {
           <div className={styles.badge}>
             ✨ 自動更新 ＆ ダブり排除稼働中
           </div>
+          <button
+            className={styles.logToggleBtn}
+            onClick={() => setShowConfigModal(true)}
+            title="収集対象チャンネル・WEB/SNSソース・更新カレンダー情報源を編集"
+          >
+            ⚙️ ソース＆競合設定
+          </button>
           <button className={styles.refreshBtn} onClick={() => { fetchTopics(); fetchLogs(); }}>
             🔄 更新
           </button>
@@ -286,16 +305,22 @@ export default function IntelligenceStudioPage() {
             .map((ev) => ({ ...ev, _days: daysUntil(ev.start_date) }))
             .filter((ev) => ev._days === null || ev._days >= 0)
             .sort((a, b) => (a._days ?? 999) - (b._days ?? 999))
-            .slice(0, 4)
+            .slice(0, 5)
             .map((ev, idx) => (
               <span key={idx} className={styles.scheduleChip}>
-                {ev._days !== null ? (
-                  ev._days === 0 ? '本日' : `あと${ev._days}日`
-                ) : '時期未定'}
+                <strong>{formatMonthDay(ev.start_date)}</strong>
+                {ev._days !== null && (
+                  <span className={styles.scheduleChipRelative}>
+                    （{ev._days === 0 ? '本日' : `あと${ev._days}日`}）
+                  </span>
+                )}
                 : {ev.character}（{ev.event}）
                 {!ev.confirmed && <span className={styles.scheduleUnconfirmed}>未確定</span>}
               </span>
             ))}
+          <button className={styles.scheduleCalendarBtn} onClick={() => setShowCalendar(true)}>
+            📅 カレンダーで見る
+          </button>
         </div>
       )}
 
@@ -518,6 +543,16 @@ export default function IntelligenceStudioPage() {
           </section>
         </div>
       )}
+
+      <IntelligenceConfigModal
+        isOpen={showConfigModal}
+        onClose={() => setShowConfigModal(false)}
+      />
+      <ScheduleCalendarModal
+        isOpen={showCalendar}
+        onClose={() => setShowCalendar(false)}
+        events={scheduleEvents}
+      />
     </div>
   );
 }

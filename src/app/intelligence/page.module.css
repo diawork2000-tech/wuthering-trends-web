@@ -136,6 +136,27 @@
   white-space: nowrap;
 }
 
+.scheduleChipRelative {
+  color: #64748b;
+  font-size: 0.72rem;
+}
+
+.scheduleCalendarBtn {
+  margin-left: auto;
+  background: rgba(250, 204, 21, 0.1);
+  border: 1px solid rgba(250, 204, 21, 0.3);
+  color: #facc15;
+  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.scheduleCalendarBtn:hover {
+  background: rgba(250, 204, 21, 0.2);
+}
+
 .scheduleUnconfirmed {
   margin-left: 0.4rem;
   font-size: 0.68rem;

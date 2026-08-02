@@ -334,7 +334,7 @@ class IntelligenceEngine:
                     print(f"  [Warning] {src.get('name')}: HTTP {res.status_code}")
                     continue
                 text = BeautifulSoup(res.text, "html.parser").get_text(separator=" ", strip=True) if BeautifulSoup else res.text
-                combined_text += f"\n\n=== 情報源: {src.get('name')} ({src['url']}) ===\n{text[:8000]}"
+                combined_text += f"\n\n=== 情報源: {src.get('name')} ({src['url']}) ===\n{text[:15000]}"
             except Exception as e:
                 print(f"  [Warning] {src.get('name')} の取得に失敗: {e}")
 
@@ -344,23 +344,29 @@ class IntelligenceEngine:
 
         prompt = (
             "あなたはゲーム『鳴潮 (Wuthering Waves)』の情報整理担当です。\n"
-            "以下は攻略Wiki等から取得した生テキストです。ここから「今後実装予定のキャラクター・バージョン・イベント」の"
-            "スケジュールを可能な限り抽出してください。\n\n"
+            "以下は攻略Wiki等から取得した生テキストです。ここから「今後実装予定のキャラクター・武器・バージョン・"
+            "イベント・ストーリー章」のスケジュールを可能な限り幅広く抽出してください。\n\n"
             "【指示】\n"
             "1. 日付は可能なら YYYY-MM-DD 形式に正規化する。年が不明なら文脈から補い、それでも不明なら null。\n"
-            "2. 公式発表済みか、リーク・非公式情報かを confirmed (true/false) で必ず区別する。判断がつかない場合は false（非公式扱い）。\n"
-            "3. 過去の日付（既に実装済みの内容）は含めない。今後の予定のみ。\n"
-            "4. キャラクター名・イベント名は日本語表記があればそれを優先し、なければ原文表記のまま。\n"
-            "5. 情報が乏しい場合は無理に埋めず、件数を絞ってよい。\n\n"
+            "2. わかる場合は end_date（バナー終了日等）も入れる。不明なら null。\n"
+            "3. 公式発表済みか、リーク・非公式情報かを confirmed (true/false) で必ず区別する。判断がつかない場合は false（非公式扱い）。\n"
+            "4. 過去の日付（既に実装済みの内容）は含めない。今後の予定のみ。\n"
+            "5. category は \"character\"(キャラ実装/バナー) / \"weapon\"(武器バナー) / \"version\"(バージョン更新) / "
+            "\"event\"(期間限定イベント) / \"story\"(ストーリー章) のいずれかで分類する。\n"
+            "6. キャラクター名・イベント名は日本語表記があればそれを優先し、なければ原文表記のまま。\n"
+            "7. 同一の出来事が複数ソースに重複して出てきた場合は1件にまとめる。\n"
+            "8. 情報が乏しい場合は無理に埋めず、件数を絞ってよい。件数上限は特に設けないので、拾えるものは全て拾う。\n\n"
             "出力は必ず【純粋なJSONフォーマットの配列】のみ。Markdownコードブロックや解説文は禁止。\n"
             "[\n  {\n"
-            '    "character": "キャラクター名 または イベント名",\n'
-            '    "event": "実装 / バナー開始 / バージョンアップデート 等の種別",\n'
+            '    "character": "キャラクター名・武器名・イベント名など",\n'
+            '    "event": "具体的な内容（実装 / バナー開始 / バージョンアップデート / イベント開催 等）",\n'
+            '    "category": "character/weapon/version/event/story のいずれか",\n'
             '    "start_date": "YYYY-MM-DD または null",\n'
+            '    "end_date": "YYYY-MM-DD または null",\n'
             '    "confirmed": true または false,\n'
             '    "notes": "補足（フェーズ、根拠等）を1行程度で"\n'
             "  }\n]\n\n"
-            "生テキスト:\n" + combined_text[:24000]
+            "生テキスト:\n" + combined_text[:60000]
         )
 
         try:

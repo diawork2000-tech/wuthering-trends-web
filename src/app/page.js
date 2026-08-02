@@ -3,11 +3,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import VideoCard from './components/VideoCard';
-import IntelligenceConfigModal from './components/IntelligenceConfigModal';
 import styles from './page.module.css';
 
 export default function Home() {
-  const [showIntelligenceModal, setShowIntelligenceModal] = useState(false);
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -318,20 +316,13 @@ export default function Home() {
             {isSyncing ? '起動中...' : '🔄 最新情報を収集'}
           </button>
           <Link href="/intelligence" style={{ textDecoration: 'none' }}>
-            <button 
-              className={styles.syncButton} 
+            <button
+              className={styles.syncButton}
               style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: '#fff', fontWeight: '700', boxShadow: '0 0 18px rgba(16, 185, 129, 0.45)', border: '1px solid rgba(255,255,255,0.2)' }}
             >
               🌐 マルチメディア収集 スタジオへ進む
             </button>
           </Link>
-          <button 
-            className={styles.intelligenceBtn || styles.syncButton} 
-            style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', color: '#000', fontWeight: '700', boxShadow: '0 0 15px rgba(245, 158, 11, 0.4)' }}
-            onClick={() => setShowIntelligenceModal(true)} 
-          >
-            ⚙️ マルチメディア収集ソース ＆ 競合設定
-          </button>
         </div>
       </div>
 
@@ -652,10 +643,6 @@ export default function Home() {
         </div>
       )}
 
-      <IntelligenceConfigModal
-        isOpen={showIntelligenceModal}
-        onClose={() => setShowIntelligenceModal(false)}
-      />
     </main>
   );
 }
