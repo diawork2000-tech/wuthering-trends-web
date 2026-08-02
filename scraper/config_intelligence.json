@@ -111,6 +111,13 @@
       "enabled": true
     }
   ],
+  "schedule_sources": [
+    {
+      "name": "Game8 鳴潮バナースケジュール (現行＆次バージョン予定)",
+      "url": "https://game8.co/games/Wuthering-Waves/archives/453303",
+      "enabled": true
+    }
+  ],
   "settings": {
     "target_items_per_run": 12,
     "min_score_threshold": 60,

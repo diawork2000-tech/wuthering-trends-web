@@ -89,6 +89,7 @@ export async function GET() {
       const scriptOutline = props["ショート台本骨格"]?.rich_text?.map(r => r.plain_text).join('') || "台本構成の準備中";
       const reason = props["合致根拠と期待値"]?.rich_text?.map(r => r.plain_text).join('') || "ホットトピック自動選抜";
       const dateStr = props["日時"]?.date?.start || page.created_time?.substring(0, 10) || "2026-07-30";
+      const adopted = props["採用"]?.checkbox || false;
 
       return {
         id: page.id,
@@ -97,6 +98,7 @@ export async function GET() {
         sourceUrl,
         scriptOutline,
         reason,
+        adopted,
         date: dateStr,
         createdTime: page.created_time
       };

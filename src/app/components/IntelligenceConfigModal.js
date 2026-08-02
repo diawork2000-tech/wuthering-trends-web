@@ -11,6 +11,7 @@ export default function IntelligenceConfigModal({ isOpen, onClose }) {
   
   const [targetChannels, setTargetChannels] = useState([]);
   const [targetWebSources, setTargetWebSources] = useState([]);
+  const [scheduleSources, setScheduleSources] = useState([]);
   // settings は画面に出さないが、保存時に丸ごと書き戻すので取得した値を保持しておく。
   // ここを固定値で組み直すと auto_source_expansion などが保存のたびに消えてしまう。
   const [settings, setSettings] = useState(null);
@@ -20,12 +21,8 @@ export default function IntelligenceConfigModal({ isOpen, onClose }) {
   const [newChUrl, setNewChUrl] = useState('');
   const [newWebName, setNewWebName] = useState('');
   const [newWebUrl, setNewWebUrl] = useState('');
-
-  useEffect(() => {
-    if (isOpen) {
-      fetchConfig();
-    }
-  }, [isOpen]);
+  const [newScheduleName, setNewScheduleName] = useState('');
+  const [newScheduleUrl, setNewScheduleUrl] = useState('');
 
   const fetchConfig = async () => {
     setLoading(true);
@@ -37,6 +34,7 @@ export default function IntelligenceConfigModal({ isOpen, onClose }) {
         if (data.config) {
           setTargetChannels(data.config.target_channels || []);
           setTargetWebSources(data.config.target_web_sources || []);
+          setScheduleSources(data.config.schedule_sources || []);
           setSettings(data.config.settings || null);
         }
       } else {
@@ -49,6 +47,15 @@ export default function IntelligenceConfigModal({ isOpen, onClose }) {
     }
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      // setLoading(true) が同期的に走る点を react-hooks/set-state-in-effect が指摘するが、
+      // モーダルを開いた瞬間にローディング表示するための意図した挙動のため許容する。
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      fetchConfig();
+    }
+  }, [isOpen]);
+
   const handleSave = async () => {
     setSaving(true);
     try {
@@ -56,6 +63,7 @@ export default function IntelligenceConfigModal({ isOpen, onClose }) {
         config: {
           target_channels: targetChannels,
           target_web_sources: targetWebSources,
+          schedule_sources: scheduleSources,
           settings: settings || {
             target_items_per_run: 12,
             min_score_threshold: 60,
@@ -110,6 +118,18 @@ export default function IntelligenceConfigModal({ isOpen, onClose }) {
     setNewWebUrl('');
   };
 
+  const handleAddScheduleSource = (e) => {
+    e.preventDefault();
+    if (!newScheduleName || !newScheduleUrl) {
+      alert('サイト名とURLを両方入力してください。');
+      return;
+    }
+    const newEntry = { name: newScheduleName, url: newScheduleUrl, enabled: true };
+    setScheduleSources([...scheduleSources, newEntry]);
+    setNewScheduleName('');
+    setNewScheduleUrl('');
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -142,6 +162,12 @@ export default function IntelligenceConfigModal({ isOpen, onClose }) {
                   onClick={() => setActiveTab('web')}
                 >
                   🌍 WEB＆SNS (Reddit/X/Togetter/TikTok) ({targetWebSources.length})
+                </button>
+                <button
+                  className={`${styles.tabButton} ${activeTab === 'schedule' ? styles.tabActive : ''}`}
+                  onClick={() => setActiveTab('schedule')}
+                >
+                  📅 更新カレンダー情報源 ({scheduleSources.length})
                 </button>
               </div>
 
@@ -286,6 +312,84 @@ export default function IntelligenceConfigModal({ isOpen, onClose }) {
                         style={{ flex: 2 }}
                         value={newWebUrl}
                         onChange={(e) => setNewWebUrl(e.target.value)}
+                      />
+                      <button type="submit" className={styles.addButton}>
+                        ✨ リストに登録
+                      </button>
+                    </form>
+                  </div>
+                </>
+              )}
+
+              {activeTab === 'schedule' && (
+                <>
+                  <p style={{ color: '#94a3b8', fontSize: '0.85rem', margin: '0 0 1rem' }}>
+                    新キャラ・バージョン実装予定日などを定期チェックする情報源です。約20時間に1回、AIが表を読み取ってスケジュールを更新します（リーク・非公式情報を含むため画面上には「未確定」表示が付きます）。
+                  </p>
+                  <div className={styles.cardGrid}>
+                    {scheduleSources.map((src, idx) => (
+                      <div key={idx} className={styles.itemCard}>
+                        <div className={styles.cardTop}>
+                          <input
+                            type="text"
+                            className={styles.cardTitleInput}
+                            value={src.name}
+                            onChange={(e) => {
+                              const copy = [...scheduleSources];
+                              copy[idx].name = e.target.value;
+                              setScheduleSources(copy);
+                            }}
+                          />
+                          <label className={styles.switch}>
+                            <input
+                              type="checkbox"
+                              checked={src.enabled !== false}
+                              onChange={(e) => {
+                                const copy = [...scheduleSources];
+                                copy[idx].enabled = e.target.checked;
+                                setScheduleSources(copy);
+                              }}
+                            />
+                            <span className={styles.slider} />
+                          </label>
+                        </div>
+                        <input
+                          type="text"
+                          className={styles.cardUrlInput}
+                          value={src.url}
+                          onChange={(e) => {
+                            const copy = [...scheduleSources];
+                            copy[idx].url = e.target.value;
+                            setScheduleSources(copy);
+                          }}
+                        />
+                        <button
+                          className={styles.deleteBtn}
+                          onClick={() => setScheduleSources(scheduleSources.filter((_, i) => i !== idx))}
+                        >
+                          🗑 この情報源を解除
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className={styles.addSection}>
+                    <h3 className={styles.addTitle}>＋ 新しいスケジュール情報源を追加</h3>
+                    <form className={styles.formRow} onSubmit={handleAddScheduleSource}>
+                      <input
+                        type="text"
+                        placeholder="例： 攻略Wikiのバナースケジュールページ"
+                        className={styles.formInput}
+                        value={newScheduleName}
+                        onChange={(e) => setNewScheduleName(e.target.value)}
+                      />
+                      <input
+                        type="text"
+                        placeholder="例： https://example.com/banner-schedule"
+                        className={styles.formInput}
+                        style={{ flex: 2 }}
+                        value={newScheduleUrl}
+                        onChange={(e) => setNewScheduleUrl(e.target.value)}
                       />
                       <button type="submit" className={styles.addButton}>
                         ✨ リストに登録

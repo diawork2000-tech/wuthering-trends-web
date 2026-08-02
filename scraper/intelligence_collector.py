@@ -20,6 +20,11 @@ except ImportError:
     feedparser = None
 
 try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    BeautifulSoup = None
+
+try:
     # google-generativeai は開発終了(EOL)のため後継 SDK の google-genai へ移行済み。
     from google import genai
 except ImportError:
@@ -137,7 +142,9 @@ class IntelligenceEngine:
                 patch_props["合致根拠と期待値"] = {"rich_text": {}}
             if "日時" not in props:
                 patch_props["日時"] = {"date": {}}
-                
+            if "採用" not in props:
+                patch_props["採用"] = {"checkbox": {}}
+
             if patch_props:
                 print(f"  [Notion Auto-Upgrade] Creating {len(patch_props)} new customized columns in your database...")
                 requests.patch(url_get, headers=headers, json={"properties": patch_props}, timeout=10)
@@ -285,6 +292,94 @@ class IntelligenceEngine:
                 print(f"  [Warning] Failed crawling {name}: {e}")
                 
         print(f"  [Crawl Complete] Total collected raw items across all networks: {len(self.collected_raw_items)}")
+
+    def update_schedule_if_stale(self, stale_after_hours=20):
+        """新キャラ・バージョン実装予定のスケジュールを更新する（アップデート先読み機能）。
+
+        頻繁には変わらない情報なので、15分おきの本体巡回に相乗りさせつつ
+        実際のサイト取得・Gemini解析は stale_after_hours 時間おきに間引く。
+        取得元は「⚙️ マルチメディア収集ソース」モーダルの
+        「📅 更新カレンダー情報源」タブ（config_intelligence.json の schedule_sources）で管理される。
+        """
+        out_path = os.path.join(os.path.dirname(__file__), "../src/data/upcoming_schedule.json")
+
+        try:
+            if os.path.exists(out_path):
+                with open(out_path, "r", encoding="utf-8") as f:
+                    existing = json.load(f)
+                last_updated = datetime.fromisoformat(existing["updated_at"])
+                age_hours = (datetime.now(timezone.utc) - last_updated).total_seconds() / 3600
+                if age_hours < stale_after_hours:
+                    print(f"  [Schedule] 前回更新から {age_hours:.1f} 時間しか経っていないためスキップ（{stale_after_hours}時間おき）")
+                    return
+        except Exception:
+            pass  # ファイル破損・初回等はそのまま更新処理へ
+
+        sources = [s for s in self.config.get("schedule_sources", []) if s.get("enabled", True)]
+        if not sources:
+            print("  [Schedule] スケジュール情報源が未設定のためスキップ")
+            return
+
+        if not self.gemini_model_name:
+            print("  [Schedule] Gemini 未設定のためスケジュール解析をスキップ")
+            return
+
+        print(f"\n=== [Schedule] 📅 {len(sources)}件の情報源からアップデート予定を解析中 ===")
+        headers_web = {"User-Agent": "WutheringTrendsIntelligenceEngine/2.0 (Schedule Tracker)"}
+        combined_text = ""
+        for src in sources:
+            try:
+                res = requests.get(src["url"], headers=headers_web, timeout=15)
+                if res.status_code != 200:
+                    print(f"  [Warning] {src.get('name')}: HTTP {res.status_code}")
+                    continue
+                text = BeautifulSoup(res.text, "html.parser").get_text(separator=" ", strip=True) if BeautifulSoup else res.text
+                combined_text += f"\n\n=== 情報源: {src.get('name')} ({src['url']}) ===\n{text[:8000]}"
+            except Exception as e:
+                print(f"  [Warning] {src.get('name')} の取得に失敗: {e}")
+
+        if not combined_text.strip():
+            print("  [Schedule] 情報源からテキストを取得できなかったため更新を中止")
+            return
+
+        prompt = (
+            "あなたはゲーム『鳴潮 (Wuthering Waves)』の情報整理担当です。\n"
+            "以下は攻略Wiki等から取得した生テキストです。ここから「今後実装予定のキャラクター・バージョン・イベント」の"
+            "スケジュールを可能な限り抽出してください。\n\n"
+            "【指示】\n"
+            "1. 日付は可能なら YYYY-MM-DD 形式に正規化する。年が不明なら文脈から補い、それでも不明なら null。\n"
+            "2. 公式発表済みか、リーク・非公式情報かを confirmed (true/false) で必ず区別する。判断がつかない場合は false（非公式扱い）。\n"
+            "3. 過去の日付（既に実装済みの内容）は含めない。今後の予定のみ。\n"
+            "4. キャラクター名・イベント名は日本語表記があればそれを優先し、なければ原文表記のまま。\n"
+            "5. 情報が乏しい場合は無理に埋めず、件数を絞ってよい。\n\n"
+            "出力は必ず【純粋なJSONフォーマットの配列】のみ。Markdownコードブロックや解説文は禁止。\n"
+            "[\n  {\n"
+            '    "character": "キャラクター名 または イベント名",\n'
+            '    "event": "実装 / バナー開始 / バージョンアップデート 等の種別",\n'
+            '    "start_date": "YYYY-MM-DD または null",\n'
+            '    "confirmed": true または false,\n'
+            '    "notes": "補足（フェーズ、根拠等）を1行程度で"\n'
+            "  }\n]\n\n"
+            "生テキスト:\n" + combined_text[:24000]
+        )
+
+        try:
+            res = self.gemini_client.models.generate_content(
+                model=self.gemini_model_name, contents=prompt
+            )
+            raw_txt = re.sub(r'^```(json)?|```$', '', res.text.strip(), flags=re.MULTILINE).strip()
+            events = json.loads(raw_txt)
+            events = [e for e in events if e.get("character")]
+
+            os.makedirs(os.path.dirname(out_path), exist_ok=True)
+            with open(out_path, "w", encoding="utf-8") as f:
+                json.dump({
+                    "updated_at": datetime.now(timezone.utc).isoformat(),
+                    "events": events
+                }, f, ensure_ascii=False, indent=2)
+            print(f"  [Schedule Success] {len(events)}件の実装予定を抽出・保存しました")
+        except Exception as e:
+            print(f"  [Warning] スケジュール解析に失敗: {e}")
 
     def generate_and_filter_ideas(self):
         print("\n=== [Phase 3] Generating, Deduplicating & Filtering Video Topics ===")
@@ -566,13 +661,20 @@ class IntelligenceEngine:
         print(f"  [Target Horizon] Identifying all topic cards older than {seven_days_ago}...")
         
         # まずは「日時」プロパティでの古いもの、あるいは作成日時での古いものを検索
+        # ただし「採用」済み(ネタ帳として使う予定のもの)は、いつまでも参照できるよう対象から除外する
         url_query = f"https://api.notion.com/v1/databases/{NOTION_INTELLIGENCE_DB_ID}/query"
         payload_query = {
             "filter": {
-                "timestamp": "created_time",
-                "created_time": {
-                    "before": f"{seven_days_ago}T00:00:00.000Z"
-                }
+                "and": [
+                    {
+                        "timestamp": "created_time",
+                        "created_time": {"before": f"{seven_days_ago}T00:00:00.000Z"}
+                    },
+                    {
+                        "property": "採用",
+                        "checkbox": {"equals": False}
+                    }
+                ]
             },
             "page_size": 100
         }
@@ -644,6 +746,11 @@ class IntelligenceEngine:
             if ideas:
                 self.push_to_notion(ideas)
             self.cleanup_old_notion_cards()
+
+            try:
+                self.update_schedule_if_stale()
+            except Exception as e:
+                print(f"  [Warning] Schedule update failed (non-fatal): {e}")
             
             # ★活動ログ(Activity Log)の自動保存処理：いつ・どれだけ集まったかを記録！
             try:

@@ -15,31 +15,8 @@ export default function IntelligenceStudioPage() {
   const [showLogs, setShowLogs] = useState(false); // 活動実績ログの開閉ステート
   const [triggering, setTriggering] = useState(false);
   const [triggerMsg, setTriggerMsg] = useState('');
+  const [scheduleEvents, setScheduleEvents] = useState([]);
   const scrollAreaRef = useRef(null);
-
-  useEffect(() => {
-    fetchTopics();
-    fetchLogs();
-  }, []);
-
-  const handleManualTrigger = async () => {
-    if (triggering) return;
-    setTriggering(true);
-    setTriggerMsg('⏳ クラウド自動発掘エンジンへ即時起動シグナルを送信中...');
-    try {
-      const res = await fetch('/api/intelligence_cron', { method: 'POST', cache: 'no-store' });
-      if (res.ok) {
-        setTriggerMsg('🚀 起動成功！現在クラウドAIがバックグラウンドで全力全巡回を開始しました！1〜2分後にお手元の「🔄 更新」ボタンを押して最新カードをお確かめください！');
-      } else {
-        setTriggerMsg('❌ 起動シグナル送信に問題が発生しました。しばらく時間をおいてから再度お試しください。');
-      }
-    } catch (e) {
-      setTriggerMsg('❌ ネットワーク通信エラーが発生しました。');
-    } finally {
-      setTriggering(false);
-      setTimeout(() => setTriggerMsg(''), 15000);
-    }
-  };
 
   const fetchTopics = async () => {
     setLoading(true);
@@ -80,11 +57,93 @@ export default function IntelligenceStudioPage() {
     }
   };
 
+  const fetchSchedule = async () => {
+    try {
+      const timestamp = new Date().getTime();
+      const res = await fetch(`/api/schedule?_t=${timestamp}`, { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        setScheduleEvents(data.events || []);
+      }
+    } catch (err) {
+      console.error('Schedule fetch error:', err);
+    }
+  };
+
+  useEffect(() => {
+    // 初回マウント時のデータ取得。setLoading(true) が同期的に走る点を
+    // react-hooks/set-state-in-effect が指摘するが、ローディング表示の
+    // 即時反映という意図した挙動であり、既存の他画面とも同じパターンのため許容する。
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchTopics();
+    fetchLogs();
+    fetchSchedule();
+  }, []);
+
+  // 「採用」チェックを ON/OFF する。実際に見に行った操作(既読)とは別の、
+  // 「このネタで動画を作る」という能動的な意思決定を記録するための機能。
+  const handleToggleAdopt = async (topic, e) => {
+    e.stopPropagation();
+    const nextAdopted = !topic.adopted;
+    // 通信を待たずに見た目へ即反映（失敗時のみ後で戻す）
+    setTopics((prev) => prev.map((t) => (t.id === topic.id ? { ...t, adopted: nextAdopted } : t)));
+    if (selectedTopic?.id === topic.id) {
+      setSelectedTopic((prev) => ({ ...prev, adopted: nextAdopted }));
+    }
+    try {
+      const res = await fetch(`/api/intelligence/${topic.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ adopted: nextAdopted }),
+      });
+      if (!res.ok) throw new Error('failed');
+    } catch (err) {
+      console.error('Adopt toggle failed, reverting:', err);
+      setTopics((prev) => prev.map((t) => (t.id === topic.id ? { ...t, adopted: !nextAdopted } : t)));
+      if (selectedTopic?.id === topic.id) {
+        setSelectedTopic((prev) => ({ ...prev, adopted: !nextAdopted }));
+      }
+    }
+  };
+
+  const daysUntil = (dateStr) => {
+    if (!dateStr) return null;
+    const target = new Date(`${dateStr}T00:00:00+09:00`);
+    if (Number.isNaN(target.getTime())) return null;
+    const today = new Date();
+    const todayJst = new Date(today.toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+    todayJst.setHours(0, 0, 0, 0);
+    const diffDays = Math.round((target - todayJst) / (1000 * 60 * 60 * 24));
+    return diffDays;
+  };
+
+  const handleManualTrigger = async () => {
+    if (triggering) return;
+    setTriggering(true);
+    setTriggerMsg('⏳ クラウド自動発掘エンジンへ即時起動シグナルを送信中...');
+    try {
+      const res = await fetch('/api/intelligence_cron', { method: 'POST', cache: 'no-store' });
+      if (res.ok) {
+        setTriggerMsg('🚀 起動成功！現在クラウドAIがバックグラウンドで全力全巡回を開始しました！1〜2分後にお手元の「🔄 更新」ボタンを押して最新カードをお確かめください！');
+      } else {
+        setTriggerMsg('❌ 起動シグナル送信に問題が発生しました。しばらく時間をおいてから再度お試しください。');
+      }
+    } catch (e) {
+      setTriggerMsg('❌ ネットワーク通信エラーが発生しました。');
+    } finally {
+      setTriggering(false);
+      setTimeout(() => setTriggerMsg(''), 15000);
+    }
+  };
+
   const filteredTopics = topics.filter((item) => {
     const st = str(item.sourceType || '').toLowerCase();
     const su = str(item.sourceUrl || '').toLowerCase();
-    
+
     if (filter === 'すべて') return true;
+    if (filter === '⭐ 採用済み') {
+      return !!item.adopted;
+    }
     if (filter === 'Reddit') {
       return st.includes('reddit') || su.includes('reddit');
     }
@@ -220,6 +279,26 @@ export default function IntelligenceStudioPage() {
         </div>
       )}
 
+      {scheduleEvents.length > 0 && (
+        <div className={styles.scheduleStrip}>
+          <span className={styles.scheduleStripLabel}>🗓️ 今後の実装予定</span>
+          {scheduleEvents
+            .map((ev) => ({ ...ev, _days: daysUntil(ev.start_date) }))
+            .filter((ev) => ev._days === null || ev._days >= 0)
+            .sort((a, b) => (a._days ?? 999) - (b._days ?? 999))
+            .slice(0, 4)
+            .map((ev, idx) => (
+              <span key={idx} className={styles.scheduleChip}>
+                {ev._days !== null ? (
+                  ev._days === 0 ? '本日' : `あと${ev._days}日`
+                ) : '時期未定'}
+                : {ev.character}（{ev.event}）
+                {!ev.confirmed && <span className={styles.scheduleUnconfirmed}>未確定</span>}
+              </span>
+            ))}
+        </div>
+      )}
+
       {/* 📜 美麗・トグル式 収集活動＆実績ログ ダッシュボード */}
       {showLogs && (
         <section className={styles.logDashboard}>
@@ -286,7 +365,7 @@ export default function IntelligenceStudioPage() {
           <section className={styles.listColumn}>
             <div className={styles.listHeaderRow}>
               <div className={styles.filterBar}>
-                {['すべて', 'Reddit', 'YouTube', 'その他'].map((btn) => (
+                {['すべて', '⭐ 採用済み', 'Reddit', 'YouTube', 'その他'].map((btn) => (
                   <button
                     key={btn}
                     className={`${styles.filterBtn} ${filter === btn ? styles.filterActive : ''}`}
@@ -348,6 +427,13 @@ export default function IntelligenceStudioPage() {
                     <div className={styles.cardHeader}>
                       <span className={styles.sourceBadge}>{topic.sourceType}</span>
                       <span className={styles.cardDate}>{topic.date}</span>
+                      <button
+                        className={`${styles.adoptStarBtn} ${topic.adopted ? styles.adoptStarActive : ''}`}
+                        onClick={(e) => handleToggleAdopt(topic, e)}
+                        title={topic.adopted ? '採用を解除' : 'このネタを採用する'}
+                      >
+                        {topic.adopted ? '⭐' : '☆'}
+                      </button>
                     </div>
                     <div className={styles.cardTitle}>{topic.title}</div>
                     <div className={styles.cardSnippet}>{topic.scriptOutline}</div>
@@ -390,6 +476,13 @@ export default function IntelligenceStudioPage() {
                     <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
                       🕒 {selectedTopic.date}
                     </span>
+                    <button
+                      className={`${styles.adoptStarBtn} ${styles.adoptStarBtnLarge} ${selectedTopic.adopted ? styles.adoptStarActive : ''}`}
+                      onClick={(e) => handleToggleAdopt(selectedTopic, e)}
+                      title={selectedTopic.adopted ? '採用を解除' : 'このネタを採用する'}
+                    >
+                      {selectedTopic.adopted ? '⭐ 採用済み' : '☆ このネタを採用'}
+                    </button>
                   </div>
                   <h2 className={styles.studioTitle}>{selectedTopic.title}</h2>
                 </div>

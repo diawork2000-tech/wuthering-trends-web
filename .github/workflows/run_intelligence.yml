@@ -42,7 +42,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add scraper/config_intelligence.json scraper/intelligence_logs.json src/data/intelligence_cache.json || true
+          git add scraper/config_intelligence.json scraper/intelligence_logs.json src/data/intelligence_cache.json src/data/upcoming_schedule.json || true
           git commit -m "[Auto-Cache] Save resolved channel IDs, cache and intelligence logs [skip ci]" || echo "No changes to commit"
           git pull --rebase origin main || true
           git push origin main || true

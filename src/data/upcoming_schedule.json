@@ -1,0 +1,26 @@
+{
+  "updated_at": "2026-08-02T02:34:26.081954+00:00",
+  "events": [
+    {
+      "character": "Qingxiao",
+      "event": "バナー開始",
+      "start_date": "2026-08-20",
+      "confirmed": false,
+      "notes": "Version 3.6での実装予想（気動/剣）"
+    },
+    {
+      "character": "Jingran",
+      "event": "バナー開始",
+      "start_date": "2026-08-20",
+      "confirmed": false,
+      "notes": "Version 3.6での実装予想（熱融/長刃）"
+    },
+    {
+      "character": "Version 3.6",
+      "event": "バージョンアップデート",
+      "start_date": "2026-08-20",
+      "confirmed": false,
+      "notes": "Version 3.5（8月19日終了予定）の直後に配信予定と推測"
+    }
+  ]
+}
