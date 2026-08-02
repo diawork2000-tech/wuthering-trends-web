@@ -1,5 +1,19 @@
 [
   {
+    "timestamp": "2026-08-02 15:48:04",
+    "status": "Success",
+    "total_harvested": 154,
+    "final_selected": 28,
+    "breakdown": {
+      "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)": 4,
+      "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ": 5,
+      "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 3,
+      "YouTube競合 (別枠全件枠)": 16
+    },
+    "gemini_topic_status": "failed",
+    "gemini_competitor_status": "success"
+  },
+  {
     "timestamp": "2026-08-02 15:34:10",
     "status": "Success",
     "total_harvested": 154,
@@ -609,19 +623,6 @@
       "海外Redditフォーラム ガチャゲー最前線": 10,
       "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)": 1,
       "YouTube競合 (別枠全件枠)": 19
-    }
-  },
-  {
-    "timestamp": "2026-08-02 03:16:17",
-    "status": "Success",
-    "total_harvested": 168,
-    "final_selected": 26,
-    "breakdown": {
-      "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)": 3,
-      "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)": 6,
-      "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ": 2,
-      "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上": 1,
-      "YouTube競合 (別枠全件枠)": 14
     }
   }
 ]
