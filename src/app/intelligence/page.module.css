@@ -710,6 +710,16 @@
   font-size: 0.72rem;
 }
 
+.scoreBadge {
+  background: rgba(251, 146, 60, 0.15);
+  color: #fb923c;
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .cardTitle {
   font-size: 0.95rem;
   font-weight: 700;

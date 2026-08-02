@@ -148,6 +148,8 @@ class IntelligenceEngine:
                 patch_props["日時"] = {"date": {}}
             if "採用" not in props:
                 patch_props["採用"] = {"checkbox": {}}
+            if "スコア" not in props:
+                patch_props["スコア"] = {"number": {}}
 
             if patch_props:
                 print(f"  [Notion Auto-Upgrade] Creating {len(patch_props)} new customized columns in your database...")
@@ -495,7 +497,8 @@ class IntelligenceEngine:
                 "source_url": comp.get("url", ""),
                 "source_type": "YouTube競合 (別枠全件枠)",
                 "script_outline": detail_summary,
-                "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出"
+                "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
+                "score": comp.get("score", 90)
             })
                 
         print(f"  [Competitor Track Unlimited] Successfully locked {len(competitor_cards)} non-duplicate competitor hit videos for full immersion!")
@@ -534,6 +537,9 @@ class IntelligenceEngine:
                 c_txt = re.sub(r'^```(json)?|```$', '', c_res.text.strip(), flags=re.MULTILINE).strip()
                 c_list = json.loads(c_txt)
                 if len(c_list) > 0:
+                    comp_score_by_url = {c.get("url", ""): c.get("score", 90) for c in self.competitor_raw_items}
+                    for c in c_list:
+                        c["score"] = comp_score_by_url.get(c.get("source_url", ""), 90)
                     competitor_cards = c_list
                     self.gemini_competitor_status = "success"
                     print(f"  [Gemini Success] Upgraded {len(competitor_cards)} competitor cards with deep content breakdowns!")
@@ -581,11 +587,13 @@ class IntelligenceEngine:
                 raw_txt = re.sub(r'^```(json)?|```$', '', raw_txt, flags=re.MULTILINE).strip()
                 ideas_list = json.loads(raw_txt)
                 
+                topic_score_by_url = {it.get("url", ""): it.get("score", 60) for it in sorted_items}
                 clean_ideas = []
                 for idea in ideas_list:
                     tt = str(idea.get("topic_title", ""))
                     to = str(idea.get("script_outline", ""))
                     if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', tt)) >= 2 and "についてご存じですか" not in to:
+                        idea["score"] = topic_score_by_url.get(idea.get("source_url", ""), 60)
                         clean_ideas.append(idea)
                 self.gemini_topic_status = "success"
                 print(f"  [Gemini Success] Successfully generated & filtered {len(clean_ideas)} high-purity comprehensive breakdown cards!")
@@ -606,7 +614,8 @@ class IntelligenceEngine:
                 "source_url": item.get("url", ""),
                 "source_type": item.get("source_type", "Web調査"),
                 "script_outline": f"【動画・記事の完全論説・網羅的詳細】：\n{t_sum if len(t_sum) > 15 else f'「{t_title}」にて提起されたビルド方針や戦略、イベント攻略情報および熱烈な議論詳細の全容。'}",
-                "reason": f"注目トレンドおよびキーワード「{kw_match}」による反響検出"
+                "reason": f"注目トレンドおよびキーワード「{kw_match}」による反響検出",
+                "score": item.get("score", 60)
             })
         print(f"  [Algorithm Ready] Formatted {len(out_ideas)} items using advanced algorithm.")
         return out_ideas + competitor_cards
@@ -634,7 +643,8 @@ class IntelligenceEngine:
                     "一次URL": {"url": str(idea.get("source_url", ""))[:200] if str(idea.get("source_url", "")).startswith("http") else None},
                     "ショート台本骨格": {"rich_text": [{"text": {"content": str(idea.get("script_outline", ""))[:2000]}}]},
                     "合致根拠と期待値": {"rich_text": [{"text": {"content": str(idea.get("reason", ""))[:400]}}]},
-                    "日時": {"date": {"start": (datetime.now(timezone.utc) + timedelta(hours=9)).strftime("%Y-%m-%d")}}
+                    "日時": {"date": {"start": (datetime.now(timezone.utc) + timedelta(hours=9)).strftime("%Y-%m-%d")}},
+                    "スコア": {"number": idea.get("score", 60)}
                 }
             }
             try:
@@ -664,6 +674,7 @@ class IntelligenceEngine:
                     "sourceUrl": str(idea.get("source_url", "")),
                     "scriptOutline": str(idea.get("script_outline", "")),
                     "reason": str(idea.get("reason", "")),
+                    "score": idea.get("score", 60),
                     "date": (datetime.now(timezone.utc) + timedelta(hours=9)).strftime("%Y-%m-%d"),
                     "createdTime": (datetime.now(timezone.utc) + timedelta(hours=9)).isoformat()
                 })

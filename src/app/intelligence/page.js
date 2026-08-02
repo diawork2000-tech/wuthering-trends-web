@@ -169,7 +169,7 @@ export default function IntelligenceStudioPage() {
     const st = str(item.sourceType || '').toLowerCase();
     const su = str(item.sourceUrl || '').toLowerCase();
 
-    if (filter === 'すべて') return true;
+    if (filter === 'すべて' || filter === '🔥 スコア順') return true;
     if (filter === '⭐ 採用済み') {
       return !!item.adopted;
     }
@@ -187,6 +187,12 @@ export default function IntelligenceStudioPage() {
     }
     return true;
   });
+
+  // 「🔥 スコア順」タブでは、収集時に既に付与済みのスコアを使って並べ替えるだけ。
+  // 新たにGeminiへ問い合わせるわけではないので、追加のAPI消費は発生しない。
+  if (filter === '🔥 スコア順') {
+    filteredTopics.sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+  }
 
   function str(val) {
     return typeof val === 'string' ? val : String(val || '');
@@ -416,7 +422,7 @@ export default function IntelligenceStudioPage() {
           <section className={styles.listColumn}>
             <div className={styles.listHeaderRow}>
               <div className={styles.filterBar}>
-                {['すべて', '⭐ 採用済み', 'Reddit', 'YouTube', 'その他'].map((btn) => (
+                {['すべて', '🔥 スコア順', '⭐ 採用済み', 'Reddit', 'YouTube', 'その他'].map((btn) => (
                   <button
                     key={btn}
                     className={`${styles.filterBtn} ${filter === btn ? styles.filterActive : ''}`}
@@ -477,6 +483,7 @@ export default function IntelligenceStudioPage() {
                     {thumbElem && <div className={styles.cardThumbArea}>{thumbElem}</div>}
                     <div className={styles.cardHeader}>
                       <span className={styles.sourceBadge}>{topic.sourceType}</span>
+                      <span className={styles.scoreBadge}>🔥{topic.score ?? 60}</span>
                       <span className={styles.cardDate}>{topic.date}</span>
                       <button
                         className={`${styles.adoptStarBtn} ${topic.adopted ? styles.adoptStarActive : ''}`}
@@ -523,6 +530,9 @@ export default function IntelligenceStudioPage() {
                   <div className={styles.studioMeta}>
                     <span className={styles.sourceBadge} style={{ fontSize: '0.85rem', padding: '0.35rem 0.85rem' }}>
                       {selectedTopic.sourceType}
+                    </span>
+                    <span className={styles.scoreBadge} style={{ fontSize: '0.8rem', padding: '0.3rem 0.6rem' }}>
+                      🔥{selectedTopic.score ?? 60}
                     </span>
                     <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
                       🕒 {selectedTopic.date}

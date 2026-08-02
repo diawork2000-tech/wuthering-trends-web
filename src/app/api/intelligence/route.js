@@ -90,6 +90,7 @@ export async function GET() {
       const reason = props["合致根拠と期待値"]?.rich_text?.map(r => r.plain_text).join('') || "ホットトピック自動選抜";
       const dateStr = props["日時"]?.date?.start || page.created_time?.substring(0, 10) || "2026-07-30";
       const adopted = props["採用"]?.checkbox || false;
+      const score = props["スコア"]?.number ?? 60;
 
       return {
         id: page.id,
@@ -99,6 +100,7 @@ export async function GET() {
         scriptOutline,
         reason,
         adopted,
+        score,
         date: dateStr,
         createdTime: page.created_time
       };
