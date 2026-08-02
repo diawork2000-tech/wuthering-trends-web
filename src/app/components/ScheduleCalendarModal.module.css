@@ -15,7 +15,7 @@
   border: 1px solid rgba(96, 165, 250, 0.25);
   border-radius: 16px;
   width: 100%;
-  max-width: 640px;
+  max-width: 760px;
   max-height: 90vh;
   overflow-y: auto;
   padding: 1.4rem;
@@ -64,8 +64,8 @@
 .weekdaysRow {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-  margin-bottom: 4px;
+  gap: 2px;
+  margin-bottom: 2px;
 }
 
 .weekdayCell {
@@ -75,73 +75,89 @@
   padding: 0.3rem 0;
 }
 
-.grid {
+/* 1週間分のブロック。日付の行 + その下にイベント帯が重なる行、という2段構成 */
+.weekBlock {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 4px;
+  margin-bottom: 4px;
+}
+
+.dayNumRow {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-}
-
-.emptyCell {
-  min-height: 68px;
-}
-
-.dayCell {
-  min-height: 68px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  padding: 4px;
-  display: flex;
-  flex-direction: column;
   gap: 2px;
-  overflow: hidden;
+  margin-bottom: 2px;
 }
 
-.todayCell {
-  border-color: rgba(250, 204, 21, 0.6);
-  background: rgba(250, 204, 21, 0.06);
+.dayNumCell {
+  font-size: 0.72rem;
+  color: #cbd5e1;
+  padding: 2px 4px;
 }
 
-.dayNum {
-  font-size: 0.75rem;
-  color: #94a3b8;
+.dayNumOutside {
+  color: #3f4a5f;
 }
 
-.todayCell .dayNum {
+.dayNumToday {
   color: #facc15;
   font-weight: 700;
 }
 
-.eventChip {
-  font-size: 0.62rem;
-  border-radius: 4px;
-  padding: 1px 4px;
+/* 日付をまたぐイベントは、その週の中で列(曜日)をまたぐ帯として描画する。
+   同時開催で期間が重なるものは gridRow で段を分けて縦に積む。 */
+.barsArea {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px 0;
+}
+
+.eventBar {
+  font-size: 0.66rem;
+  padding: 2px 6px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-radius: 10px;
+  margin: 0 1px;
+}
+
+/* 週をまたいで続く場合は、続いている側の角を丸めず「途切れていない」ことを示す */
+.barOpenLeft {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: 0;
+}
+
+.barOpenRight {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-right: 0;
 }
 
 /* 重要項目（キャラ実装・武器・バージョン更新・ストーリー章） */
-.importantChip {
-  background: rgba(96, 165, 250, 0.25);
-  color: #dbeafe;
+.eventBarImportant {
+  background: rgba(96, 165, 250, 0.55);
+  color: #f0f7ff;
 }
 
 /* ゲーム内で開催される期間限定イベント。重要項目と見分けやすいよう別系統の色にする */
-.eventCategoryChip {
-  background: rgba(52, 211, 153, 0.22);
-  color: #d1fae5;
+.eventBarEvent {
+  background: rgba(52, 211, 153, 0.5);
+  color: #ecfdf5;
 }
 
 /* 未確定(リーク・予想)は種別に関わらず警告色を最優先で表示する */
-.unconfirmedChip {
-  background: rgba(251, 191, 36, 0.2);
-  color: #fde68a;
+.eventBarUnconfirmed {
+  background: rgba(251, 191, 36, 0.45);
+  color: #fffbeb;
 }
 
 .moreLabel {
-  font-size: 0.6rem;
+  font-size: 0.62rem;
   color: #64748b;
+  text-align: right;
+  padding: 1px 4px 0;
 }
 
 .legend {
@@ -151,6 +167,7 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  flex-wrap: wrap;
 }
 
 .legendDot {
