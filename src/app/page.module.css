@@ -187,6 +187,13 @@
   cursor: pointer;
 }
 
+/* ブラウザ標準のドロップダウン展開部分は rgba 背景が効かず不透明な既定色になるため、
+   <option> には明示的に不透明な背景色を指定しないと白背景に白文字で読めなくなる */
+.sortSelect option {
+  background: #1e1e2e;
+  color: #fff;
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(var(--card-width, 320px), 1fr));
