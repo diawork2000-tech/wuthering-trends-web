@@ -1,5 +1,18 @@
 [
   {
+    "timestamp": "2026-08-05 16:33:14",
+    "status": "Success",
+    "total_harvested": 153,
+    "final_selected": 25,
+    "breakdown": {
+      "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)": 9,
+      "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 3,
+      "YouTube競合 (別枠全件枠)": 13
+    },
+    "gemini_topic_status": "success",
+    "gemini_competitor_status": "success"
+  },
+  {
     "timestamp": "2026-08-05 16:18:10",
     "status": "Success",
     "total_harvested": 153,
@@ -674,18 +687,5 @@
     },
     "gemini_topic_status": "success",
     "gemini_competitor_status": "success"
-  },
-  {
-    "timestamp": "2026-08-05 04:02:43",
-    "status": "Success",
-    "total_harvested": 165,
-    "final_selected": 28,
-    "breakdown": {
-      "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)": 6,
-      "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)": 6,
-      "YouTube競合 (別枠全件枠)": 16
-    },
-    "gemini_topic_status": "failed",
-    "gemini_competitor_status": "failed"
   }
 ]
