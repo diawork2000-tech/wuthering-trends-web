@@ -1,4 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "ignoreCommand": "if git rev-parse -q --verify HEAD^2 >/dev/null 2>&1; then exit 1; fi; git diff --quiet HEAD^ HEAD -- . ':(exclude)scraper/logs.json' ':(exclude)scraper/config_intelligence.json' ':(exclude)scraper/intelligence_logs.json' ':(exclude)src/data/intelligence_cache.json' ':(exclude)src/data/upcoming_schedule.json'"
+  "ignoreCommand": "bash scripts/vercel-ignore.sh"
 }
