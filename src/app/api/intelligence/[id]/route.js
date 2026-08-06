@@ -15,7 +15,21 @@ export async function PATCH(request, { params }) {
   }
 
   try {
-    const { adopted } = await request.json();
+    const body = await request.json();
+    const properties = {};
+
+    if (typeof body.adopted === 'boolean') {
+      properties['採用'] = { checkbox: body.adopted };
+    }
+    // 制作状況は「未着手 → 制作中 → 投稿済み」を追えるようにするためのもの。
+    // 採用チェックだけだと、後から作ったのかどうかが分からなくなる。
+    if (typeof body.status === 'string' && body.status) {
+      properties['制作状況'] = { select: { name: body.status } };
+    }
+
+    if (Object.keys(properties).length === 0) {
+      return NextResponse.json({ error: 'No updatable field provided' }, { status: 400 });
+    }
 
     const response = await fetch(`https://api.notion.com/v1/pages/${id}`, {
       method: 'PATCH',
@@ -24,11 +38,7 @@ export async function PATCH(request, { params }) {
         'Content-Type': 'application/json',
         'Notion-Version': '2022-06-28'
       },
-      body: JSON.stringify({
-        properties: {
-          '採用': { checkbox: !!adopted }
-        }
-      })
+      body: JSON.stringify({ properties })
     });
 
     if (!response.ok) {
@@ -36,7 +46,7 @@ export async function PATCH(request, { params }) {
       throw new Error(`Notion API Error: ${response.status} ${errText}`);
     }
 
-    return NextResponse.json({ success: true, adopted: !!adopted });
+    return NextResponse.json({ success: true, ...body });
   } catch (error) {
     console.error('Error updating adoption status:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });

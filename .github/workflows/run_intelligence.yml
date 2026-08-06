@@ -34,6 +34,12 @@ jobs:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_INTELLIGENCE_DB_ID: ${{ secrets.NOTION_INTELLIGENCE_DB_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NOTION_LOG_DB_ID: ${{ secrets.NOTION_LOG_DB_ID }}
+          DISCORD_ALERT_WEBHOOK_URL: ${{ secrets.DISCORD_ALERT_WEBHOOK_URL }}
+          DISCORD_ALERT_ENABLED: ${{ vars.DISCORD_ALERT_ENABLED }}
+          # 手動実行、および画面の「今すぐ即時発掘」ボタンからの起動では
+          # 収集側の巡回間隔ガードを飛ばして必ず実行させる。
+          FORCE_RUN: ${{ github.event_name == 'workflow_dispatch' || github.event.client_payload.force == true }}
         run: |
           cd scraper
           python intelligence_collector.py

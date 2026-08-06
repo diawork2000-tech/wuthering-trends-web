@@ -32,6 +32,7 @@ except ImportError:
 
 from trend_collector import YouTubeKeyManager, translate_if_needed
 from notion_utils import notion_request
+from shared.automation_logger import log_run
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(os.path.join(BASE_DIR, ".env"))
@@ -42,6 +43,223 @@ NOTION_API_KEY = os.getenv("NOTION_API_KEY")
 NOTION_INTELLIGENCE_DB_ID = os.getenv("NOTION_INTELLIGENCE_DB_ID")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY") or os.getenv("YOUTUBE_API_KEYS")
+
+LOG_PATH = os.path.join(BASE_DIR, "intelligence_logs.json")
+SCHEDULE_PATH = os.path.join(BASE_DIR, "../src/data/upcoming_schedule.json")
+
+
+# どのカードにも出てくる語。これを残すと「鳴潮」だけで全部が同一話題に見えてしまう。
+# 「競合バズ実績」の見出しや攻略サイトの定型文（評価・おすすめ編成…）もここで落とす。
+TITLE_STOPWORDS = {
+    "鳴潮", "wutheringwaves", "wuthering", "waves", "wuwa", "meicho",
+    "競合", "バズ", "実績", "動画", "解説", "攻略", "最新", "情報", "まとめ",
+    "shorts", "short", "ショート", "youtube", "gaming",
+    "評価", "おすすめ", "編成", "パーティ", "武器", "音骸", "方法", "進め方",
+    "gamewith", "game8", "インサイド", "ニュース", "yahoo",
+}
+
+
+def _title_tokens(text):
+    """タイトルから意味のある語だけを取り出す。同一話題の判定に使う。
+
+    ハッシュタグ（#wuwacreator 等）は話題ではなく投稿者の習慣なので、
+    残すと無関係な動画同士が同一視されてしまう。先に丸ごと落とす。
+    """
+    t = re.sub(r"#\S+", " ", str(text).lower())
+    t = re.sub(r"[【】\[\]（）()｜|/,.!?・:：\-—＆&\"']", " ", t)
+    tokens = set(re.findall(r'[a-z0-9]{3,}|[ァ-ヴー]{2,}|[一-龥]{2,}', t))
+    return {w for w in tokens if w not in TITLE_STOPWORDS}
+
+
+def cluster_similar_items(items, threshold=0.34):
+    """同じ話題を扱うアイテムをまとめる。
+
+    「同じ話題が別ソースから5件」で一覧が埋まるのを防ぐのが第一の目的だが、
+    複数の情報源が同時に取り上げている = 話題性が高い、という判断材料にもなるため
+    まとめた件数を mention_count として残す。代表は最もスコアが高いものを選ぶ。
+    """
+    clusters = []  # [{"rep": item, "tokens": set, "members": [item, ...]}]
+    for item in items:
+        tokens = _title_tokens(item.get("title", ""))
+        # 特徴語が1語しかないタイトルは、偶然の一致で無関係なものと結合されやすいため
+        # 束ねの対象から外し、単独の話題として扱う。
+        if len(tokens) < 2:
+            clusters.append({"rep": item, "tokens": set(), "members": [item]})
+            continue
+
+        for c in clusters:
+            if not c["tokens"]:
+                continue
+            overlap = len(tokens & c["tokens"])
+            union = len(tokens | c["tokens"])
+            # 割合だけだと語数の少ないタイトル同士が1語かぶるだけで一致してしまうので
+            # 実数でも2語以上重なっていることを条件に加える。
+            if overlap >= 2 and union and (overlap / union) >= threshold:
+                c["members"].append(item)
+                if item.get("score", 0) > c["rep"].get("score", 0):
+                    c["rep"] = item
+                    c["tokens"] = tokens
+                break
+        else:
+            clusters.append({"rep": item, "tokens": tokens, "members": [item]})
+
+    representatives = []
+    for c in clusters:
+        rep = c["rep"]
+        rep["mention_count"] = len(c["members"])
+        # 別ソースが同じ話題に触れているほど加点する（最大 +18）
+        rep["score"] = min(100, rep.get("score", 60) + min(18, (len(c["members"]) - 1) * 6))
+        representatives.append(rep)
+    return representatives
+
+
+def _feed_entry_iso(entry):
+    """RSS エントリの公開日時を ISO8601 で返す。
+
+    RSS の日付表記はソースによってバラバラなので、feedparser が正規化した
+    published_parsed（UTC の time.struct_time）を優先して使う。
+    """
+    for attr in ("published_parsed", "updated_parsed"):
+        parsed = getattr(entry, attr, None)
+        if parsed:
+            try:
+                return datetime(*parsed[:6], tzinfo=timezone.utc).isoformat()
+            except Exception:
+                continue
+    return ""
+
+
+def _hours_since(iso_str):
+    """ISO8601 の日時から現在までの経過時間(時)。解釈できなければ None。"""
+    if not iso_str:
+        return None
+    try:
+        s = str(iso_str).replace("Z", "+00:00")
+        dt = datetime.fromisoformat(s)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return max(0.5, (datetime.now(timezone.utc) - dt).total_seconds() / 3600.0)
+    except Exception:
+        return None
+
+
+def score_competitor_video(view_count, like_count, published_at):
+    """競合動画のスコア。絶対再生数ではなく「伸び速度」を主軸にする。
+
+    投稿直後の1万再生と、半年かけての1万再生では価値が全く違う。
+    後追いで作って間に合うかを判断したいので、時間あたりの再生数で測る。
+    """
+    hours = _hours_since(published_at) or 72.0
+    vph = view_count / hours
+
+    for bar, pt in ((5000, 40), (2000, 34), (1000, 28), (500, 22), (200, 16), (50, 10)):
+        if vph >= bar:
+            speed = pt
+            break
+    else:
+        speed = 4
+
+    freshness = 8 if hours <= 24 else (4 if hours <= 72 else 0)
+    # 高評価率は「再生されただけ」か「刺さったか」の区別になる
+    engagement = 4 if view_count > 0 and (like_count / view_count) >= 0.05 else 0
+
+    return min(100, 50 + speed + freshness + engagement), round(vph, 1)
+
+
+def score_web_item(weight, published_at):
+    """Web/RSS 記事のスコア。情報源の信頼度と鮮度で決める。"""
+    hours = _hours_since(published_at)
+    if hours is None:
+        recency = 2  # 日時不明のものを不利にしすぎない程度に
+    elif hours <= 6:
+        recency = 12
+    elif hours <= 24:
+        recency = 8
+    elif hours <= 72:
+        recency = 4
+    else:
+        recency = 0
+    return min(100, int(weight) + recency)
+
+
+def load_upcoming_events():
+    """実装予定カレンダーを読む。スコアの直前ブースト判定に使う。"""
+    try:
+        with open(SCHEDULE_PATH, "r", encoding="utf-8") as f:
+            return json.load(f).get("events", [])
+    except Exception:
+        return []
+
+
+def schedule_boost(text, events):
+    """まもなく実装/開催される要素に触れたネタを加点する。
+
+    新キャラ実装の数日前にそのキャラの解説を出すのが最も伸びるため、
+    カレンダー上で近い予定に言及しているネタを優先的に浮上させる。
+    """
+    if not events:
+        return 0, None
+    low = str(text).lower()
+    best, best_name = 0, None
+    today = datetime.now(timezone.utc) + timedelta(hours=9)
+    for ev in events:
+        name = str(ev.get("character", "")).strip()
+        if len(name) < 2 or name.lower() not in low:
+            continue
+        try:
+            start = datetime.strptime(str(ev.get("start_date")), "%Y-%m-%d")
+        except Exception:
+            continue
+        days = (start - today.replace(tzinfo=None)).days
+        if -3 <= days <= 14:
+            pt = 12 if days >= 0 else 6
+            if pt > best:
+                best, best_name = pt, name
+    return best, best_name
+
+
+def minutes_since_last_run():
+    """前回の収集完了からの経過分数。記録が無ければ None（＝必ず実行する）。"""
+    try:
+        with open(LOG_PATH, "r", encoding="utf-8") as f:
+            logs = json.load(f)
+        if not logs:
+            return None
+        last = datetime.strptime(logs[0]["timestamp"], "%Y-%m-%d %H:%M:%S")
+        now_jst = (datetime.now(timezone.utc) + timedelta(hours=9)).replace(tzinfo=None)
+        return (now_jst - last).total_seconds() / 60.0
+    except Exception:
+        return None
+
+
+def is_force_run():
+    """手動の「今すぐ即時発掘」など、間隔を無視して実行すべきかどうか。"""
+    if "--force" in sys.argv:
+        return True
+    return str(os.getenv("FORCE_RUN", "")).lower() in ("1", "true", "yes")
+
+
+def _build_reason(item, kw_match):
+    """「なぜ今これなのか」を、手元の事実だけで組み立てる。
+
+    Gemini が無料枠切れ等で失敗したときのフォールバックでも、
+    定型文ではなく判断材料になる一文が出るようにしておく。
+    """
+    parts = []
+    mentions = item.get("mention_count", 1)
+    if mentions > 1:
+        parts.append(f"{mentions}件の情報源が同時に取り上げている話題")
+    if item.get("schedule_hit"):
+        parts.append(f"まもなく実装・開催の「{item['schedule_hit']}」に関連")
+    hours = _hours_since(item.get("published_at"))
+    if hours is not None and hours <= 24:
+        parts.append(f"約{int(hours)}時間前に出たばかりの新しい情報")
+    if item.get("match_kw"):
+        parts.append(f"競合が扱っている注目ワード「{item['match_kw']}」を含む")
+    if not parts:
+        parts.append(f"「{kw_match}」に関連する情報として収集")
+    return " ／ ".join(parts)
+
 
 def load_intelligence_config():
     if not os.path.exists(CONFIG_FILE):
@@ -150,6 +368,25 @@ class IntelligenceEngine:
                 patch_props["採用"] = {"checkbox": {}}
             if "スコア" not in props:
                 patch_props["スコア"] = {"number": {}}
+            if "再生数" not in props:
+                patch_props["再生数"] = {"number": {}}
+            if "伸び速度" not in props:
+                patch_props["伸び速度"] = {"number": {}}
+            if "言及ソース数" not in props:
+                patch_props["言及ソース数"] = {"number": {}}
+            # 「採用」だけだと作ったのか作っていないのかが後から分からないため、
+            # 制作の進み具合を段階で持てるようにする。
+            if "制作状況" not in props:
+                patch_props["制作状況"] = {
+                    "select": {
+                        "options": [
+                            {"name": "未着手", "color": "default"},
+                            {"name": "制作中", "color": "yellow"},
+                            {"name": "投稿済み", "color": "green"},
+                            {"name": "見送り", "color": "gray"},
+                        ]
+                    }
+                }
 
             if patch_props:
                 print(f"  [Notion Auto-Upgrade] Creating {len(patch_props)} new customized columns in your database...")
@@ -219,7 +456,8 @@ class IntelligenceEngine:
                 title = snippet.get("title", "")
                 view_count = int(stats.get("viewCount", 0))
                 like_count = int(stats.get("likeCount", 0))
-                
+                published_at = snippet.get("publishedAt", "")
+
                 if view_count > 1500 or like_count > 100:
                     words = re.findall(r'([A-Za-z0-9_-]{2,}|[ァ-ンヴー]{2,}|[一-龥]{2,})', title)
                     for w in words:
@@ -232,14 +470,19 @@ class IntelligenceEngine:
 
                     desc_raw = re.sub(r'\s+', ' ', str(snippet.get("description", ""))).strip()
                     desc_clean = desc_raw[:1500] if desc_raw else f"{title} に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。"
-                    full_summary = f"【動画の概要と発信内容詳細】\n{desc_clean}\n\n（📊 バズ実績: {ch_name} にて現在 {view_count:,} 再生 / 高評価 {like_count:,} を記録！）"
-                        
+                    score, vph = score_competitor_video(view_count, like_count, published_at)
+                    full_summary = f"【動画の概要と発信内容詳細】\n{desc_clean}\n\n（📊 バズ実績: {ch_name} にて現在 {view_count:,} 再生 / 高評価 {like_count:,} / 約 {vph:,.0f} 再生毎時）"
+
                     self.competitor_raw_items.append({
                         "title": f"【競合バズ実績】{title}",
                         "summary": full_summary,
                         "url": f"https://www.youtube.com/watch?v={video['id']}",
                         "source_type": "YouTube競合 (別枠全件枠)",
-                        "score": 98
+                        "score": score,
+                        "view_count": view_count,
+                        "like_count": like_count,
+                        "views_per_hour": vph,
+                        "published_at": published_at,
                     })
         print(f"  [Analytics Complete] Extracted {len(self.trending_keywords)} keywords and locked {len(self.competitor_raw_items)} competitor videos in separate track!")
 
@@ -261,6 +504,7 @@ class IntelligenceEngine:
             name = src.get("name", "Unknown Source")
             url = src.get("url", "")
             stype = src.get("type", "rss")
+            weight = src.get("weight", 55)  # 情報源ごとの信頼度（設定ファイルで調整可能）
             print(f"  [Fetch] {name} ({stype})...")
             
             try:
@@ -285,12 +529,14 @@ class IntelligenceEngine:
                             if not link or not str(link).startswith("http") or "google.com/search" in str(link):
                                 continue
                                 
+                            published_iso = _feed_entry_iso(entry)
                             self.collected_raw_items.append({
                                 "title": title_ja,
                                 "summary": summary_ja,
                                 "url": link,
                                 "source_type": name[:30],
-                                "score": 92
+                                "score": score_web_item(weight, published_iso),
+                                "published_at": published_iso or "",
                             })
                             item_cnt += 1
                         print(f"    -> Harvested & Selective-Translated {item_cnt} high-impact pure-link topic cards!")
@@ -399,6 +645,110 @@ class IntelligenceEngine:
         except Exception as e:
             print(f"  [Warning] スケジュール解析に失敗: {e}")
 
+    def _gemini_enrich(self, sorted_items, competitor_cards, target_count):
+        """トピック選出と競合動画の解説を1回の Gemini 呼び出しでまとめて行う。
+
+        戻り値は (topics, competitors) のタプル。失敗時は None を返し、
+        呼び出し側は従来通りアルゴリズムによるフォールバックへ落ちる。
+        """
+        # スコアや再生数などの数値はこちらで確定済みなので、AI には
+        # 文章の生成だけを任せ、数値は後からこちらで戻す（AIに数値を作らせない）。
+        topic_src = [
+            {
+                "title": it.get("title", ""),
+                "summary": str(it.get("summary", ""))[:600],
+                "url": it.get("url", ""),
+                "source_type": it.get("source_type", ""),
+                "mention_count": it.get("mention_count", 1),
+            }
+            for it in sorted_items[:20]
+        ]
+        comp_src = [
+            {
+                "title": c.get("topic_title", ""),
+                "summary": str(c.get("script_outline", ""))[:600],
+                "url": c.get("source_url", ""),
+            }
+            for c in competitor_cards[:15]
+        ]
+
+        prompt = (
+            "あなたはゲーム『鳴潮』専門のコンテンツアナリストです。\n"
+            "ショート動画の企画を立てるために、以下2種類の素材を解析してください。\n\n"
+            "【A: Web/SNSトピック候補】から最大 " + str(target_count) + " 件を選び、\n"
+            "【B: 競合YouTube動画】は件数を削らず全件について解説してください。\n\n"
+            "共通の絶対指令:\n"
+            "1. 元記事や元動画を開かなくても内容が完全に把握できる水準まで、結論・根拠・"
+            "キャラ名・パーティ構成・具体的な数値まで踏み込んで濃密に記述すること。\n"
+            "2. 短いあらすじで済ませることを禁ずる。\n"
+            "3. 『冒頭3秒』『〜をご存じですか？！』のような定型テンプレートは禁止。\n"
+            "4. 英語素材は100%自然な日本語へ完全翻訳すること。\n"
+            "5. reason は「なぜ今このネタなのか」を、時期・競合状況・話題性の観点で具体的に書くこと。\n\n"
+            "出力は純粋なJSONオブジェクトのみ。Markdownコードブロックは不可。形式:\n"
+            "{\n"
+            '  "topics": [\n'
+            "    {\n"
+            '      "topic_title": "純日本語の魅力的な見出し",\n'
+            '      "summary": "核心ポイント(純日本語)",\n'
+            '      "source_url": "素材に記載された元URLを正確に代入",\n'
+            '      "source_type": "素材のメディア種別",\n'
+            '      "script_outline": "【動画・記事の完全論説・網羅的詳細】：\\n(全容を長尺で徹底解説)",\n'
+            '      "reason": "なぜ今このネタが狙い目なのかの具体的な理由"\n'
+            "    }\n"
+            "  ],\n"
+            '  "competitors": [\n'
+            "    {\n"
+            '      "topic_title": "純日本語の見出し",\n'
+            '      "summary": "動画の核心ポイント",\n'
+            '      "source_url": "素材に記載された元動画URLを正確に代入",\n'
+            '      "source_type": "YouTube競合 (別枠全件枠)",\n'
+            '      "script_outline": "【動画・記事の完全論説・網羅的詳細】：\\n(結論・ビルド方針・強さを徹底解説)",\n'
+            '      "reason": "この競合動画が伸びている理由の分析"\n'
+            "    }\n"
+            "  ]\n"
+            "}\n\n"
+            "A: Web/SNSトピック候補:\n" + json.dumps(topic_src, ensure_ascii=False) + "\n\n"
+            "B: 競合YouTube動画:\n" + json.dumps(comp_src, ensure_ascii=False)
+        )
+
+        try:
+            res = self.gemini_client.models.generate_content(
+                model=self.gemini_model_name, contents=prompt
+            )
+            txt = re.sub(r'^```(json)?|```$', '', res.text.strip(), flags=re.MULTILINE).strip()
+            data = json.loads(txt)
+        except Exception as e:
+            print(f"  [Warning] Gemini combined analysis failed ({e}). Falling back to advanced algorithm.")
+            return None
+
+        # 数値系のフィールドは元データ（URLをキー）から復元する
+        topic_meta = {it.get("url", ""): it for it in sorted_items}
+        comp_meta = {c.get("source_url", ""): c for c in competitor_cards}
+
+        topics_out = []
+        for idea in data.get("topics", []) or []:
+            tt = str(idea.get("topic_title", ""))
+            to = str(idea.get("script_outline", ""))
+            if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', tt)) < 2 or "についてご存じですか" in to:
+                continue
+            meta = topic_meta.get(idea.get("source_url", ""), {})
+            idea["score"] = meta.get("score", 60)
+            idea["view_count"] = 0
+            idea["views_per_hour"] = 0
+            idea["mention_count"] = meta.get("mention_count", 1)
+            topics_out.append(idea)
+
+        comps_out = []
+        for c in data.get("competitors", []) or []:
+            meta = comp_meta.get(c.get("source_url", ""), {})
+            c["score"] = meta.get("score", 90)
+            c["view_count"] = meta.get("view_count", 0)
+            c["views_per_hour"] = meta.get("views_per_hour", 0)
+            c["mention_count"] = 1
+            comps_out.append(c)
+
+        return topics_out, comps_out
+
     def generate_and_filter_ideas(self):
         print("\n=== [Phase 3] Generating, Deduplicating & Filtering Video Topics ===")
         target_count = self.config.get("settings", {}).get("target_items_per_run", 12)
@@ -436,7 +786,9 @@ class IntelligenceEngine:
                 pass
 
         print(f"  [Deduplication Shield] Registered {len(existing_urls)} existing URLs and {len(existing_titles)} existing titles in prevention memory.")
-        
+
+        upcoming_events = load_upcoming_events()
+
         unique_raw_items = []
         seen_in_batch_url = set()
         seen_in_batch_title = set()
@@ -454,13 +806,25 @@ class IntelligenceEngine:
             combined = (item["title"] + " " + item.get("summary", "")).lower()
             for kw in self.trending_keywords:
                 if kw.lower() in combined:
-                    item["score"] = min(100, item.get("score", 60) + 15)
+                    item["score"] = min(100, item.get("score", 60) + 10)
                     item["match_kw"] = kw
                     break
+
+            # 実装/開催が近い要素に触れているネタを浮上させる
+            boost, ev_name = schedule_boost(combined, upcoming_events)
+            if boost:
+                item["score"] = min(100, item.get("score", 60) + boost)
+                item["schedule_hit"] = ev_name
+
             unique_raw_items.append(item)
 
         print(f"  [Deduplication Complete] Filtered down from {len(self.collected_raw_items)} raw grabs to {len(unique_raw_items)} distinct, fresh candidates.")
-        
+
+        # 同じ話題が別ソースから何件も並ぶのを畳む。複数が触れている話題は加点される。
+        before_cluster = len(unique_raw_items)
+        unique_raw_items = cluster_similar_items(unique_raw_items)
+        print(f"  [Topic Clustering] Merged {before_cluster} candidates into {len(unique_raw_items)} distinct topics.")
+
         web_items = [x for x in unique_raw_items if "youtube" not in str(x.get("source_type", "")).lower() and "youtube" not in str(x.get("url", "")).lower()]
         yt_items = [x for x in unique_raw_items if "youtube" in str(x.get("source_type", "")).lower() or "youtube" in str(x.get("url", "")).lower()]
         
@@ -497,109 +861,42 @@ class IntelligenceEngine:
                 "source_url": comp.get("url", ""),
                 "source_type": "YouTube競合 (別枠全件枠)",
                 "script_outline": detail_summary,
-                "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
-                "score": comp.get("score", 90)
+                "reason": (
+                    f"競合チャンネルで約 {comp.get('views_per_hour', 0):,.0f} 再生/時 のペースで伸びている実績データに基づく抽出"
+                ),
+                "score": comp.get("score", 90),
+                "view_count": comp.get("view_count", 0),
+                "views_per_hour": comp.get("views_per_hour", 0),
+                "mention_count": 1,
             })
                 
         print(f"  [Competitor Track Unlimited] Successfully locked {len(competitor_cards)} non-duplicate competitor hit videos for full immersion!")
 
-        if not self.gemini_model_name:
-            self.gemini_competitor_status = "not_configured"
-        elif len(competitor_cards) == 0:
-            self.gemini_competitor_status = "no_items"
-
-        # 競合動画に対しても再生数表記だけで済ませないよう、AIで動画内容の「完全な網羅的詳細」を強力解剖！！
-        if self.gemini_model_name and len(competitor_cards) > 0:
-            self.gemini_competitor_status = "failed"  # 例外/0件時はこのまま failed として記録される
-            print(f"  [Gemini Competitor Deep-Dive] Sending {len(competitor_cards)} competitor videos to Gemini for full technical breakdown...")
-            comp_prompt = (
-                "あなたはゲーム『鳴潮』情報と競合YouTubeチャンネル分析の最高責任者です。\n"
-                "以下の競合チャンネル動画リストについて、動画概要欄のデータから読み取れる【 具体的な動画の内容・キャラ評価・音骸・ビルド戦略や結論の詳細 】を徹底解説してください。\n\n"
-                "【⚠️絶対指令⚠️】\n"
-                "1. 単に「OO再生の注目テーマです」のような数字紹介や手抜き言説を徹底廃止。\n"
-                "2. 動画リンクを開いて再生しなくても、「この動画で何が主張され、どのキャラが最強と結論づけられ、どう戦うべきなのか」の具体的な全容を読者が完璧に把握できるように濃密解説せよ。\n"
-                "3. リスト内にある動画件数は削がずに全件出力すること。\n\n"
-                "純粋なJSONフォーマットの配列のみを返してください。Markdownのコードブロックは不可。\n"
-                "[\n  {\n"
-                '    "topic_title": "魅力的な見出し(純日本語)",\n'
-                '    "summary": "動画の核心ポイント(純日本語)",\n'
-                '    "source_url": "提供リスト内にある元動画URLを正確に代入",\n'
-                '    "source_type": "YouTube競合 (別枠全件枠)",\n'
-                '    "script_outline": "【動画・記事の完全論説・網羅的詳細】：\\n(元動画を見なくても内容が100%把握できるように結論・ビルド方針・強さを長文で徹底解説)",\n'
-                '    "reason": "競合チャンネルにおける卓越した熱気と高いバズ実績による抽出"\n'
-                "  }\n]\n\n"
-                "動画素材リスト:\n" + json.dumps(competitor_cards[:25], ensure_ascii=False)
-            )
-            try:
-                c_res = self.gemini_client.models.generate_content(
-                    model=self.gemini_model_name, contents=comp_prompt
-                )
-                c_txt = re.sub(r'^```(json)?|```$', '', c_res.text.strip(), flags=re.MULTILINE).strip()
-                c_list = json.loads(c_txt)
-                if len(c_list) > 0:
-                    comp_score_by_url = {c.get("url", ""): c.get("score", 90) for c in self.competitor_raw_items}
-                    for c in c_list:
-                        c["score"] = comp_score_by_url.get(c.get("source_url", ""), 90)
-                    competitor_cards = c_list
-                    self.gemini_competitor_status = "success"
-                    print(f"  [Gemini Success] Upgraded {len(competitor_cards)} competitor cards with deep content breakdowns!")
-            except Exception as e:
-                print(f"  [Warning] Competitor deep-dive fallback to native description text ({e}).")
-
+        # --- Gemini 解析（トピックと競合を1回の呼び出しでまとめて処理する）---
+        # 以前はトピック用・競合用で別々に呼んでいたため、15分おきの巡回と掛け合わせて
+        # 1日約192回に達し、無料枠(1日20回)を大幅に超えて9割が失敗していた。
+        # 1回にまとめることで消費を半減させる（巡回間隔の見直しと合わせて枠内に収める）。
         if not self.gemini_model_name:
             self.gemini_topic_status = "not_configured"
-        elif len(sorted_items) == 0:
+            self.gemini_competitor_status = "not_configured"
+        elif not sorted_items and not competitor_cards:
             self.gemini_topic_status = "no_items"
+            self.gemini_competitor_status = "no_items"
+        else:
+            self.gemini_topic_status = "failed" if sorted_items else "no_items"
+            self.gemini_competitor_status = "failed" if competitor_cards else "no_items"
 
-        if self.gemini_model_name and len(sorted_items) > 0:
-            self.gemini_topic_status = "failed"  # 例外/0件時はこのまま failed として記録される
-            print(f"  [Gemini Batch] Sending batch request to Gemini AI with {len(sorted_items)} items to compile comprehensive full breakdowns...")
-            prompt = (
-                "あなたはゲーム『鳴潮』情報のアナリストおよびコンテンツ最高責任者です。\n"
-                "以下の回収リストから注目すべきトピックを【 最大 " + str(target_count) + " 件 】選出し、"
-                "記事や動画の【網羅的で完全な詳細内容（論旨の全容解説）】を正確かつ精緻に構築してください。\n\n"
-                "【⚠️最重要・絶対指令⚠️】\n"
-                "1. 単なる「要約（短いあらすじ）」で終わらせることは堅く禁ずる。\n"
-                "2. 読者が「元記事や動画のリンクを開いてわざわざ確認に行かなくても、このテキストを一読するだけですべての内容・結論・理由・具体的数値を完全に把握できる」水準まで詳細かつ濃密に解説・徹底記述すること。\n"
-                "   例：ガチャ・育成動画であれば「誰をどの音骸・サブステータスで組み、なぜ今すぐ引くべきか/スルーすべきかの結論と理由」の完全解説、\n"
-                "   海外掲示板やリーク考察であれば「どんな背景・事実があり、プレイヤーたちがどのような肯否意見で熱狂論争しているかの全様」を徹底詳説。\n"
-                "3. 「冒頭3秒」「〜をご存じですか？！」などの定型的な台本テンプレートや、中身を省略する言動は一切 proibit とする。\n"
-                "4. 海外Reddit等の英語記事が含まれる場合は、必ず【100% 自然で滑らかな純日本語による超高品質な網羅的詳細】へ完全翻訳すること。\n\n"
-                "出力は必ず【純粋なJSONフォーマットの配列】のみを返し、Markdownコードブロックや不要な解説は除外してください。\n\n"
-                "JSONの形式基準:\n"
-                "[\n"
-                "  {\n"
-                '    "topic_title": "100%純日本語の的確で魅力的なトピック見出し",\n'
-                '    "summary": "事象の核心ポイント(純日本語)",\n'
-                '    "source_url": "提供リスト内に記載された正確な元URL",\n'
-                '    "source_type": "提供リストのメディア種別",\n'
-                '    "script_outline": "【動画・記事の完全論説・網羅的詳細】：\n(元サイトに行かなくても完全に全容を理解できるよう、ここで結論、根拠、キャラクター名やパーティ戦略、具体的な議論の細流や検証ステータスを余すことなく長尺で徹底解説せよ)",\n'
-                '    "reason": "なぜこの情報がプレイヤー層において重要視されているかの注目ポイント"\n'
-                "  }\n"
-                "]\n\n"
-                "素材リスト:\n" + json.dumps(sorted_items[:25], ensure_ascii=False)
-            )
-            try:
-                ai_res = self.gemini_client.models.generate_content(
-                    model=self.gemini_model_name, contents=prompt
-                )
-                raw_txt = ai_res.text.strip()
-                raw_txt = re.sub(r'^```(json)?|```$', '', raw_txt, flags=re.MULTILINE).strip()
-                ideas_list = json.loads(raw_txt)
-                
-                topic_score_by_url = {it.get("url", ""): it.get("score", 60) for it in sorted_items}
-                clean_ideas = []
-                for idea in ideas_list:
-                    tt = str(idea.get("topic_title", ""))
-                    to = str(idea.get("script_outline", ""))
-                    if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', tt)) >= 2 and "についてご存じですか" not in to:
-                        idea["score"] = topic_score_by_url.get(idea.get("source_url", ""), 60)
-                        clean_ideas.append(idea)
-                self.gemini_topic_status = "success"
-                print(f"  [Gemini Success] Successfully generated & filtered {len(clean_ideas)} high-purity comprehensive breakdown cards!")
-                return clean_ideas[:target_count] + competitor_cards
-            except Exception as e:
-                print(f"  [Warning] Gemini generation failed ({e}). Falling back to advanced algorithm.")
+            enriched = self._gemini_enrich(sorted_items, competitor_cards, target_count)
+            if enriched:
+                topics_out, comps_out = enriched
+                if topics_out:
+                    self.gemini_topic_status = "success"
+                if comps_out:
+                    competitor_cards = comps_out
+                    self.gemini_competitor_status = "success"
+                if topics_out:
+                    print(f"  [Gemini Success] {len(topics_out)} topics / {len(comps_out)} competitor cards enriched in a single call.")
+                    return topics_out[:target_count] + competitor_cards
 
         out_ideas = []
         for item in sorted_items[:target_count]:
@@ -614,8 +911,11 @@ class IntelligenceEngine:
                 "source_url": item.get("url", ""),
                 "source_type": item.get("source_type", "Web調査"),
                 "script_outline": f"【動画・記事の完全論説・網羅的詳細】：\n{t_sum if len(t_sum) > 15 else f'「{t_title}」にて提起されたビルド方針や戦略、イベント攻略情報および熱烈な議論詳細の全容。'}",
-                "reason": f"注目トレンドおよびキーワード「{kw_match}」による反響検出",
-                "score": item.get("score", 60)
+                "reason": _build_reason(item, kw_match),
+                "score": item.get("score", 60),
+                "view_count": 0,
+                "views_per_hour": 0,
+                "mention_count": item.get("mention_count", 1),
             })
         print(f"  [Algorithm Ready] Formatted {len(out_ideas)} items using advanced algorithm.")
         return out_ideas + competitor_cards
@@ -644,7 +944,11 @@ class IntelligenceEngine:
                     "ショート台本骨格": {"rich_text": [{"text": {"content": str(idea.get("script_outline", ""))[:2000]}}]},
                     "合致根拠と期待値": {"rich_text": [{"text": {"content": str(idea.get("reason", ""))[:400]}}]},
                     "日時": {"date": {"start": (datetime.now(timezone.utc) + timedelta(hours=9)).strftime("%Y-%m-%d")}},
-                    "スコア": {"number": idea.get("score", 60)}
+                    "スコア": {"number": idea.get("score", 60)},
+                    "再生数": {"number": int(idea.get("view_count", 0) or 0)},
+                    "伸び速度": {"number": round(float(idea.get("views_per_hour", 0) or 0), 1)},
+                    "言及ソース数": {"number": int(idea.get("mention_count", 1) or 1)},
+                    "制作状況": {"select": {"name": "未着手"}},
                 }
             }
             try:
@@ -675,6 +979,9 @@ class IntelligenceEngine:
                     "scriptOutline": str(idea.get("script_outline", "")),
                     "reason": str(idea.get("reason", "")),
                     "score": idea.get("score", 60),
+                    "viewCount": int(idea.get("view_count", 0) or 0),
+                    "viewsPerHour": round(float(idea.get("views_per_hour", 0) or 0), 1),
+                    "mentionCount": int(idea.get("mention_count", 1) or 1),
                     "date": (datetime.now(timezone.utc) + timedelta(hours=9)).strftime("%Y-%m-%d"),
                     "createdTime": (datetime.now(timezone.utc) + timedelta(hours=9)).isoformat()
                 })
@@ -773,6 +1080,21 @@ class IntelligenceEngine:
     def run(self):
         now_str = (datetime.now(timezone.utc) + timedelta(hours=9)).strftime('%Y/%m/%d %H:%M:%S (JST)')
         print(f"\n--- [Intelligence Engine Started] {now_str} ---")
+        run_start_time = time.time()
+
+        # 巡回間隔のガード。外部 cron が15分おきに叩いても、ここで実際の実行頻度を決める。
+        # cron 側の設定を触らずに間隔を変えられるようにしてある（設定ファイルの
+        # settings.min_run_interval_minutes）。手動実行(--force / FORCE_RUN)は素通し。
+        interval = int(self.config.get("settings", {}).get("min_run_interval_minutes", 0) or 0)
+        elapsed = minutes_since_last_run()
+        if interval and elapsed is not None and elapsed < interval and not is_force_run():
+            print(
+                f"  [Skip] 前回の収集から {elapsed:.0f} 分しか経っていません"
+                f"（設定間隔 {interval} 分）。今回はスキップします。"
+            )
+            print("  ※ Gemini無料枠とYouTube APIクォータを使い切らないための意図的な間引きです。")
+            return
+
         try:
             self.analyze_channels()
             self.crawl_web_sources()
@@ -820,9 +1142,13 @@ class IntelligenceEngine:
             except Exception as le:
                 print(f"  [Log Warning] Failed to write intelligence logs: {le}")
 
+            log_run("intelligence_collector", "success",
+                    f"収集{len(self.collected_raw_items) + len(self.competitor_raw_items)}件 / 採用{len(ideas or [])}件",
+                    time.time() - run_start_time)
             print("\n--- [All Intelligence Processing, Auto-Cleanup & Logging Completed Successfully!] ---\n")
         except Exception as e:
             print(f"[Fatal Exception during Intelligence Execution]: {traceback.format_exc()}")
+            log_run("intelligence_collector", "error", traceback.format_exc(), time.time() - run_start_time)
 
 if __name__ == "__main__":
     engine = IntelligenceEngine()

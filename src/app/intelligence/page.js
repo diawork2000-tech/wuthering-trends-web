@@ -20,6 +20,10 @@ export default function IntelligenceStudioPage() {
   const [triggering, setTriggering] = useState(false);
   const [triggerMsg, setTriggerMsg] = useState('');
   const [scheduleEvents, setScheduleEvents] = useState([]);
+  const [script, setScript] = useState(null);
+  const [scriptLoading, setScriptLoading] = useState(false);
+  const [scriptError, setScriptError] = useState('');
+  const [scriptSeconds, setScriptSeconds] = useState(30);
   const scrollAreaRef = useRef(null);
 
   const fetchTopics = async () => {
@@ -110,6 +114,55 @@ export default function IntelligenceStudioPage() {
     }
   };
 
+  // 制作の進み具合を記録する。「採用」だけだと、後から見たときに
+  // そのネタを実際に作ったのかどうかが分からなくなるため。
+  const handleChangeStatus = async (topic, nextStatus) => {
+    setTopics((prev) => prev.map((t) => (t.id === topic.id ? { ...t, status: nextStatus } : t)));
+    if (selectedTopic?.id === topic.id) {
+      setSelectedTopic((prev) => ({ ...prev, status: nextStatus }));
+    }
+    try {
+      const res = await fetch(`/api/intelligence/${topic.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: nextStatus }),
+      });
+      if (!res.ok) throw new Error('failed');
+    } catch (err) {
+      console.error('Status update failed:', err);
+      setTopics((prev) => prev.map((t) => (t.id === topic.id ? { ...t, status: topic.status } : t)));
+    }
+  };
+
+  const handleGenerateScript = async () => {
+    if (!selectedTopic || scriptLoading) return;
+    setScriptLoading(true);
+    setScriptError('');
+    setScript(null);
+    try {
+      const res = await fetch('/api/script', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: selectedTopic.title,
+          outline: selectedTopic.scriptOutline,
+          reason: selectedTopic.reason,
+          seconds: scriptSeconds,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setScriptError(data.error || '台本の生成に失敗しました。');
+      } else {
+        setScript(data.script || { raw: data.raw });
+      }
+    } catch (err) {
+      setScriptError('通信エラーが発生しました。');
+    } finally {
+      setScriptLoading(false);
+    }
+  };
+
   // Gemini が実際に成功したか、無料枠制限等で代替アルゴリズムに落ちていたかを
   // 稼働ログから一目で確認できるようにする（「本当に毎回効いているのか」を検証するため）
   const renderGeminiStatus = (label, status) => {
@@ -151,7 +204,8 @@ export default function IntelligenceStudioPage() {
     setTriggering(true);
     setTriggerMsg('⏳ クラウド自動発掘エンジンへ即時起動シグナルを送信中...');
     try {
-      const res = await fetch('/api/intelligence_cron', { method: 'POST', cache: 'no-store' });
+      // force=1 を付けることで、巡回間隔のガードを飛ばして必ず今すぐ実行させる
+      const res = await fetch('/api/intelligence_cron?force=1', { method: 'POST', cache: 'no-store' });
       if (res.ok) {
         setTriggerMsg('🚀 起動成功！現在クラウドAIがバックグラウンドで全力全巡回を開始しました！1〜2分後にお手元の「🔄 更新」ボタンを押して最新カードをお確かめください！');
       } else {
@@ -169,7 +223,7 @@ export default function IntelligenceStudioPage() {
     const st = str(item.sourceType || '').toLowerCase();
     const su = str(item.sourceUrl || '').toLowerCase();
 
-    if (filter === 'すべて' || filter === '🔥 スコア順') return true;
+    if (filter === 'すべて' || filter === '🔥 スコア順' || filter === '🎯 今日の3本') return true;
     if (filter === '⭐ 採用済み') {
       return !!item.adopted;
     }
@@ -192,6 +246,31 @@ export default function IntelligenceStudioPage() {
   // 新たにGeminiへ問い合わせるわけではないので、追加のAPI消費は発生しない。
   if (filter === '🔥 スコア順') {
     filteredTopics.sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+  }
+
+  // 100件を眺めるのが一番の負担なので、「今日やる分」だけを切り出す。
+  // 未着手・高スコアを優先しつつ、同じソースに偏らないよう1件ずつ拾う。
+  let displayTopics = filteredTopics;
+  if (filter === '🎯 今日の3本') {
+    const pool = [...filteredTopics]
+      .filter((t) => !t.adopted && (t.status || '未着手') === '未着手')
+      .sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+
+    const picked = [];
+    const usedSources = new Set();
+    for (const t of pool) {
+      const key = str(t.sourceType).toLowerCase();
+      if (usedSources.has(key)) continue;
+      usedSources.add(key);
+      picked.push(t);
+      if (picked.length === 3) break;
+    }
+    // ソースの種類が3つに満たない場合は、スコア順で足りない分を補う
+    for (const t of pool) {
+      if (picked.length >= 3) break;
+      if (!picked.includes(t)) picked.push(t);
+    }
+    displayTopics = picked;
   }
 
   function str(val) {
@@ -422,7 +501,7 @@ export default function IntelligenceStudioPage() {
           <section className={styles.listColumn}>
             <div className={styles.listHeaderRow}>
               <div className={styles.filterBar}>
-                {['すべて', '🔥 スコア順', '⭐ 採用済み', 'Reddit', 'YouTube', 'その他'].map((btn) => (
+                {['🎯 今日の3本', 'すべて', '🔥 スコア順', '⭐ 採用済み', 'Reddit', 'YouTube', 'その他'].map((btn) => (
                   <button
                     key={btn}
                     className={`${styles.filterBtn} ${filter === btn ? styles.filterActive : ''}`}
@@ -471,14 +550,19 @@ export default function IntelligenceStudioPage() {
               ref={scrollAreaRef}
               onWheel={handleWheel}
             >
-              {filteredTopics.map((topic) => {
+              {displayTopics.map((topic) => {
                 const isSelected = selectedTopic && selectedTopic.id === topic.id;
                 const thumbElem = renderThumbnail(topic);
                 return (
                   <div
                     key={topic.id}
                     className={`${styles.topicCard} ${isSelected ? styles.activeCard : ''}`}
-                    onClick={() => setSelectedTopic(topic)}
+                    onClick={() => {
+                      setSelectedTopic(topic);
+                      // 別のネタに切り替えたら、前のネタの台本は消しておく
+                      setScript(null);
+                      setScriptError('');
+                    }}
                   >
                     {thumbElem && <div className={styles.cardThumbArea}>{thumbElem}</div>}
                     <div className={styles.cardHeader}>
@@ -494,6 +578,21 @@ export default function IntelligenceStudioPage() {
                       </button>
                     </div>
                     <div className={styles.cardTitle}>{topic.title}</div>
+                    <div className={styles.cardStatRow}>
+                      {topic.viewsPerHour > 0 && (
+                        <span className={styles.statChip} title="競合動画が伸びている速度">
+                          ⚡ {Math.round(topic.viewsPerHour).toLocaleString()} 再生/時
+                        </span>
+                      )}
+                      {topic.mentionCount > 1 && (
+                        <span className={styles.statChipHot} title="複数の情報源が同じ話題を扱っている">
+                          🗣 {topic.mentionCount}ソースが言及
+                        </span>
+                      )}
+                      {(topic.status || '未着手') !== '未着手' && (
+                        <span className={styles.statChipStatus}>{topic.status}</span>
+                      )}
+                    </div>
                     <div className={styles.cardSnippet}>{topic.scriptOutline}</div>
                   </div>
                 );
@@ -544,6 +643,16 @@ export default function IntelligenceStudioPage() {
                     >
                       {selectedTopic.adopted ? '⭐ 採用済み' : '☆ このネタを採用'}
                     </button>
+                    <select
+                      className={styles.statusSelect}
+                      value={selectedTopic.status || '未着手'}
+                      onChange={(e) => handleChangeStatus(selectedTopic, e.target.value)}
+                      title="制作の進み具合を記録します"
+                    >
+                      {['未着手', '制作中', '投稿済み', '見送り'].map((s) => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
+                    </select>
                   </div>
                   <h2 className={styles.studioTitle}>{selectedTopic.title}</h2>
                 </div>
@@ -558,6 +667,81 @@ export default function IntelligenceStudioPage() {
                 <div className={styles.reasonSection}>
                   <div className={styles.reasonTitle}>💡 バズ予測と注目ポイント</div>
                   <p className={styles.reasonText}>{selectedTopic.reason}</p>
+                </div>
+
+                <div className={styles.scriptSection}>
+                  <div className={styles.sectionHeading}>
+                    <span>✍️ 台本のたたき台</span>
+                    <div className={styles.scriptControls}>
+                      {[30, 60].map((sec) => (
+                        <button
+                          key={sec}
+                          className={`${styles.lengthBtn} ${scriptSeconds === sec ? styles.lengthBtnActive : ''}`}
+                          onClick={() => setScriptSeconds(sec)}
+                        >
+                          {sec}秒
+                        </button>
+                      ))}
+                      <button
+                        className={styles.generateBtn}
+                        onClick={handleGenerateScript}
+                        disabled={scriptLoading}
+                      >
+                        {scriptLoading ? '⏳ 生成中...' : '⚡ 台本を作る'}
+                      </button>
+                    </div>
+                  </div>
+
+                  {scriptError && <p className={styles.scriptError}>{scriptError}</p>}
+
+                  {script && (
+                    <div className={styles.scriptResult}>
+                      {script.raw ? (
+                        <pre className={styles.scriptRaw}>{script.raw}</pre>
+                      ) : (
+                        <>
+                          <div className={styles.scriptBlock}>
+                            <span className={styles.scriptLabel}>冒頭2秒</span>
+                            <p className={styles.scriptHook}>{script.hook}</p>
+                          </div>
+                          <div className={styles.scriptBlock}>
+                            <span className={styles.scriptLabel}>本編</span>
+                            {(script.body || []).map((line, i) => (
+                              <p key={i} className={styles.scriptLine}>{line}</p>
+                            ))}
+                          </div>
+                          <div className={styles.scriptBlock}>
+                            <span className={styles.scriptLabel}>締め</span>
+                            <p className={styles.scriptLine}>{script.closing}</p>
+                          </div>
+                          {script.titles?.length > 0 && (
+                            <div className={styles.scriptBlock}>
+                              <span className={styles.scriptLabel}>タイトル案</span>
+                              <ul className={styles.scriptList}>
+                                {script.titles.map((t, i) => <li key={i}>{t}</li>)}
+                              </ul>
+                            </div>
+                          )}
+                          {script.thumbnail_texts?.length > 0 && (
+                            <div className={styles.scriptBlock}>
+                              <span className={styles.scriptLabel}>サムネ文言案</span>
+                              <ul className={styles.scriptList}>
+                                {script.thumbnail_texts.map((t, i) => <li key={i}>{t}</li>)}
+                              </ul>
+                            </div>
+                          )}
+                          {script.assets?.length > 0 && (
+                            <div className={styles.scriptBlock}>
+                              <span className={styles.scriptLabel}>必要な素材</span>
+                              <ul className={styles.scriptList}>
+                                {script.assets.map((t, i) => <li key={i}>{t}</li>)}
+                              </ul>
+                            </div>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {selectedTopic.sourceUrl && (

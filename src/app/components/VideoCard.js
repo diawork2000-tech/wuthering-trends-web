@@ -132,6 +132,11 @@ export default function VideoCard({ video }) {
       <div className={styles.content}>
         <div className={styles.metaRow}>
           <span className={styles.categoryBadge}>{video.category}</span>
+          {video.viewCount > 0 && (
+            <span className={styles.viewCount} title="収集時点の再生数">
+              ▶ {video.viewCount.toLocaleString()}
+            </span>
+          )}
           <span className={styles.channelName}>{video.channel}</span>
         </div>
         <a href={video.url} target="_blank" rel="noopener noreferrer" className={styles.titleLink} onClick={handleTitleClick}>

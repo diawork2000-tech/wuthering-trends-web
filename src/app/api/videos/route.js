@@ -62,6 +62,8 @@ export async function GET() {
       const url = urlProp?.url || '';
       const channel = channelProp?.rich_text?.[0]?.plain_text || 'Unknown Channel';
       const category = categoryProp?.select?.name || '';
+      const viewCount = page.properties['再生数']?.number ?? null;
+      const likeCount = page.properties['高評価数']?.number ?? null;
       
       const thumbnail = page.cover?.external?.url || 'https://via.placeholder.com/640x360.png?text=No+Image';
 
@@ -83,6 +85,8 @@ export async function GET() {
         channel,
         category,
         thumbnail,
+        viewCount,
+        likeCount,
         created_time: page.created_time,
       };
     });

@@ -710,6 +710,161 @@
   font-size: 0.72rem;
 }
 
+/* カード上に出す実測値のバッジ。読まずに判断できるようにするためのもの。 */
+.cardStatRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0.35rem 0 0.15rem;
+}
+
+.statChip,
+.statChipHot,
+.statChipStatus {
+  font-size: 0.66rem;
+  padding: 0.12rem 0.4rem;
+  border-radius: 5px;
+  white-space: nowrap;
+  background: rgba(148, 163, 184, 0.14);
+  color: #cbd5e1;
+}
+
+.statChipHot {
+  background: rgba(248, 113, 113, 0.16);
+  color: #fca5a5;
+}
+
+.statChipStatus {
+  background: rgba(52, 211, 153, 0.16);
+  color: #6ee7b7;
+}
+
+.statusSelect {
+  background: #1e1e2e;
+  color: #e2e8f0;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 8px;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color-scheme: dark;
+}
+
+.statusSelect option {
+  background: #1e1e2e;
+  color: #e2e8f0;
+}
+
+/* 台本のたたき台 */
+.scriptControls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: auto;
+}
+
+.lengthBtn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #cbd5e1;
+  border-radius: 7px;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.lengthBtnActive {
+  background: rgba(96, 165, 250, 0.28);
+  border-color: rgba(96, 165, 250, 0.5);
+  color: #eff6ff;
+}
+
+.generateBtn {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.generateBtn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.scriptError {
+  color: #fca5a5;
+  font-size: 0.82rem;
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin: 0.6rem 0 0;
+  line-height: 1.6;
+}
+
+.scriptResult {
+  margin-top: 0.7rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+}
+
+.scriptBlock {
+  margin-bottom: 0.9rem;
+}
+
+.scriptBlock:last-child {
+  margin-bottom: 0;
+}
+
+.scriptLabel {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #93c5fd;
+  background: rgba(96, 165, 250, 0.14);
+  border-radius: 5px;
+  padding: 0.12rem 0.45rem;
+  margin-bottom: 0.35rem;
+}
+
+.scriptHook {
+  color: #fbbf24;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.scriptLine {
+  color: #e2e8f0;
+  font-size: 0.88rem;
+  line-height: 1.75;
+  margin: 0 0 0.25rem;
+}
+
+.scriptList {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #cbd5e1;
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+
+.scriptRaw {
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
 .scoreBadge {
   background: rgba(251, 146, 60, 0.15);
   color: #fb923c;

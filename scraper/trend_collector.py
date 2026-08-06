@@ -1,5 +1,6 @@
 import os
 import json
+import time
 import traceback
 import re
 import requests
@@ -8,6 +9,7 @@ from googleapiclient.discovery import build
 from dotenv import load_dotenv
 from deep_translator import GoogleTranslator
 from notion_utils import notion_request
+from shared.automation_logger import log_run
 
 # Load environment variables
 load_dotenv()
@@ -216,6 +218,46 @@ def fetch_youtube_api(key_manager, query, max_results, region_code, order="date"
         return response.get("items", [])
     return []
 
+def enrich_with_statistics(key_manager, results):
+    """収集した動画に再生数・高評価数を付与する。
+
+    search.list は統計値を返さないため、これまで「どれが伸びた動画なのか」が
+    画面上で全く分からなかった。videos.list は1回1ユニットと安価で、
+    50件まとめて取得できるので、クォータへの影響はほぼ無視できる。
+    """
+    by_id = {}
+    for videos in results.values():
+        for v in videos:
+            m = re.search(r'v=([A-Za-z0-9_-]{11})', str(v.get("url", "")))
+            if m:
+                by_id.setdefault(m.group(1), []).append(v)
+
+    ids = list(by_id.keys())
+    if not ids:
+        return
+
+    fetched = 0
+    for i in range(0, len(ids), 50):
+        chunk = ids[i:i + 50]
+
+        def _req(client, ids_str=",".join(chunk)):
+            return client.videos().list(part="statistics,snippet", id=ids_str).execute()
+
+        res = key_manager.execute(_req)
+        if not res:
+            continue
+        for item in res.get("items", []):
+            stats = item.get("statistics", {})
+            published = item.get("snippet", {}).get("publishedAt", "")
+            for v in by_id.get(item.get("id", ""), []):
+                v["view_count"] = int(stats.get("viewCount", 0) or 0)
+                v["like_count"] = int(stats.get("likeCount", 0) or 0)
+                v["published_at"] = published
+                fetched += 1
+
+    print(f"  [Statistics] Attached view/like counts to {fetched} videos ({len(ids)} unique IDs).")
+
+
 def get_target_channels_from_notion(headers, channels_db_id):
     """Notionのデータベースから対象チャンネルIDのリストを取得する"""
     if not channels_db_id:
@@ -412,7 +454,9 @@ def get_youtube_trends(config, mode="latest"):
                 })
         if channel_videos:
             results["★Target Channels"] = channel_videos
-            
+
+    enrich_with_statistics(key_manager, results)
+
     return results
 
 def get_existing_notion_urls(headers, database_id):
@@ -451,6 +495,43 @@ def get_existing_notion_urls(headers, database_id):
             
     print(f"Found {len(existing_urls)} existing videos in Notion.")
     return existing_urls
+
+def ensure_video_db_schema():
+    """動画DBに再生数・高評価数の列が無ければ自動で追加する。
+
+    Notion は未定義のプロパティを含むページ作成を 400 で弾くため、
+    列を作る前に書き込むと収集が丸ごと失敗する。必ず先に通しておく。
+    """
+    notion_api_key = os.getenv("NOTION_API_KEY")
+    database_id = os.getenv("NOTION_DATABASE_ID")
+    if not notion_api_key or not database_id:
+        return
+
+    headers = {
+        "Authorization": f"Bearer {notion_api_key}",
+        "Content-Type": "application/json",
+        "Notion-Version": "2022-06-28"
+    }
+    url = f"https://api.notion.com/v1/databases/{database_id}"
+    try:
+        res = notion_request("GET", url, headers, timeout=10)
+        if res.status_code != 200:
+            print(f"  [Warning] Could not inspect video DB schema (Status {res.status_code})")
+            return
+        props = res.json().get("properties", {})
+
+        patch = {}
+        if "再生数" not in props:
+            patch["再生数"] = {"number": {}}
+        if "高評価数" not in props:
+            patch["高評価数"] = {"number": {}}
+
+        if patch:
+            print(f"  [Notion Auto-Upgrade] Adding {len(patch)} statistics column(s) to the video database...")
+            notion_request("PATCH", url, headers, json={"properties": patch}, timeout=10)
+    except Exception as e:
+        print(f"  [Warning] Video DB schema check failed: {e}")
+
 
 def send_to_notion(video_list, category, existing_urls):
     """Notionのデータベースに動画情報を追加する（重複排除つき）"""
@@ -496,6 +577,12 @@ def send_to_notion(video_list, category, existing_urls):
                 },
                 "カテゴリ": {
                     "select": {"name": category}
+                },
+                "再生数": {
+                    "number": int(video.get("view_count", 0) or 0)
+                },
+                "高評価数": {
+                    "number": int(video.get("like_count", 0) or 0)
                 }
             },
             "children": [
@@ -571,11 +658,15 @@ def get_flat_video_list(data_dict):
 def main():
     print("--- Wuthering Waves Trend Collector (Advanced) ---")
     logger.log("🚀 YouTubeトレンド収集ツールの自動実行プロセス始動")
-    
+    run_start_time = time.time()
+
     try:
         config = load_config()
         logger.log(f"📋 検索設定ロード: キーワード {len(config.get('youtube', {}).get('search_queries', []))}個 / 1ワード最大 {config.get('youtube', {}).get('max_results_per_query', 50)} 件")
-        
+
+        # 再生数の列を Notion 側に用意してから書き込む（列が無いと書き込みが400で失敗する）
+        ensure_video_db_schema()
+
         print("\n[1] Fetching LATEST YouTube trends (85% Shorts, 15% Normal)...")
         logger.log("🆕 [ステップ1] 「最新トレンド (Shorts & 長尺)」の検索・回収処理をスタート...")
         latest_data = get_youtube_trends(config, mode="latest")
@@ -654,15 +745,19 @@ def main():
         logger.log(f"✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: {logger.log_data['new_items_count']} 件)")
         logger.set_summary(f"正常完了 (新着Notion追加: {logger.log_data['new_items_count']} 件)")
         logger.save_to_json()
-        
+        log_run("trend_collector", "success",
+                f"新着Notion追加: {logger.log_data['new_items_count']} 件",
+                time.time() - run_start_time)
+
     except Exception as e:
         err_detail = str(e)
         print(f"\n[CRITICAL ERROR] {err_detail}")
         logger.log(f"💥 致命的エラー発生により中断: {err_detail}")
         logger.set_summary("異常終了 (エラー検出)", is_error=True)
         logger.save_to_json()
-        
-        # ⚠️ エラーが出た場合のみ、Discordへ直接SOS警告アラートを送信！！
+        log_run("trend_collector", "error", traceback.format_exc(), time.time() - run_start_time)
+
+        # ⚠️ エラーが出た場合のみ、Discordへ直接SOS警告アラートを送信！！(既存の通知はそのまま維持)
         alert_msg = f"⚠️ **【YouTubeトレンド収集 エラー検知】** ⚠️\n自動巡回プロセス中に致命的なエラーまたは例外を検出しました。\n\n**詳細:** `{err_detail}`\nスタジオ活動実績ログまたは GitHub Actions コンソールをご確認ください。"
         send_to_discord(alert_msg)
         raise e

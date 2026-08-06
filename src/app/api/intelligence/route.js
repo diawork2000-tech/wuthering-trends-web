@@ -91,6 +91,10 @@ export async function GET() {
       const dateStr = props["日時"]?.date?.start || page.created_time?.substring(0, 10) || "2026-07-30";
       const adopted = props["採用"]?.checkbox || false;
       const score = props["スコア"]?.number ?? 60;
+      const viewCount = props["再生数"]?.number ?? 0;
+      const viewsPerHour = props["伸び速度"]?.number ?? 0;
+      const mentionCount = props["言及ソース数"]?.number ?? 1;
+      const status = props["制作状況"]?.select?.name || '未着手';
 
       return {
         id: page.id,
@@ -101,6 +105,10 @@ export async function GET() {
         reason,
         adopted,
         score,
+        viewCount,
+        viewsPerHour,
+        mentionCount,
+        status,
         date: dateStr,
         createdTime: page.created_time
       };

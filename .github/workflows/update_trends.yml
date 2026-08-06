@@ -37,6 +37,9 @@ jobs:
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
           NOTION_CHANNELS_DB_ID: ${{ secrets.NOTION_CHANNELS_DB_ID }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          NOTION_LOG_DB_ID: ${{ secrets.NOTION_LOG_DB_ID }}
+          DISCORD_ALERT_WEBHOOK_URL: ${{ secrets.DISCORD_ALERT_WEBHOOK_URL }}
+          DISCORD_ALERT_ENABLED: ${{ vars.DISCORD_ALERT_ENABLED }}
         run: |
           cd scraper
           python trend_collector.py

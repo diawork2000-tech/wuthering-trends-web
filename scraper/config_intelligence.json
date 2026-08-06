@@ -60,55 +60,64 @@
       "name": "TikTok バズ動画・ショート急上昇レーダー (復活＆強化版)",
       "url": "https://www.tiktok.com/tag/%E9%B3%B4%E6%BD%AE",
       "type": "rss_safe_unwrap",
-      "enabled": true
+      "enabled": true,
+      "weight": 52
     },
     {
       "name": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
       "url": "https://www.reddit.com/r/WutheringWaves/hot/.rss?limit=15",
       "type": "rss",
-      "enabled": true
+      "enabled": true,
+      "weight": 56
     },
     {
       "name": "海外Redditフォーラム ガチャゲー最前線",
       "url": "https://www.reddit.com/r/gachagaming/hot/.rss?limit=10",
       "type": "rss",
-      "enabled": true
+      "enabled": true,
+      "weight": 50
     },
     {
       "name": "Twitter(X) 話題まとめ最高峰 Togetter (鳴潮バズ)",
       "url": "https://togetter.com/rss/tag/%E9%B3%B4%E6%BD%AE",
       "type": "rss_safe_unwrap",
-      "enabled": true
+      "enabled": true,
+      "weight": 54
     },
     {
       "name": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
       "url": "https://news.google.com/rss/search?q=%E9%B3%B4%E6%BD%AE+%E6%9C%80%E5%BC%B7+OR+%E3%83%86%E3%82%A3%E3%82%A2+OR+%E9%9F%B3%E9%AA%B8+when:7d&hl=ja&gl=JP&ceid=JP:ja",
       "type": "rss_safe_unwrap",
-      "enabled": true
+      "enabled": true,
+      "weight": 58
     },
     {
       "name": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆ファミ通)",
       "url": "https://news.google.com/rss/search?q=%E9%B3%B4%E6%BD%AE+4Gamer+OR+%E3%83%95%E3%82%A1%E3%83%9F%E9%80%9A+OR+%E5%85%AC%E5%BC%8F+when:7d&hl=ja&gl=JP&ceid=JP:ja",
       "type": "rss_safe_unwrap",
-      "enabled": true
+      "enabled": true,
+      "weight": 64
     },
     {
       "name": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上・熱気)",
       "url": "https://news.google.com/rss/search?q=%E9%B3%B4%E6%BD%AE+%E3%83%88%E3%83%AC%E3%83%B3%E3%83%89+OR+%E8%A9%B1%E9%A1%8C+OR+%E7%82%8E%E4%B8%8A+when:7d&hl=ja&gl=JP&ceid=JP:ja",
       "type": "rss_safe_unwrap",
-      "enabled": true
+      "enabled": true,
+      "weight": 56
     },
     {
       "name": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
       "url": "https://news.google.com/rss/search?q=%E9%B3%B4%E6%BD%AE+%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88+OR+%E8%A7%A3%E8%AA%AC+OR+%E7%A5%9E%E3%83%97%E3%83%AC%E3%82%A4+when:7d&hl=ja&gl=JP&ceid=JP:ja",
       "type": "rss_safe_unwrap",
-      "enabled": true
+      "enabled": true,
+      "weight": 54
     },
     {
       "name": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハブ発掘版)",
       "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UC_g6tbc6zXHfXs7L4aHcUHw",
       "type": "rss",
-      "enabled": true
+      "enabled": true,
+      "weight": 55
     }
   ],
   "schedule_sources": [
@@ -132,6 +141,7 @@
     "target_items_per_run": 12,
     "min_score_threshold": 60,
     "enable_gemini_summary": true,
-    "auto_source_expansion": true
+    "auto_source_expansion": true,
+    "min_run_interval_minutes": 180
   }
 }
