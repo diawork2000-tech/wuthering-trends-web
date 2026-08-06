@@ -3,289 +3,289 @@
   "items": [
     {
       "id": "card-0",
-      "title": "お父さんのジョーク",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vgf130/dad_joke/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n&#32; submitted by &#32;  /u/rahul_joseph   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「コメント」による反響検出",
+      "title": "ショアキーパーの性能完全解説・育成ビルドと運用論",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE50S1ZieGdxcFlSV0NFSmtTV0JhbC0tU29MWTAycDNOQ0xDdWZJeDMyelV1Q2M4U3VCNTd1bWVmcWpIMTlUU2J4elJZUF9TYUZxaW53?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nショアキーパーは最高峰のヒーラー兼サポートキャラであり、高難易度コンテンツにおいて必須級の性能を誇る。共鳴解放による領域展開で味方のクリティカル率・クリティカルダメージを大幅増幅し、さらに自動追撃や致死ダメージ回避などの補助性能を兼ね備える。推奨音骸は「無形なる星（回復量・共鳴効率アップ）」または「軽雲出月（変奏時に攻撃力バフ）」の5セット。メインステータスは4コストにクリティカル率/ダメージまたは治療効果、3コストに共鳴効率を1~2個配置し、共鳴効率200%以上を確保することが最優先となる。武器は☆5「黒炎の星」または☆4「奇幻変奏（共鳴効率＋エネルギー回復）」が最適。おすすめ編成は「メインアタッカー（今汐や忌炎）＋サブアタッカー（散華や吟霖）＋ショアキーパー」。無凸でも完成された強力なサポート能力を発揮するが、2凸で攻撃力バフ数値が大幅上昇するため、余力があれば2凸を目指すのが推奨される。",
+      "reason": "現環境最強クラスのサポーターであり、ガチャの確保優先度や育成方法に対するプレイヤーの関心が極めて高いため。",
       "score": 100,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556699+00:00"
+      "createdTime": "2026-08-06T16:02:35.861620+00:00"
     },
     {
       "id": "card-1",
-      "title": "スイスイの造りは違う",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vgsg7o/suisui_is_built_different/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n&#32; submitted by &#32;  /u/Queasy_Captain_1010   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「コメント」による反響検出",
+      "title": "忌炎(きえん)の評価・ビルド・適正パーティ徹底解説",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE96UVpzT2ktbkFfZnNMWi1FaWQ5ckJvdU42MU12WkR0MFNXZUUzWEhOLXhFVUNUS0hQdjJycDJNV0tMYkl0UXlYY09MNzJhNDNXNjRz?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n忌炎は範囲攻撃と広域集敵能力に長けた強力な気動属性メインアタッカー。共鳴解放状態「蒼龍の降臨」中はすべての通常攻撃・重撃が気動ダメージに変化し、広範囲の敵を一網打尽にする。推奨音骸セットは「気動を呼ぶ嵐（5セット）」。4コスト音骸には「飛廉の騎士（気動ダメ・重撃バフ）」を採用し、3コストは気動ダメージアップ×2、1コストは攻撃力%を選択する。サブステータスはクリティカル率、クリティカルダメージ、重撃ダメージアップ、共鳴効率（130%前後推奨）を優先。武器はモチーフ武器「蒼鱗の疾雷」が最適で、代用として☆4「紋尾の剣」や「千古の晄（標準☆5）」が挙げられる。パーティ編成は「忌炎＋モルトフィー（重撃ブースト・協同攻撃）＋ショアキーパー（またはヴェリーナ）」の組み合わせが最高火力ループを叩き出せる。",
+      "reason": "限定★5アタッカーとして根強い人気と高火力を誇り、復刻時や高難易度タワー攻略での編成需要が高いため。",
       "score": 100,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556724+00:00"
+      "createdTime": "2026-08-06T16:02:35.861651+00:00"
     },
     {
       "id": "card-2",
-      "title": "新しいロロイベントは再びメインストーリークエストの後ろにロックされているので、まだやっていない場合は行ってください。",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vgseys/new_lollo_event_is_locked_behind_main_story_quest/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nThis is the second time I've seen them putting on such a requirement for this event. And while I absolutely hate that, it doesn't look like they'll change it in the future. If you haven't run the new main story quests for whatever reason, go do it before next patch or you'll miss out these rewards. It takes about 4-4.5 hours before you can do coop again (in the middle of act 2) so make sure that you empty your daily waveplates before running the quests.  &#32; submitted by &#32;  /u/delacroix01   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「sec」による反響検出",
+      "title": "鑑心(かんしん)の評価とシールド・ヒーラー兼サブアタッカーとしての最適ビルド",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5Dd3YySnFKUjRPNkdsMDVGWGVxOW5vQWJXLW5lRl9YYV9tSXhsZDZEWU0ydkFQSFpvLUJubmZxZlJtUUZaX0Z6eHM5eVN3TXpQMlZv?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鑑心は長押し重撃によるカウンター・シールド付与、強力な吸い寄せ吸着性能を持つ共鳴解放、終奏スキルによる共鳴解放ダメージバフなど、多角的なサポートと耐久補助を担う気動キャラクター。シールド量は鑑心の攻撃力に依存するため、ビルドは攻撃力と共鳴効率を高次元でバランスさせる必要がある。おすすめ音骸セットは「軽雲出月（バフ性能の底上げ）」または「気動を呼ぶ嵐（サブアタッカー運用）」。4コストは「飛廉の騎士」や「無冠者」、3コストは共鳴効率および気動ダメ、1コストは攻撃力%。推奨武器は☆5「擎天の拳」または☆4「金掌」。パーティ運用では共鳴解放ダメージを軸に戦うアタッカー（相里要や今汐など）のサブサポーターとして組み込むことで、敵を一所に集めつつ強力なデバフ＆バフを提供し、高難易度コンテンツでの安定度を劇的に向上させる。",
+      "reason": "恒常★5でありながらシールド・回復・集敵・解放バフを併せ持つ独特な性能のため、育成方針の需要が高いため。",
       "score": 100,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556735+00:00"
+      "createdTime": "2026-08-06T16:02:35.861665+00:00"
     },
     {
       "id": "card-3",
-      "title": "Wuwa で最高のスキル プレイ 😎",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vguq35/highest_skill_play_in_wuwa/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nWhen you practice (to pay) enough, no enemy can stop you 👍  &#32; submitted by &#32;  /u/Shiratasa   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「コメント」による反響検出",
+      "title": "主人公(気動・漂泊者)の評価と育成優先度・おすすめビルド解説",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE16YThxVmZ0c053WXF4bkNRa0hoT1ZaOUc4RW1hSjgzTmpjeVhPeTNBNlFpT2xfV3lNWGxWSTluZTFEN0J4bDJPdGMzRlJ3dmlnb040?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n気動属性の漂泊者（主人公）は、扱いやすいスキル構成と牽引能力を持つ万能型アタッカー。凸を進めることが容易で、無課金・微課金プレイヤーのメインアタッカーとして非常に優秀。音骸は「気動を呼ぶ嵐」5セットが基本で、4コスト音骸「飛廉の騎士」によりダメージと気動属性バフを稼ぐ。メインステータスは4コスト：クリティカル率/ダメ、3コスト：気動ダメージアップ×2、1コスト：攻撃力%。武器は配布やショップで入手可能な☆5「千古の晄」が理想的で、☆4「迅刀・飛溝」なども噛み合う。育成の手間が少なく凸素材がストーリー進行で手に入るため、リソースを抑えて深空の塔（タワー）のサブパーティ構築枠を埋めるキャラクターとして非常に高い実用性を有している。",
+      "reason": "全プレイヤーが所持し、無料で完凸可能なためサブパーティ構築や育成優先度において重要視されているため。",
       "score": 100,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556745+00:00"
+      "createdTime": "2026-08-06T16:02:35.861677+00:00"
     },
     {
       "id": "card-4",
-      "title": "撮影会を怠ってしまったことを後悔しています。もうなくなってしまいました😭",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vgtz3f/i_regret_neglecting_the_photo_event_its_gone_now/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n&#32; submitted by &#32;  /u/xneptunespear   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「コメント」による反響検出",
+      "title": "『鳴潮』未実装キャラ＆今後の実装予定ガチャキャラ完全まとめ",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1JYXBnMG14YTAyMW1TMUhOOXp1dHdXbVVCYVpxR2FxcDZycjhiem1SQnVfSkRmUEI5VldXbFlMblU1OHdZTm54UDZiOW1XZHdFeWI0?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n今後登場が期待されている新キャラクターおよび公式PV・ストーリーで姿を見せた未実装キャラクターの情報を集約解説。ストーリー上で登場した未実装人物の属性（熱熔、冷凝、導電、気動、消滅、回光）や武器種の推測、各バージョンにおける実装スケジュール予測を網羅する。特にバージョン大型アップデートで追加される新地域に関わる重要人物のシナジーや、既存アタッカーを強力に補強する専用サポートキャラの可能性について考察。ガチャ石（星声）の保存・使用計画を立てるプレイヤーにとって、次のバージョンに向けて引くべきかスルーすべきかを判断する最も重要かつ網羅的な指針となる。",
+      "reason": "将来のガチャ計画やリソース管理を行ううえで、すべてのプレイヤーが最も関心を寄せる情報だから。",
       "score": 100,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556754+00:00"
+      "createdTime": "2026-08-06T16:02:35.861687+00:00"
     },
     {
       "id": "card-5",
-      "title": "🩷 |アート by Chinn_POu",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vggl6s/aemeath_art_by_chinn_pou/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nsource: https://x.com/Chinn\\_P0u/status/2015451599486017633  &#32; submitted by &#32;  /u/-Aemeath-   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「コメント」による反響検出",
+      "title": "最新ガチャスケジュールと引くべきキャラ・武器の完全解説",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9FUUU0RmFTb0NDWnRUd3haalI3Wm95RS1ibDV2eGlsVVFwQlpWLUZnM2hqck9Va1NZM2hITGUyWTUtTDdaUmZxWmFmQTV5M3JQaGZJ?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n現在開催中および今後の限定ピックアップ（キャラクター・モチーフ武器）ガチャの全スケジュールと、各キャラクターの評価・確保優先度を正確に分析。限定☆5アタッカーや人権級サポーター（ショアキーパーやヴェリーナなど）の引くべき度合いをランク付けして解説する。無課金・微課金プレイヤーは単体で完結している汎用サポーターや強力なメインアタッカー＋モチーフ武器を優先確保する戦略が推奨される。モチーフ武器の引きどき（キャラ確保優先か武器確保優先か）についても、武器ガチャが確定（天井で確実にモチーフが出る）仕様である鳴潮の特性を踏まえて詳細に解説。効率的な石の消費計画を立てるための必須ガイド。",
+      "reason": "ガチャ石の限られたプレイヤーが後悔しないための明確な優先順位・戦略を提供する超重要トピックであるため。",
       "score": 100,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556762+00:00"
+      "createdTime": "2026-08-06T16:02:35.861698+00:00"
     },
     {
       "id": "card-6",
-      "title": "BiliBili でボールになりたいハムスターの水着パーティー",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vg79oe/swimsuit_party_by_仓鼠想要变成球_on_bilibili/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n&#32; submitted by &#32;  /u/Specialist-Fail8539   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「コメント」による反響検出",
+      "title": "『鳴潮』Steamおよびグローバルプラットフォーム売上首位獲得の要因分析",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiREFVX3lxTE9DclgteTVEMWR2X0pOUTdWTE82WFozRVlqXzZjZ2FobUhMcWRjU0Q5YjZNSHRILUNMazk1V3prSmNpMC1R?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n大型アップデート「遺志を紡ぐは剣、夢に響くは歌」の配信に伴い、『鳴潮』がSteam売上ランキングにて並み居る競合（CS2、eFootball、ゼンゼロ等）を抑えて日替わり首位を獲得。新キャラクターの実装、新エリアの解放、戦闘システムのブラッシュアップおよび最適化の実施が国内外のプレイヤーに大好評を博した。PC版（Steam/Epic/独自クライアント）の最適化が進んだことで高フレームレートでの洗練された超絶アクション体験が高く評価され、アクティブユーザー数および課金率が爆発的に上昇。他社アクションRPG作品との比較においても最高峰のプレイフィールを実現している点が売上好調の主要因となっている。",
+      "reason": "ゲームのグローバルな評価・勢いを示し、コミュニティの活況さを証明する市場トレンドであるため。",
       "score": 100,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556770+00:00"
+      "createdTime": "2026-08-06T16:02:35.861708+00:00"
     },
     {
       "id": "card-7",
-      "title": "すいすいさんが描いたローバー",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vgrpu2/suisuis_drawing_of_rover/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n&#32; submitted by &#32;  /u/Clear_Rich3534   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「コメント」による反響検出",
+      "title": "イベント「秘玉帰巣記」の完全攻略ガイドと効率的な報酬回収方法",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE56dHNFTkNzY2x6U3lWVnItSldmZHVSaWlRX0NaVmdKd2xFaVE2dDFHZ1JQekYxUTU1SFBkR01XN281aVdPdW90VExvc1BIcERQX0p3?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n期間限定イベント「秘玉帰巣記」の完全攻略手順。イベント特有のパズル・収集ギミックやウェーブ制戦闘の突破コツを段階的に解説。獲得できる主要報酬として、ガチャ石である「星声」、特級チューナー、高級密音筒、シェルコインなどの限界突破・育成素材が多数用意されている。ステージごとの最適おすすめキャラ選定や、特定バフを利用した高速周回ルートを明示し、プレイ時間の限られたプレイヤーでも最短・最高効率で全報酬（特に星声）を回収できるフローチャートを詳細に構築して提供する。",
+      "reason": "期間限定報酬の取り逃しを防ぎ、大量のガチャ石（星声）と育成リソースを確実に入手するための必須情報だから。",
       "score": 100,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556779+00:00"
+      "createdTime": "2026-08-06T16:02:35.861717+00:00"
     },
     {
       "id": "card-8",
-      "title": "JVN ファンアート",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vg4wqj/jvn_fanart/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n&#32; submitted by &#32;  /u/Old-Temperature984   [link] &#32; [個のコメント]",
-      "reason": "注目トレンドおよびキーワード「コメント」による反響検出",
+      "title": "『鳴潮』最新シリアルコード一覧と交換方法・限定アイテム獲得手順",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5Kb2E2WWV2eGk0WGQtNllRc2xyTGg5ZFZtSm1DNzQwa2ZzTWt6QXlDWUdWdlJWdVBWSXB5LUxlN19jRmFuU1c5b2VNNmdXT0xOTVJB?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n現在有効なすべてのシリアルコード（交換コード）および有効期限、獲得できるアイテム一覧（星声、特級エネルギーカプセル、シェルコイン等）を正確に一覧化。PC・iOS・Android各プラットフォームにおけるゲーム内メニュー（設定＞その他＞交換コード）からの入力方法と、公式ウェブサイト経由でのコード適用手順をわかりやすくステップバイステップで解説。コードの入力ミスを防ぐための注意点や、期限切れ間近の限定コードに関する警告も網羅し、ログインするだけで無料で豪華報酬を入手できるお得情報を完璧に提示する。",
+      "reason": "無料で星声や強化用アイテムを獲得できるため、全プレイヤーにとって即効性と価値が高い情報だから。",
       "score": 100,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556787+00:00"
+      "createdTime": "2026-08-06T16:02:35.861725+00:00"
     },
     {
       "id": "card-9",
-      "title": "【鳴潮】最強パーティ編成 - gamewith.jp",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE91QjFXV1VPcFhCRGltRUFYQVo0TGpUVzdISHowT19HQnoyMXN3M0dxMXc5X2dkbTBnNkV1elF6THp5cEJDREFKRHN0cjZCZ2JmbXZj?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】最強パーティ編成&nbsp;&nbsp;gamewith.jp",
-      "reason": "注目トレンドおよびキーワード「game」による反響検出",
+      "title": "『鳴潮』を快適にプレイするおすすめゲーミングPCと動作推奨スペック解説",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9iMUc1NlFzN1Ywd3lhc1FscE1yaU9VY1NORlNhY0Zyb2lYYkpWbmlIMXNDSlV5aGF3U0JKeHRxd3ZyMVdvOUttQk1aVzY?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n『鳴潮』の超ハイレベルなグラフィックとシームレスなパルクール・超高速アクションを120fps/4K高画質でストレスなく動作させるための必要・推奨PCスペックを完全網羅。CPUはCore i7 / Ryzen 7以上、GPUはRTX 4060 Ti / RTX 4070以上、メモリ16GB（32GB推奨）、ストレージはSSD（空き容量50GB以上必至）といった具体的な動作要件を細かく分析。グラフィック設定（シャドウ、ポストエフェクト、DLSS/FSR設定）の最適化によるフレームレート安定化テクニックや、予算別（15万円台〜30万円超）のおすすめBTOゲーミングPCモデルをピックアップして徹底解説する。",
+      "reason": "アクション性の非常に高いゲーム性において、プレイ環境の最適化やPC新調の需要が非常に強いから。",
       "score": 100,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556795+00:00"
+      "createdTime": "2026-08-06T16:02:35.861733+00:00"
     },
     {
       "id": "card-10",
-      "title": "【鳴潮】イベント最新情報まとめ - gamewith.jp",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFB6TlFqNjhrcTZuQTFxVTZXSkZMaGl0elNkZjNpLTV0d3RJQVVDRkQ5eS1faUg0UVBpZGRodUFFb3RDcFpjTkpYTWEzNG1McG9UQ0RF?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】イベント最新情報まとめ&nbsp;&nbsp;gamewith.jp",
-      "reason": "注目トレンドおよびキーワード「イベント」による反響検出",
+      "title": "ホロタクティクス「ダーニャ」完全攻略法・攻撃パターン回避と高スコア編成",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFB2TzBLVjBEbnpmT3lxS2dkaEpIRVhMZEFHeXFQRnM4UlVITmxBM2UzVXFORC1LZHZ2MHprU3ZQLVJibE5NZjRXcnpMVlp4b1ZfOUo4?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n最難関エンドコンテンツ「ホロタクティクス：強襲」におけるボス「ダーニャ」の難易度6完全クリアに向けた立ち回りガイド。ダーニャ特有の高速連続攻撃や一撃必殺の大技の予兆動作、ジャスト回避・パリィ（逆転攻撃）を入れる具体的なタイミングをモーション画像やタイムラインで解説。ボスの靭性ゲージ（共鳴ゲージ）をいかに短時間で削りきるかが鍵となるため、シールドを付与できる鑑心や即時高火力を叩き込める今汐、ショアキーパーによる会心バフを駆使した最適編成を提案。被弾時の即死を避けるための音骸ビルドやアイテム消費、カメラ設定のコツまで、クリアできないプレイヤーのための解決策を網羅的に詳説する。",
+      "reason": "プレイヤースキルが強く求められるエンドコンテンツであり、勝てないユーザーからの攻略解法に対する強いニーズがあるため。",
       "score": 100,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556802+00:00"
+      "createdTime": "2026-08-06T16:02:35.861743+00:00"
     },
     {
       "id": "card-11",
-      "title": "【鳴潮】追憶の響きガチャのおすすめキャラ｜引くべき？ - gamewith.jp",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBTUHpDT2l5dXVDZ0Y1cW9wUWpHal9xejBmdU9fUWlwbVoza1ZGZUdlMzc5TGdaZkRKVmItXzZDaUhGa2NGOGxoWkJyZE1pMmFwMU9Z?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】追憶の響きガチャのおすすめキャラ｜引くべき？&nbsp;&nbsp;gamewith.jp",
-      "reason": "注目トレンドおよびキーワード「game」による反響検出",
+      "title": "潮汐任務「4章-第2幕：荒波鎮めるは玄翎の声」完全ストーリー攻略＆ギミック解説",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1rUF9vbjZpazlYdllxOTFCQU4wbnFpSWFMYk9rLXZGVWQtd2lVSlBNbjdiN1VCdWtfeTRqTlZMMzRpWTVqQjg3OUhwYTJLU183UG5Z?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nメインストーリー潮汐任務「4章-第2幕：荒波鎮めるは玄翎の声」の進行チャート。道中に登場する新エリアのパズルギミックや鍵回収ルートを画像付きで詳細解説。ストーリー内で展開される各種戦闘イベントの攻略法、NPC同行ミッションの最適ルート、そして章末に待ち受ける強力なボス戦でのギミック突破手順（属性耐性、バリア破壊、固有アクションの利用）を徹底解説する。クリア後に解放される新規マップ機能やデイリーコンテンツ、追加されるサブクエストの発生条件まで網羅し、ストレスなくストーリーを進められる完全ガイドとなっている。",
+      "reason": "アップデート後に全プレイヤーが進めるべきメインコンテンツであり、途中の詰まりやすいギミックやボス攻略情報の需要が高いため。",
       "score": 100,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556810+00:00"
+      "createdTime": "2026-08-06T16:02:35.861753+00:00"
     },
     {
       "id": "card-12",
-      "title": "【競合バズ実績】【鳴潮考察】組織長さん、犠牲を覚悟に世界を救うダークヒーローだった【Wuthering Waves】",
+      "title": "【競合バズ実績】【鳴潮】玄方地界で見れる小ネタ3選【Wuthering Waves】",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=5hSxjlUyT9I",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 19,881 再生 / 高評価 390 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=m00eb1r6F-8",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 40,304 再生 / 高評価 639 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556819+00:00"
+      "createdTime": "2026-08-06T16:02:35.861763+00:00"
     },
     {
       "id": "card-13",
-      "title": "【競合バズ実績】【鳴潮】評価が逆転したキャラ3選【Wuthering Waves】",
+      "title": "【競合バズ実績】【鳴潮】プレイヤーがもう遊んでいなさそうな要素3選 #鳴潮 #wutheringwaves #めいちょう #ゆっくり実況",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=1914j5YW-LE",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 52,197 再生 / 高評価 760 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=bBiYytG2Ub0",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮】プレイヤーがもう遊んでいなさそうな要素3選 #鳴潮 #wutheringwaves #めいちょう #ゆっくり実況 に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: 鳴潮スタジオ にて現在 39,976 再生 / 高評価 462 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556828+00:00"
+      "createdTime": "2026-08-06T16:02:35.861772+00:00"
     },
     {
       "id": "card-14",
-      "title": "【競合バズ実績】【鳴潮】実装して欲しいアクセサリー3選【Wuthering Waves】",
+      "title": "【競合バズ実績】【鳴潮】ver3.5圧倒的更新！？正妻ランキング！ #鳴潮 #wutheringwaves #めいちょう #ゆっくり実況",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=eSBgBBO6JUw",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 16,971 再生 / 高評価 416 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=EvPBhAh6lBo",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮】ver3.5圧倒的更新！？正妻ランキング！ #鳴潮 #wutheringwaves #めいちょう #ゆっくり実況 に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: 鳴潮スタジオ にて現在 35,794 再生 / 高評価 701 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556835+00:00"
+      "createdTime": "2026-08-06T16:02:35.861781+00:00"
     },
     {
       "id": "card-15",
-      "title": "【競合バズ実績】【鳴潮】穂穂のおすすめ編成2選【Wuthering Waves】",
+      "title": "【競合バズ実績】【鳴潮】鳴潮がアニメ化！？情報まとめ！ #鳴潮 #wutheringwaves #ゆっくり実況 #めいちょう",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=eN7lWu75p1E",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 35,958 再生 / 高評価 405 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=9D7hMgxg3og",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮】鳴潮がアニメ化！？情報まとめ！ #鳴潮 #wutheringwaves #ゆっくり実況 #めいちょう に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: 鳴潮スタジオ にて現在 31,767 再生 / 高評価 917 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556843+00:00"
+      "createdTime": "2026-08-06T16:02:35.861824+00:00"
     },
     {
       "id": "card-16",
-      "title": "【競合バズ実績】【鳴潮】穂穂の簡単コンボ解説【Wuthering Waves】",
+      "title": "【競合バズ実績】【鳴潮】どの夏衣装も最高すぎる件【Wuthering Waves】#鳴潮",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=r7sViDeQ79k",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 25,742 再生 / 高評価 671 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=ZbWUn-DABYs",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nチャンネル登録と高評価お願いします 調理かな #新キャラ#鳴潮 #wutheringwaves #エイメス#wuwa#ダーニャ#シグリカ#緋雪#景燃#カルテジア\n\n（📊 バズ実績: ぷにお-game にて現在 69,101 再生 / 高評価 1,364 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556850+00:00"
+      "createdTime": "2026-08-06T16:02:35.861833+00:00"
     },
     {
       "id": "card-17",
-      "title": "【競合バズ実績】【鳴潮】穂穂を引くべき人の特徴3選【Wuthering Waves】",
+      "title": "【競合バズ実績】【鳴潮】通常衣装と新衣装のお菓子のしまい方の違い【Wuthering Waves】#鳴潮",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=IS70hN6JeG8",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 60,756 再生 / 高評価 934 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=8NDDeUxFjtU",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nチャンネル登録と高評価お願いします 消えた #新キャラ#鳴潮 #wutheringwaves #エイメス#wuwa#ダーニャ#シグリカ#緋雪#景燃#カルテジア\n\n（📊 バズ実績: ぷにお-game にて現在 55,681 再生 / 高評価 785 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556859+00:00"
+      "createdTime": "2026-08-06T16:02:35.861843+00:00"
     },
     {
       "id": "card-18",
-      "title": "【競合バズ実績】【鳴潮】あまり使われない幻の攻撃3選【Wuthering Waves】",
+      "title": "【競合バズ実績】【鳴潮】ヤンヤンとスイスイが姉妹すぎる件【Wuthering Waves】#鳴潮",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=DXf090fEeDE",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 51,372 再生 / 高評価 642 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=IAHptDBZlvA",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nチャンネル登録と高評価お願いします うお #新キャラ#鳴潮 #wutheringwaves #エイメス#wuwa#ダーニャ#シグリカ#緋雪#景燃#カルテジア\n\n（📊 バズ実績: ぷにお-game にて現在 101,965 再生 / 高評価 1,685 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556866+00:00"
+      "createdTime": "2026-08-06T16:02:35.861852+00:00"
     },
     {
       "id": "card-19",
-      "title": "【競合バズ実績】【鳴潮】癖がありすぎるキャラクター3選【Wuthering Waves】",
+      "title": "【競合バズ実績】【鳴潮】むすーが可愛い件【Wuthering Waves】#鳴潮",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=O3WHgrEeTso",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮ダウンロードリンク】 https://t.co/TS67Z6n7Ws ―――――――――――――――――――――――― ●動画 【Youtube】→https://www.youtube.com/channel/UC5Sbfo5LfDBHPHAULDeGkVQ ●SNS 【Twitter】→https://twitter.com/12notaru ――――――――――――――――――――――――― ▼楽曲提供：株式会社Pinguino様 ▼使用させていただいてるBGM https://dova-s.jp/ ▼使用させて頂いてる素材 効果音ラボ様 https://soundeffect-lab.info/ OtoLogic様 https://otologic.jp Pexels様 https://www.pexels.com/ja-jp/ illust AC様 https://www.ac-illust.com/ ――――――――――――――――――――――――― #鳴潮 #wutheringwaves #wuwa #ノタル #ランキング #shorts #short\n\n（📊 バズ実績: ノタルch にて現在 20,281 再生 / 高評価 438 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=w1JQQSJy-ws",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nチャンネル登録と高評価お願いします むすー #新キャラ#鳴潮 #wutheringwaves #エイメス#wuwa#ダーニャ#シグリカ#緋雪#景燃#カルテジア\n\n（📊 バズ実績: ぷにお-game にて現在 74,960 再生 / 高評価 2,485 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556873+00:00"
+      "createdTime": "2026-08-06T16:02:35.861861+00:00"
     },
     {
       "id": "card-20",
-      "title": "【競合バズ実績】【鳴潮】細かすぎるリンネーの作り込み",
+      "title": "【競合バズ実績】Make this permanent, please🗿 #wutheringwaves #wuwa #wuwacreator #fyp #wuwacontest35",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=buRZh98WVKo",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n#鳴潮#wutheringwaves\n\n（📊 バズ実績: セリーナ鳴潮メイン にて現在 22,858 再生 / 高評価 340 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=hSE3-Xuen88",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nWuthering waves photo event gameplay #鳴潮 #鸣潮 #kurogames #shorts #명조: 워더링 웨이브 #wuwashorts\n\n（📊 バズ実績: deoxy.y にて現在 4,118 再生 / 高評価 257 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556881+00:00"
+      "createdTime": "2026-08-06T16:02:35.861870+00:00"
     },
     {
       "id": "card-21",
-      "title": "【競合バズ実績】【鳴潮】特殊な月",
+      "title": "【競合バズ実績】一人だけ重労働すぎる#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=PWgdk3UgIGg",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n#鳴潮#wutheringwaves\n\n（📊 バズ実績: セリーナ鳴潮メイン にて現在 10,636 再生 / 高評価 217 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=myhfSKkK5vA",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n一人だけ重労働すぎる#崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ#starrail #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: pamunogekijou にて現在 65,206 再生 / 高評価 1,297 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556888+00:00"
+      "createdTime": "2026-08-06T16:02:35.861878+00:00"
     },
     {
       "id": "card-22",
-      "title": "【競合バズ実績】【鳴潮】音痕の色が特殊なキャラ達",
+      "title": "【競合バズ実績】イメージだけで描いた漂泊者、クセが強すぎる#鳴潮 #wutheringwaves #shorts",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=eQ8hT-tF1vg",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n#鳴潮#wutheringwaves\n\n（📊 バズ実績: セリーナ鳴潮メイン にて現在 22,708 再生 / 高評価 297 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=JsD96Gx5t_I",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nイメージだけで描いた漂泊者、クセが強すぎる#鳴潮 #wutheringwaves #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: hiragi-e4x にて現在 5,568 再生 / 高評価 120 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556894+00:00"
+      "createdTime": "2026-08-06T16:02:35.861886+00:00"
     },
     {
       "id": "card-23",
-      "title": "【競合バズ実績】【鳴潮】コンセプトを強化したら強そうなキャラ3選 #鳴潮 #wutheringwaves #めいちょう #ゆっくり実況",
+      "title": "【競合バズ実績】尊すぎる姉妹の今と昔#鳴潮 #wutheringwaves #shorts",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=4AkMRyArmGM",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n【鳴潮】コンセプトを強化したら強そうなキャラ3選 #鳴潮 #wutheringwaves #めいちょう #ゆっくり実況 に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: 鳴潮スタジオ にて現在 3,673 再生 / 高評価 58 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=kQI55Bsu43I",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n尊すぎる姉妹の今と昔#鳴潮 #wutheringwaves #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: hiragi-e4x にて現在 52,890 再生 / 高評価 1,188 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556902+00:00"
+      "createdTime": "2026-08-06T16:02:35.861895+00:00"
     },
     {
       "id": "card-24",
-      "title": "【競合バズ実績】【鳴潮】クロゲのキャラたちが最高な理由【Wuthering Waves】#鳴潮",
+      "title": "【競合バズ実績】別れの挨拶、ヒロイン感全開の千咲#鳴潮 #wutheringwaves #shorts",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=5j0C-4y4dd0",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nチャンネル登録と高評価お願いします パ二グレのピンク髪の子好こ #新キャラ#鳴潮 #wutheringwaves #エイメス#wuwa#ダーニャ#シグリカ#緋雪#景燃#カルテジア\n\n（📊 バズ実績: ぷにお-game にて現在 25,035 再生 / 高評価 1,293 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=mLOpFApRehM",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n別れの挨拶、ヒロイン感全開の千咲#鳴潮 #wutheringwaves #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: hiragi-e4x にて現在 27,866 再生 / 高評価 517 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556910+00:00"
+      "createdTime": "2026-08-06T16:02:35.861903+00:00"
     },
     {
       "id": "card-25",
-      "title": "【競合バズ実績】口が悪いキャラランキングw #崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ #starrail #shorts",
+      "title": "【競合バズ実績】【鳴潮】実戦PVも出るぞ!「穂穂/スイスイ」レシート公開! 質問、コメント大歓迎!★既に判明してますが性能を再度確認! 色々考察などもしながら育成素材や音骸準備もするぞ!【WuWa/めいちょう】",
       "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=t3ajX38xvhI",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n口が悪いキャラランキングw #崩壊スターレイル #honkaistarrail #hsrwll #スタレ #崩スタ #starrail #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: pamunogekijou にて現在 43,059 再生 / 高評価 878 を記録！）",
+      "sourceUrl": "https://www.youtube.com/watch?v=H7w-6hPUvQ8",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nDLはこちらから:https://wutheringwaves.kurogames.com/jp/main discord:https://discord.gg/rs6mQ3HwYN メンバーシップ:https://www.youtube.com/channel/UCpuVSgupgphwhBNmNYhZsnQ/join ★コメントについてのお願い★ 基本的に自由でOKですが、リークと非公開テストの内容については公言しないようよろしくお願いします！ ★スーパーチャットについて★ 万が一にもスーパーチャットを投げてくださる場合は、大変申し訳ないのですが、金額に見合ったリターンをサブチが提供するのが困難である可能性が高いです。もしそれでもよろしいのであればよろしくお願いしますm(_ _\"m) #鳴潮 #Wuthering Waves #新作ゲーム #オープンワールド #アクションrpg #おすすめ #解説 #スマホゲーム #プロジェクトwave #鳴潮rally twitter: https://twitter.com/Sabchg 公式YouTube：@wutheringwaves3352 公式X（Twitter）：https://twitter.com/WW_JP_Official --------------------------- アンコ、凌陽/リンヨウ、カカロ、ヴェリーナ、鑑心/カンシン、忌炎/キエン、インリン、散華/サンカ、タンキン、 ヤンヤン、シカ、アールト、淵武/エンブ、ビャクシ、モルトフィー、 桃折/タオキ、今汐/コンシ、長離/チョウリ、折枝/オリエ、相理要/ソウリヨウ、ユウゴ、ショアキーパー、ツバキ、灯灯/トウトウ,フィービー、ブラント、ロココ、ザンニー、カルロッタ、カンタレラ、カルテジア、シャコンヌ/ルパ、フローヴァ、千咲(チサ)、仇遠(キュウエン)、ユーノ、ガルブレーナ、オーガスタ、モーニエ、ルシラー、シグリカ、リューク・ヘルセン、リンネ―、エイメス、緋雪(ヒユキ)、ダーニャ、ルーシー,レベッカ、秧秧玄翎（ヤンヤンゲンレイ）、穂穂（スイスイ）、鎖暝（サメイ）、景燃（ジンラン）、清宵（セイショウ）、心（シン）\n\n（📊 バズ実績: sabchbch にて現在 5,183 再生 / 高評価 67 を記録！）",
       "reason": "競合チャンネルにおいて大きな反響を獲得している実績データに基づく抽出",
       "score": 98,
       "date": "2026-08-06",
-      "createdTime": "2026-08-06T15:46:23.556917+00:00"
+      "createdTime": "2026-08-06T16:02:35.861911+00:00"
     }
   ]
 }
