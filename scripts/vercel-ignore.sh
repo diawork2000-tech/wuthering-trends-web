@@ -22,6 +22,14 @@ GENERATED=(
   ':(exclude)src/data/upcoming_schedule.json'
 )
 
+# コミットメッセージに [redeploy] と書いた場合は、差分の内容によらず必ずビルドする。
+# デプロイ枠切れなどでビルドが流れてしまったときに、コードを変えずに
+# もう一度デプロイをやり直すための逃げ道。
+if git log -1 --pretty=%B | grep -q '\[redeploy\]'; then
+  echo "[vercel-ignore] [redeploy] 指定のためビルドします"
+  exit 1
+fi
+
 # マージコミットの場合、HEAD^ は自分側の親を指すため、差分には相手側から
 # 入ってきた変更しか現れない。コード変更を取りこぼしてスキップしてしまうので
 # マージコミットは無条件でビルドする。
