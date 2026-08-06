@@ -52,3 +52,6 @@ __pycache__/
 /scraper/test_trans.py
 /scraper/trends_output.json
 /scraper/video_list.md
+
+# 削除スクリプトの実行ログ（実行のたびに変わる作業ファイル）
+scraper/purge_run.log

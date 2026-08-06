@@ -20,10 +20,6 @@ export default function IntelligenceStudioPage() {
   const [triggering, setTriggering] = useState(false);
   const [triggerMsg, setTriggerMsg] = useState('');
   const [scheduleEvents, setScheduleEvents] = useState([]);
-  const [script, setScript] = useState(null);
-  const [scriptLoading, setScriptLoading] = useState(false);
-  const [scriptError, setScriptError] = useState('');
-  const [scriptSeconds, setScriptSeconds] = useState(30);
   const scrollAreaRef = useRef(null);
 
   const fetchTopics = async () => {
@@ -131,35 +127,6 @@ export default function IntelligenceStudioPage() {
     } catch (err) {
       console.error('Status update failed:', err);
       setTopics((prev) => prev.map((t) => (t.id === topic.id ? { ...t, status: topic.status } : t)));
-    }
-  };
-
-  const handleGenerateScript = async () => {
-    if (!selectedTopic || scriptLoading) return;
-    setScriptLoading(true);
-    setScriptError('');
-    setScript(null);
-    try {
-      const res = await fetch('/api/script', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: selectedTopic.title,
-          outline: selectedTopic.scriptOutline,
-          reason: selectedTopic.reason,
-          seconds: scriptSeconds,
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        setScriptError(data.error || '台本の生成に失敗しました。');
-      } else {
-        setScript(data.script || { raw: data.raw });
-      }
-    } catch (err) {
-      setScriptError('通信エラーが発生しました。');
-    } finally {
-      setScriptLoading(false);
     }
   };
 
@@ -557,12 +524,7 @@ export default function IntelligenceStudioPage() {
                   <div
                     key={topic.id}
                     className={`${styles.topicCard} ${isSelected ? styles.activeCard : ''}`}
-                    onClick={() => {
-                      setSelectedTopic(topic);
-                      // 別のネタに切り替えたら、前のネタの台本は消しておく
-                      setScript(null);
-                      setScriptError('');
-                    }}
+                    onClick={() => setSelectedTopic(topic)}
                   >
                     {thumbElem && <div className={styles.cardThumbArea}>{thumbElem}</div>}
                     <div className={styles.cardHeader}>
@@ -667,81 +629,6 @@ export default function IntelligenceStudioPage() {
                 <div className={styles.reasonSection}>
                   <div className={styles.reasonTitle}>💡 バズ予測と注目ポイント</div>
                   <p className={styles.reasonText}>{selectedTopic.reason}</p>
-                </div>
-
-                <div className={styles.scriptSection}>
-                  <div className={styles.sectionHeading}>
-                    <span>✍️ 台本のたたき台</span>
-                    <div className={styles.scriptControls}>
-                      {[30, 60].map((sec) => (
-                        <button
-                          key={sec}
-                          className={`${styles.lengthBtn} ${scriptSeconds === sec ? styles.lengthBtnActive : ''}`}
-                          onClick={() => setScriptSeconds(sec)}
-                        >
-                          {sec}秒
-                        </button>
-                      ))}
-                      <button
-                        className={styles.generateBtn}
-                        onClick={handleGenerateScript}
-                        disabled={scriptLoading}
-                      >
-                        {scriptLoading ? '⏳ 生成中...' : '⚡ 台本を作る'}
-                      </button>
-                    </div>
-                  </div>
-
-                  {scriptError && <p className={styles.scriptError}>{scriptError}</p>}
-
-                  {script && (
-                    <div className={styles.scriptResult}>
-                      {script.raw ? (
-                        <pre className={styles.scriptRaw}>{script.raw}</pre>
-                      ) : (
-                        <>
-                          <div className={styles.scriptBlock}>
-                            <span className={styles.scriptLabel}>冒頭2秒</span>
-                            <p className={styles.scriptHook}>{script.hook}</p>
-                          </div>
-                          <div className={styles.scriptBlock}>
-                            <span className={styles.scriptLabel}>本編</span>
-                            {(script.body || []).map((line, i) => (
-                              <p key={i} className={styles.scriptLine}>{line}</p>
-                            ))}
-                          </div>
-                          <div className={styles.scriptBlock}>
-                            <span className={styles.scriptLabel}>締め</span>
-                            <p className={styles.scriptLine}>{script.closing}</p>
-                          </div>
-                          {script.titles?.length > 0 && (
-                            <div className={styles.scriptBlock}>
-                              <span className={styles.scriptLabel}>タイトル案</span>
-                              <ul className={styles.scriptList}>
-                                {script.titles.map((t, i) => <li key={i}>{t}</li>)}
-                              </ul>
-                            </div>
-                          )}
-                          {script.thumbnail_texts?.length > 0 && (
-                            <div className={styles.scriptBlock}>
-                              <span className={styles.scriptLabel}>サムネ文言案</span>
-                              <ul className={styles.scriptList}>
-                                {script.thumbnail_texts.map((t, i) => <li key={i}>{t}</li>)}
-                              </ul>
-                            </div>
-                          )}
-                          {script.assets?.length > 0 && (
-                            <div className={styles.scriptBlock}>
-                              <span className={styles.scriptLabel}>必要な素材</span>
-                              <ul className={styles.scriptList}>
-                                {script.assets.map((t, i) => <li key={i}>{t}</li>)}
-                              </ul>
-                            </div>
-                          )}
-                        </>
-                      )}
-                    </div>
-                  )}
                 </div>
 
                 {selectedTopic.sourceUrl && (

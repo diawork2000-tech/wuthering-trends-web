@@ -239,6 +239,36 @@ def is_force_run():
     return str(os.getenv("FORCE_RUN", "")).lower() in ("1", "true", "yes")
 
 
+# 『鳴潮』の話だと判断できる手がかり。タイトル・概要・タグのどこかにあればよい。
+RELEVANCE_MARKERS = (
+    "鳴潮", "めいちょう", "wutheringwaves", "wuthering waves", "wuthering", "wuwa",
+    "鳴潮攻略", "kurogames", "クロゲ", "漂泊者", "音骸", "共鳴者", "ソラランク",
+)
+
+# 明らかに別ゲーム・別ジャンルの話。手がかり語が紛れ込んでいても弾く。
+OFF_TOPIC_MARKERS = (
+    "zenless", "zenlesszonegame", "ゼンレスゾーンゼロ", "原神", "genshin",
+    "スターレイル", "starrail", "崩壊", "honkai", "アズールレーン", "fgo",
+    "fate/", "ブルーアーカイブ", "ウマ娘", "モンハン", "ポケモン",
+)
+
+
+def is_relevant(*texts):
+    """『鳴潮』の話として扱ってよい素材かを判定する。
+
+    競合チャンネルは鳴潮以外の動画も投稿しており、Googleニュースの検索結果にも
+    別ゲームの記事が紛れ込む。これらを Gemini に渡すと、鳴潮の用語で
+    もっともらしい嘘（実在しないキャラのビルド解説など）を書いてしまうため、
+    解析に入る前にここで落とす。
+    """
+    blob = " ".join(str(t or "") for t in texts).lower()
+    if not blob.strip():
+        return False
+    if any(m in blob for m in OFF_TOPIC_MARKERS):
+        return False
+    return any(m in blob for m in RELEVANCE_MARKERS)
+
+
 def _build_reason(item, kw_match):
     """「なぜ今これなのか」を、手元の事実だけで組み立てる。
 
@@ -424,6 +454,8 @@ class IntelligenceEngine:
             print("  [Notice] YOUTUBE_API_KEY not present in local env. Skipping channel analysis.")
             return
 
+        skipped_offtopic = 0
+
         for ch in self.config.get("target_channels", []):
             if not ch.get("enabled", True):
                 continue
@@ -445,6 +477,8 @@ class IntelligenceEngine:
                 
             ids_str = ",".join(vid_ids)
             def _get_vids(client):
+                # tags まで取るのは、タイトルに『鳴潮』と書かれていない動画でも
+                # タグで判別できるようにするため（無関係な動画の混入を防ぐ）
                 return client.videos().list(part="snippet,statistics", id=ids_str).execute()
             v_res = self.key_manager.execute(_get_vids)
             if not v_res or not v_res.get("items"):
@@ -468,6 +502,12 @@ class IntelligenceEngine:
                     if "diachannel" in ch_title_lower or "dia" in str(ch_name).lower() or "自チャンネル" in str(ch_name):
                         continue
 
+                    # 監視対象チャンネルは鳴潮以外のゲームも投稿している。
+                    # タイトル・概要・タグのどこにも手がかりが無いものは取り込まない。
+                    if not is_relevant(title, snippet.get("description", ""), " ".join(snippet.get("tags", []) or [])):
+                        skipped_offtopic += 1
+                        continue
+
                     desc_raw = re.sub(r'\s+', ' ', str(snippet.get("description", ""))).strip()
                     desc_clean = desc_raw[:1500] if desc_raw else f"{title} に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。"
                     score, vph = score_competitor_video(view_count, like_count, published_at)
@@ -485,6 +525,8 @@ class IntelligenceEngine:
                         "published_at": published_at,
                     })
         print(f"  [Analytics Complete] Extracted {len(self.trending_keywords)} keywords and locked {len(self.competitor_raw_items)} competitor videos in separate track!")
+        if skipped_offtopic:
+            print(f"  [Relevance Filter] 鳴潮と無関係な競合動画 {skipped_offtopic} 件を除外しました。")
 
     def crawl_web_sources(self):
         print("\n=== [Phase 2] Crawling Multi-Platform Web Sources (Selective Foreign-Only Translation & Pure Direct URLs) ===")
@@ -528,7 +570,11 @@ class IntelligenceEngine:
                             
                             if not link or not str(link).startswith("http") or "google.com/search" in str(link):
                                 continue
-                                
+
+                            # 検索フィードには別ゲームの記事も紛れ込む。翻訳前の原文で判定する。
+                            if not is_relevant(raw_title, summary_clean):
+                                continue
+
                             published_iso = _feed_entry_iso(entry)
                             self.collected_raw_items.append({
                                 "title": title_ja,
@@ -677,10 +723,17 @@ class IntelligenceEngine:
             "ショート動画の企画を立てるために、以下2種類の素材を解析してください。\n\n"
             "【A: Web/SNSトピック候補】から最大 " + str(target_count) + " 件を選び、\n"
             "【B: 競合YouTube動画】は件数を削らず全件について解説してください。\n\n"
-            "共通の絶対指令:\n"
-            "1. 元記事や元動画を開かなくても内容が完全に把握できる水準まで、結論・根拠・"
-            "キャラ名・パーティ構成・具体的な数値まで踏み込んで濃密に記述すること。\n"
-            "2. 短いあらすじで済ませることを禁ずる。\n"
+            "【⚠️最優先の絶対指令：事実の捏造を禁ずる⚠️】\n"
+            "A. 素材に書かれていない情報を、絶対に補完・推測・創作してはならない。\n"
+            "   キャラクター名・音骸セット名・武器名・数値・効果は、素材に明記されているものだけを使うこと。\n"
+            "   もっともらしい鳴潮の用語で埋めることは、最も重大な違反とみなす。\n"
+            "B. 素材の情報が薄い場合は、無理に長文化せず、分かっている範囲だけを簡潔に書くこと。\n"
+            "C. 素材が『鳴潮』に関するものだと判断できない場合（別ゲーム・別ジャンルの話題など）は、\n"
+            "   その項目を出力に含めず、丸ごと省略すること。件数合わせのために残してはならない。\n"
+            "D. source_url は必ず素材に記載されたURLをそのまま使うこと。URLを創作・改変してはならない。\n\n"
+            "共通の指令:\n"
+            "1. 素材から読み取れる範囲で、結論・根拠・キャラ名・パーティ構成・数値まで具体的に記述すること。\n"
+            "2. 意味の薄いあらすじで済ませないこと（ただしAを優先し、無い情報は書かない）。\n"
             "3. 『冒頭3秒』『〜をご存じですか？！』のような定型テンプレートは禁止。\n"
             "4. 英語素材は100%自然な日本語へ完全翻訳すること。\n"
             "5. reason は「なぜ今このネタなのか」を、時期・競合状況・話題性の観点で具体的に書くこと。\n\n"
@@ -725,13 +778,18 @@ class IntelligenceEngine:
         topic_meta = {it.get("url", ""): it for it in sorted_items}
         comp_meta = {c.get("source_url", ""): c for c in competitor_cards}
 
+        dropped = 0
         topics_out = []
         for idea in data.get("topics", []) or []:
             tt = str(idea.get("topic_title", ""))
             to = str(idea.get("script_outline", ""))
             if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', tt)) < 2 or "についてご存じですか" in to:
                 continue
-            meta = topic_meta.get(idea.get("source_url", ""), {})
+            # 渡していないURLが返ってきた場合、素材に無いものを作文した疑いが強いので捨てる
+            meta = topic_meta.get(idea.get("source_url", ""))
+            if meta is None:
+                dropped += 1
+                continue
             idea["score"] = meta.get("score", 60)
             idea["view_count"] = 0
             idea["views_per_hour"] = 0
@@ -740,12 +798,18 @@ class IntelligenceEngine:
 
         comps_out = []
         for c in data.get("competitors", []) or []:
-            meta = comp_meta.get(c.get("source_url", ""), {})
+            meta = comp_meta.get(c.get("source_url", ""))
+            if meta is None:
+                dropped += 1
+                continue
             c["score"] = meta.get("score", 90)
             c["view_count"] = meta.get("view_count", 0)
             c["views_per_hour"] = meta.get("views_per_hour", 0)
             c["mention_count"] = 1
             comps_out.append(c)
+
+        if dropped:
+            print(f"  [Fabrication Guard] 素材に無いURLを含む {dropped} 件を破棄しました。")
 
         return topics_out, comps_out
 
