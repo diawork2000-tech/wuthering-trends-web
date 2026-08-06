@@ -455,7 +455,12 @@ def get_youtube_trends(config, mode="latest"):
         if channel_videos:
             results["★Target Channels"] = channel_videos
 
-    enrich_with_statistics(key_manager, results)
+    # 再生数はあると便利という程度の情報なので、ここでの失敗が
+    # 収集そのものを巻き添えにしないよう切り離しておく。
+    try:
+        enrich_with_statistics(key_manager, results)
+    except Exception as e:
+        print(f"  [Warning] Statistics enrichment skipped ({e}).")
 
     return results
 
