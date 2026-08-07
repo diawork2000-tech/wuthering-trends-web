@@ -253,6 +253,15 @@ OFF_TOPIC_MARKERS = (
 )
 
 
+# 鳴潮の話ではあるが、ゲーム内容の動画ネタにはならないもの。
+# コスプレ写真集・イベント来場レポートなどが該当する。
+NOISE_MARKERS = (
+    "コスプレ", "こすぷれ", "cosplay", "レイヤー", "写真集", "グラビア",
+    "漫画博覧会", "ワンダーフェスティバル", "コミケ", "コミックマーケット",
+    "美女", "美脚", "水着グラビア",
+)
+
+
 def is_relevant(*texts):
     """『鳴潮』の話として扱ってよい素材かを判定する。
 
@@ -260,11 +269,16 @@ def is_relevant(*texts):
     別ゲームの記事が紛れ込む。これらを Gemini に渡すと、鳴潮の用語で
     もっともらしい嘘（実在しないキャラのビルド解説など）を書いてしまうため、
     解析に入る前にここで落とす。
+
+    加えて、鳴潮関連ではあってもコスプレ写真集のように
+    ゲーム内容の動画ネタにならないものも同時に除外する。
     """
     blob = " ".join(str(t or "") for t in texts).lower()
     if not blob.strip():
         return False
     if any(m in blob for m in OFF_TOPIC_MARKERS):
+        return False
+    if any(m in blob for m in NOISE_MARKERS):
         return False
     return any(m in blob for m in RELEVANCE_MARKERS)
 
