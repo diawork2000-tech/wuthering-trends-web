@@ -1,293 +1,95 @@
 {
-  "updated_at": "2026-08-08T07:32:36.695295+00:00",
+  "updated_at": "2026-08-09T06:17:21.960391+00:00",
   "events": [
     {
-      "character": "Ver.3.5「遺志を紡ぐは剣、夢に響くは歌」",
-      "event": "バージョン3.5アップデート「遺志を紡ぐは剣、夢に響くは歌」開催",
+      "character": "Ver.3.5",
+      "event": "バージョンアップデート「遺志を紡ぐは剣、夢に響くは歌」",
       "category": "version",
       "start_date": "2026-07-10",
       "end_date": "2026-08-19",
       "confirmed": true,
-      "notes": "Ver.3.5アップデート期間"
+      "notes": "Ver3.5アップデート期間"
+    },
+    {
+      "character": "Ver.3.6",
+      "event": "バージョンアップデート「幻雲纏いし灯の影、俗世憂いし剣の心」",
+      "category": "version",
+      "start_date": "2026-08-20",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.6アップデート予定日"
     },
     {
       "character": "穂穂",
-      "event": "新★5キャラクター「穂穂」ピックアップガチャ「夕霞の飲露」開催",
+      "event": "新限定★5キャラクター「穂穂」限定集音（後半バナー）",
       "category": "character",
       "start_date": "2026-07-30",
       "end_date": "2026-08-19",
       "confirmed": true,
-      "notes": "Ver.3.5後半ガチャ"
-    },
-    {
-      "character": "たゆたう輝き",
-      "event": "★5武器「たゆたう輝き」ピックアップ武器ガチャ開催",
-      "category": "weapon",
-      "start_date": "2026-07-30",
-      "end_date": "2026-08-19",
-      "confirmed": true,
-      "notes": "穂穂のモチーフ武器"
+      "notes": "Ver3.5後半ガチャピックアップ"
     },
     {
       "character": "エイメス",
-      "event": "★5キャラクター「エイメス」復刻ピックアップガチャ「とこしえの明星」開催",
+      "event": "★5キャラクター「エイメス」復刻集音（後半バナー）",
       "category": "character",
       "start_date": "2026-07-30",
       "end_date": "2026-08-19",
       "confirmed": true,
-      "notes": "Ver.3.5後半復刻ガチャ"
+      "notes": "Ver3.5後半復刻ガチャピックアップ"
     },
     {
-      "character": "時苔の繭",
-      "event": "★5武器「時苔の繭」復刻ピックアップ武器ガチャ開催",
-      "category": "weapon",
-      "start_date": "2026-07-30",
-      "end_date": "2026-08-19",
-      "confirmed": true,
-      "notes": "エイメスのモチーフ武器"
-    },
-    {
-      "character": "今州限定共鳴者（忌炎/吟霖/今汐/長離/折枝/相里要）",
-      "event": "今州限定共鳴者一挙復刻ガチャ開催",
+      "character": "今州限定共鳴者（忌炎・吟霖・今汐・長離・折枝・相里要）",
+      "event": "今州限定★5キャラ一挙復刻ガチャ（追憶の響き）",
       "category": "character",
       "start_date": "2026-07-10",
       "end_date": "2026-08-19",
       "confirmed": true,
-      "notes": "Ver.3.5通期開催、初回10連無料"
-    },
-    {
-      "character": "余音のプレゼント",
-      "event": "ログインイベント「余音のプレゼント」開催",
-      "category": "event",
-      "start_date": "2026-07-10",
-      "end_date": "2026-08-19",
-      "confirmed": true,
-      "notes": "金髓の波模様*5、唱喚の渦模様*5獲得"
-    },
-    {
-      "character": "虚無領域のクライシス・クアドラント拡張",
-      "event": "演習挑戦イベント「虚無領域のクライシス・クアドラント拡張」開催",
-      "category": "event",
-      "start_date": "2026-07-30",
-      "end_date": "2026-08-19",
-      "confirmed": true,
-      "notes": "星声*500、称号を獲得可能"
-    },
-    {
-      "character": "ブブ企画・旅立",
-      "event": "依頼イベント「ブブ企画・旅立」開催",
-      "category": "event",
-      "start_date": "2026-08-06",
-      "end_date": "2026-08-19",
-      "confirmed": true,
-      "notes": "星声*400、唱喚の渦模様*5獲得"
-    },
-    {
-      "character": "響き渡る音弦",
-      "event": "無音区報酬2倍イベント「響き渡る音弦」開催",
-      "category": "event",
-      "start_date": "2026-08-12",
-      "end_date": "2026-08-19",
-      "confirmed": true,
-      "notes": "1日3回まで無音区報酬2倍"
-    },
-    {
-      "character": "秘玉帰巣記",
-      "event": "Webイベント「秘玉帰巣記」開催",
-      "category": "event",
-      "start_date": "2026-07-30",
-      "end_date": "2026-08-13",
-      "confirmed": true,
-      "notes": "Webイベント、星声*100獲得"
-    },
-    {
-      "character": "ラメントリコン：サイレントクライシス",
-      "event": "戦闘イベント「ラメントリコン：サイレントクライシス」開催",
-      "category": "event",
-      "start_date": "2026-07-10",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "常設コンテンツ"
-    },
-    {
-      "character": "此より狭間の地・玄方",
-      "event": "エリア探索イベント「此より狭間の地・玄方」開催",
-      "category": "event",
-      "start_date": "2026-07-10",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "Ver.3.5新エリア探索"
-    },
-    {
-      "character": "明慎事件簿",
-      "event": "エリア恒常コンテンツ「明慎事件簿」実装",
-      "category": "event",
-      "start_date": "2026-07-10",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "常設コンテンツ"
-    },
-    {
-      "character": "色褪せぬ面影",
-      "event": "イベント「色褪せぬ面影」開催",
-      "category": "event",
-      "start_date": "2026-07-10",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "留まる影収集イベント"
-    },
-    {
-      "character": "潮汐任務 第四章",
-      "event": "メインストーリー「第四章 第1幕/第2幕/幕間」追加",
-      "category": "story",
-      "start_date": "2026-07-10",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "第1幕「山雨来たらんと欲して風楼に満つ」、第2幕「荒波鎮めるは玄翎の声」、幕間「霊響の契り、冥々の定め」"
-    },
-    {
-      "character": "Ver.3.6「幻雲纏いし灯の影、俗世憂いし剣の心」",
-      "event": "バージョン3.6アップデート「幻雲纏いし灯の影、俗世憂いし剣の心」実施",
-      "category": "version",
-      "start_date": "2026-08-20",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "Ver.3.6大型アップデート"
+      "notes": "Ver3.5全期間開催の復刻ガチャ（初回10連無料等）"
     },
     {
       "character": "清宵",
-      "event": "新★5キャラクター「清宵」ピックアップガチャ開催",
+      "event": "新★5キャラクター「清宵」限定集音（前半バナー）",
       "category": "character",
       "start_date": "2026-08-20",
       "end_date": null,
       "confirmed": true,
-      "notes": "Ver.3.6前半ガチャ"
-    },
-    {
-      "character": "雲琅",
-      "event": "★5武器「雲琅」ピックアップ武器ガチャ開催",
-      "category": "weapon",
-      "start_date": "2026-08-20",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "清宵のモチーフ武器"
+      "notes": "Ver3.6前半ガチャピックアップ"
     },
     {
       "character": "ダーニャ",
-      "event": "★5キャラクター「ダーニャ」復刻ピックアップガチャ開催",
+      "event": "★5キャラクター「ダーニャ」復刻集音（前半バナー）",
       "category": "character",
       "start_date": "2026-08-20",
       "end_date": null,
       "confirmed": true,
-      "notes": "Ver.3.6前半復刻ガチャ"
+      "notes": "Ver3.6前半復刻ガチャピックアップ"
     },
     {
       "character": "景燃",
-      "event": "新★5キャラクター「景燃」ピックアップガチャ開催",
+      "event": "新★5キャラクター「景燃」限定集音（後半バナー）",
       "category": "character",
       "start_date": null,
       "end_date": null,
       "confirmed": true,
-      "notes": "Ver.3.6後半ガチャ予定"
-    },
-    {
-      "character": "幾千の導き",
-      "event": "★5武器「幾千の導き」ピックアップ武器ガチャ開催",
-      "category": "weapon",
-      "start_date": null,
-      "end_date": null,
-      "confirmed": true,
-      "notes": "景燃のモチーフ武器"
+      "notes": "Ver3.6後半ガチャピックアップ予定"
     },
     {
       "character": "緋雪",
-      "event": "★5キャラクター「緋雪」復刻ピックアップガチャ開催",
+      "event": "★5キャラクター「緋雪」復刻集音（後半バナー）",
       "category": "character",
       "start_date": null,
       "end_date": null,
       "confirmed": true,
-      "notes": "Ver.3.6後半復刻ガチャ予定"
+      "notes": "Ver3.6後半復刻ガチャピックアップ予定"
     },
     {
       "character": "モーニエ",
-      "event": "★5キャラクター「モーニエ」復刻ピックアップガチャ開催",
+      "event": "★5キャラクター「モーニエ」復刻集音（後半バナー）",
       "category": "character",
       "start_date": null,
       "end_date": null,
       "confirmed": true,
-      "notes": "Ver.3.6後半復刻ガチャ予定"
-    },
-    {
-      "character": "潮汐任務 第四章 第3幕「心剣響けば煙雲棚引く」",
-      "event": "メインストーリー「第四章 第3幕」実装",
-      "category": "story",
-      "start_date": "2026-08-20",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "Ver.3.6実装潮汐任務"
-    },
-    {
-      "character": "潮汐任務 第四章 幕間「幽客の残り声」",
-      "event": "メインストーリー「第四章 幕間」実装",
-      "category": "story",
-      "start_date": "2026-08-20",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "Ver.3.6実装潮汐任務"
-    },
-    {
-      "character": "雲煙のプレゼント",
-      "event": "ログインイベント「雲煙のプレゼント」開催",
-      "category": "event",
-      "start_date": "2026-08-20",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "金髓の波模様*5、唱喚の渦模様*5獲得"
-    },
-    {
-      "character": "群響シミュレーション",
-      "event": "戦闘イベント「群響シミュレーション」開催",
-      "category": "event",
-      "start_date": null,
-      "end_date": null,
-      "confirmed": true,
-      "notes": "Ver.3.6開催イベント"
-    },
-    {
-      "character": "第二ソラリス・紛れ込む怪異",
-      "event": "ミニイベント「第二ソラリス・紛れ込む怪異」開催",
-      "category": "event",
-      "start_date": null,
-      "end_date": null,
-      "confirmed": true,
-      "notes": "Ver.3.6開催イベント"
-    },
-    {
-      "character": "夢がまだ、響き続けているなら",
-      "event": "マルチ戦闘イベント「夢がまだ、響き続けているなら」開催",
-      "category": "event",
-      "start_date": null,
-      "end_date": null,
-      "confirmed": true,
-      "notes": "Ver.3.6開催イベント"
-    },
-    {
-      "character": "清らかな調べ、過ぎゆく歳月を記す",
-      "event": "ミニイベント「清らかな調べ、過ぎゆく歳月を記す」開催",
-      "category": "event",
-      "start_date": null,
-      "end_date": null,
-      "confirmed": true,
-      "notes": "Ver.3.6開催イベント"
-    },
-    {
-      "character": "潮汐の探り手",
-      "event": "調査イベント「潮汐の探り手」開催",
-      "category": "event",
-      "start_date": null,
-      "end_date": null,
-      "confirmed": true,
-      "notes": "Ver.3.6開催イベント"
+      "notes": "Ver3.6後半復刻ガチャピックアップ予定"
     },
     {
       "character": "鎖暝",
@@ -296,7 +98,7 @@
       "start_date": null,
       "end_date": null,
       "confirmed": false,
-      "notes": "未実装キャラクター"
+      "notes": "公式発表済みの未実装キャラ"
     },
     {
       "character": "心",
@@ -305,7 +107,223 @@
       "start_date": null,
       "end_date": null,
       "confirmed": false,
-      "notes": "未実装キャラクター"
+      "notes": "公式発表済みの未実装キャラ"
+    },
+    {
+      "character": "たゆたう輝き",
+      "event": "★5増幅器「たゆたう輝き」武器集音（後半バナー）",
+      "category": "weapon",
+      "start_date": "2026-07-30",
+      "end_date": "2026-08-19",
+      "confirmed": true,
+      "notes": "穂穂のモチーフ武器"
+    },
+    {
+      "character": "時苔の繭",
+      "event": "★5武器「時苔の繭」復刻武器集音（後半バナー）",
+      "category": "weapon",
+      "start_date": "2026-07-30",
+      "end_date": "2026-08-19",
+      "confirmed": true,
+      "notes": "エイメスのモチーフ武器"
+    },
+    {
+      "character": "雲琅",
+      "event": "★5迅刀「雲琅」武器集音（前半バナー）",
+      "category": "weapon",
+      "start_date": "2026-08-20",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "清宵のモチーフ武器"
+    },
+    {
+      "character": "幾千の導き",
+      "event": "★5長刃「幾千の導き」武器集音（後半バナー）",
+      "category": "weapon",
+      "start_date": null,
+      "end_date": null,
+      "confirmed": true,
+      "notes": "景燃のモチーフ武器"
+    },
+    {
+      "character": "余音のプレゼント",
+      "event": "Ver3.5 ログインボーナスイベント",
+      "category": "event",
+      "start_date": "2026-07-10",
+      "end_date": "2026-08-19",
+      "confirmed": true,
+      "notes": "ガチャ石（金髓の波模様・唱喚の渦模様）の配布"
+    },
+    {
+      "character": "虚無領域のクライシス・クアドラント拡張",
+      "event": "演習挑戦イベント",
+      "category": "event",
+      "start_date": "2026-07-30",
+      "end_date": "2026-08-19",
+      "confirmed": true,
+      "notes": "Ver3.5期間限定イベント"
+    },
+    {
+      "character": "ブブ企画・旅立",
+      "event": "依頼イベント",
+      "category": "event",
+      "start_date": "2026-08-06",
+      "end_date": "2026-08-19",
+      "confirmed": true,
+      "notes": "Ver3.5期間限定イベント"
+    },
+    {
+      "character": "秘玉帰巣記",
+      "event": "Web限定イベント",
+      "category": "event",
+      "start_date": "2026-07-30",
+      "end_date": "2026-08-13",
+      "confirmed": true,
+      "notes": "星声などを獲得可能"
+    },
+    {
+      "character": "響き渡る音弦",
+      "event": "無音区報酬2倍イベント",
+      "category": "event",
+      "start_date": "2026-08-12",
+      "end_date": "2026-08-19",
+      "confirmed": true,
+      "notes": "1日3回まで無音区報酬2倍"
+    },
+    {
+      "character": "ラメントリコン：サイレントクライシス",
+      "event": "常設戦闘挑戦コンテンツ",
+      "category": "event",
+      "start_date": "2026-07-10",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.5実装の常設コンテンツ"
+    },
+    {
+      "character": "此より狭間の地・玄方",
+      "event": "エリア探索イベント",
+      "category": "event",
+      "start_date": "2026-07-10",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.5実装のエリアイベント"
+    },
+    {
+      "character": "色褪せぬ面影",
+      "event": "留まる影収集イベント",
+      "category": "event",
+      "start_date": "2026-07-10",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.5イベント"
+    },
+    {
+      "character": "明慎事件簿",
+      "event": "エリア恒常コンテンツ",
+      "category": "event",
+      "start_date": "2026-07-10",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.5実装の恒常イベント"
+    },
+    {
+      "character": "雲煙のプレゼント",
+      "event": "Ver3.6 ログインボーナスイベント",
+      "category": "event",
+      "start_date": "2026-08-20",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "ガチャ石等の配布"
+    },
+    {
+      "character": "群響シミュレーション",
+      "event": "期間限定戦闘イベント",
+      "category": "event",
+      "start_date": "2026-08-20",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.6イベント。異相・万囮の檻・朽躯を獲得可能"
+    },
+    {
+      "character": "第二ソラリス・紛れ込む怪異",
+      "event": "異変撮影ミニイベント",
+      "category": "event",
+      "start_date": "2026-08-20",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.6イベント"
+    },
+    {
+      "character": "夢がまだ、響き続けているなら",
+      "event": "マルチプレイ挑戦イベント",
+      "category": "event",
+      "start_date": "2026-08-20",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.6マルチ戦闘チャレンジ"
+    },
+    {
+      "character": "清らかな調べ、過ぎゆく歳月を記す",
+      "event": "七弦琴演奏ミニイベント",
+      "category": "event",
+      "start_date": "2026-08-20",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.6イベント"
+    },
+    {
+      "character": "潮汐の探り手",
+      "event": "調査任務イベント",
+      "category": "event",
+      "start_date": "2026-08-20",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.6イベント"
+    },
+    {
+      "character": "第四章 第一幕「山雨来たらんと欲して風楼に満つ」",
+      "event": "潮汐任務（メインストーリー）更新",
+      "category": "story",
+      "start_date": "2026-07-10",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.5実装ストーリー"
+    },
+    {
+      "character": "第四章 第二幕「荒波鎮めるは玄翎の声」",
+      "event": "潮汐任務（メインストーリー）更新",
+      "category": "story",
+      "start_date": "2026-07-10",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.5実装ストーリー"
+    },
+    {
+      "character": "第四章 幕間「霊響の契り、冥々の定め」",
+      "event": "潮汐任務（メインストーリー）更新",
+      "category": "story",
+      "start_date": "2026-07-10",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.5実装ストーリー"
+    },
+    {
+      "character": "第四章 第三幕「心剣響けば煙雲棚引く」",
+      "event": "潮汐任務（メインストーリー）更新",
+      "category": "story",
+      "start_date": "2026-08-20",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.6実装ストーリー"
+    },
+    {
+      "character": "第四章 幕間「幽客の残り声」",
+      "event": "潮汐任務（メインストーリー）更新",
+      "category": "story",
+      "start_date": "2026-08-20",
+      "end_date": null,
+      "confirmed": true,
+      "notes": "Ver3.6実装ストーリー"
     }
   ]
 }
