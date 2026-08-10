@@ -584,8 +584,17 @@ class IntelligenceEngine:
             try:
                 if "rss" in stype and feedparser:
                     res = requests.get(url, headers=headers_web, timeout=12)
+                    # 取得できなかったことを必ず表に出す。
+                    # 以前は 200 以外を黙って読み飛ばしており、Togetter が URL 間違いで
+                    # 404 を返し続けていたのに、ログ上は何も起きていないように見えていた。
+                    if res.status_code != 200:
+                        print(f"    -> [Dead Source] HTTP {res.status_code} を返しました。この情報源は今回何も取得できていません。")
                     if res.status_code == 200:
                         feed = feedparser.parse(res.text)
+                        if not feed.entries:
+                            # RSS として読めない(HTMLページ等)か、中身が空。
+                            # どちらも「取得できたのに0件」なので、通信成功とは分けて記録する。
+                            print(f"    -> [Empty Feed] 取得はできましたが記事が0件でした（RSSでない可能性があります）。")
                         item_cnt = 0
                         for entry in feed.entries[:15]:
                             raw_title = getattr(entry, 'title', '')

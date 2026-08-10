@@ -60,7 +60,8 @@
       "name": "TikTok バズ動画・ショート急上昇レーダー (復活＆強化版)",
       "url": "https://www.tiktok.com/tag/%E9%B3%B4%E6%BD%AE",
       "type": "rss_safe_unwrap",
-      "enabled": true,
+      "_note": "無効化中。このURLはRSSではなくJavaScriptで描画されるHTMLページで、取得は200で成功するが記事は常に0件。稼働開始から一度も収集できていない。動くフィードが見つかれば enabled を true に戻す。",
+      "enabled": false,
       "weight": 52
     },
     {
@@ -79,7 +80,7 @@
     },
     {
       "name": "Twitter(X) 話題まとめ最高峰 Togetter (鳴潮バズ)",
-      "url": "https://togetter.com/rss/tag/%E9%B3%B4%E6%BD%AE",
+      "url": "https://togetter.com/rss/t/%E9%B3%B4%E6%BD%AE",
       "type": "rss_safe_unwrap",
       "enabled": true,
       "weight": 54
