@@ -1111,6 +1111,12 @@ class IntelligenceEngine:
         # 制作状況が「制作中」「投稿済み」の行も同様に残す。
         # ピックアップを外しても制作状況は記録として残るため、これを見ていないと
         # 「画面上は制作中なのに7日で消える」という事態が起きる。
+        #
+        # 「見送り」も残す。重複チェックは "今Notionに残っている行" のURLで判定するため、
+        # 行が消えると収集側はその記事を忘れ、話題が続いていれば再び拾ってくる。
+        # つまり行そのものが「一度断った」という記録になっており、消すと同じネタを
+        # 何度も却下させることになる。見送りは人が手で押した分しか増えないので、
+        # 保持しても行数は暴走しない。
         url_query = f"https://api.notion.com/v1/databases/{NOTION_INTELLIGENCE_DB_ID}/query"
         payload_query = {
             "filter": {
@@ -1130,6 +1136,10 @@ class IntelligenceEngine:
                     {
                         "property": "制作状況",
                         "select": {"does_not_equal": "投稿済み"}
+                    },
+                    {
+                        "property": "制作状況",
+                        "select": {"does_not_equal": "見送り"}
                     }
                 ]
             },
@@ -1164,7 +1174,8 @@ class IntelligenceEngine:
                     "and": [
                         {"property": "採用", "checkbox": {"equals": False}},
                         {"property": "制作状況", "select": {"does_not_equal": "制作中"}},
-                        {"property": "制作状況", "select": {"does_not_equal": "投稿済み"}}
+                        {"property": "制作状況", "select": {"does_not_equal": "投稿済み"}},
+                        {"property": "制作状況", "select": {"does_not_equal": "見送り"}}
                     ]
                 },
                 "page_size": 100
