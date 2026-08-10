@@ -1106,7 +1106,11 @@ class IntelligenceEngine:
         print(f"  [Target Horizon] Identifying all topic cards older than {seven_days_ago}...")
         
         # まずは「日時」プロパティでの古いもの、あるいは作成日時での古いものを検索
-        # ただし「採用」済み(ネタ帳として使う予定のもの)は、いつまでも参照できるよう対象から除外する
+        # ただし「採用」済み(ネタ帳として使う予定のもの)は、いつまでも参照できるよう対象から除外する。
+        #
+        # 制作状況が「制作中」「投稿済み」の行も同様に残す。
+        # ピックアップを外しても制作状況は記録として残るため、これを見ていないと
+        # 「画面上は制作中なのに7日で消える」という事態が起きる。
         url_query = f"https://api.notion.com/v1/databases/{NOTION_INTELLIGENCE_DB_ID}/query"
         payload_query = {
             "filter": {
@@ -1118,6 +1122,14 @@ class IntelligenceEngine:
                     {
                         "property": "採用",
                         "checkbox": {"equals": False}
+                    },
+                    {
+                        "property": "制作状況",
+                        "select": {"does_not_equal": "制作中"}
+                    },
+                    {
+                        "property": "制作状況",
+                        "select": {"does_not_equal": "投稿済み"}
                     }
                 ]
             },
@@ -1148,7 +1160,13 @@ class IntelligenceEngine:
             # 採用済み(ピックアップ済み)のカードは検査対象から外す。
             # ここは人が「これで作る」と判断した行なので、機械判定で消してはいけない。
             payload_patrol = {
-                "filter": {"property": "採用", "checkbox": {"equals": False}},
+                "filter": {
+                    "and": [
+                        {"property": "採用", "checkbox": {"equals": False}},
+                        {"property": "制作状況", "select": {"does_not_equal": "制作中"}},
+                        {"property": "制作状況", "select": {"does_not_equal": "投稿済み"}}
+                    ]
+                },
                 "page_size": 100
             }
             res_all = requests.post(url_query, headers=headers, json=payload_patrol, timeout=12)
