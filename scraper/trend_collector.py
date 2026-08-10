@@ -530,9 +530,25 @@ def ensure_video_db_schema():
             patch["再生数"] = {"number": {}}
         if "高評価数" not in props:
             patch["高評価数"] = {"number": {}}
+        # ピックアップ（採用）を動画DB側でも記録できるようにする。
+        # 企画DBと同じ列名・同じ選択肢に揃えてあるので、画面側は
+        # 2つのDBを同じ形として横断表示できる。
+        if "採用" not in props:
+            patch["採用"] = {"checkbox": {}}
+        if "制作状況" not in props:
+            patch["制作状況"] = {
+                "select": {
+                    "options": [
+                        {"name": "未着手", "color": "default"},
+                        {"name": "制作中", "color": "yellow"},
+                        {"name": "投稿済み", "color": "green"},
+                        {"name": "見送り", "color": "gray"},
+                    ]
+                }
+            }
 
         if patch:
-            print(f"  [Notion Auto-Upgrade] Adding {len(patch)} statistics column(s) to the video database...")
+            print(f"  [Notion Auto-Upgrade] Adding {len(patch)} column(s) to the video database...")
             notion_request("PATCH", url, headers, json={"properties": patch}, timeout=10)
     except Exception as e:
         print(f"  [Warning] Video DB schema check failed: {e}")

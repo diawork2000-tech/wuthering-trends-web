@@ -323,6 +323,14 @@ export default function Home() {
               🌐 マルチメディア収集 スタジオへ進む
             </button>
           </Link>
+          <Link href="/pickups" style={{ textDecoration: 'none' }}>
+            <button
+              className={styles.syncButton}
+              style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', color: '#fff', fontWeight: '700', boxShadow: '0 0 18px rgba(245, 158, 11, 0.4)', border: '1px solid rgba(255,255,255,0.2)' }}
+            >
+              📌 ピックアップ一覧
+            </button>
+          </Link>
         </div>
       </div>
 

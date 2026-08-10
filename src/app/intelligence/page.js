@@ -330,9 +330,13 @@ export default function IntelligenceStudioPage() {
           </div>
         </div>
         <div className={styles.headerActions}>
-          <button 
-            className={styles.triggerBtn} 
-            onClick={handleManualTrigger} 
+          {/* 採用済みは両DBにまたがるため、専用画面へ集約している */}
+          <Link href="/pickups" className={styles.pickupLink}>
+            📌 ピックアップ一覧
+          </Link>
+          <button
+            className={styles.triggerBtn}
+            onClick={handleManualTrigger}
             disabled={triggering}
             title="ワンクリックで今すぐクラウド発掘とAI深層解析を実行します"
           >

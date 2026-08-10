@@ -848,11 +848,24 @@ class IntelligenceEngine:
             pass
 
         if NOTION_API_KEY and NOTION_INTELLIGENCE_DB_ID:
+            # ここは必ず全ページを走査すること。
+            # 以前は page_size=100 の1回だけで打ち切っていたため、DBが100行を超えた時点で
+            # それ以前の行が「無かったこと」になり、同じ動画・記事が何度も新規追加されていた。
+            # （実測: 518行のうちユニークな動画は122本しかない状態になっていた）
             try:
                 headers = {"Authorization": f"Bearer {NOTION_API_KEY}", "Content-Type": "application/json", "Notion-Version": "2022-06-28"}
-                res_db = requests.post(f"https://api.notion.com/v1/databases/{NOTION_INTELLIGENCE_DB_ID}/query", headers=headers, json={"page_size": 100}, timeout=8)
-                if res_db.status_code == 200:
-                    for page in res_db.json().get("results", []):
+                cursor = None
+                pages_scanned = 0
+                while True:
+                    payload = {"page_size": 100}
+                    if cursor:
+                        payload["start_cursor"] = cursor
+                    res_db = requests.post(f"https://api.notion.com/v1/databases/{NOTION_INTELLIGENCE_DB_ID}/query", headers=headers, json=payload, timeout=15)
+                    if res_db.status_code != 200:
+                        print(f"  [Warning] Deduplication query failed at page {pages_scanned + 1} (Status {res_db.status_code}). Falling back to partial memory.")
+                        break
+                    data = res_db.json()
+                    for page in data.get("results", []):
                         props = page.get("properties", {})
                         u_prop = props.get("一次URL", {})
                         if u_prop and u_prop.get("url"):
@@ -860,8 +873,14 @@ class IntelligenceEngine:
                         t_prop = props.get("名前") or props.get("Name") or props.get("title")
                         if t_prop and t_prop.get("title") and len(t_prop["title"]) > 0:
                             existing_titles.add(str(t_prop["title"][0]["plain_text"]).strip().lower())
-            except Exception:
-                pass
+                    pages_scanned += 1
+                    if not data.get("has_more"):
+                        break
+                    cursor = data.get("next_cursor")
+                    if not cursor:
+                        break
+            except Exception as e:
+                print(f"  [Warning] Deduplication scan aborted ({e}). Falling back to partial memory.")
 
         print(f"  [Deduplication Shield] Registered {len(existing_urls)} existing URLs and {len(existing_titles)} existing titles in prevention memory.")
 
@@ -1126,7 +1145,13 @@ class IntelligenceEngine:
 
             # 続いて！！ 現在Notionに残留してしまっている【 未翻訳(英語のまま) 】や【 陳腐な機械的テンプレート 】の品質未達カードを自発的にお掃除！
             print("\n=== [Phase 5-B] 🛡️ Quality Patrol: Purging Un-Translated English & Mechanical Boilerplate Cards ===")
-            res_all = requests.post(url_query, headers=headers, json={"page_size": 100}, timeout=12)
+            # 採用済み(ピックアップ済み)のカードは検査対象から外す。
+            # ここは人が「これで作る」と判断した行なので、機械判定で消してはいけない。
+            payload_patrol = {
+                "filter": {"property": "採用", "checkbox": {"equals": False}},
+                "page_size": 100
+            }
+            res_all = requests.post(url_query, headers=headers, json=payload_patrol, timeout=12)
             if res_all.status_code == 200:
                 all_pages = res_all.json().get("results", [])
                 purged_cnt = 0
