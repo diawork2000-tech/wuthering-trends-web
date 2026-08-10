@@ -3,12 +3,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import styles from './page.module.css';
+import PickupCard from './PickupCard';
 
 // ピックアップ（採用）済みの一覧。
 // YouTube動画DBとトレンド企画DBの両方から採用済みを集め、重複を除いて並べる。
 // ここでの「解除」は採用チェックを外すだけで、収集した行そのものは消さない。
-
-const STATUS_OPTIONS = ['未着手', '制作中', '投稿済み', '見送り'];
 
 export default function PickupsPage() {
   const [items, setItems] = useState([]);
@@ -17,6 +16,7 @@ export default function PickupsPage() {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   const [confirming, setConfirming] = useState(null); // 'selected' | 'all' | null
+  const [zoomLevel, setZoomLevel] = useState(300);
 
   const fetchPickups = useCallback(async () => {
     setLoading(true);
@@ -109,16 +109,20 @@ export default function PickupsPage() {
   };
 
   const selectedItems = items.filter((i) => selected.has(i.id));
-  const thumbFor = (item) =>
-    item.thumbnail || (item.videoId ? `https://i.ytimg.com/vi/${item.videoId}/hqdefault.jpg` : '');
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.leftNav}>
-          <Link href="/intelligence" className={styles.backBtn}>
-            ◀ 🌐 マルチメディア収集 へ戻る
-          </Link>
+          {/* 両方の収集画面から来られるので、両方へ戻れるようにしてある */}
+          <div className={styles.backLinks}>
+            <Link href="/" className={styles.backBtn}>
+              ◀ 🎥 YouTubeトレンド収集
+            </Link>
+            <Link href="/intelligence" className={styles.backBtn}>
+              ◀ 🌐 マルチメディア収集
+            </Link>
+          </div>
           <div className={styles.titleArea}>
             <h1>📌 ピックアップ一覧</h1>
             <p>YouTube・マルチメディア両方の採用済みネタをまとめて管理</p>
@@ -146,6 +150,21 @@ export default function PickupsPage() {
             {selected.size > 0 ? `${selected.size} 件を選択中` : '未選択'}
           </span>
         </div>
+
+        <div className={styles.zoomControl}>
+          <span title="カードを小さく">➖</span>
+          <input
+            type="range"
+            min="220"
+            max="520"
+            step="20"
+            value={zoomLevel}
+            onChange={(e) => setZoomLevel(Number(e.target.value))}
+            className={styles.zoomSlider}
+          />
+          <span title="カードを大きく">➕</span>
+        </div>
+
         <div className={styles.toolbarRight}>
           <button
             className={styles.dangerBtn}
@@ -203,94 +222,19 @@ export default function PickupsPage() {
             </p>
           </div>
         ) : (
-          <ul className={styles.list}>
-            {items.map((item) => {
-              const isSelected = selected.has(item.id);
-              const thumb = thumbFor(item);
-              return (
-                <li
-                  key={item.id}
-                  className={`${styles.row} ${isSelected ? styles.rowSelected : ''}`}
-                  onClick={() => toggleSelect(item.id)}
-                >
-                  <input
-                    type="checkbox"
-                    className={styles.checkbox}
-                    checked={isSelected}
-                    onChange={() => toggleSelect(item.id)}
-                    onClick={(e) => e.stopPropagation()}
-                    aria-label={`${item.title} を選択`}
-                  />
-
-                  <div className={styles.thumbWrap}>
-                    {thumb ? (
-                      // 外部サムネイルのドメインが増えても壊れないよう、あえて通常のimgを使う
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={thumb} alt="" className={styles.thumb} loading="lazy" />
-                    ) : (
-                      <div className={styles.thumbFallback}>📰</div>
-                    )}
-                  </div>
-
-                  <div className={styles.info}>
-                    <div className={styles.badgeRow}>
-                      <span
-                        className={`${styles.originBadge} ${
-                          item.origin === 'video' ? styles.originVideo : styles.originTopic
-                        }`}
-                      >
-                        {item.originLabel}
-                      </span>
-                      {item.linkedIds?.length > 1 && (
-                        <span className={styles.metaBadge}>両DBに登録</span>
-                      )}
-                      {item.score != null && (
-                        <span className={styles.metaBadge}>スコア {item.score}</span>
-                      )}
-                      {item.viewCount != null && item.viewCount > 0 && (
-                        <span className={styles.metaBadge}>▶ {item.viewCount.toLocaleString()}</span>
-                      )}
-                      {item.subtitle && <span className={styles.subtitle}>{item.subtitle}</span>}
-                    </div>
-                    <p className={styles.title}>{item.title}</p>
-                    {item.url && (
-                      <a
-                        href={item.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.link}
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        元のページを開く ↗
-                      </a>
-                    )}
-                  </div>
-
-                  <div className={styles.actions} onClick={(e) => e.stopPropagation()}>
-                    <select
-                      className={styles.statusSelect}
-                      value={item.status || '未着手'}
-                      onChange={(e) => changeStatus(item, e.target.value)}
-                    >
-                      {STATUS_OPTIONS.map((s) => (
-                        <option key={s} value={s}>
-                          {s}
-                        </option>
-                      ))}
-                    </select>
-                    <button
-                      className={styles.removeBtn}
-                      onClick={() => release([item], 'このネタ')}
-                      disabled={busy}
-                      title="この1件をピックアップから外す（データは残ります）"
-                    >
-                      外す
-                    </button>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          <div className={styles.gallery} style={{ '--card-width': `${zoomLevel}px` }}>
+            {items.map((item) => (
+              <PickupCard
+                key={item.id}
+                item={item}
+                selected={selected.has(item.id)}
+                onToggleSelect={toggleSelect}
+                onChangeStatus={changeStatus}
+                onRemove={(i) => release([i], 'このネタ')}
+                busy={busy}
+              />
+            ))}
+          </div>
         )}
       </main>
     </div>

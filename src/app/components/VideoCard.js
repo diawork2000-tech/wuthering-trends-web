@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import styles from './VideoCard.module.css';
+import { useHoverAutoplay } from './useHoverAutoplay';
 
 const WATCHED_STORAGE_KEY = 'wt_watched_video_ids';
 
@@ -28,76 +29,15 @@ function markAsWatched(id) {
 }
 
 export default function VideoCard({ video }) {
-  const [isPlaying, setIsPlaying] = useState(false);
   // カードは videos 読み込み後（＝クライアント側）でしか描画されないため、
   // 初期値をここで localStorage から直接読んでも SSR とのズレは起きない。
   const [isWatched, setIsWatched] = useState(() => getWatchedIds().has(video.id));
-  const cardRef = useRef(null);
-  const timerRef = useRef(null);
+  // ホバー／画面中央での自動再生。ピックアップ一覧のカードと共通の挙動。
+  const { isPlaying, cardRef, handleMouseEnter, handleMouseLeave } = useHoverAutoplay();
 
   const handleTitleClick = () => {
     markAsWatched(video.id);
     setIsWatched(true);
-  };
-
-  // Intersection Observer for mobile scroll auto-play with intelligent hold delay
-  useEffect(() => {
-    // マウスでホバー可能なPC環境ではスクロール再生（Observer）を無効化
-    const isHoverable = window.matchMedia('(hover: hover)').matches;
-    if (isHoverable) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          // 画面中央領域にしっかり定着した場合のみ、1.3秒じっくり待ってからスマートに自動再生開始
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.7) {
-            if (!timerRef.current) {
-              timerRef.current = setTimeout(() => {
-                setIsPlaying(true);
-              }, 1300); // 1.3秒間 画面中央に留まり続けたときだけ発火！
-            }
-          } else {
-            // スクロールによる素通りや画面外への離脱時は、即座にタイマーをキャンセルし再生させない
-            if (timerRef.current) {
-              clearTimeout(timerRef.current);
-              timerRef.current = null;
-            }
-            setIsPlaying(false);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: '-22% 0px -22% 0px', // スマホ画面の上下22%ずつを除外した確信の「中央フォーカスゾーン」
-        threshold: [0, 0.7], // 70%見えたらトリガー
-      }
-    );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
-    return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
-    };
-  }, []);
-
-  // Hover handlers for PC
-  const handleMouseEnter = () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => setIsPlaying(true), 200);
-  };
-  const handleMouseLeave = () => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
-    }
-    setIsPlaying(false);
   };
 
   return (

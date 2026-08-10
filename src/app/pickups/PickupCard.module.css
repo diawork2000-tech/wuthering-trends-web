@@ -1,0 +1,240 @@
+/* YouTubeトレンド収集のカード(VideoCard.module.css)に見た目を合わせてある。
+   違いは、選択チェック・制作状況・解除ボタンを持つことだけ。 */
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease,
+    border-color 0.25s ease, background 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(100, 150, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.cardSelected {
+  border-color: rgba(250, 204, 21, 0.75);
+  background: rgba(250, 204, 21, 0.09);
+  box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.35), 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.thumbnailContainer {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  background: #111;
+  overflow: hidden;
+}
+
+.checkWrap {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 17px;
+  height: 17px;
+  accent-color: #facc15;
+  cursor: pointer;
+}
+
+.thumbnailImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.card:hover .thumbnailImage {
+  transform: scale(1.05);
+  filter: brightness(0.8);
+}
+
+.thumbFallback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  opacity: 0.4;
+}
+
+.iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.originBadge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.originVideo {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.3);
+}
+
+.originTopic {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(37, 117, 252, 0.3);
+}
+
+.metaBadge {
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  white-space: nowrap;
+}
+
+.viewCount {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.12);
+  padding: 3px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.titleLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #f0f0f0;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s ease;
+}
+
+.card:hover .title {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.subtitle {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.statusSelect {
+  flex: 1;
+  min-width: 0;
+  background: rgba(10, 14, 26, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  color: #e2e8f0;
+  padding: 6px 8px;
+  border-radius: 9px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  color-scheme: dark;
+}
+
+.statusSelect option {
+  background: #1e1e2e;
+  color: #fff;
+}
+
+.removeBtn {
+  background: rgba(220, 38, 38, 0.16);
+  border: 1px solid rgba(248, 113, 113, 0.42);
+  color: #fca5a5;
+  padding: 6px 12px;
+  border-radius: 9px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.removeBtn:hover:not(:disabled) {
+  background: rgba(220, 38, 38, 0.32);
+  color: #fff;
+}
+
+.removeBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
