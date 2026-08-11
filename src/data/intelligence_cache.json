@@ -3,45 +3,17 @@
   "items": [
     {
       "id": "card-0",
-      "title": "Reddit『鳴潮』公式コミュニティ 質問メガスレッド解説",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vk7x4v/daily_questions_megathread_august_10_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外公式Redditコミュニティに設置された日次質問メガスレッド。初心者から熟練プレイヤーまで、質問や回答、攻略ヒントの共有、お互いの助け合いが行われています。投稿内にはu/Zapphiren氏によるスターターガイド、u/nihilistfun氏によるバージョン1.Xストーリーアーカイブ、Chasey氏のキャラクタービルドガイド、u/Aizen_Myo氏の簿記資料、デバイス要件、Subreddit FAQなどの有用リンクが紹介されています。",
-      "reason": "海外コミュニティにおけるプレイヤーの疑問解決や攻略資料の集積状況を確認でき、プレイヤー層の関心や初心者がつまずきやすいポイントを把握するのに適したネタだからです。",
-      "score": 74,
+      "title": "鳴潮 8月11日付 - 徳島新聞デジタル",
+      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE4yOU5DYThxMVRtUlhwRGliVEdscElaaXQzalA2b3ROZURNcUFlSThjMEhMeGV2LXZ4NVdBUlo2MzF3WkZtTHFwdml6c3dNZXVoSzZMc2J3?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮 8月11日付&nbsp;&nbsp;徳島新聞デジタル",
+      "reason": "3件の情報源が同時に取り上げている話題 ／ 約4時間前に出たばかりの新しい情報",
+      "score": 80,
       "viewCount": 0,
       "viewsPerHour": 0.0,
-      "mentionCount": 1,
+      "mentionCount": 3,
       "date": "2026-08-11",
-      "createdTime": "2026-08-11T06:16:43.140521+00:00"
-    },
-    {
-      "id": "card-1",
-      "title": "海外Reddit『鳴潮』ガチャ＆エコー成果報告メガスレッド",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vk7wtt/weekly_gacha_echo_megathread_week_32_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外公式Redditで運用されている週刊の「ガチャ＆エコーメガスレッド（2026年第32週）」です。プレイヤーがガチャの引き（幸運・不運）や厳選したエコーのドロップ結果を投稿・共有する専用の場所として機能しています。単体のガチャ・エコー報告ポストはスパム防止のため削除される規約となっており、コミュニティ内での交流が集約されています。",
-      "reason": "ガチャ結果やエコー獲得に関するプレイヤーの盛り上がりやコミュニティ管理の動向を把握し、視聴者の共感を得やすい話題を提供できるためです。",
-      "score": 74,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-08-11",
-      "createdTime": "2026-08-11T06:16:43.140551+00:00"
-    },
-    {
-      "id": "card-2",
-      "title": "ファン自作！『鳴潮』仕様のカスタムRTX 5090 GPUスキン",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vk9bmw/yet_another_aemeath_rtx_5090_gpu/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n公式の『鳴潮』テーマGPU（RTX 5090）のリリースを待ちきれなかったファンが、NVIDIAの公式事前公開画像を参考に特別制作されたGPUスキンを購入し装着した報告です。中国からの送料込みで約70ドルを費やし、MSIのGaming Trioモデルに自らスキンを施工。スキンはiGameおよびGigabyteのデザインを参考に制作されたもので、施工に多少の難しさはあったものの出来映えに満足しており、Kuro Games公式とのコラボレーション展開への期待も寄せられています。",
-      "reason": "高価格帯グラフィックボードの自作カスタムというファンによる熱量の高いリアルグッズ関連トピックであり、海外ファンの熱狂ぶりを届けるショート動画として関心を集めやすいためです。",
-      "score": 74,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-08-11",
-      "createdTime": "2026-08-11T06:16:43.140566+00:00"
+      "createdTime": "2026-08-11T09:31:25.324239+00:00"
     }
   ]
 }
