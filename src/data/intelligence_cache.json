@@ -3,17 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "鳴潮 8月11日付 - 徳島新聞デジタル",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE4yOU5DYThxMVRtUlhwRGliVEdscElaaXQzalA2b3ROZURNcUFlSThjMEhMeGV2LXZ4NVdBUlo2MzF3WkZtTHFwdml6c3dNZXVoSzZMc2J3?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮 8月11日付&nbsp;&nbsp;徳島新聞デジタル",
-      "reason": "3件の情報源が同時に取り上げている話題 ／ 約4時間前に出たばかりの新しい情報",
-      "score": 80,
+      "title": "【鳴潮】公式Reddit「毎日の質問メガスレッド」の概要と役立つリンク集",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vl4bul/daily_questions_megathread_august_11_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外のWuthering Waves（鳴潮）コミュニティにおける日常的な質問用スレッド。スレッド内では独立した投稿を作成せずに質問を行うことが推奨されており、既存の回答の検索や詳細な情報提供、回答者への敬意が求められている。また、u/Zapphiren氏によるスターターガイド、u/nihilistfun氏による1.Xストーリーアーカイブ、Chasey氏のキャラクタービルドガイド、u/Aizen_Myo氏の帳簿データなど、役立つ各種リンクが一覧としてまとめられている。",
+      "reason": "海外コミュニティの初心者支援や情報蓄積の現状、プレイヤーが参照している代表的なガイド資料の動向を把握するのに適したトピックであるため。",
+      "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
-      "mentionCount": 3,
+      "mentionCount": 1,
       "date": "2026-08-11",
-      "createdTime": "2026-08-11T09:31:25.324239+00:00"
+      "createdTime": "2026-08-11T12:46:48.519614+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "【鳴潮 vs ZZZ】海外プレイヤーが語るガチャゲーのストーリー描写と完成度への期待",
+      "sourceType": "海外Redditフォーラム ガチャゲー最前線",
+      "sourceUrl": "https://www.reddit.com/r/gachagaming/comments/1vjd3ae/the_dichotomy_of_the_two_types_of_gacha_games_i/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n『ゼンレスゾーンゼロ（ZZZ）』と『鳴潮（Wuwa）』の両方をプレイしているユーザーによる考察投稿。著者は双方の物語設定自体には好意的な評価を示しているものの、より没入感を高めるために開発陣がストーリー展開や細部の練り込みにより多くの時間をかけることを望んでいる。自身にとってちょうど良い満足度を得られる「ゴルディロックス・ゾーン（最適なバランス）」のゲーム環境を熱望している内容となっている。",
+      "reason": "同ジャンルの競合タイトルであるZZZとの比較を通じ、海外のガチャゲーム層が『鳴潮』のストーリー展開や制作の熟成度に何を求めているかという生のユーザー意向を分析できるため。",
+      "score": 64,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-08-11",
+      "createdTime": "2026-08-11T12:46:48.519645+00:00"
     }
   ]
 }
