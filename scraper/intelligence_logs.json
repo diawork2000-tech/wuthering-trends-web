@@ -1,5 +1,14 @@
 [
   {
+    "timestamp": "2026-08-12 05:01:38",
+    "status": "Success",
+    "total_harvested": 121,
+    "final_selected": 0,
+    "breakdown": {},
+    "gemini_topic_status": "not_configured",
+    "gemini_competitor_status": "not_configured"
+  },
+  {
     "timestamp": "2026-08-12 01:46:27",
     "status": "Success",
     "total_harvested": 119,
@@ -690,17 +699,5 @@
     },
     "gemini_topic_status": "success",
     "gemini_competitor_status": "no_items"
-  },
-  {
-    "timestamp": "2026-08-05 07:04:18",
-    "status": "Success",
-    "total_harvested": 149,
-    "final_selected": 76,
-    "breakdown": {
-      "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)": 12,
-      "YouTube競合 (別枠全件枠)": 64
-    },
-    "gemini_topic_status": "failed",
-    "gemini_competitor_status": "failed"
   }
 ]
