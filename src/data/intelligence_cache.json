@@ -3,31 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "GameWithによる『鳴潮』マップナビ・全体地図まとめ",
-      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE4tcVMwZzhSMkFjWjJrenFaYjN4VzlkeEduYWF0bHY3VzlNSE8wZEwtRklYa3M4NmlkcWhoZkRkSUJWWExlb2w5RGduR2NCMXdHMWc0?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによる『鳴潮』のマップナビゲーションおよび全体地図のまとめ情報。マップ全体の構造や探索に必要な情報がまとめられている。",
-      "reason": "マップの全体像やナビゲーションはプレイヤーにとって常に関心が高い基本攻略要素であり、情報参照ニーズが安定して存在するため。",
-      "score": 74,
+      "title": "毎日の質問メガスレッドと初心者・ビルド向け各種ガイドリンク",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vmxlzm/daily_questions_megathread_august_13_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nRedditのデイリー質問スレッドにて、ユーザー同士の質疑応答とともに有用なリソースリンクが共有されています。含まれているリンクは、u/Zapphirenによるスターターガイド、u/nihilistfunによるフルバージョン1.Xストーリーアーカイブ、ChaseyによるWWキャラクタービルドガイド、u/Aizen_Myoによる簿記データ、およびデバイス要件やSubreddit FAQです。",
+      "reason": "新規プレイヤーや復帰勢が役立つビルドガイドや1.Xのストーリーまとめ等を求めている状況において、公式コミュニティで推奨されているリソース一覧を紹介する企画として価値があるため。",
+      "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-08-13",
-      "createdTime": "2026-08-13T13:31:27.347230+00:00"
+      "createdTime": "2026-08-13T16:46:31.530720+00:00"
     },
     {
       "id": "card-1",
-      "title": "【鳴潮】細かすぎる千咲の作り込み解説",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=v_W6-eGzFY4",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nチャンネル「セリーナ鳴潮メイン」投稿による『鳴潮』の「千咲」のグラフィックや演出など細かな作り込みに注目した動画（バズ実績: 1,544 再生 / 高評価 12 / 約 114 再生毎時）。キャラクターの緻密なデザインやグラフィック表現を取り上げている。",
-      "reason": "特定キャラクターの緻密なグラフィックや作り込み要素を紹介するコンテンツはプレイヤーの注目度が高く、毎時114再生という高い勢いを記録しているため。",
-      "score": 68,
-      "viewCount": 1544,
-      "viewsPerHour": 113.8,
+      "title": "Ver.2.0大型アプデ前からのグラフィックの美しさを振り返る話題",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vn1zgs/just_a_reminder_that_wuwa_has_always_been/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nユーザー/u/Sea-Nose921による投稿。「Great 2.0 Update」の前から、本作のグラフィックやフィールドの景観が常に高いクオリティを誇り美しかったことを改めて伝えています。",
+      "reason": "Ver.2.0への期待感が高まる中で、初期からのゲーム内の美しいグラフィック表現やフィールドの魅力を振り返るショート動画ネタとして共感を得やすいため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-08-13",
-      "createdTime": "2026-08-13T13:31:27.347279+00:00"
+      "createdTime": "2026-08-13T16:46:31.530758+00:00"
     }
   ]
 }
