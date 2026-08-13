@@ -3,31 +3,45 @@
   "items": [
     {
       "id": "card-0",
-      "title": "毎日の質問メガスレッドと初心者・ビルド向け各種ガイドリンク",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vmxlzm/daily_questions_megathread_august_13_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nRedditのデイリー質問スレッドにて、ユーザー同士の質疑応答とともに有用なリソースリンクが共有されています。含まれているリンクは、u/Zapphirenによるスターターガイド、u/nihilistfunによるフルバージョン1.Xストーリーアーカイブ、ChaseyによるWWキャラクタービルドガイド、u/Aizen_Myoによる簿記データ、およびデバイス要件やSubreddit FAQです。",
-      "reason": "新規プレイヤーや復帰勢が役立つビルドガイドや1.Xのストーリーまとめ等を求めている状況において、公式コミュニティで推奨されているリソース一覧を紹介する企画として価値があるため。",
-      "score": 78,
+      "title": "【鳴潮】いつの間にか橋が壊れなくなっている件",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/VW1YmOtZSvo",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nフィールド上の橋が壊れなくなっている現象を取り上げている。概要欄にはエイメス、ダーニャ、シグリカ、緋雪、景燃、カルテジアなどの関連タグが記載されている。",
+      "reason": "マップ上の細かな仕様変更や挙動の変化はプレイヤー間の共感を呼びやすく、ショート動画での検証ネタとして注目されやすいため。",
+      "score": 89,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-08-13",
-      "createdTime": "2026-08-13T16:46:31.530720+00:00"
+      "createdTime": "2026-08-13T20:01:50.210252+00:00"
     },
     {
       "id": "card-1",
-      "title": "Ver.2.0大型アプデ前からのグラフィックの美しさを振り返る話題",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1vn1zgs/just_a_reminder_that_wuwa_has_always_been/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nユーザー/u/Sea-Nose921による投稿。「Great 2.0 Update」の前から、本作のグラフィックやフィールドの景観が常に高いクオリティを誇り美しかったことを改めて伝えています。",
-      "reason": "Ver.2.0への期待感が高まる中で、初期からのゲーム内の美しいグラフィック表現やフィールドの魅力を振り返るショート動画ネタとして共感を得やすいため。",
-      "score": 78,
+      "title": "【鳴潮】歳主は味方なのか？敵なのか？",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/cC6OCwI2HUk",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n歳主が味方なのか敵なのかという疑問および週ボスとしての存在について触れている。エイメス、ダーニャ、シグリカ、緋雪、景燃、カルテジアなどのタグが付与されている。",
+      "reason": "ストーリーの核心や週ボスに関する考察は関心度が高く、視聴者からのコメントや議論を誘発しやすいため。",
+      "score": 89,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-08-13",
-      "createdTime": "2026-08-13T16:46:31.530758+00:00"
+      "createdTime": "2026-08-13T20:01:50.210283+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "【鳴潮】恒常星5キャラの外れ枠3選",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=8dar6GaOqV0",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n恒常星5キャラの中から「外れ枠」とされる3キャラをピックアップして解説する内容。現在2,157再生、高評価61、1時間あたり約1,069再生のペースで急速に再生数を伸ばしている。",
+      "reason": "ガチャのすり抜けで獲得する恒常星5キャラの評価や育成の優先度はプレイヤーの関心が非常に高く、ランキング形式のタイトルがクリック率を集めているため。",
+      "score": 86,
+      "viewCount": 2157,
+      "viewsPerHour": 1068.6,
+      "mentionCount": 1,
+      "date": "2026-08-13",
+      "createdTime": "2026-08-13T20:01:50.210303+00:00"
     }
   ]
 }
