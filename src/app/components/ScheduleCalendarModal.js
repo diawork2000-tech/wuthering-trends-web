@@ -88,6 +88,20 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
     })
     .filter(Boolean);
 
+  // 終了日が入っていないバージョンは、次のバージョンが始まる前日まで伸ばす。
+  // 伸ばさないと幅が1日しかなく、タイトルが読めない（Ver3.6がこの状態だった）。
+  const versionStarts = normalizedOwn
+    .filter((ev) => ev.category === 'version')
+    .map((ev) => ev._start)
+    .sort((a, b) => a - b);
+
+  normalizedOwn.forEach((ev) => {
+    if (ev.category !== 'version' || ev.end_date) return;
+    const next = versionStarts.find((d) => d > ev._start);
+    // 次が分からなければ、鳴潮の更新周期(6週間)ぶん確保しておく
+    ev._end = next ? addDays(next, -1) : addDays(ev._start, 41);
+  });
+
   // 競合タイトルのアップデートは単日の印として扱う。
   // 期間の長い鳴潮の予定を上段に出したいので、こちらは後ろに並べる。
   const rivalNormalized = rivalEvents
@@ -96,8 +110,8 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
       const s2 = parseDate(ev.date);
       if (!s2) return null;
       return {
-        character: ev.version ? `${ev.game} ${ev.version}` : `${ev.game} 次回`,
-        event: ev.predicted ? 'アップデート(予測)' : 'アップデート',
+        character: ev.label || ev.game,
+        event: ev.phase ? `アップデート ${ev.phase}` : 'アップデート',
         category: 'rival',
         confirmed: ev.confirmed,
         _color: ev.color,
@@ -243,7 +257,9 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
                         }}
                         title={`${p.ev.character}（${p.ev.event}）${p.ev.confirmed ? '' : ' [未確定]'}${p.ev._note ? ` ${p.ev._note}` : ''}`}
                       >
-                        {startsHere ? p.ev.character : ''}
+                        {/* 週をまたぐ帯は各週で見出しを出す。開始週だけだと2週目以降が無地になり、
+                            どの期間が何なのか分からなくなる。 */}
+                        {p.endCol - p.startCol >= 1 || startsHere ? p.ev.character : ''}
                       </div>
                     );
                   })}

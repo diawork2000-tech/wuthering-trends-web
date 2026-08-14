@@ -143,6 +143,39 @@
     "min_score_threshold": 60,
     "enable_gemini_summary": true,
     "auto_source_expansion": true,
-    "min_run_interval_minutes": 180
-  }
+    "min_run_interval_minutes": 180,
+    "rival_schedule_interval_hours": 24
+  },
+  "rival_schedule_sources": [
+    {
+      "game_id": "genshin",
+      "name": "原神 今後の実装情報 (Wiki*)",
+      "url": "https://wikiwiki.jp/genshinwiki/%E4%BB%8A%E5%BE%8C%E3%81%AE%E5%AE%9F%E8%A3%85%E6%83%85%E5%A0%B1",
+      "enabled": true
+    },
+    {
+      "game_id": "hsr",
+      "name": "崩壊スターレイル アプデ最新情報 (Game8)",
+      "url": "https://game8.jp/houkaistarrail/525736",
+      "enabled": true
+    },
+    {
+      "game_id": "zzz",
+      "name": "ゼンゼロ アップデート履歴 (Wiki*)",
+      "url": "https://wikiwiki.jp/zenless/%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E5%B1%A5%E6%AD%B4",
+      "enabled": true
+    },
+    {
+      "game_id": "nte",
+      "name": "NTE アプデ・メンテ情報 (神ゲー攻略)",
+      "url": "https://kamigame.jp/nte/page/420360960969025352.html",
+      "enabled": true
+    },
+    {
+      "game_id": "endfield",
+      "name": "エンドフィールド アプデまとめ (GameWith)",
+      "url": "https://gamewith.jp/akendfield/540641",
+      "enabled": true
+    }
+  ]
 }

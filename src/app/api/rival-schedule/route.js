@@ -4,11 +4,15 @@ import path from 'path';
 import { readRepoJson } from '@/lib/github';
 
 // 競合タイトルのアップデート日程を返す。
-// 判明している分はデータファイルに手で書き、そこから先は各タイトルの更新周期で
+// 判明している分はデータファイルに書き、そこから先は各タイトルの更新周期で
 // 機械的に伸ばす。伸ばした分は confirmed: false にして、画面上でも予測と分かるようにする。
 //
-// バージョン番号は推測しない。7.8の次が7.9なのか8.0なのかは外からは分からず、
-// 間違った番号を出すくらいなら「次回アップデート」とだけ書くほうが役に立つ。
+// バージョン番号は小数点以下を1つ進めて推測する。7.8の次が7.9なのか8.0なのかは
+// 外からは分からないので外れることがあるが、「次回」とだけ書かれるより
+// 何の話か分かるほうが役に立つ。外れうる箇所なので必ず(予測)を添える。
+//
+// 前半・後半はバージョン開始日と、その phase_offset_days 日後に分かれる。
+// ガチャの入れ替えがここで起きるため、動画のネタとしてはバージョン開始と同じくらい重要。
 
 const HORIZON_DAYS = 200; // これより先は予測しない（当たらないので出す意味がない）
 const EMPTY = { updated_at: null, games: [], events: [] };
@@ -26,41 +30,76 @@ function todayJst() {
   return now.toISOString().slice(0, 10);
 }
 
+// 「7.1」→「7.2」。数値として扱うと 7.10 が 7.1 に潰れるので文字列のまま進める。
+function nextVersion(v) {
+  if (!v) return null;
+  const m = String(v).match(/^(\d+)\.(\d+)$/);
+  if (!m) return null;
+  return `${m[1]}.${Number(m[2]) + 1}`;
+}
+
+// 1つのバージョンを、前半・後半のイベントに分解する。
+function toPhaseEvents(game, base) {
+  const label = base.version ? `${game.name} ${base.version}` : game.name;
+  if (!game.has_phases) {
+    return [{ ...base, label: base.title ? `${label}「${base.title}」` : label, phase: '' }];
+  }
+  const offset = Number(game.phase_offset_days) || Math.floor((Number(game.cycle_days) || 42) / 2);
+  return [
+    { ...base, label: `${label} 前半`, phase: '前半' },
+    {
+      ...base,
+      date: addDays(base.date, offset),
+      label: `${label} 後半`,
+      phase: '後半',
+      // 後半の日付は開始日からの逆算。バージョン自体が確定でも、後半入りは前後しうる。
+      confirmed: false,
+      note: base.note || `バージョン開始から${offset}日後（推定）`,
+    },
+  ];
+}
+
 function expand(game) {
   const known = [...(game.versions || [])]
     .filter((v) => v.date)
     .sort((a, b) => a.date.localeCompare(b.date));
 
-  const events = known.map((v) => ({
-    game_id: game.id,
-    game: game.name,
-    color: game.color,
-    version: v.version || null,
-    title: v.title || '',
-    date: v.date,
-    confirmed: v.confirmed !== false,
-    note: v.note || '',
-    predicted: false,
-  }));
+  const events = known.flatMap((v) =>
+    toPhaseEvents(game, {
+      game_id: game.id,
+      game: game.name,
+      color: game.color,
+      version: v.version || null,
+      title: v.title || '',
+      date: v.date,
+      confirmed: v.confirmed !== false,
+      note: v.note || '',
+      predicted: false,
+    })
+  );
 
   const cycle = Number(game.cycle_days) || 42;
   const limit = addDays(todayJst(), HORIZON_DAYS);
   let cursor = known.length ? known[known.length - 1].date : null;
+  let version = known.length ? known[known.length - 1].version : null;
 
   while (cursor) {
     const next = addDays(cursor, cycle);
     if (next > limit) break;
-    events.push({
-      game_id: game.id,
-      game: game.name,
-      color: game.color,
-      version: null,
-      title: '',
-      date: next,
-      confirmed: false,
-      note: `直近の周期(${cycle}日)からの推定`,
-      predicted: true,
-    });
+    version = nextVersion(version);
+    events.push(
+      ...toPhaseEvents(game, {
+        game_id: game.id,
+        game: game.name,
+        color: game.color,
+        version: version ? `${version}(予測)` : null,
+        title: '',
+        date: next,
+        confirmed: false,
+        note: `直近の周期(${cycle}日)からの推定`,
+        predicted: true,
+      })
+    );
     cursor = next;
   }
 

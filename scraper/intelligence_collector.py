@@ -732,6 +732,193 @@ class IntelligenceEngine:
         except Exception as e:
             print(f"  [Warning] スケジュール解析に失敗: {e}")
 
+
+    def update_rival_schedule_if_stale(self, stale_after_hours=None):
+        """競合タイトル（原神/スタレ/ゼンゼロ/NTE/エンドフィールド）の更新日程を取り込む。
+
+        鳴潮本体の予定とは別ファイル(src/data/rival_schedule.json)に保存する。
+        同じファイルに混ぜると、ネタのスコア計算(schedule_boost)が他ゲームの
+        イベント名に反応してしまうため。
+
+        Gemini の無料枠は1日20回しかないので、1日1回・全タイトルまとめて1回の
+        呼び出しで済ませる。読み取れなかったタイトルの既存データは残す
+        （解析に失敗したときに、手で入れた確定日まで消えると困るため）。
+        """
+        out_path = os.path.join(os.path.dirname(__file__), "../src/data/rival_schedule.json")
+        if stale_after_hours is None:
+            stale_after_hours = int(self.config.get("settings", {}).get("rival_schedule_interval_hours", 24) or 24)
+
+        try:
+            with open(out_path, "r", encoding="utf-8") as f:
+                current = json.load(f)
+        except Exception as e:
+            print(f"  [Rival Schedule] 設定ファイルを読めないためスキップ: {e}")
+            return
+
+        # updated_at は日付だけのこともあるので、両方の書式を許容する
+        try:
+            raw = str(current.get("updated_at") or "")
+            last = datetime.fromisoformat(raw if "T" in raw else raw + "T00:00:00+00:00")
+            if last.tzinfo is None:
+                last = last.replace(tzinfo=timezone.utc)
+            age_hours = (datetime.now(timezone.utc) - last).total_seconds() / 3600
+            if age_hours < stale_after_hours:
+                print(f"  [Rival Schedule] 前回更新から {age_hours:.1f} 時間のためスキップ（{stale_after_hours}時間おき）")
+                return
+        except Exception:
+            pass  # 初回・書式不正はそのまま更新へ
+
+        sources = [x for x in self.config.get("rival_schedule_sources", []) if x.get("enabled", True)]
+        if not sources:
+            print("  [Rival Schedule] 情報源が未設定のためスキップ")
+            return
+        if not self.gemini_model_name:
+            print("  [Rival Schedule] Gemini 未設定のためスキップ")
+            return
+
+        print("\n=== [Rival Schedule] 競合タイトルの更新日程を解析中 ===")
+        headers_web = {"User-Agent": "WutheringTrendsIntelligenceEngine/2.0 (Schedule Tracker)"}
+        blocks = []
+        for src in sources:
+            try:
+                res = requests.get(src["url"], headers=headers_web, timeout=15)
+                if res.status_code != 200:
+                    print(f"  [Warning] {src.get('name')}: HTTP {res.status_code}")
+                    continue
+                text = BeautifulSoup(res.text, "html.parser").get_text(separator=" ", strip=True) if BeautifulSoup else res.text
+                blocks.append("\n\n=== game_id: " + str(src["game_id"]) + " / " + str(src.get("name")) + " ===\n" + text[:12000])
+                print(f"  [Fetch] {src.get('name')} OK")
+            except Exception as e:
+                print(f"  [Warning] {src.get('name')} の取得に失敗: {e}")
+
+        if not blocks:
+            print("  [Rival Schedule] 全ソースの取得に失敗したため更新を中止")
+            return
+
+        today = (datetime.now(timezone.utc) + timedelta(hours=9)).strftime("%Y-%m-%d")
+        prompt = (
+            "あなたはソーシャルゲームの更新日程を整理する担当です。\n"
+            "今日は " + today + " です。以下は各タイトルの攻略サイトから取得した生テキストです。\n\n"
+            "【最優先の絶対指令：事実の捏造を禁ずる】\n"
+            "A. 素材に書かれていない日付を、周期から逆算したり推測したりして出力してはならない。\n"
+            "B. 読み取れたものだけを出す。1件も読み取れないタイトルは、そのタイトルごと出力から省く。\n"
+            "C. game_id は素材の見出しに書かれた値をそのまま使う。新しい値を作ってはならない。\n\n"
+            "【指示】\n"
+            "1. 各タイトルの『バージョン番号』と『そのバージョンの開始日』を抽出する。\n"
+            "2. 日付は YYYY-MM-DD に正規化する。年が書かれていない場合は今日の日付から補う。\n"
+            "3. 公式に発表済みの日付は confirmed:true、予想・リークは confirmed:false とする。\n"
+            "4. 今日より前に始まった最新バージョンと、今後のバージョンだけを出す。それ以前の過去分は不要。\n"
+            "5. バージョン名（サブタイトル）が分かれば title に入れる。無ければ空文字。\n\n"
+            "出力は必ず【純粋なJSONオブジェクト】のみ。Markdownや解説文は禁止。\n"
+            "{\n"
+            '  "genshin": [ {"version": "7.0", "title": "サブタイトル", "date": "2026-08-12", "confirmed": true} ],\n'
+            '  "hsr": [ ]\n'
+            "}\n\n"
+            "生テキスト:\n" + "".join(blocks)[:90000]
+        )
+
+        # この処理は1日1回しか動かない。503(モデル混雑)のような一時的な失敗で
+        # 丸一日更新されないのは困るので、少し待って再試行し、それでも駄目なら
+        # 予備モデルに切り替える。503は課金・クォータを消費しないので再試行は安い。
+        parsed = None
+        # 予備モデルは実際に呼べることを確認したものだけ並べる。
+        # models.list() には載っていても "no longer available to new users" で
+        # 404 になるもの(gemini-2.5-flash / gemini-2.5-pro)があるため、
+        # 一覧をそのまま候補にしてはいけない。
+        models_to_try = [self.gemini_model_name]
+        for alt in ("gemini-flash-lite-latest", "gemini-3.5-flash"):
+            if alt not in models_to_try:
+                models_to_try.append(alt)
+
+        for model_name in models_to_try:
+            for attempt in range(3):
+                try:
+                    res = self.gemini_client.models.generate_content(
+                        model=model_name, contents=prompt
+                    )
+                    raw_txt = re.sub(r"^```(json)?|```$", "", res.text.strip(), flags=re.MULTILINE).strip()
+                    got = json.loads(raw_txt)
+                    if not isinstance(got, dict):
+                        raise ValueError("オブジェクト以外が返された")
+                    parsed = got
+                    if model_name != self.gemini_model_name:
+                        print(f"  [Rival Schedule] 予備モデル {model_name} で解析しました")
+                    break
+                except Exception as e:
+                    msg = str(e)
+                    transient = "503" in msg or "UNAVAILABLE" in msg or "429" in msg
+                    print(f"  [Warning] 競合スケジュール解析に失敗 ({model_name}, {attempt + 1}回目): {msg[:120]}")
+                    if not transient:
+                        break  # 書式不正など、待っても直らないものは次のモデルへ
+                    time.sleep(5 * (attempt + 1))
+            if parsed is not None:
+                break
+
+        if parsed is None:
+            print("  [Rival Schedule] 解析できなかったため既存データを維持します")
+            return
+
+        known_ids = {g.get("id") for g in current.get("games", [])}
+        for gid in parsed:
+            if gid not in known_ids:
+                # 素材に無いタイトルを勝手に増やさせない
+                print(f"  [Fabrication Guard] 未知の game_id を破棄: {gid}")
+
+        updated = []
+        for game in current.get("games", []):
+            got = parsed.get(game.get("id"))
+            if not isinstance(got, list):
+                continue
+            clean = []
+            for v in got:
+                if not isinstance(v, dict):
+                    continue
+                d = str(v.get("date") or "")
+                if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", d):
+                    continue
+                # バージョン番号は「数字.数字」だけ受け付ける。サブタイトルが
+                # そのまま入ってくることがあり（例: エンドフィールドで「拾遺散記」）、
+                # 通すと画面に「Ver拾遺散記」と出てしまう。
+                ver = str(v.get("version") or "").strip().lstrip("Ver.").strip()
+                if not re.fullmatch(r"\d+\.\d+", ver):
+                    ver = None
+                clean.append({
+                    "version": ver,
+                    "title": str(v.get("title") or "").strip(),
+                    "date": d,
+                    "confirmed": bool(v.get("confirmed")),
+                })
+            if not clean:
+                # 1件も読めなかったタイトルは既存データを触らない
+                continue
+
+            # 既存と統合する。上書きにすると、今回の情報源に載っていなかった
+            # 確定日（別ソースで判明していた分）が消えてしまう。
+            merged = {}
+            for v in list(game.get("versions", [])) + clean:
+                key = v.get("version") or v.get("date")
+                prev = merged.get(key)
+                # 同じバージョンが両方にあれば、確定情報を優先して残す
+                if prev and prev.get("confirmed") and not v.get("confirmed"):
+                    continue
+                merged[key] = v
+
+            cutoff = (datetime.now(timezone.utc) + timedelta(hours=9) - timedelta(days=60)).strftime("%Y-%m-%d")
+            final = sorted([v for v in merged.values() if v["date"] >= cutoff], key=lambda x: x["date"])
+            if not final:
+                continue
+            game["versions"] = final
+            updated.append(f"{game.get('name')}({len(final)}件)")
+
+        if not updated:
+            print("  [Rival Schedule] 有効な日程を抽出できなかったため既存データを維持します")
+            return
+
+        current["updated_at"] = datetime.now(timezone.utc).isoformat()
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(current, f, ensure_ascii=False, indent=2)
+        print(f"  [Rival Schedule Success] 更新: {', '.join(updated)}")
+
     def _gemini_enrich(self, sorted_items, competitor_cards, target_count):
         """トピック選出と競合動画の解説を1回の Gemini 呼び出しでまとめて行う。
 
@@ -1271,6 +1458,7 @@ class IntelligenceEngine:
 
             try:
                 self.update_schedule_if_stale()
+                self.update_rival_schedule_if_stale()
             except Exception as e:
                 print(f"  [Warning] Schedule update failed (non-fatal): {e}")
             
