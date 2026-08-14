@@ -812,10 +812,13 @@ class IntelligenceEngine:
             "2. 日付は YYYY-MM-DD に正規化する。年が書かれていない場合は今日の日付から補う。\n"
             "3. 公式に発表済みの日付は confirmed:true、予想・リークは confirmed:false とする。\n"
             "4. 今日より前に始まった最新バージョンと、今後のバージョンだけを出す。それ以前の過去分は不要。\n"
-            "5. バージョン名（サブタイトル）が分かれば title に入れる。無ければ空文字。\n\n"
+            "5. バージョン名（サブタイトル）が分かれば title に入れる。無ければ空文字。\n"
+            "6. そのバージョンで新キャラクターが実装されるかを、前半・後半それぞれについて"
+            " new_character_first / new_character_second に true/false で入れる。\n"
+            "   読み取れない場合は null。キャラ名や開催期間は不要（有無だけ分かればよい）。\n"
             "出力は必ず【純粋なJSONオブジェクト】のみ。Markdownや解説文は禁止。\n"
             "{\n"
-            '  "genshin": [ {"version": "7.0", "title": "サブタイトル", "date": "2026-08-12", "confirmed": true} ],\n'
+            '  "genshin": [ {"version": "7.0", "title": "サブタイトル", "date": "2026-08-12", "confirmed": true, "new_character_first": true, "new_character_second": false} ],\n'
             '  "hsr": [ ]\n'
             "}\n\n"
             "生テキスト:\n" + "".join(blocks)[:90000]
@@ -886,11 +889,19 @@ class IntelligenceEngine:
                 ver = str(v.get("version") or "").strip().lstrip("Ver.").strip()
                 if not re.fullmatch(r"\d+\.\d+", ver):
                     ver = None
+                def tri(x):
+                    # 読み取れなかった場合は null のまま保持する。
+                    # false と「不明」を混ぜると、画面上で「新キャラ無し」と
+                    # 断言してしまうことになる。
+                    return bool(x) if isinstance(x, bool) else None
+
                 clean.append({
                     "version": ver,
                     "title": str(v.get("title") or "").strip(),
                     "date": d,
                     "confirmed": bool(v.get("confirmed")),
+                    "new_character_first": tri(v.get("new_character_first")),
+                    "new_character_second": tri(v.get("new_character_second")),
                 })
             if not clean:
                 # 1件も読めなかったタイトルは既存データを触らない

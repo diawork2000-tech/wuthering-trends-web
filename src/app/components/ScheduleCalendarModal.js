@@ -114,9 +114,12 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
     .map((ev) => {
       const s2 = parseDate(ev.date);
       if (!s2) return null;
+      // 新キャラ実装がある回だけ印を付ける。読み取れなかった場合(null)は何も出さない。
+      // 「無し」と断言できないものを「無し」に見せないため。
+      const newChar = ev.newCharacter === true;
       return {
-        character: ev.label || ev.game,
-        event: ev.phase ? `アップデート ${ev.phase}` : 'アップデート',
+        character: `${ev.label || ev.game}${newChar ? ' 🆕' : ''}`,
+        event: (ev.phase ? `アップデート ${ev.phase}` : 'アップデート') + (newChar ? '・新キャラ実装あり' : ''),
         category: 'rival',
         confirmed: ev.confirmed,
         _color: ev.color,
@@ -288,7 +291,7 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
           <span className={`${styles.legendDot} ${styles.legendDotEvent}`} /> ゲーム内イベント
           <span className={`${styles.legendDot} ${styles.legendDotUnconfirmed}`} /> 未確定（リーク・予想）
           <span className={styles.legendSep}>|</span>
-          他タイトルは枠線の色で区別。点線は更新周期からの推定で、公式発表ではありません。
+          他タイトルは枠線の色で区別。🆕は新キャラ実装あり。点線は更新周期からの推定で、公式発表ではありません。
         </p>
       </div>
     </div>

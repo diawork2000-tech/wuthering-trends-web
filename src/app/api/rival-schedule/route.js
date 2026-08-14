@@ -42,16 +42,25 @@ function nextVersion(v) {
 function toPhaseEvents(game, base) {
   const label = base.version ? `${game.name} ${base.version}` : game.name;
   if (!game.has_phases) {
-    return [{ ...base, label: base.title ? `${label}「${base.title}」` : label, phase: '' }];
+    return [
+      {
+        ...base,
+        label: base.title ? `${label}「${base.title}」` : label,
+        phase: '',
+        // 前後半で分けないタイトルは、どちらかに新キャラがあれば「あり」とする
+        newCharacter: base.newFirst === true || base.newSecond === true ? true : base.newFirst,
+      },
+    ];
   }
   const offset = Number(game.phase_offset_days) || Math.floor((Number(game.cycle_days) || 42) / 2);
   return [
-    { ...base, label: `${label} 前半`, phase: '前半' },
+    { ...base, label: `${label} 前半`, phase: '前半', newCharacter: base.newFirst },
     {
       ...base,
       date: addDays(base.date, offset),
       label: `${label} 後半`,
       phase: '後半',
+      newCharacter: base.newSecond,
       // 後半の日付は開始日からの逆算。バージョン自体が確定でも、後半入りは前後しうる。
       confirmed: false,
       note: base.note || `バージョン開始から${offset}日後（推定）`,
@@ -75,6 +84,8 @@ function expand(game) {
       confirmed: v.confirmed !== false,
       note: v.note || '',
       predicted: false,
+      newFirst: v.new_character_first ?? null,
+      newSecond: v.new_character_second ?? null,
     })
   );
 
@@ -98,6 +109,9 @@ function expand(game) {
         confirmed: false,
         note: `直近の周期(${cycle}日)からの推定`,
         predicted: true,
+        // 未来のバージョンに誰が来るかは分からない
+        newFirst: null,
+        newSecond: null,
       })
     );
     cursor = next;
