@@ -88,18 +88,23 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
     })
     .filter(Boolean);
 
-  // 終了日が入っていないバージョンは、次のバージョンが始まる前日まで伸ばす。
-  // 伸ばさないと幅が1日しかなく、タイトルが読めない（Ver3.6がこの状態だった）。
+  // 終了日が入っていない予定は、そのバージョンが終わる日まで伸ばす。
+  // 伸ばさないと幅が1日しかなく、キャラ名やイベント名が読めない。
+  //
+  // バージョンだけを対象にしていた時期があったが、ガチャ・イベント・ストーリーも
+  // 同じ状態だった（Ver3.6の8件が全部1日分になっていた）。未発表の新バージョンは
+  // 個別の終了日が出ていないことが多く、これは今後も繰り返し起きる。
   const versionStarts = normalizedOwn
     .filter((ev) => ev.category === 'version')
     .map((ev) => ev._start)
     .sort((a, b) => a - b);
 
   normalizedOwn.forEach((ev) => {
-    if (ev.category !== 'version' || ev.end_date) return;
+    if (ev.end_date) return;
+    // 自分より後に始まるバージョンの前日まで。無ければ更新周期(6週間)ぶん。
     const next = versionStarts.find((d) => d > ev._start);
-    // 次が分からなければ、鳴潮の更新周期(6週間)ぶん確保しておく
     ev._end = next ? addDays(next, -1) : addDays(ev._start, 41);
+    ev._inferredEnd = true;
   });
 
   // 競合タイトルのアップデートは単日の印として扱う。
@@ -255,7 +260,12 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
                           gridRow: p.lane + 1,
                           ...(isRival ? { borderLeftColor: p.ev._color, color: p.ev._color } : {}),
                         }}
-                        title={`${p.ev.character}（${p.ev.event}）${p.ev.confirmed ? '' : ' [未確定]'}${p.ev._note ? ` ${p.ev._note}` : ''}`}
+                        title={
+                          `${p.ev.character}（${p.ev.event}）` +
+                          `${p.ev.confirmed ? '' : ' [未確定]'}` +
+                          `${p.ev._inferredEnd ? ' ※終了日は未発表のためバージョン期間で表示' : ''}` +
+                          `${p.ev._note ? ` ${p.ev._note}` : ''}`
+                        }
                       >
                         {/* 週をまたぐ帯は各週で見出しを出す。開始週だけだと2週目以降が無地になり、
                             どの期間が何なのか分からなくなる。 */}
