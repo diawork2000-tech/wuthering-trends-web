@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styles from './ScheduleCalendarModal.module.css';
 
 const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土'];
@@ -26,6 +26,38 @@ const ONE_DAY = 24 * 60 * 60 * 1000;
 
 export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
   const [viewDate, setViewDate] = useState(() => new Date());
+  // 競合タイトルのアップデート日。鳴潮の予定とは別系統で持ち、表示は個別に切り替えられる。
+  const [rivalGames, setRivalGames] = useState([]);
+  const [rivalEvents, setRivalEvents] = useState([]);
+  const [hiddenGames, setHiddenGames] = useState(() => new Set());
+
+  const fetchRivals = useCallback(async () => {
+    try {
+      const res = await fetch('/api/rival-schedule', { cache: 'no-store' });
+      const data = await res.json();
+      setRivalGames(Array.isArray(data.games) ? data.games : []);
+      setRivalEvents(Array.isArray(data.events) ? data.events : []);
+    } catch (err) {
+      // 取得できなくても鳴潮側のカレンダーは出したいので、握って続行する
+      console.error('Failed to load rival schedule:', err);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    // 開いたときに読み直す。データファイルを直したあと、開き直せば反映される。
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchRivals();
+  }, [isOpen, fetchRivals]);
+
+  const toggleGame = (id) => {
+    setHiddenGames((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
 
   if (!isOpen) return null;
 
@@ -47,15 +79,41 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
 
   // start_date/end_date を持つイベントを正規化。end_date が無い(単発)ものは単日として扱う。
   // 期間が長い予定を先に並べ、レーン割り当て時に上段へ来やすくして見やすくする。
-  const normalizedEvents = (events || [])
+  const normalizedOwn = (events || [])
     .map((ev) => {
       const s = parseDate(ev.start_date);
       if (!s) return null;
       const e = parseDate(ev.end_date) || s;
       return e < s ? { ...ev, _start: s, _end: s } : { ...ev, _start: s, _end: e };
     })
-    .filter(Boolean)
-    .sort((a, b) => (b._end - b._start) - (a._end - a._start));
+    .filter(Boolean);
+
+  // 競合タイトルのアップデートは単日の印として扱う。
+  // 期間の長い鳴潮の予定を上段に出したいので、こちらは後ろに並べる。
+  const rivalNormalized = rivalEvents
+    .filter((ev) => !hiddenGames.has(ev.game_id))
+    .map((ev) => {
+      const s2 = parseDate(ev.date);
+      if (!s2) return null;
+      return {
+        character: ev.version ? `${ev.game} ${ev.version}` : `${ev.game} 次回`,
+        event: ev.predicted ? 'アップデート(予測)' : 'アップデート',
+        category: 'rival',
+        confirmed: ev.confirmed,
+        _color: ev.color,
+        _note: ev.note,
+        _start: s2,
+        _end: s2,
+      };
+    })
+    .filter(Boolean);
+
+  // 競合分は鳴潮の予定と同じ場所に並べない。
+  // 単日なのでレーン割り当てでは最後尾に回り、予定が多い週だと「他N件」に
+  // 畳まれて消えてしまう（実際に原神のアップデートが隠れた）。専用の行に出す。
+  const normalizedEvents = [...normalizedOwn].sort(
+    (a, b) => (b._end - b._start) - (a._end - a._start)
+  );
 
   return (
     <div className={styles.overlay} onClick={onClose}>
@@ -67,6 +125,27 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
           <button className={styles.todayBtn} onClick={() => setViewDate(new Date())}>今日</button>
           <button className={styles.closeBtn} onClick={onClose}>×</button>
         </div>
+
+        {rivalGames.length > 0 && (
+          <div className={styles.gameFilterRow}>
+            <span className={styles.gameFilterLabel}>他タイトル:</span>
+            {rivalGames.map((g) => {
+              const on = !hiddenGames.has(g.id);
+              return (
+                <button
+                  key={g.id}
+                  className={`${styles.gameChip} ${on ? styles.gameChipOn : ''}`}
+                  style={on ? { borderColor: g.color, color: g.color } : {}}
+                  onClick={() => toggleGame(g.id)}
+                  title={on ? 'クリックで非表示' : 'クリックで表示'}
+                >
+                  <span className={styles.gameChipDot} style={{ background: g.color }} />
+                  {g.name}
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         <div className={styles.weekdaysRow}>
           {WEEKDAYS.map((w) => (
@@ -115,10 +194,36 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
                 })}
               </div>
 
+              {(() => {
+                const marks = days.map((d) =>
+                  rivalNormalized.filter((ev) => ev._start.getTime() === d.getTime())
+                );
+                if (!marks.some((m) => m.length)) return null;
+                return (
+                  <div className={styles.rivalRow}>
+                    {marks.map((list, di) => (
+                      <div key={di} className={styles.rivalCell}>
+                        {list.map((ev, ei) => (
+                          <span
+                            key={ei}
+                            className={`${styles.rivalChip} ${ev.confirmed ? '' : styles.rivalChipUnconfirmed}`}
+                            style={{ borderLeftColor: ev._color, color: ev._color }}
+                            title={`${ev.character}（${ev.event}）${ev.confirmed ? '' : ' [未確定]'}${ev._note ? ` ${ev._note}` : ''}`}
+                          >
+                            {ev.character}
+                          </span>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                );
+              })()}
+
               {laneCount > 0 && (
                 <div className={styles.barsArea} style={{ gridTemplateRows: `repeat(${laneCount}, auto)` }}>
                   {visible.map((p, i) => {
                     const isEvent = p.ev.category === 'event';
+                    const isRival = p.ev.category === 'rival';
                     const startsHere = p.ev._start >= weekStart;
                     const endsHere = p.ev._end <= weekEnd;
                     return (
@@ -126,13 +231,17 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
                         key={i}
                         className={[
                           styles.eventBar,
-                          isEvent ? styles.eventBarEvent : styles.eventBarImportant,
+                          isRival ? styles.eventBarRival : isEvent ? styles.eventBarEvent : styles.eventBarImportant,
                           !p.ev.confirmed ? styles.eventBarUnconfirmed : '',
                           !startsHere ? styles.barOpenLeft : '',
                           !endsHere ? styles.barOpenRight : '',
                         ].join(' ')}
-                        style={{ gridColumn: `${p.startCol + 1} / ${p.endCol + 2}`, gridRow: p.lane + 1 }}
-                        title={`${p.ev.character}（${p.ev.event}）${p.ev.confirmed ? '' : ' [未確定]'}`}
+                        style={{
+                          gridColumn: `${p.startCol + 1} / ${p.endCol + 2}`,
+                          gridRow: p.lane + 1,
+                          ...(isRival ? { borderLeftColor: p.ev._color, color: p.ev._color } : {}),
+                        }}
+                        title={`${p.ev.character}（${p.ev.event}）${p.ev.confirmed ? '' : ' [未確定]'}${p.ev._note ? ` ${p.ev._note}` : ''}`}
                       >
                         {startsHere ? p.ev.character : ''}
                       </div>
@@ -152,6 +261,8 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
           <span className={styles.legendDot} /> 重要項目（キャラ/武器/バージョン）
           <span className={`${styles.legendDot} ${styles.legendDotEvent}`} /> ゲーム内イベント
           <span className={`${styles.legendDot} ${styles.legendDotUnconfirmed}`} /> 未確定（リーク・予想）
+          <span className={styles.legendSep}>|</span>
+          他タイトルは枠線の色で区別。点線は更新周期からの推定で、公式発表ではありません。
         </p>
       </div>
     </div>

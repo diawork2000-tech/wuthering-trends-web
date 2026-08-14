@@ -190,3 +190,101 @@
 .legendDotUnconfirmed {
   background: rgba(251, 191, 36, 0.7);
 }
+
+/* 競合タイトルの表示切り替え */
+.gameFilterRow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 0.2rem 0.7rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  margin-bottom: 0.5rem;
+}
+
+.gameFilterLabel {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-right: 0.2rem;
+}
+
+.gameChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: transparent;
+  color: #64748b;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.gameChip:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.gameChipOn {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.gameChipDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0.45;
+}
+
+.gameChipOn .gameChipDot {
+  opacity: 1;
+}
+
+/* 競合タイトルのアップデート。鳴潮の予定と混ざらないよう、塗りではなく枠線で示す。 */
+.eventBarRival {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-left-width: 3px;
+  font-weight: 700;
+}
+
+.legendSep {
+  margin: 0 0.5rem;
+  opacity: 0.4;
+}
+
+/* 競合タイトルのアップデート専用の行。鳴潮の予定と場所を取り合わせない。 */
+.rivalRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 3px;
+}
+
+.rivalCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.rivalChip {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1.35;
+  padding: 1px 4px;
+  border-radius: 3px;
+  border-left: 3px solid currentColor;
+  background: rgba(15, 23, 42, 0.75);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rivalChipUnconfirmed {
+  border-left-style: dotted;
+  opacity: 0.75;
+}
