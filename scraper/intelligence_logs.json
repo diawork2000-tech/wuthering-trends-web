@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-08-19 20:32:47",
+    "status": "Success",
+    "total_harvested": 109,
+    "final_selected": 7,
+    "breakdown": {
+      "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 3,
+      "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)": 4
+    },
+    "gemini_topic_status": "failed",
+    "gemini_competitor_status": "no_items"
+  },
+  {
     "timestamp": "2026-08-19 17:18:47",
     "status": "Success",
     "total_harvested": 106,
@@ -545,15 +557,6 @@
     "timestamp": "2026-08-13 03:46:03",
     "status": "Success",
     "total_harvested": 115,
-    "final_selected": 0,
-    "breakdown": {},
-    "gemini_topic_status": "not_configured",
-    "gemini_competitor_status": "not_configured"
-  },
-  {
-    "timestamp": "2026-08-13 00:31:19",
-    "status": "Success",
-    "total_harvested": 114,
     "final_selected": 0,
     "breakdown": {},
     "gemini_topic_status": "not_configured",
