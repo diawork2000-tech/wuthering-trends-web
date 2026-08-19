@@ -331,3 +331,15 @@
     display: none;
   }
 }
+
+/* 一覧が全件でないときの警告。この状態で一括操作をさせない。 */
+.partialBar {
+  margin: 1rem 2rem 0;
+  padding: 0.8rem 1.1rem;
+  border-radius: 12px;
+  background: rgba(120, 53, 15, 0.5);
+  border: 1px solid rgba(251, 191, 36, 0.45);
+  color: #fde68a;
+  font-size: 0.86rem;
+  line-height: 1.6;
+}

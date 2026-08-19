@@ -338,6 +338,9 @@ class IntelligenceEngine:
         self.config = load_intelligence_config()
         self.key_manager = YouTubeKeyManager()
         self.collected_raw_items = []
+        # 既存分を全件把握できたか。False の回はNotionへ書き込まない
+        # （部分的な記憶で書くと重複が大量に再生産されるため）。
+        self.dedupe_scan_complete = True
         self.competitor_raw_items = []  # ★最重要：競合チャンネル動向専用の独立収容ラック（別枠カウント）！
         self.trending_keywords = set()
         # google-genai では「モデル」はクライアント越しに名前で呼び出す方式のため、
@@ -1091,8 +1094,13 @@ class IntelligenceEngine:
                         payload["start_cursor"] = cursor
                     res_db = requests.post(f"https://api.notion.com/v1/databases/{NOTION_INTELLIGENCE_DB_ID}/query", headers=headers, json=payload, timeout=15)
                     if res_db.status_code != 200:
-                        print(f"  [Warning] Deduplication query failed at page {pages_scanned + 1} (Status {res_db.status_code}). Falling back to partial memory.")
-                        break
+                        # 部分的な記憶のまま先へ進むと、走査できなかった行が
+                        # 「無かったこと」になり、重複が大量に再生産される。
+                        # 全件揃わなかった回は、この後の書き込みごと中止する。
+                        print(f"  [Abort] 重複チェックの{pages_scanned + 1}ページ目で失敗 (Status {res_db.status_code})。"
+                              "既存分を全件把握できないため、今回の生成・書き込みは中止します。")
+                        self.dedupe_scan_complete = False
+                        return []
                     data = res_db.json()
                     for page in data.get("results", []):
                         props = page.get("properties", {})
@@ -1109,7 +1117,9 @@ class IntelligenceEngine:
                     if not cursor:
                         break
             except Exception as e:
-                print(f"  [Warning] Deduplication scan aborted ({e}). Falling back to partial memory.")
+                print(f"  [Abort] 重複チェックの走査に失敗 ({e})。今回の生成・書き込みは中止します。")
+                self.dedupe_scan_complete = False
+                return []
 
         print(f"  [Deduplication Shield] Registered {len(existing_urls)} existing URLs and {len(existing_titles)} existing titles in prevention memory.")
 

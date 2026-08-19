@@ -20,6 +20,7 @@ GENERATED=(
   ':(exclude)scraper/intelligence_logs.json'
   ':(exclude)src/data/intelligence_cache.json'
   ':(exclude)src/data/upcoming_schedule.json'
+  ':(exclude)src/data/rival_schedule.json'
 )
 
 # コミットメッセージに [redeploy] と書いた場合は、差分の内容によらず必ずビルドする。

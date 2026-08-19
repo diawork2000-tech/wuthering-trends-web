@@ -16,6 +16,7 @@ import sys
 import json
 import time
 import argparse
+from datetime import datetime, timezone
 
 import requests
 from dotenv import load_dotenv
@@ -74,6 +75,26 @@ def fetch_all_pages():
     return pages
 
 
+# 人が判断を下した行。除外ワードに引っかかっても自動でアーカイブしない。
+PROTECTED_STATUSES = {"制作中", "投稿済み", "見送り"}
+
+
+def is_protected(page):
+    """人の判断が入っている行かを判定する。
+
+    採用チェック、または制作状況が未着手以外なら保護対象。
+    除外ワードは機械判定であり、人が「これで作る」「これは作らない」と
+    決めた記録を機械判定で消してはいけない。
+    """
+    props = page.get("properties", {})
+    if props.get("採用", {}).get("checkbox"):
+        return True, "採用済み"
+    status = (props.get("制作状況", {}).get("select") or {}).get("name")
+    if status in PROTECTED_STATUSES:
+        return True, f"制作状況={status}"
+    return False, ""
+
+
 def read_props(page):
     props = page.get("properties", {})
     title = ""
@@ -93,6 +114,12 @@ def main():
         action="store_true",
         help="実際にアーカイブする（付けない場合は確認のみ）",
     )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=200,
+        help="1回でアーカイブする上限件数（既定200）。想定外の大量削除を防ぐため",
+    )
     args = parser.parse_args()
 
     if not NOTION_API_KEY or not NOTION_DATABASE_ID:
@@ -107,10 +134,22 @@ def main():
     print(f"  登録件数: {len(pages)} 件\n")
 
     hits = []
+    protected = []
     for page in pages:
         title, category, url = read_props(page)
-        if title and should_exclude(title, exclude_words):
-            hits.append((page["id"], title, category, url))
+        if not (title and should_exclude(title, exclude_words)):
+            continue
+        guarded, reason = is_protected(page)
+        if guarded:
+            protected.append((title, reason))
+            continue
+        hits.append((page["id"], title, category, url))
+
+    if protected:
+        print(f"=== 除外ワードに該当するが、人の判断が入っているため保護: {len(protected)} 件 ===")
+        for title, reason in protected:
+            print(f"  [保護:{reason}] {title[:50]}")
+        print()
 
     if not hits:
         print("除外対象に該当する動画はありませんでした。")
@@ -126,23 +165,39 @@ def main():
         print(f"実行するには: python purge_excluded.py --apply")
         return 0
 
+    # 想定外の大量削除を防ぐ。除外ワードを1語足しただけで数百件が対象に
+    # なることがあり、確認せずに走らせると取り返しがつかない。
+    if len(hits) > args.limit:
+        print(f"\n[中止] 対象が {len(hits)} 件あり、上限 {args.limit} 件を超えています。")
+        print("       内容を確認したうえで --limit を明示的に指定してください。")
+        return 1
+
     print(f"\nアーカイブを実行します...")
+    audit_path = os.path.join(BASE_DIR, "purge_audit.log")
+    stamp = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
     ok = 0
-    for page_id, title, _, _ in hits:
-        res = notion_request(
-            "PATCH",
-            f"https://api.notion.com/v1/pages/{page_id}",
-            HEADERS,
-            json={"archived": True},
-            timeout=10,
-        )
-        if res.status_code in (200, 201):
-            ok += 1
-        else:
-            print(f"  [失敗] {title[:40]} -> {res.status_code}")
-        time.sleep(0.25)  # Notion のレート制限（3req/sec）回避
+    # 何を消したかを必ず残す。復元はNotionのゴミ箱から行うが、
+    # 「何が消えたのか」はここを見ないと後から分からない。
+    with open(audit_path, "a", encoding="utf-8") as audit:
+        audit.write(f"# {stamp} purge_excluded.py --apply 対象{len(hits)}件\n")
+        for page_id, title, category, url in hits:
+            res = notion_request(
+                "PATCH",
+                f"https://api.notion.com/v1/pages/{page_id}",
+                HEADERS,
+                json={"archived": True},
+                timeout=10,
+            )
+            if res.status_code in (200, 201):
+                ok += 1
+                audit.write(f"{stamp}\tARCHIVED\t{page_id}\t{category}\t{title}\t{url}\n")
+            else:
+                print(f"  [失敗] {title[:40]} -> {res.status_code}")
+                audit.write(f"{stamp}\tFAILED({res.status_code})\t{page_id}\t{category}\t{title}\t{url}\n")
+            time.sleep(0.25)  # Notion のレート制限（3req/sec）回避
 
     print(f"\n完了: {ok} / {len(hits)} 件をアーカイブしました（30日間は復元可能）。")
+    print(f"      記録: {audit_path}")
     return 0
 
 

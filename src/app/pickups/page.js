@@ -16,6 +16,9 @@ export default function PickupsPage() {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   const [confirming, setConfirming] = useState(null); // 'selected' | 'all' | null
+  const [partial, setPartial] = useState(false);
+  const [partialReason, setPartialReason] = useState('');
+  const [pendingIds, setPendingIds] = useState(() => new Set());
   const [zoomLevel, setZoomLevel] = useState(300);
 
   const fetchPickups = useCallback(async () => {
@@ -25,6 +28,10 @@ export default function PickupsPage() {
       const data = await res.json();
       setItems(Array.isArray(data.items) ? data.items : []);
       setSelected(new Set());
+      // 一部のDBしか読めていない場合、一覧は全件のように見えるが実際は欠けている。
+      // その状態で「すべて外す」を押せると、外れていないものを外したつもりになる。
+      setPartial(data.partial === true);
+      setPartialReason(data.partialReason || '');
     } catch (err) {
       console.error('Failed to load pickups:', err);
       setMessage('❌ 読み込みに失敗しました。しばらくしてから再度お試しください。');
@@ -77,8 +84,17 @@ export default function PickupsPage() {
         body: JSON.stringify({ ids: pageIds, adopted: false }),
       });
       const data = await res.json();
-      if (!res.ok || data.success === false) {
-        throw new Error(`一部の解除に失敗しました（${data.failed?.length ?? '?'}件）`);
+      if (!res.ok && res.status !== 207) {
+        throw new Error(data.error || `HTTP ${res.status}`);
+      }
+      if (data.failed?.length > 0) {
+        // 一部だけ失敗した場合、全体を巻き戻すと成功した分まで元に戻したように
+        // 見えてしまう。Notionの実状態を取り直して合わせる。
+        setMessage(
+          `⚠️ ${data.updated}/${data.requested} 件を外しました。${data.failed.length}件が失敗したため、最新の状態を取り直します。`
+        );
+        await fetchPickups();
+        return;
       }
       setMessage(`✅ ${label} ${targets.length}件をピックアップから外しました（収集データは残っています）。`);
     } catch (err) {
@@ -93,18 +109,35 @@ export default function PickupsPage() {
   };
 
   const changeStatus = async (item, nextStatus) => {
+    // 同じカードの連続操作は受け付けない。応答順が入れ替わると
+    // 画面とNotionの状態がずれる。
+    if (pendingIds.has(item.id)) return;
+    setPendingIds((prev) => new Set(prev).add(item.id));
     const prevStatus = item.status;
     setItems((prev) => prev.map((i) => (i.id === item.id ? { ...i, status: nextStatus } : i)));
     try {
       const res = await fetch('/api/pickups', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ids: item.linkedIds || [item.id], adopted: true, status: nextStatus }),
+        // adopted は送らない。制作状況だけを変えたいのに採用まで書き換えると、
+        // 別画面で解除された直後だった場合に採用を復活させてしまう。
+        body: JSON.stringify({ ids: item.linkedIds || [item.id], status: nextStatus }),
       });
-      if (!res.ok) throw new Error('failed');
+      const data = await res.json().catch(() => ({}));
+      if ((!res.ok && res.status !== 207) || data.failed?.length > 0) {
+        throw new Error(data.error || `${data.failed?.length ?? ''}件が失敗`);
+      }
     } catch (err) {
       console.error('Status update failed:', err);
       setItems((prev) => prev.map((i) => (i.id === item.id ? { ...i, status: prevStatus } : i)));
+      setMessage(`❌ 制作状況の更新に失敗しました。${err.message}`);
+      setTimeout(() => setMessage(''), 8000);
+    } finally {
+      setPendingIds((prev) => {
+        const next = new Set(prev);
+        next.delete(item.id);
+        return next;
+      });
     }
   };
 
@@ -138,9 +171,17 @@ export default function PickupsPage() {
 
       {message && <div className={styles.messageBar}>{message}</div>}
 
+      {partial && (
+        <div className={styles.partialBar}>
+          ⚠️ 一部のデータベースを読み取れなかったため、この一覧は全件ではありません
+          （{partialReason}）。取り違えを防ぐため、一括操作を止めています。
+          「🔄 更新」で読み直してください。
+        </div>
+      )}
+
       <div className={styles.toolbar}>
         <div className={styles.toolbarLeft}>
-          <button className={styles.toolBtn} onClick={selectAll} disabled={items.length === 0}>
+          <button className={styles.toolBtn} onClick={selectAll} disabled={items.length === 0 || partial}>
             ☑ すべて選択
           </button>
           <button className={styles.toolBtn} onClick={clearSelection} disabled={selected.size === 0}>
@@ -169,14 +210,14 @@ export default function PickupsPage() {
           <button
             className={styles.dangerBtn}
             onClick={() => setConfirming('selected')}
-            disabled={selected.size === 0 || busy}
+            disabled={selected.size === 0 || busy || partial}
           >
             選択した {selected.size} 件を外す
           </button>
           <button
             className={styles.dangerOutlineBtn}
             onClick={() => setConfirming('all')}
-            disabled={items.length === 0 || busy}
+            disabled={items.length === 0 || busy || partial}
           >
             すべて外す
           </button>
@@ -231,7 +272,7 @@ export default function PickupsPage() {
                 onToggleSelect={toggleSelect}
                 onChangeStatus={changeStatus}
                 onRemove={(i) => release([i], 'このネタ')}
-                busy={busy}
+                busy={busy || pendingIds.has(item.id)}
               />
             ))}
           </div>
