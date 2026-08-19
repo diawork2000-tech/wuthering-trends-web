@@ -55,3 +55,6 @@ __pycache__/
 
 # 削除スクリプトの実行ログ（実行のたびに変わる作業ファイル）
 scraper/purge_run.log
+
+# 自動生成のバックアップ（write_json_atomic が作る1世代前の控え）
+*.json.bak

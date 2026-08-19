@@ -16,10 +16,11 @@ function parseDate(str) {
   return Number.isNaN(d.getTime()) ? null : toDateOnly(d);
 }
 
+// 日付の加減算はローカル時刻の日付部分だけで行う。
+// parseDate が JST 基準で「その日の0時」を作っているので、
+// ここで時差をまたぐ演算を挟むと1日ずれる余地が生まれる。
 function addDays(d, n) {
-  const r = new Date(d);
-  r.setDate(r.getDate() + n);
-  return r;
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
 }
 
 const ONE_DAY = 24 * 60 * 60 * 1000;
@@ -99,10 +100,25 @@ export default function ScheduleCalendarModal({ isOpen, onClose, events }) {
     .map((ev) => ev._start)
     .sort((a, b) => a - b);
 
+  // そのバージョンの実際の終了日が分かっていれば、それを共通の終端として使う。
+  // 6週間で一律に伸ばすと、5週間で終わる回では次のバージョンへ食い込む。
+  const versionEnds = normalizedOwn
+    .filter((ev) => ev.category === 'version' && ev.end_date)
+    .map((ev) => ({ start: ev._start, end: ev._end }))
+    .sort((a, b) => a.start - b.start);
+
   normalizedOwn.forEach((ev) => {
     if (ev.end_date) return;
-    // 自分より後に始まるバージョンの前日まで。無ければ更新周期(6週間)ぶん。
+    // 1) 自分が属するバージョンの終了日（判明していれば最優先）
+    const owner = versionEnds.filter((v) => v.start <= ev._start).pop();
+    if (owner && owner.end >= ev._start) {
+      ev._end = owner.end;
+      ev._inferredEnd = true;
+      return;
+    }
+    // 2) 次のバージョンが始まる前日まで
     const next = versionStarts.find((d) => d > ev._start);
+    // 3) どちらも無ければ更新周期(6週間)ぶん
     ev._end = next ? addDays(next, -1) : addDays(ev._start, 41);
     ev._inferredEnd = true;
   });

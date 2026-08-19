@@ -1,6 +1,6 @@
 {
   "_note": "競合タイトルのアップデート日程。鳴潮本体の予定(upcoming_schedule.json)とは別ファイルにしてある。混ぜるとネタのスコア計算(schedule_boost)が他ゲームの名前に反応してしまうため。versions は自動収集(collect_rival_schedule.py)が上書きするので、手で直す場合は confirmed:true の行だけにすること。",
-  "updated_at": "2026-08-14T14:39:47.954525+00:00",
+  "updated_at": "2026-08-19T20:36:12.237393+00:00",
   "games": [
     {
       "id": "genshin",
@@ -11,22 +11,39 @@
       "source": "https://wikiwiki.jp/genshinwiki/%E4%BB%8A%E5%BE%8C%E3%81%AE%E5%AE%9F%E8%A3%85%E6%83%85%E5%A0%B1",
       "versions": [
         {
+          "version": null,
+          "title": "",
+          "date": "2026-07-01",
+          "confirmed": true,
+          "new_character_first": null,
+          "new_character_second": null
+        },
+        {
           "version": "7.0",
           "title": "神に愛されぬ雪国",
           "date": "2026-08-12",
           "confirmed": true,
           "new_character_first": true,
-          "new_character_second": false
+          "new_character_second": true,
+          "note": ""
         },
         {
           "version": "7.1",
           "date": "2026-09-23",
-          "confirmed": true
+          "confirmed": true,
+          "title": "",
+          "note": "",
+          "new_character_first": null,
+          "new_character_second": null
         },
         {
           "version": "7.2",
           "date": "2026-11-04",
-          "confirmed": true
+          "confirmed": true,
+          "title": "",
+          "note": "",
+          "new_character_first": null,
+          "new_character_second": null
         },
         {
           "version": "7.3",
@@ -34,7 +51,8 @@
           "date": "2026-12-16",
           "confirmed": false,
           "new_character_first": null,
-          "new_character_second": null
+          "new_character_second": null,
+          "note": ""
         }
       ],
       "has_phases": true,
@@ -54,15 +72,17 @@
           "date": "2026-07-15",
           "confirmed": true,
           "new_character_first": true,
-          "new_character_second": false
+          "new_character_second": false,
+          "note": ""
         },
         {
           "version": "4.5",
           "title": "",
           "date": "2026-08-26",
           "confirmed": true,
-          "new_character_first": null,
-          "new_character_second": null
+          "new_character_first": true,
+          "new_character_second": true,
+          "note": ""
         },
         {
           "version": "4.6",
@@ -87,8 +107,9 @@
           "title": "ロング・グッドバイ",
           "date": "2026-07-29",
           "confirmed": true,
-          "new_character_first": null,
-          "new_character_second": null
+          "new_character_first": true,
+          "new_character_second": false,
+          "note": ""
         },
         {
           "version": "3.2",
@@ -120,7 +141,8 @@
           "date": "2026-08-19",
           "confirmed": true,
           "new_character_first": true,
-          "new_character_second": true
+          "new_character_second": true,
+          "note": ""
         }
       ],
       "has_phases": false,
@@ -144,5 +166,37 @@
       "has_phases": true,
       "phase_offset_days": 21
     }
-  ]
+  ],
+  "source_health": {
+    "genshin": {
+      "last_fetch_ok_at": "2026-08-19T20:36:02.243934+00:00",
+      "consecutive_failures": 0,
+      "last_parse_ok_at": "2026-08-19T20:36:02.243934+00:00",
+      "consecutive_parse_empty": 0
+    },
+    "hsr": {
+      "last_fetch_ok_at": "2026-08-19T20:36:02.243934+00:00",
+      "consecutive_failures": 0,
+      "last_parse_ok_at": "2026-08-19T20:36:02.243934+00:00",
+      "consecutive_parse_empty": 0
+    },
+    "zzz": {
+      "last_fetch_ok_at": "2026-08-19T20:36:02.243934+00:00",
+      "consecutive_failures": 0,
+      "last_parse_ok_at": "2026-08-19T20:36:02.243934+00:00",
+      "consecutive_parse_empty": 0
+    },
+    "nte": {
+      "last_fetch_ok_at": "2026-08-19T20:36:02.243934+00:00",
+      "consecutive_failures": 0,
+      "last_parse_ok_at": "2026-08-19T20:36:02.243934+00:00",
+      "consecutive_parse_empty": 0
+    },
+    "endfield": {
+      "last_fetch_ok_at": "2026-08-19T20:36:02.243934+00:00",
+      "consecutive_failures": 0,
+      "last_parse_empty_at": "2026-08-19T20:36:02.243934+00:00",
+      "consecutive_parse_empty": 1
+    }
+  }
 }

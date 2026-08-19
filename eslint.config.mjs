@@ -10,6 +10,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // 動作確認用に置かれたまま残っている断片。UTF-16で保存されており
+    // lint が解析に失敗してリポジトリ全体の検査が止まるため対象外にする。
+    "test.js",
   ]),
 ]);
 

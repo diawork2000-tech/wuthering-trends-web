@@ -1,0 +1,51 @@
+name: CI
+
+# コードを変えたときに、検査・テスト・ビルドを自動で通す。
+# 収集の自動実行(run_intelligence.yml / update_trends.yml)が書き込む
+# データファイルだけの変更では動かさない。無意味に走らせても意味がないため。
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'scraper/logs.json'
+      - 'scraper/intelligence_logs.json'
+      - 'scraper/config_intelligence.json'
+      - 'src/data/intelligence_cache.json'
+      - 'src/data/upcoming_schedule.json'
+      - 'src/data/rival_schedule.json'
+      - 'docs/**'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: 依存関係の導入
+        run: npm ci
+
+      - name: 静的検査
+        run: npm run lint
+
+      - name: JavaScriptのテスト
+        run: npm test
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Pythonの依存関係
+        run: pip install -r scraper/requirements.txt
+
+      - name: Pythonのテスト
+        run: npm run test:py
+
+      - name: ビルド
+        run: npm run build

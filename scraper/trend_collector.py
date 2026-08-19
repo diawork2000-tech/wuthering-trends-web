@@ -50,11 +50,16 @@ def should_exclude(title, exclude_words):
             continue
 
         pattern = re.escape(ew)
-        # 半角英数字で始まる/終わる語のみ、部分一致の暴発を防ぐため境界を付ける
+        # 半角英数字で始まる/終わる語のみ、部分一致の暴発を防ぐため境界を付ける。
+        #
+        # ここで \b を使ってはいけない。Python の \w は日本語も含むため、
+        # 「鳴潮MMD」「鳴潮cosplay」のように日本語と地続きだと境界が生まれず、
+        # 除外したい動画が素通りしていた（空白や【】で区切られた時だけ効いていた）。
+        # 半角英数字が隣接する場合だけを弾きたいので、そう明示する。
         if re.match(r'[A-Za-z0-9_]', ew[0]):
-            pattern = r'\b' + pattern
+            pattern = r'(?<![A-Za-z0-9_])' + pattern
         if re.match(r'[A-Za-z0-9_]', ew[-1]):
-            pattern = pattern + r'\b'
+            pattern = pattern + r'(?![A-Za-z0-9_])'
 
         if re.search(pattern, title, re.IGNORECASE):
             return True

@@ -1,6 +1,7 @@
 import sys
 import os
 import json
+import shutil
 import traceback
 import re
 import time
@@ -332,6 +333,121 @@ def load_intelligence_config():
 def save_intelligence_config(data):
     with open(CONFIG_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+def notify_anomaly(message):
+    """異常をDiscordへ通知する。
+
+    既存の log_run は「例外で落ちたとき」しか通知しない。だが実際に困るのは
+    落ちずに静かに何も採れなくなる状態で、今は自分で画面を見に行くまで
+    気づけない。落ちなかったが結果がおかしい場合をここで拾う。
+
+    通知に失敗しても収集は止めない。
+    """
+    url = os.getenv("DISCORD_ALERT_WEBHOOK_URL")
+    enabled = os.getenv("DISCORD_ALERT_ENABLED", "false").lower() == "true"
+    print(f"  [Anomaly] {message}")
+    if not url or not enabled:
+        return
+    try:
+        requests.post(url, json={"content": f"⚠️【鳴潮トレンド収集】{message}"[:1800]}, timeout=10)
+    except Exception as e:
+        print(f"  [Notice] Discord通知に失敗: {e}")
+
+
+def is_real_date(text):
+    """YYYY-MM-DD が実在する日付かを確かめる。
+
+    形だけの検証だと 2026-99-99 のような値が通り、画面の日付計算が壊れる。
+    あわせて、現実的な範囲（前後3年）から外れたものも弾く。
+    """
+    if not isinstance(text, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", text):
+        return False
+    try:
+        d = datetime.strptime(text, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    except ValueError:
+        return False
+    now = datetime.now(timezone.utc)
+    return abs((d - now).days) <= 365 * 3
+
+
+def merge_version_entry(prev, new):
+    """同じバージョンの行を項目単位で統合する。
+
+    丸ごと差し替えると、前回読み取れていた情報が「今回読めなかった」だけで
+    消えてしまう。確定情報は未確定より優先し、それ以外は
+    「空でないほう」「Noneでないほう」を残す。
+    """
+    out = dict(prev)
+    prev_conf = bool(prev.get("confirmed"))
+    new_conf = bool(new.get("confirmed"))
+
+    # 日付と確定フラグは、確定情報が入ってきたときだけ差し替える
+    if new_conf or not prev_conf:
+        out["date"] = new.get("date") or prev.get("date")
+        out["confirmed"] = new_conf or prev_conf
+
+    for key in ("version", "title", "note"):
+        if new.get(key):
+            out[key] = new[key]
+        elif not out.get(key):
+            # None のまま残すと JSON に null が出て、画面で "None" と表示されうる
+            out[key] = prev.get(key) or ("" if key != "version" else None)
+
+    # 新キャラの有無は「不明(None)」で上書きしない
+    for key in ("new_character_first", "new_character_second"):
+        if isinstance(new.get(key), bool):
+            out[key] = new[key]
+        elif key not in out:
+            out[key] = prev.get(key)
+
+    return out
+
+
+def write_json_atomic(path, data):
+    """一時ファイルに書いてから差し替える。
+
+    書いている途中で落ちると、中身が切れたファイルが残って以後ずっと
+    読めなくなる。差し替え方式なら、失敗しても前の内容がそのまま残る。
+    直前の内容は .bak として1世代だけ保存する。
+    """
+    tmp = path + ".tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+        f.flush()
+        os.fsync(f.fileno())
+    if os.path.exists(path):
+        try:
+            shutil.copyfile(path, path + ".bak")
+        except Exception:
+            pass  # バックアップが取れなくても本体の更新は続ける
+    os.replace(tmp, path)
+
+
+def query_all_pages(url, headers, payload, label, max_pages=50):
+    """Notion のクエリを全ページ分たどって返す。
+
+    1ページ(100件)で打ち切ると、101件目以降が永久に処理されないまま残る。
+    途中で失敗した場合は (取れた分, False) を返し、呼び出し側で
+    「全部見たつもり」にならないようにする。
+    """
+    rows = []
+    cursor = None
+    for _ in range(max_pages):
+        body = dict(payload)
+        if cursor:
+            body["start_cursor"] = cursor
+        res = requests.post(url, headers=headers, json=body, timeout=15)
+        if res.status_code != 200:
+            print(f"  [Warning] {label}: 取得に失敗 (Status {res.status_code})")
+            return rows, False
+        data = res.json()
+        rows.extend(data.get("results", []))
+        if not data.get("has_more") or not data.get("next_cursor"):
+            return rows, True
+        cursor = data["next_cursor"]
+    print(f"  [Warning] {label}: ページ数の上限({max_pages})に達したため打ち切りました")
+    return rows, False
+
 
 class IntelligenceEngine:
     def __init__(self):
@@ -786,17 +902,32 @@ class IntelligenceEngine:
         print("\n=== [Rival Schedule] 競合タイトルの更新日程を解析中 ===")
         headers_web = {"User-Agent": "WutheringTrendsIntelligenceEngine/2.0 (Schedule Tracker)"}
         blocks = []
+        # 情報源ごとの成否を記録する。全体の更新日時だけを見ていると、
+        # 5サイト中1サイトだけ失敗しても翌日まで気づけず、原因も分からない。
+        health = current.setdefault("source_health", {})
+        now_iso = datetime.now(timezone.utc).isoformat()
         for src in sources:
+            gid = str(src["game_id"])
+            entry = health.setdefault(gid, {})
             try:
                 res = requests.get(src["url"], headers=headers_web, timeout=15)
                 if res.status_code != 200:
                     print(f"  [Warning] {src.get('name')}: HTTP {res.status_code}")
+                    entry["last_error"] = f"HTTP {res.status_code}"
+                    entry["last_error_at"] = now_iso
+                    entry["consecutive_failures"] = int(entry.get("consecutive_failures", 0)) + 1
                     continue
                 text = BeautifulSoup(res.text, "html.parser").get_text(separator=" ", strip=True) if BeautifulSoup else res.text
-                blocks.append("\n\n=== game_id: " + str(src["game_id"]) + " / " + str(src.get("name")) + " ===\n" + text[:12000])
+                blocks.append("\n\n=== game_id: " + gid + " / " + str(src.get("name")) + " ===\n" + text[:12000])
+                entry["last_fetch_ok_at"] = now_iso
+                entry["consecutive_failures"] = 0
+                entry.pop("last_error", None)
                 print(f"  [Fetch] {src.get('name')} OK")
             except Exception as e:
                 print(f"  [Warning] {src.get('name')} の取得に失敗: {e}")
+                entry["last_error"] = str(e)[:200]
+                entry["last_error_at"] = now_iso
+                entry["consecutive_failures"] = int(entry.get("consecutive_failures", 0)) + 1
 
         if not blocks:
             print("  [Rival Schedule] 全ソースの取得に失敗したため更新を中止")
@@ -876,15 +1007,26 @@ class IntelligenceEngine:
 
         updated = []
         for game in current.get("games", []):
+            gid = str(game.get("id"))
+            entry = health.setdefault(gid, {})
             got = parsed.get(game.get("id"))
             if not isinstance(got, list):
+                # 解析結果にそのタイトルが1件も出てこなかった。
+                # 取得は成功しているので、情報源に日程の記載が無い可能性が高い。
+                entry["last_parse_empty_at"] = now_iso
+                entry["consecutive_parse_empty"] = int(entry.get("consecutive_parse_empty", 0)) + 1
+                if entry["consecutive_parse_empty"] == 3:
+                    notify_anomaly(
+                        f"{game.get('name')} の日程を3回続けて読み取れていません。情報源の見直しが必要です。"
+                    )
                 continue
             clean = []
             for v in got:
                 if not isinstance(v, dict):
                     continue
                 d = str(v.get("date") or "")
-                if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", d):
+                if not is_real_date(d):
+                    # 形は合っていても 2026-99-99 のような値が来ることがある
                     continue
                 # バージョン番号は「数字.数字」だけ受け付ける。サブタイトルが
                 # そのまま入ってくることがあり（例: エンドフィールドで「拾遺散記」）、
@@ -907,22 +1049,61 @@ class IntelligenceEngine:
                     "new_character_second": tri(v.get("new_character_second")),
                 })
             if not clean:
-                # 1件も読めなかったタイトルは既存データを触らない
+                # 1件も読めなかったタイトルは既存データを触らない。
+                # ただし「取得はできたのに読めない」状態が続いていることは残す。
+                entry["last_parse_empty_at"] = now_iso
+                entry["consecutive_parse_empty"] = int(entry.get("consecutive_parse_empty", 0)) + 1
+                if entry["consecutive_parse_empty"] >= 3:
+                    print(f"  [Notice] {game.get('name')}: 3回続けて日程を読み取れていません。情報源の見直しが必要です")
                 continue
+            entry["last_parse_ok_at"] = now_iso
+            entry["consecutive_parse_empty"] = 0
 
             # 既存と統合する。上書きにすると、今回の情報源に載っていなかった
             # 確定日（別ソースで判明していた分）が消えてしまう。
+            #
+            # 辞書ごと差し替えるのではなく、項目単位で埋める。
+            # 丸ごと置換すると、既存の note やサブタイトル、前回読み取れた
+            # 新キャラ情報が、今回それを読めなかっただけで消える。
             merged = {}
             for v in list(game.get("versions", [])) + clean:
-                key = v.get("version") or v.get("date")
+                # バージョン番号が読めた行はその番号を、読めなかった行は日付を鍵にする。
+                # ただし番号なしの行は、同じ日付の既存行があればそこへ統合する。
+                # 別々に持つと「Ver1.3 拾遺散記」と「番号なし 同日」が二重に残り、
+                # 片方が脱落して番号が消える（実際にエンドフィールドで起きた）。
+                key = v.get("version")
+                if not key:
+                    same_date = next((k for k, x in merged.items() if x.get("date") == v.get("date")), None)
+                    key = same_date or v.get("date")
                 prev = merged.get(key)
-                # 同じバージョンが両方にあれば、確定情報を優先して残す
-                if prev and prev.get("confirmed") and not v.get("confirmed"):
+                if prev is None:
+                    merged[key] = dict(v)
                     continue
-                merged[key] = v
+                merged[key] = merge_version_entry(prev, v)
 
+            # バージョン番号が無い行は日付をキーにしているため、日付が変わると
+            # 旧行が残る。同じ番号の行が別日付で入ってきたら、古いほうを畳む。
+            by_version = {}
+            for key, v in list(merged.items()):
+                ver = v.get("version")
+                if not ver:
+                    continue
+                if ver in by_version:
+                    keep, drop = (v, by_version[ver]) if v.get("confirmed") and not by_version[ver].get("confirmed") else (by_version[ver], v)
+                    merged.pop(next(k for k, x in merged.items() if x is drop), None)
+                    by_version[ver] = keep
+                else:
+                    by_version[ver] = v
+
+            today = (datetime.now(timezone.utc) + timedelta(hours=9)).strftime("%Y-%m-%d")
             cutoff = (datetime.now(timezone.utc) + timedelta(hours=9) - timedelta(days=60)).strftime("%Y-%m-%d")
-            final = sorted([v for v in merged.values() if v["date"] >= cutoff], key=lambda x: x["date"])
+            rows = sorted(merged.values(), key=lambda x: x["date"])
+            # 60日で一律に切ると、バージョンが延期されたときに現行バージョンごと
+            # 消える。過去分は「直近の1件」だけ必ず残す。
+            past = [v for v in rows if v["date"] <= today]
+            keep_past = past[-1:] if past else []
+            final = [v for v in rows if v["date"] > today or v["date"] >= cutoff or v in keep_past]
+            final = sorted({id(v): v for v in final}.values(), key=lambda x: x["date"])
             if not final:
                 continue
             game["versions"] = final
@@ -933,8 +1114,7 @@ class IntelligenceEngine:
             return
 
         current["updated_at"] = datetime.now(timezone.utc).isoformat()
-        with open(out_path, "w", encoding="utf-8") as f:
-            json.dump(current, f, ensure_ascii=False, indent=2)
+        write_json_atomic(out_path, current)
         print(f"  [Rival Schedule Success] 更新: {', '.join(updated)}")
 
     def _gemini_enrich(self, sorted_items, competitor_cards, target_count):
@@ -1100,6 +1280,10 @@ class IntelligenceEngine:
                         print(f"  [Abort] 重複チェックの{pages_scanned + 1}ページ目で失敗 (Status {res_db.status_code})。"
                               "既存分を全件把握できないため、今回の生成・書き込みは中止します。")
                         self.dedupe_scan_complete = False
+                        notify_anomaly(
+                            f"重複チェックの走査に失敗したため、今回の収集を中止しました "
+                            f"(Notion {res_db.status_code})。続くようなら確認が必要です。"
+                        )
                         return []
                     data = res_db.json()
                     for page in data.get("results", []):
@@ -1386,23 +1570,21 @@ class IntelligenceEngine:
         }
         
         try:
-            res = requests.post(url_query, headers=headers, json=payload_query, timeout=12)
-            if res.status_code != 200:
-                print(f"  [Warning] Failed to query old pages: {res.text}")
+            pages, complete = query_all_pages(url_query, headers, payload_query, "7日経過カードの抽出")
+            if not complete:
+                print("  [Cleanup] 全件を確認できなかったため、取得できた分だけを処理します")
+            if not pages:
+                print("  [Cleanup] 7日を超えた対象カードはありませんでした")
             else:
-                pages = res.json().get("results", [])
-                if not pages:
-                    print("  [Cleanup] Zero cards exceeded the 7-day shelf-life limit. Database is perfectly fresh!")
-                else:
-                    archived_cnt = 0
-                    for pg in pages:
-                        page_id = pg["id"]
-                        url_patch = f"https://api.notion.com/v1/pages/{page_id}"
-                        del_res = notion_request("PATCH", url_patch, headers, json={"archived": True}, timeout=8)
-                        if del_res.status_code in [200, 201]:
-                            archived_cnt += 1
-                        time.sleep(0.2)
-                    print(f"  [Cleanup Success] Automatically archived and wiped {archived_cnt} outdated cards!")
+                archived_cnt = 0
+                for pg in pages:
+                    page_id = pg["id"]
+                    url_patch = f"https://api.notion.com/v1/pages/{page_id}"
+                    del_res = notion_request("PATCH", url_patch, headers, json={"archived": True}, timeout=8)
+                    if del_res.status_code in [200, 201]:
+                        archived_cnt += 1
+                    time.sleep(0.2)
+                print(f"  [Cleanup Success] {archived_cnt} / {len(pages)} 件をアーカイブしました")
 
             # 続いて！！ 現在Notionに残留してしまっている【 未翻訳(英語のまま) 】や【 陳腐な機械的テンプレート 】の品質未達カードを自発的にお掃除！
             print("\n=== [Phase 5-B] 🛡️ Quality Patrol: Purging Un-Translated English & Mechanical Boilerplate Cards ===")
@@ -1419,32 +1601,32 @@ class IntelligenceEngine:
                 },
                 "page_size": 100
             }
-            res_all = requests.post(url_query, headers=headers, json=payload_patrol, timeout=12)
-            if res_all.status_code == 200:
-                all_pages = res_all.json().get("results", [])
-                purged_cnt = 0
-                for pg in all_pages:
-                    pid = pg["id"]
-                    props = pg.get("properties", {})
+            all_pages, patrol_complete = query_all_pages(url_query, headers, payload_patrol, "品質パトロールの対象抽出")
+            if not patrol_complete:
+                print("  [Quality Patrol] 全件を確認できなかったため、取得できた分だけを検査します")
+            purged_cnt = 0
+            for pg in all_pages:
+                pid = pg["id"]
+                props = pg.get("properties", {})
                     
-                    # タイトルの抽出
-                    t_str = ""
-                    t_prop = props.get(self.notion_title_prop_name) or props.get("名前") or props.get("Name") or props.get("title")
-                    if t_prop and t_prop.get("title") and len(t_prop["title"]) > 0:
-                        t_str = t_prop["title"][0]["plain_text"]
+                # タイトルの抽出
+                t_str = ""
+                t_prop = props.get(self.notion_title_prop_name) or props.get("名前") or props.get("Name") or props.get("title")
+                if t_prop and t_prop.get("title") and len(t_prop["title"]) > 0:
+                    t_str = t_prop["title"][0]["plain_text"]
                         
-                    # 台本の抽出
-                    o_str = ""
-                    o_prop = props.get("ショート台本骨格", {})
-                    if o_prop and o_prop.get("rich_text") and len(o_prop["rich_text"]) > 0:
-                        o_str = o_prop["rich_text"][0]["plain_text"]
+                # 台本の抽出
+                o_str = ""
+                o_prop = props.get("ショート台本骨格", {})
+                if o_prop and o_prop.get("rich_text") and len(o_prop["rich_text"]) > 0:
+                    o_str = o_prop["rich_text"][0]["plain_text"]
                         
-                    # ひらがな・カタカナ・日常漢字が極端に少ない(純英語状態) または 「についてご存じですか？！」などの機械的文字列が含まれている場合は徹底削除！
-                    if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', t_str)) < 2 or "についてご存じですか" in o_str or "Bro had one job" in t_str or "Reddit -" in o_str:
-                        notion_request("PATCH", f"https://api.notion.com/v1/pages/{pid}", headers, json={"archived": True}, timeout=10)
-                        purged_cnt += 1
-                        print(f"    -> Purged sub-quality un-translated card: '{t_str[:35]}...'")
-                print(f"  [Quality Patrol Complete] Successfully scrubbed {purged_cnt} un-translated or mechanical cards from Notion!")
+                # ひらがな・カタカナ・日常漢字が極端に少ない(純英語状態) または 「についてご存じですか？！」などの機械的文字列が含まれている場合は徹底削除！
+                if len(re.findall(r'[ぁ-んァ-ヶー一-龠]', t_str)) < 2 or "についてご存じですか" in o_str or "Bro had one job" in t_str or "Reddit -" in o_str:
+                    notion_request("PATCH", f"https://api.notion.com/v1/pages/{pid}", headers, json={"archived": True}, timeout=10)
+                    purged_cnt += 1
+                    print(f"    -> Purged sub-quality un-translated card: '{t_str[:35]}...'")
+            print(f"  [Quality Patrol Complete] Successfully scrubbed {purged_cnt} un-translated or mechanical cards from Notion!")
         except Exception as e:
             print(f"  [Error during cleanup] {e}")
 
@@ -1514,8 +1696,16 @@ class IntelligenceEngine:
             except Exception as le:
                 print(f"  [Log Warning] Failed to write intelligence logs: {le}")
 
+            harvested = len(self.collected_raw_items) + len(self.competitor_raw_items)
+            # 落ちてはいないが何も採れていない状態を拾う。
+            # 例外にならないため log_run では通知されず、画面を見るまで気づけない。
+            if self.dedupe_scan_complete and harvested == 0:
+                notify_anomaly("収集が0件でした。情報源が全滅している可能性があります。")
+            elif self.dedupe_scan_complete and not ideas:
+                notify_anomaly(f"{harvested}件を収集しましたが、採用が0件でした。判定が厳しすぎる可能性があります。")
+
             log_run("intelligence_collector", "success",
-                    f"収集{len(self.collected_raw_items) + len(self.competitor_raw_items)}件 / 採用{len(ideas or [])}件",
+                    f"収集{harvested}件 / 採用{len(ideas or [])}件",
                     time.time() - run_start_time)
             print("\n--- [All Intelligence Processing, Auto-Cleanup & Logging Completed Successfully!] ---\n")
         except Exception as e:

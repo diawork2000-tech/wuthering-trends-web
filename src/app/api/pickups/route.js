@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { extractVideoId, parsePatchBody } from '@/lib/pickup-helpers';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -75,43 +76,6 @@ function readTitle(props) {
     }
   }
   return '無題';
-}
-
-// 名寄せのキーになるため、YouTubeの動画IDだけを厳密に取り出す。
-//
-// 以前は任意ドメインの ?v= を動画ID扱いしていた。名寄せは「同じIDなら同じ動画」
-// として複数行を1枚のカードに束ね、解除時はその全行をまとめて外すので、
-// 無関係なURLが同じ ?v= を持っているだけで巻き込んで解除する事故になりうる。
-const YOUTUBE_HOSTS = new Set([
-  'youtube.com',
-  'www.youtube.com',
-  'm.youtube.com',
-  'music.youtube.com',
-  'youtu.be',
-  'www.youtu.be',
-]);
-
-const VIDEO_ID = /^[\w-]{11}$/;
-
-function extractVideoId(url) {
-  if (!url) return '';
-  try {
-    const u = new URL(url);
-    if (!YOUTUBE_HOSTS.has(u.hostname.toLowerCase())) return '';
-
-    if (u.hostname.toLowerCase().endsWith('youtu.be')) {
-      const id = u.pathname.slice(1).split('/')[0];
-      return VIDEO_ID.test(id) ? id : '';
-    }
-    const v = u.searchParams.get('v');
-    if (v && VIDEO_ID.test(v)) return v;
-
-    const m = u.pathname.match(/\/(?:shorts|embed|live)\/([\w-]{11})(?:$|\/)/);
-    if (m) return m[1];
-  } catch {
-    // URLとして壊れている場合は名寄せに使わない
-  }
-  return '';
 }
 
 function mapVideo(page) {
@@ -223,9 +187,6 @@ export async function GET() {
 //   3. 429/5xx は Retry-After を見て再試行する。
 //   4. 結果はID単位で返す。どれが失敗したか分からないと再同期できない。
 
-const MAX_IDS = 200; // 一度に扱う上限。取り違えで全件消すのを防ぐ
-const ALLOWED_STATUSES = new Set(['未着手', '制作中', '投稿済み', '見送り']);
-const NOTION_ID = /^[0-9a-f]{32}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -266,48 +227,11 @@ export async function PATCH(request) {
     return NextResponse.json({ error: 'JSONとして解釈できません' }, { status: 400 });
   }
 
-  // --- 入力検証 ---
-  if (!Array.isArray(body.ids)) {
-    return NextResponse.json({ error: 'ids は配列で指定してください' }, { status: 400 });
+  const parsed = parsePatchBody(body);
+  if (parsed.error) {
+    return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
-  const invalid = body.ids.filter((id) => typeof id !== 'string' || !NOTION_ID.test(id.trim()));
-  if (invalid.length > 0) {
-    return NextResponse.json(
-      { error: `NotionのページIDとして不正な値が含まれています (${invalid.length}件)` },
-      { status: 400 }
-    );
-  }
-  // 名寄せで束ねた行を平坦化して送るため、同じIDが重複しうる
-  const ids = [...new Set(body.ids.map((id) => id.trim()))];
-  if (ids.length === 0) {
-    return NextResponse.json({ error: 'ids is required' }, { status: 400 });
-  }
-  if (ids.length > MAX_IDS) {
-    return NextResponse.json(
-      { error: `一度に更新できるのは ${MAX_IDS} 件までです (${ids.length}件が指定されました)` },
-      { status: 400 }
-    );
-  }
-
-  const properties = {};
-  if (typeof body.adopted === 'boolean') {
-    properties['採用'] = { checkbox: body.adopted };
-  }
-  if (body.status !== undefined) {
-    if (typeof body.status !== 'string' || !ALLOWED_STATUSES.has(body.status)) {
-      return NextResponse.json(
-        { error: `status は ${[...ALLOWED_STATUSES].join(' / ')} のいずれかです` },
-        { status: 400 }
-      );
-    }
-    properties['制作状況'] = { select: { name: body.status } };
-  }
-  if (Object.keys(properties).length === 0) {
-    return NextResponse.json(
-      { error: 'adopted か status のどちらかを指定してください' },
-      { status: 400 }
-    );
-  }
+  const { ids, properties } = parsed;
 
   // --- 送信（直列） ---
   try {
