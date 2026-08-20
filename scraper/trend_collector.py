@@ -532,28 +532,38 @@ def apply_ad_periods(headers, database_id, ad_videos):
     # URLを指定して引く。全件走査すると3000行で30往復かかるが、これなら1往復で済む。
     for i in range(0, len(urls), 100):
         chunk = urls[i:i + 100]
-        payload = {
-            "filter": {"or": [{"property": "URL", "url": {"equals": u}} for u in chunk]},
-            "page_size": 100,
-        }
-        try:
-            res = notion_request("POST", query_url, headers, json=payload, timeout=30)
-        except Exception as e:
-            print(f"  [Warning] 出稿期間の対象取得に失敗しました: {e}")
-            return 0
-        if res.status_code != 200:
-            print(f"  [Warning] 出稿期間の対象取得に失敗しました: {res.text[:200]}")
-            return 0
-        for page in res.json().get("results", []):
-            props = page.get("properties", {})
-            page_url = props.get("URL", {}).get("url")
-            if not page_url:
-                continue
-            current = props.get("出稿期間", {}).get("rich_text", [])
-            targets[page_url] = {
-                "id": page["id"],
-                "current": current[0].get("plain_text", "") if current else "",
+        cursor = None
+        while True:
+            payload = {
+                "filter": {"or": [{"property": "URL", "url": {"equals": u}} for u in chunk]},
+                "page_size": 100,
             }
+            if cursor:
+                payload["start_cursor"] = cursor
+            try:
+                res = notion_request("POST", query_url, headers, json=payload, timeout=30)
+            except Exception as e:
+                print(f"  [Warning] 出稿期間の対象取得に失敗しました: {e}")
+                return 0
+            if res.status_code != 200:
+                print(f"  [Warning] 出稿期間の対象取得に失敗しました: {res.text[:200]}")
+                return 0
+            data = res.json()
+            for page in data.get("results", []):
+                props = page.get("properties", {})
+                page_url = props.get("URL", {}).get("url")
+                if not page_url:
+                    continue
+                current = props.get("出稿期間", {}).get("rich_text", [])
+                targets[page_url] = {
+                    "id": page["id"],
+                    "current": current[0].get("plain_text", "") if current else "",
+                }
+            # 同じURLの行が重複していると100件を超えうる。打ち切ると
+            # 「対象が見つからなかった」ことにされて黙って書き漏らす。
+            if not data.get("has_more"):
+                break
+            cursor = data.get("next_cursor")
 
     updated = 0
     unchanged = 0

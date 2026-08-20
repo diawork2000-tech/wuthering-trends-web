@@ -41,15 +41,17 @@
     "jp_ratio": 0.85
   },
   "ad_transparency": {
-    "_note": "Google広告の透明性センターから、実際に配信された鳴潮の動画広告を集める。鍵不要・公開データ。",
+    "_note": "Google広告の透明性センターから、実際に配信された鳴潮の動画広告を集める。鍵不要・公開データ。domains は広告主IDを洗い出すための入口で、実際の収集は広告主ID単位で行う。",
+    "_note_region": "region_code は null で地域を絞らない。広告専用の素材は海外向けに多く、日本を指定すると大半が落ちる。",
     "enabled": true,
-    "region_code": 2392,
+    "region_code": null,
     "domains": [
       "kurogames.com",
-      "kurogames-global.com",
-      "kurogames-ads.com"
+      "kurogames-ads.com",
+      "kurogames-global.com"
     ],
-    "max_pages_per_domain": 5,
-    "request_interval_sec": 0.4
+    "max_pages_per_advertiser": 60,
+    "request_interval_sec": 0.2,
+    "resolve_workers": 6
   }
 }

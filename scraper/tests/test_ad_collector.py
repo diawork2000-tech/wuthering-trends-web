@@ -14,8 +14,12 @@ import unittest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from ad_collector import (  # noqa: E402
+    MAX_RESOLVE_MISSES,
+    _needs_resolving,
     extract_youtube_id,
     format_period,
+    is_other_game,
+    load_cache,
     parse_creative,
 )
 
@@ -87,6 +91,72 @@ class TestFormatPeriod(unittest.TestCase):
 
     def test_どちらも無ければ空(self):
         self.assertEqual(format_period("", ""), "")
+
+
+class TestIsOtherGame(unittest.TestCase):
+    """同じ広告主がパニシングの広告も出しているので、混ざらないようにする。"""
+
+    def test_パニシングの素材は除く(self):
+        self.assertTrue(is_other_game("PGR-JP-V-CQ-QZY-4.5-空花2.0多角色旋转合影-1080x1920.mp4", ""))
+        self.assertTrue(is_other_game("何かの広告", "パニシング:グレイレイヴン"))
+        self.assertTrue(is_other_game("何かの広告", "PGR"))
+
+    def test_鳴潮の素材は残す(self):
+        self.assertFalse(is_other_game("WW-JP-V-SSW-DJS-3.6-清宵直面BOSS拼主城行走-1920x1080.mp4", "Wuthering Waves"))
+        self.assertFalse(is_other_game("『鳴潮』キャラクターPV丨清宵丨修真", "鳴潮 (Wuthering Waves)公式"))
+
+    def test_語の一部には反応しない(self):
+        # 「PGR」で始まる素材だけを対象にする。含むだけでは落とさない
+        self.assertFalse(is_other_game("鳴潮とPGRを比較してみた", "個人チャンネル"))
+
+
+class TestNeedsResolving(unittest.TestCase):
+    """一度の通信の綾で、動画広告が永久に埋もれないようにする。"""
+
+    WITH_PREVIEW = {"creative_id": "CR1", "preview_url": "https://example.invalid/p.js"}
+    NO_PREVIEW = {"creative_id": "CR2", "preview_url": ""}
+
+    def test_未取得なら調べる(self):
+        self.assertTrue(_needs_resolving(self.WITH_PREVIEW, {}))
+
+    def test_動画IDが取れているなら調べ直さない(self):
+        cache = {"CR1": {"video_id": "W2C_Gm_ZLoI"}}
+        self.assertFalse(_needs_resolving(self.WITH_PREVIEW, cache))
+
+    def test_取りこぼしは回数を区切って引き直す(self):
+        # プレビューは毎回組み立て直され、動画IDが入らない回がある。
+        # 1回の空振りで「動画ではない広告」と確定させると二度と拾えない。
+        self.assertTrue(_needs_resolving(self.WITH_PREVIEW, {"CR1": {"video_id": "", "misses": 1}}))
+        self.assertFalse(
+            _needs_resolving(self.WITH_PREVIEW, {"CR1": {"video_id": "", "misses": MAX_RESOLVE_MISSES}})
+        )
+
+    def test_旧形式の控えも引き直しの対象になる(self):
+        # misses を持たない古い控えを「確定」と読むと、取りこぼしが固定される
+        self.assertTrue(_needs_resolving(self.WITH_PREVIEW, {"CR1": {"video_id": ""}}))
+
+    def test_プレビューが無い広告は調べない(self):
+        # 画像・テキスト広告。動画は存在しないので確定させてよい
+        self.assertFalse(_needs_resolving(self.NO_PREVIEW, {}))
+
+
+class TestLoadCache(unittest.TestCase):
+    def test_旧形式の控えを読み替える(self):
+        import json
+        import tempfile
+
+        legacy = {"CR1": {"video_id": "W2C_Gm_ZLoI", "title": "t", "channel": "c"}}
+        with tempfile.TemporaryDirectory() as d:
+            path = os.path.join(d, "cache.json")
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(legacy, f)
+            cache = load_cache(path)
+        self.assertEqual(cache["creatives"]["CR1"]["video_id"], "W2C_Gm_ZLoI")
+        self.assertEqual(cache["advertisers"], {})
+
+    def test_控えが無くても壊れない(self):
+        cache = load_cache(os.path.join("存在しない", "cache.json"))
+        self.assertEqual(cache, {"creatives": {}, "advertisers": {}})
 
 
 if __name__ == "__main__":

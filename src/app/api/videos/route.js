@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(request) {
   const notionApiKey = process.env.NOTION_API_KEY;
   const databaseId = process.env.NOTION_DATABASE_ID;
 
@@ -8,13 +8,18 @@ export async function GET() {
     return NextResponse.json({ error: 'Database ID or API Key is not defined' }, { status: 500 });
   }
 
+  // 広告だけは別枠で引く。通常の一覧は新しい順に500件で打ち切るため、
+  // 広告をまとめて取り込んだ日に古い広告が全部その枠から押し出される。
+  // 出稿期間が入っている行だけを対象にすれば、件数に関係なく全部揃う。
+  const adsOnly = new URL(request.url).searchParams.get('ads') === '1';
+  const maxItems = adsOnly ? 2000 : 500;
+
   try {
     let allResults = [];
     let hasMore = true;
     let nextCursor = undefined;
-    
-    // 最大5ページ (500件) まで取得する
-    while (hasMore && allResults.length < 500) {
+
+    while (hasMore && allResults.length < maxItems) {
       const body = {
         sorts: [
           {
@@ -24,7 +29,11 @@ export async function GET() {
         ],
         page_size: 100,
       };
-      
+
+      if (adsOnly) {
+        body.filter = { property: '出稿期間', rich_text: { is_not_empty: true } };
+      }
+
       if (nextCursor) {
         body.start_cursor = nextCursor;
       }

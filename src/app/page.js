@@ -1,12 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import VideoCard from './components/VideoCard';
 import styles from './page.module.css';
 
 export default function Home() {
   const [videos, setVideos] = useState([]);
+  // 広告は件数が多く別枠で取るため、通常の一覧とは別に持つ
+  const [adVideos, setAdVideos] = useState(null);
+  const adsRequested = useRef(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('すべて');
@@ -91,6 +94,20 @@ export default function Home() {
     }
     fetchVideos();
   }, []);
+
+  // 広告は通常の一覧の500件枠に収まらないので、タブを開いたときに別で取る。
+  // 一度取ったら覚えておき、タブを行き来しても取り直さない。
+  useEffect(() => {
+    if (activeTab !== '広告' || adVideos !== null || adsRequested.current) return;
+    adsRequested.current = true;
+    fetch('/api/videos?ads=1')
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`Status: ${res.status}`))))
+      .then((data) => setAdVideos(data.videos || []))
+      .catch((err) => {
+        adsRequested.current = false; // 失敗したらタブを開き直したときに再挑戦する
+        setError(err.message);
+      });
+  }, [activeTab, adVideos]);
 
   const handleSync = async () => {
     if (!window.confirm('クラウドで情報収集を開始しますか？完了まで数分かかり、Discordに通知されます。')) return;
@@ -369,7 +386,7 @@ export default function Home() {
         </select>
       </div>
 
-      {loading ? (
+      {loading || (activeTab === '広告' && adVideos === null) ? (
         <div className={styles.loadingContainer}>
           <div className={styles.spinner}></div>
           <p>Loading the latest trends...</p>
@@ -380,17 +397,11 @@ export default function Home() {
         </div>
       ) : (
         <div className={styles.gallery} style={{ '--card-width': `${zoomLevel}px` }}>
-          {videos
-            // 「広告」だけはカテゴリで絞れない。広告に使われた動画のほとんどは
-            // 公式チャンネルの通常投稿で、別カテゴリで先に登録されているため。
-            // 出稿期間が入っているかどうかが、広告として流れた唯一の目印になる。
-            .filter((video) =>
-              activeTab === 'すべて'
-                ? true
-                : activeTab === '広告'
-                  ? Boolean(video.adPeriod)
-                  : video.category === activeTab
-            )
+          {/* 「広告」はカテゴリで絞れない。広告に使われた動画の多くは公式チャンネルの
+              通常投稿で、別カテゴリで先に登録されているため。出稿期間の有無だけが
+              広告として流れた目印になるので、絞り込みごとサーバー側に任せている。 */}
+          {(activeTab === '広告' ? adVideos || [] : videos)
+            .filter((video) => activeTab === 'すべて' || activeTab === '広告' || video.category === activeTab)
             .filter((video) => {
               if (!searchQuery.trim()) return true;
               const q = searchQuery.trim().toLowerCase();
