@@ -381,7 +381,16 @@ export default function Home() {
       ) : (
         <div className={styles.gallery} style={{ '--card-width': `${zoomLevel}px` }}>
           {videos
-            .filter((video) => activeTab === 'すべて' || video.category === activeTab)
+            // 「広告」だけはカテゴリで絞れない。広告に使われた動画のほとんどは
+            // 公式チャンネルの通常投稿で、別カテゴリで先に登録されているため。
+            // 出稿期間が入っているかどうかが、広告として流れた唯一の目印になる。
+            .filter((video) =>
+              activeTab === 'すべて'
+                ? true
+                : activeTab === '広告'
+                  ? Boolean(video.adPeriod)
+                  : video.category === activeTab
+            )
             .filter((video) => {
               if (!searchQuery.trim()) return true;
               const q = searchQuery.trim().toLowerCase();

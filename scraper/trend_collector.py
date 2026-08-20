@@ -507,6 +507,95 @@ def get_existing_notion_urls(headers, database_id):
     print(f"Found {len(existing_urls)} existing videos in Notion.")
     return existing_urls
 
+def apply_ad_periods(headers, database_id, ad_videos):
+    """広告として配信された動画に、出稿期間を書き込む。
+
+    広告のほとんどは公式チャンネルに普通に上がっている動画で、トレンド収集が
+    先に拾っているため、新しい行としては1件も増えない。増えないのが正しい。
+    価値があるのは動画そのものではなく「その動画がいつ広告として流れたか」
+    なので、既にある行に後から書き足す。
+
+    値が変わらない行には書かない。同じ値でも書けば Notion の最終更新日時が
+    動いてしまい、「誰がいつ何を触ったか」が読めなくなるため。
+    """
+    if not ad_videos:
+        return 0
+
+    by_url = {v["url"]: v for v in ad_videos if v.get("ad_period")}
+    if not by_url:
+        return 0
+
+    query_url = f"https://api.notion.com/v1/databases/{database_id}/query"
+    urls = list(by_url.keys())
+    targets = {}
+
+    # URLを指定して引く。全件走査すると3000行で30往復かかるが、これなら1往復で済む。
+    for i in range(0, len(urls), 100):
+        chunk = urls[i:i + 100]
+        payload = {
+            "filter": {"or": [{"property": "URL", "url": {"equals": u}} for u in chunk]},
+            "page_size": 100,
+        }
+        try:
+            res = notion_request("POST", query_url, headers, json=payload, timeout=30)
+        except Exception as e:
+            print(f"  [Warning] 出稿期間の対象取得に失敗しました: {e}")
+            return 0
+        if res.status_code != 200:
+            print(f"  [Warning] 出稿期間の対象取得に失敗しました: {res.text[:200]}")
+            return 0
+        for page in res.json().get("results", []):
+            props = page.get("properties", {})
+            page_url = props.get("URL", {}).get("url")
+            if not page_url:
+                continue
+            current = props.get("出稿期間", {}).get("rich_text", [])
+            targets[page_url] = {
+                "id": page["id"],
+                "current": current[0].get("plain_text", "") if current else "",
+            }
+
+    updated = 0
+    unchanged = 0
+    failed = 0
+    for url_key, video in by_url.items():
+        target = targets.get(url_key)
+        if not target:
+            continue
+        if target["current"] == video["ad_period"]:
+            unchanged += 1
+            continue
+        payload = {"properties": {
+            "出稿期間": {"rich_text": [{"text": {"content": video["ad_period"]}}]}
+        }}
+        try:
+            res = notion_request(
+                "PATCH", f"https://api.notion.com/v1/pages/{target['id']}",
+                headers, json=payload, timeout=30,
+            )
+            if res.status_code == 200:
+                updated += 1
+            else:
+                failed += 1
+                print(f"  [Warning] 出稿期間の書き込みに失敗: {res.text[:150]}")
+        except Exception as e:
+            failed += 1
+            print(f"  [Warning] 出稿期間の書き込みに失敗: {e}")
+        time.sleep(0.35)  # Notionの毎秒3回制限に合わせる
+
+    # 成功・据え置き・失敗を別々に数える。まとめて引き算で出すと、
+    # 失敗が「変更なし」に紛れて成功したように見えてしまう。
+    missing = len(by_url) - len(targets)
+    msg = f"出稿期間を {updated} 件に記録しました（対象 {len(by_url)} 件 / 変更なし {unchanged} 件）"
+    if failed > 0:
+        msg += f" ⚠️ 書き込み失敗 {failed} 件"
+    if missing > 0:
+        msg += f" ※DB未登録 {missing} 件"
+    print("  " + msg)
+    logger.log("📣 " + msg)
+    return updated
+
+
 def ensure_video_db_schema():
     """動画DBに再生数・高評価数の列が無ければ自動で追加する。
 
@@ -827,7 +916,10 @@ def main():
                 send_to_notion(target_flat, "登録チャンネル", existing_urls)
 
             if ad_videos:
+                # 広告専用に作られた動画（公式チャンネルに無い尺違いなど）だけが
+                # 新規行になる。大半は既にある行なので、期間の書き足しが本命。
                 send_to_notion(ad_videos, "広告", existing_urls)
+                apply_ad_periods(headers, database_id, ad_videos)
         else:
             print("Notion API is not configured. Skipping upload.")
             logger.log("ℹ️ Notion設定不備のためアップロードスキップ")
