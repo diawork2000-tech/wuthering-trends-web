@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from deep_translator import GoogleTranslator
 from notion_utils import notion_request
 from shared.automation_logger import log_run
+from ad_collector import collect_ad_videos
 
 # Load environment variables
 load_dotenv()
@@ -540,6 +541,9 @@ def ensure_video_db_schema():
         # 2つのDBを同じ形として横断表示できる。
         if "採用" not in props:
             patch["採用"] = {"checkbox": {}}
+        # 広告として実際に配信されていた期間。広告以外の動画では空になる。
+        if "出稿期間" not in props:
+            patch["出稿期間"] = {"rich_text": {}}
         if "制作状況" not in props:
             patch["制作状況"] = {
                 "select": {
@@ -624,7 +628,14 @@ def send_to_notion(video_list, category, existing_urls):
                 }
             ]
         }
-        
+
+        # 出稿期間を持つのは広告だけ。無い動画に空欄を作っても読み手が困るので、
+        # 値があるときだけ付ける。
+        if video.get("ad_period"):
+            payload["properties"]["出稿期間"] = {
+                "rich_text": [{"text": {"content": video["ad_period"]}}]
+            }
+
         try:
             res = notion_request("POST", "https://api.notion.com/v1/pages", headers, json=payload)
             if res.status_code == 200:
@@ -681,6 +692,51 @@ def get_flat_video_list(data_dict):
             seen_urls.add(v["url"])
     return unique_list
 
+def collect_ad_videos_safely(config):
+    """広告収集を、本体の収集から切り離して実行する。
+
+    相手はGoogleの内部RPCで、仕様が変わればいつでも壊れる。壊れた日に
+    YouTubeトレンドの収集まで巻き添えで止まるのは割に合わないので、
+    ここで完全に受け止めて空リストを返す。
+    """
+    ad_config = config.get("ad_transparency", {})
+    if not ad_config:
+        return []
+
+    exclude_words = config.get("youtube", {}).get("exclude_words", [])
+
+    try:
+        videos, stats = collect_ad_videos(
+            ad_config,
+            exclude_checker=lambda title: should_exclude(title, exclude_words),
+        )
+    except Exception as e:
+        msg = f"広告収集に失敗しました（本体の収集は続行します）: {e}"
+        print(f"  [Warning] {msg}")
+        logger.log(f"⚠️ {msg}")
+        return []
+
+    if stats.get("failed_domains"):
+        logger.log(f"⚠️ 広告の取得に失敗したドメイン: {', '.join(stats['failed_domains'])}")
+
+    # 広告が1件も取れないのは、透明性センター側の仕様変更を疑うべき状態。
+    # 静かにゼロ件が続くと気づけないので、必ず記録に残す。
+    if stats.get("creatives", 0) == 0:
+        logger.log("⚠️ 広告クリエイティブが1件も取得できませんでした。取得方法が壊れている可能性があります。")
+    else:
+        logger.log(
+            f"📣 広告 {stats['creatives']} 件を確認し、動画広告 {stats['video_ads']} 件を回収"
+            f"（動画以外 {stats['non_video']} 件 / 除外 {stats['excluded']} 件）"
+        )
+
+    try:
+        enrich_with_statistics(YouTubeKeyManager(), {"広告": videos})
+    except Exception as e:
+        print(f"  [Warning] Ad statistics enrichment skipped ({e}).")
+
+    return videos
+
+
 def main():
     print("--- Wuthering Waves Trend Collector (Advanced) ---")
     logger.log("🚀 YouTubeトレンド収集ツールの自動実行プロセス始動")
@@ -700,12 +756,17 @@ def main():
         print("\n[2] Fetching POPULAR YouTube trends from past 7 days (85% Shorts, 15% Normal)...")
         logger.log("🔥 [ステップ2] 「週間人気ランキング (直近7日間)」の回収処理をスタート...")
         popular_data = get_youtube_trends(config, mode="popular_weekly")
-        
+
+        print("\n[2.5] Fetching ads actually served for Wuthering Waves...")
+        logger.log("📣 [ステップ2.5] 「出稿中の広告クリエイティブ」の回収処理をスタート...")
+        ad_videos = collect_ad_videos_safely(config)
+
         collected_data = {
             "youtube": {
                 "latest": latest_data,
                 "popular_weekly": popular_data
-            }
+            },
+            "ads": ad_videos
         }
         
         output_file = "trends_output.json"
@@ -764,6 +825,9 @@ def main():
             if target_channel_videos:
                 target_flat = get_flat_video_list({"dummy": target_channel_videos})
                 send_to_notion(target_flat, "登録チャンネル", existing_urls)
+
+            if ad_videos:
+                send_to_notion(ad_videos, "広告", existing_urls)
         else:
             print("Notion API is not configured. Skipping upload.")
             logger.log("ℹ️ Notion設定不備のためアップロードスキップ")

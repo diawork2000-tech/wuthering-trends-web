@@ -66,6 +66,8 @@ export async function GET() {
       const likeCount = page.properties['高評価数']?.number ?? null;
       // ピックアップの状態。列がまだ無いDBでも undefined になるだけで壊れない。
       const adopted = page.properties['採用']?.checkbox || false;
+      // 広告として実際に配信されていた期間。広告以外は空になる。
+      const adPeriod = page.properties['出稿期間']?.rich_text?.[0]?.plain_text || '';
       const status = page.properties['制作状況']?.select?.name || '未着手';
       
       const thumbnail = page.cover?.external?.url || 'https://via.placeholder.com/640x360.png?text=No+Image';
@@ -92,6 +94,7 @@ export async function GET() {
         likeCount,
         adopted,
         status,
+        adPeriod,
         created_time: page.created_time,
       };
     });

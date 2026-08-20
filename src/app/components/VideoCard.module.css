@@ -144,3 +144,17 @@
   color: #ffffff;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
+
+/* 広告として配信されていた期間。広告カードにだけ出る */
+.adPeriod {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #f0abfc;
+  background: rgba(240, 171, 252, 0.12);
+  border: 1px solid rgba(240, 171, 252, 0.25);
+  padding: 3px 9px;
+  border-radius: 12px;
+  white-space: nowrap;
+}

@@ -82,6 +82,12 @@ export default function VideoCard({ video }) {
         <a href={video.url} target="_blank" rel="noopener noreferrer" className={styles.titleLink} onClick={handleTitleClick}>
           <h3 className={styles.title} title={video.title}>{video.title}</h3>
         </a>
+        {/* 広告として実際に配信されていた期間。どのPVをいつ推していたかが分かる */}
+        {video.adPeriod && (
+          <span className={styles.adPeriod} title="この動画が広告として配信されていた期間">
+            📣 {video.adPeriod}
+          </span>
+        )}
       </div>
     </div>
   );
