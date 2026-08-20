@@ -59,3 +59,4 @@ scraper/purge_run.log
 # 自動生成のバックアップ（write_json_atomic が作る1世代前の控え）
 *.json.bak
 *.json.tmp
+scraper/purge_ads_audit.log
