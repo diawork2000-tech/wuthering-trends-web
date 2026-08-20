@@ -5,6 +5,14 @@ import Link from 'next/link';
 import VideoCard from './components/VideoCard';
 import styles from './page.module.css';
 
+// 出稿期間「2026-07-31 〜 2026-08-03」から開始日・終了日を取り出す。
+// 片方しか無い場合はその日付が開始日として入っている。
+const adStart = (video) => (video.adPeriod || '').slice(0, 10);
+const adEnd = (video) => {
+  const parts = (video.adPeriod || '').split('〜');
+  return (parts[1] || parts[0] || '').trim();
+};
+
 export default function Home() {
   const [videos, setVideos] = useState([]);
   // 広告は件数が多く別枠で取るため、通常の一覧とは別に持つ
@@ -379,8 +387,12 @@ export default function Home() {
           value={sortOrder}
           onChange={(e) => setSortOrder(e.target.value)}
         >
-          <option value="newest">新しい順</option>
-          <option value="oldest">古い順</option>
+          <option value="newest">新しい順（収集日）</option>
+          <option value="oldest">古い順（収集日）</option>
+          {/* 広告はまとめて登録されるため収集日では並ばない。
+              いつ流れていた広告かで並べられるようにする。 */}
+          <option value="adEnd">出稿の新しい順（終了日）</option>
+          <option value="adStart">出稿の古い順（開始日）</option>
           <option value="title">タイトル順</option>
           <option value="channel">チャンネル順</option>
         </select>
@@ -418,6 +430,13 @@ export default function Home() {
                   return (a.title || '').localeCompare(b.title || '', 'ja');
                 case 'channel':
                   return (a.channel || '').localeCompare(b.channel || '', 'ja');
+                case 'adStart':
+                  // 出稿期間は「2026-07-31 〜 2026-08-03」の形。日付が
+                  // YYYY-MM-DD なので、文字列のまま比べても日付順になる。
+                  // 期間を持たない動画は末尾へ送る。
+                  return (adStart(a) || '9999').localeCompare(adStart(b) || '9999');
+                case 'adEnd':
+                  return (adEnd(b) || '').localeCompare(adEnd(a) || '');
                 case 'newest':
                 default:
                   return new Date(b.created_time) - new Date(a.created_time);

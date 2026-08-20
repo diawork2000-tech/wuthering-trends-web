@@ -19,6 +19,8 @@ from ad_collector import (  # noqa: E402
     _needs_resolving,
     extract_youtube_id,
     format_period,
+    channel_handle,
+    is_official_channel,
     is_other_game,
     load_cache,
     parse_creative,
@@ -110,6 +112,55 @@ class TestIsOtherGame(unittest.TestCase):
     def test_語の一部には反応しない(self):
         # 「PGR」で始まる素材だけを対象にする。含むだけでは落とさない
         self.assertFalse(is_other_game("鳴潮とPGRを比較してみた", "個人チャンネル"))
+
+
+class TestIsOfficialChannel(unittest.TestCase):
+    """本家の広告アカウントは配信者の動画も広告に使う。素材だけを残す。"""
+
+    OFFICIAL = [
+        "@WW-op1vs",
+        "@WutheringWaves",
+        "@wutheringwaves3352",
+        "@WW_KR_Official",
+        "@WutheringWaves.ZH.official",
+    ]
+
+    def test_本家のチャンネルは通す(self):
+        for url in [
+            "https://www.youtube.com/@WW-op1vs",           # 広告専用の限定公開
+            "https://www.youtube.com/@WutheringWaves",      # 英語圏公式
+            "https://www.youtube.com/@wutheringwaves3352",  # 日本公式
+            "https://www.youtube.com/@WW_KR_Official",      # 韓国公式
+            "https://www.youtube.com/@WutheringWaves.ZH.official",
+        ]:
+            with self.subTest(url=url):
+                self.assertTrue(is_official_channel(url, self.OFFICIAL))
+
+    def test_配信者のチャンネルは落とす(self):
+        for url in [
+            "https://www.youtube.com/@itssenpai626",
+            "https://www.youtube.com/@WUWACreatorHub",
+            "https://www.youtube.com/@krow",
+            # ハンドルに official を含む配信者。名前で見ていると混ざる
+            "https://www.youtube.com/@buledeblurred_official",
+        ]:
+            with self.subTest(url=url):
+                self.assertFalse(is_official_channel(url, self.OFFICIAL))
+
+    def test_大文字小文字と末尾スラッシュを吸収する(self):
+        self.assertTrue(is_official_channel("https://www.youtube.com/@ww-OP1VS/", self.OFFICIAL))
+
+    def test_チャンネルURLが取れていなければ落とす(self):
+        # 判定できないものを通すと、配信者の動画が混ざる
+        self.assertFalse(is_official_channel("", self.OFFICIAL))
+
+    def test_条件が空なら全部通す(self):
+        self.assertTrue(is_official_channel("https://www.youtube.com/@itssenpai626", []))
+        self.assertTrue(is_official_channel("", []))
+
+    def test_ハンドルの取り出し(self):
+        self.assertEqual(channel_handle("https://www.youtube.com/@WW-op1vs"), "@ww-op1vs")
+        self.assertEqual(channel_handle(""), "")
 
 
 class TestSelectAdvertisers(unittest.TestCase):

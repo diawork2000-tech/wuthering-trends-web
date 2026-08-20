@@ -59,6 +59,14 @@
       "Kuro"
     ],
     "_note_advertiser": "同じ遷移先に代理店も広告を出しているが、中身は個人配信者の動画で本家の素材ではない。本家の広告主名に含まれる語で絞る。空にすると全部集める。",
-    "advertiser_probe_pages": 3
+    "advertiser_probe_pages": 3,
+    "official_channels": [
+      "@WW-op1vs",
+      "@WutheringWaves",
+      "@wutheringwaves3352",
+      "@WW_KR_Official",
+      "@WutheringWaves.ZH.official"
+    ],
+    "_note_channels": "本家の広告アカウントは個人配信者の動画も広告として回す。欲しいのは本家が作った素材なので、チャンネルのハンドルで線を引く。@WW-op1vs は広告専用の限定公開チャンネル。空にすると全部集める。"
   }
 }

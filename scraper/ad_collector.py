@@ -273,8 +273,39 @@ def fetch_video_meta(video_id):
     try:
         data = json.loads(_fetch(url, timeout=20))
     except (urllib.error.URLError, urllib.error.HTTPError, ValueError, TimeoutError):
-        return {"title": "", "channel": ""}
-    return {"title": data.get("title") or "", "channel": data.get("author_name") or ""}
+        return {"title": "", "channel": "", "channel_url": ""}
+    return {
+        "title": data.get("title") or "",
+        "channel": data.get("author_name") or "",
+        # 名前は locale ごとに違い、変更もされうる。誰のチャンネルかの判定は
+        # ハンドルを含む URL で行う。
+        "channel_url": data.get("author_url") or "",
+    }
+
+
+def channel_handle(channel_url):
+    """チャンネルURLから @ハンドルを取り出す。小文字で返す。"""
+    if not channel_url:
+        return ""
+    return channel_url.rstrip("/").rsplit("/", 1)[-1].lower()
+
+
+def is_official_channel(channel_url, official_handles):
+    """本家が持つチャンネルの動画かどうか。
+
+    本家の広告アカウントは、自社が作った素材だけでなく、個人配信者の動画も
+    そのまま広告として大量に回している。実測では742本のうち382本が配信者の
+    動画で、チャンネル数は117に及んだ。広告主単位の絞り込みでは落とせない。
+
+    official_handles が空なら全部通す。
+    """
+    if not official_handles:
+        return True
+    handle = channel_handle(channel_url).lstrip("@")
+    if not handle:
+        return False
+    # 設定側は @ 付きで書く想定だが、無くても通るようにしておく
+    return handle in {h.lstrip("@").lower() for h in official_handles}
 
 
 def load_cache(path=CACHE_PATH):
@@ -355,6 +386,7 @@ def _resolve_missing(creatives, cache_entries, workers=6):
             "video_id": video_id,
             "title": meta["title"],
             "channel": meta["channel"],
+            "channel_url": meta["channel_url"],
         }
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
@@ -367,6 +399,39 @@ def _resolve_missing(creatives, cache_entries, workers=6):
             cache_entries.setdefault(
                 info["creative_id"], {"video_id": "", "title": "", "channel": ""}
             )
+    return len(todo)
+
+
+def _refresh_missing_meta(creatives, cache_entries, workers=6):
+    """チャンネルURLを持たない古い控えを埋め直す。
+
+    チャンネルURLは後から足した項目なので、それ以前に控えた分には入っていない。
+    無いものを「本家ではない」と扱うと既存分が丸ごと落ちるため、YouTube側にだけ
+    問い合わせて補う。透明性センターは叩かないのでレート制限には影響しない。
+    """
+    todo = [
+        c["creative_id"] for c in creatives
+        if (cache_entries.get(c["creative_id"]) or {}).get("video_id")
+        and not (cache_entries.get(c["creative_id"]) or {}).get("channel_url")
+    ]
+    if not todo:
+        return 0
+
+    print(f"  [Ads] チャンネル情報が未取得の {len(todo)} 件を補います...")
+
+    def one(creative_id):
+        entry = cache_entries[creative_id]
+        meta = fetch_video_meta(entry["video_id"])
+        return creative_id, meta
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for creative_id, meta in pool.map(one, todo):
+            if not meta["channel_url"]:
+                continue  # 取れなかった回は据え置く。次回また試す
+            entry = cache_entries[creative_id]
+            entry["channel_url"] = meta["channel_url"]
+            entry["channel"] = meta["channel"] or entry.get("channel", "")
+            entry["title"] = entry.get("title") or meta["title"]
     return len(todo)
 
 
@@ -404,6 +469,7 @@ def collect_ad_videos(ad_config, exclude_checker=None):
         "creatives": 0,
         "video_ads": 0,
         "non_video": 0,
+        "other_channel": 0,
         "other_game": 0,
         "excluded": 0,
         "newly_resolved": 0,
@@ -429,7 +495,10 @@ def collect_ad_videos(ad_config, exclude_checker=None):
 
     stats["creatives"] = len(parsed)
     stats["newly_resolved"] = _resolve_missing(list(parsed.values()), entries, workers)
+    _refresh_missing_meta(list(parsed.values()), entries, workers)
     save_cache(cache)
+
+    official = ad_config.get("official_channels", [])
 
     seen_ids = set()
     videos = []
@@ -446,6 +515,11 @@ def collect_ad_videos(ad_config, exclude_checker=None):
         title = entry.get("title") or f"広告クリエイティブ {info['creative_id']}"
         channel = entry.get("channel") or ""
 
+        # 本家の広告アカウントは配信者の動画もそのまま広告に使う。
+        # 欲しいのは本家が作った素材なので、チャンネルで線を引く。
+        if not is_official_channel(entry.get("channel_url", ""), official):
+            stats["other_channel"] += 1
+            continue
         if is_other_game(title, channel):
             stats["other_game"] += 1
             continue
