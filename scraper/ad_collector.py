@@ -53,6 +53,35 @@ _PGR_TITLE = re.compile(r"^PGR[-_]", re.IGNORECASE)
 _PGR_CHANNELS = {"PGR", "パニシング:グレイレイヴン", "Punishing: Gray Raven"}
 
 
+MAX_HTTP_RETRIES = 4
+
+
+def _open_with_backoff(req, timeout, label):
+    """429と5xxは待って取り直す。
+
+    まとめて引くと相手に絞られる。ここで諦めると、収集そのものは成功した
+    のに中身だけ空という一番たちの悪い結果になるので、必ず待って粘る。
+    """
+    wait = 5
+    for attempt in range(MAX_HTTP_RETRIES):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as res:
+                return res.read().decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            if e.code not in (429, 500, 502, 503, 504) or attempt == MAX_HTTP_RETRIES - 1:
+                raise
+            retry_after = e.headers.get("Retry-After") if e.headers else None
+            try:
+                delay = max(float(retry_after), wait)
+            except (TypeError, ValueError):
+                delay = wait
+            print(f"    [Ads] {label} が {e.code} を返しました。{delay:.0f}秒待って取り直します"
+                  f" ({attempt + 1}/{MAX_HTTP_RETRIES})")
+            time.sleep(delay)
+            wait *= 2
+    raise urllib.error.URLError(f"{label}: 再試行の上限に達しました")
+
+
 def _post(payload, timeout=40):
     body = urllib.parse.urlencode({"f.req": json.dumps(payload, ensure_ascii=False)}).encode()
     req = urllib.request.Request(
@@ -64,8 +93,7 @@ def _post(payload, timeout=40):
             "Referer": "https://adstransparency.google.com/",
         },
     )
-    with urllib.request.urlopen(req, timeout=timeout) as res:
-        return json.loads(res.read().decode("utf-8"))
+    return json.loads(_open_with_backoff(req, timeout, "広告一覧"))
 
 
 def search_creatives(domain=None, advertiser=None, region=None, max_pages=60, interval=0.2):
@@ -94,7 +122,7 @@ def search_creatives(domain=None, advertiser=None, region=None, max_pages=60, in
     return creatives
 
 
-def discover_advertisers(domains, known=None, probe_pages=20):
+def discover_advertisers(domains, known=None, probe_pages=3):
     """広告を出している広告主IDを、遷移先ドメインから洗い出す。
 
     鳴潮の広告は本体の広告主アカウントだけでなく、代理店とみられる複数の
@@ -103,6 +131,9 @@ def discover_advertisers(domains, known=None, probe_pages=20):
 
     一度見つけたIDは控えに残して使い続ける。ある回の応答にたまたま
     出てこなかっただけで対象から外れるのを防ぐため。
+
+    浅くしか見ないのは、深く掘って出てくるのが代理店ばかりで、どうせ
+    select_advertisers() で捨てるから。無駄な往復はレート制限を早める。
     """
     found = dict(known or {})
     for domain in domains:
@@ -116,6 +147,28 @@ def discover_advertisers(domains, known=None, probe_pages=20):
             if advertiser_id:
                 found[advertiser_id] = creative.get("12") or found.get(advertiser_id, "")
     return found
+
+
+def select_advertisers(found, patterns):
+    """本家の広告主だけに絞る。
+
+    同じ遷移先に対して、代理店とみられる別会社も広告を出している。中身は
+    個人配信者の動画を回しているもので、本家が作った素材ではない。
+
+    IDを直書きせず名前で見るのは、本家が別法人でアカウントを増やしたときに
+    黙って取りこぼさないため。patterns が空なら全部通す。
+    """
+    if not patterns:
+        return dict(found), {}
+    lowered = [p.lower() for p in patterns]
+    kept, skipped = {}, {}
+    for advertiser_id, name in found.items():
+        text = (name or "").lower()
+        if any(p in text for p in lowered):
+            kept[advertiser_id] = name
+        else:
+            skipped[advertiser_id] = name
+    return kept, skipped
 
 
 def parse_creative(creative):
@@ -172,32 +225,38 @@ def is_other_game(title, channel):
     return bool(_PGR_TITLE.match(title or ""))
 
 
-def _fetch(url, timeout=25):
+def _fetch(url, timeout=25, label="プレビュー"):
     req = urllib.request.Request(
         url,
         headers={"User-Agent": USER_AGENT, "Referer": "https://adstransparency.google.com/"},
     )
-    with urllib.request.urlopen(req, timeout=timeout) as res:
-        return res.read().decode("utf-8", "replace")
+    return _open_with_backoff(req, timeout, label)
 
 
 def resolve_video_id(preview_url, attempts=2):
-    """プレビューから動画IDを取り出す。1度だけ取り直す。
+    """プレビューから動画IDを取り出す。戻り値は (動画ID, 取得できたか)。
 
     プレビューは毎回組み立て直されるらしく、同じ広告でも動画IDが入って
     こない回がある。実測で1398件中361件が1回目に取りこぼしていた。
     取れなかったものを「動画ではない広告」と決めつけないための再試行。
+
+    通信自体に失敗した回は「空振り」に数えない。レート制限に当たった日に
+    全件が空振り扱いになり、数回で「動画ではない広告」として確定して
+    しまうため。中身を見た上で無かった場合だけ空振りとする。
     """
+    fetched = False
     for attempt in range(attempts):
         try:
-            video_id = extract_youtube_id(_fetch(preview_url))
+            body = _fetch(preview_url)
+            fetched = True
         except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, ValueError):
-            video_id = ""
+            body = ""
+        video_id = extract_youtube_id(body)
         if video_id:
-            return video_id
+            return video_id, True
         if attempt + 1 < attempts:
             time.sleep(0.5)
-    return ""
+    return "", fetched
 
 
 def fetch_video_meta(video_id):
@@ -280,14 +339,16 @@ def _resolve_missing(creatives, cache_entries, workers=6):
     print(f"  [Ads] 中身が未確定の広告 {len(todo)} 件を確認します...")
 
     def one(info):
-        video_id = resolve_video_id(info["preview_url"])
+        video_id, fetched = resolve_video_id(info["preview_url"])
         if not video_id:
             previous = cache_entries.get(info["creative_id"]) or {}
+            misses = previous.get("misses", 0)
             return info["creative_id"], {
                 "video_id": "",
                 "title": "",
                 "channel": "",
-                "misses": previous.get("misses", 0) + 1,
+                # 中身を見た上で無かったときだけ数える
+                "misses": misses + 1 if fetched else misses,
             }
         meta = fetch_video_meta(video_id)
         return info["creative_id"], {
@@ -323,17 +384,23 @@ def collect_ad_videos(ad_config, exclude_checker=None):
     max_pages = ad_config.get("max_pages_per_advertiser", 60)
     interval = ad_config.get("request_interval_sec", 0.2)
     workers = ad_config.get("resolve_workers", 6)
-    probe_pages = ad_config.get("advertiser_probe_pages", 20)
+    probe_pages = ad_config.get("advertiser_probe_pages", 3)
 
     cache = load_cache()
     entries = cache["creatives"]
 
-    advertisers = discover_advertisers(domains, known=cache.get("advertisers"), probe_pages=probe_pages)
-    cache["advertisers"] = advertisers
+    found = discover_advertisers(domains, known=cache.get("advertisers"), probe_pages=probe_pages)
+    cache["advertisers"] = found
+    advertisers, skipped = select_advertisers(found, ad_config.get("advertiser_name_patterns", []))
     print(f"  [Ads] 広告主 {len(advertisers)} 件を対象にします")
+    # 誰を外したかは必ず残す。黙って外すと、本家が法人を増やした日に
+    # 収集が痩せた理由が分からなくなる。
+    for advertiser_id, name in skipped.items():
+        print(f"  [Ads] 対象外（本家以外）: {name or advertiser_id}")
 
     stats = {
         "advertisers": len(advertisers),
+        "skipped_advertisers": len(skipped),
         "creatives": 0,
         "video_ads": 0,
         "non_video": 0,

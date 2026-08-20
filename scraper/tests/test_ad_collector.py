@@ -10,6 +10,7 @@
 import os
 import sys
 import unittest
+import urllib.error
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
@@ -21,6 +22,7 @@ from ad_collector import (  # noqa: E402
     is_other_game,
     load_cache,
     parse_creative,
+    select_advertisers,
 )
 
 
@@ -110,6 +112,45 @@ class TestIsOtherGame(unittest.TestCase):
         self.assertFalse(is_other_game("鳴潮とPGRを比較してみた", "個人チャンネル"))
 
 
+class TestSelectAdvertisers(unittest.TestCase):
+    """本家の広告だけを集める。代理店は個人配信者の動画を回しているだけ。"""
+
+    FOUND = {
+        "AR00700200168850456577": "广州库洛科技有限公司",
+        "AR02411244470184968193": "COMETS INTERNATIONAL LIMITED",
+        "AR02965941824335642625": "RPL Digital, SIA",
+        "AR12990585511142752257": "JOÃO CÉSAR SIMPLÍCIO DE ALMEIDA",
+    }
+    PATTERNS = ["库洛", "庫洛", "Kuro"]
+
+    def test_本家だけ残す(self):
+        kept, skipped = select_advertisers(self.FOUND, self.PATTERNS)
+        self.assertEqual(list(kept), ["AR00700200168850456577"])
+        self.assertEqual(len(skipped), 3)
+
+    def test_別法人でも名前が合えば拾う(self):
+        # 本家がアカウントを増やしたときに黙って取りこぼさないよう、
+        # IDの直書きではなく名前で見ている
+        found = {**self.FOUND, "AR99": "Kuro Games Global Pte. Ltd."}
+        kept, _ = select_advertisers(found, self.PATTERNS)
+        self.assertIn("AR99", kept)
+
+    def test_大文字小文字を区別しない(self):
+        kept, _ = select_advertisers({"AR1": "KURO GAMES"}, ["kuro"])
+        self.assertEqual(list(kept), ["AR1"])
+
+    def test_条件が空なら全部通す(self):
+        kept, skipped = select_advertisers(self.FOUND, [])
+        self.assertEqual(len(kept), 4)
+        self.assertEqual(skipped, {})
+
+    def test_名前が取れていない広告主は外す(self):
+        # 名前が空だと本家か判断できない。取りこぼしより誤混入を避ける
+        kept, skipped = select_advertisers({"AR1": ""}, self.PATTERNS)
+        self.assertEqual(kept, {})
+        self.assertEqual(list(skipped), ["AR1"])
+
+
 class TestNeedsResolving(unittest.TestCase):
     """一度の通信の綾で、動画広告が永久に埋もれないようにする。"""
 
@@ -134,6 +175,40 @@ class TestNeedsResolving(unittest.TestCase):
     def test_旧形式の控えも引き直しの対象になる(self):
         # misses を持たない古い控えを「確定」と読むと、取りこぼしが固定される
         self.assertTrue(_needs_resolving(self.WITH_PREVIEW, {"CR1": {"video_id": ""}}))
+
+    def test_通信に失敗した回は空振りに数えない(self):
+        # レート制限に当たった日に全件が空振り扱いになり、数回で
+        # 「動画ではない広告」として確定してしまうのを防ぐ
+        import ad_collector
+
+        calls = []
+
+        def boom(url, timeout=25, label="プレビュー"):
+            calls.append(url)
+            raise urllib.error.HTTPError(url, 429, "Too Many Requests", None, None)
+
+        original = ad_collector._fetch
+        ad_collector._fetch = boom
+        try:
+            video_id, fetched = ad_collector.resolve_video_id("https://example.invalid/p.js")
+        finally:
+            ad_collector._fetch = original
+
+        self.assertEqual(video_id, "")
+        self.assertFalse(fetched)
+
+    def test_中身を見て無ければ空振りに数える(self):
+        import ad_collector
+
+        original = ad_collector._fetch
+        ad_collector._fetch = lambda url, timeout=25, label="プレビュー": "<div>画像だけの広告</div>"
+        try:
+            video_id, fetched = ad_collector.resolve_video_id("https://example.invalid/p.js")
+        finally:
+            ad_collector._fetch = original
+
+        self.assertEqual(video_id, "")
+        self.assertTrue(fetched)
 
     def test_プレビューが無い広告は調べない(self):
         # 画像・テキスト広告。動画は存在しないので確定させてよい

@@ -815,8 +815,13 @@ def collect_ad_videos_safely(config):
         logger.log(f"⚠️ {msg}")
         return []
 
-    if stats.get("failed_domains"):
-        logger.log(f"⚠️ 広告の取得に失敗したドメイン: {', '.join(stats['failed_domains'])}")
+    if stats.get("failed_advertisers"):
+        logger.log(
+            f"⚠️ 広告の取得に失敗した広告主: {len(stats['failed_advertisers'])} 件"
+            f"（{', '.join(stats['failed_advertisers'])}）"
+        )
+    if stats.get("advertisers", 0) == 0:
+        logger.log("⚠️ 対象の広告主が1件も見つかりませんでした。広告主名の条件か、取得方法が壊れている可能性があります。")
 
     # 広告が1件も取れないのは、透明性センター側の仕様変更を疑うべき状態。
     # 静かにゼロ件が続くと気づけないので、必ず記録に残す。

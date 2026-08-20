@@ -52,6 +52,13 @@
     ],
     "max_pages_per_advertiser": 60,
     "request_interval_sec": 0.2,
-    "resolve_workers": 6
+    "resolve_workers": 6,
+    "advertiser_name_patterns": [
+      "库洛",
+      "庫洛",
+      "Kuro"
+    ],
+    "_note_advertiser": "同じ遷移先に代理店も広告を出しているが、中身は個人配信者の動画で本家の素材ではない。本家の広告主名に含まれる語で絞る。空にすると全部集める。",
+    "advertiser_probe_pages": 3
   }
 }
