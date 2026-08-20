@@ -293,3 +293,101 @@ docs/improvement-proposals.md                 他タイトルの扱い方針を�
 - 台本作成側（`C:\Users\doras\Music\雑多\台本作成-Shorts`）が
   `src/data/upcoming_schedule.json` をローカルパス直指定で読んでいる。
   このファイルの形式を変えないこと
+
+---
+
+# 追記 (2026-08-20): 出稿中の広告クリエイティブの自動収集
+
+- 対象コミット: `f80dfcc`
+- 状態: **main にマージ済み**。本番での実収集は未実施（次回の巡回で自動的に走る）
+
+## A-1. 作業目的
+
+「鳴潮の広告動画も自動で収集したい」という依頼。
+ユーザーの意図は**公式PVではなく、実際に出稿されている広告クリエイティブ**。
+
+## A-2. 調査結果（実測）
+
+| 経路 | 可否 | 根拠 |
+|---|---|---|
+| Google広告の透明性センター | **可** | 内部RPC `SearchService/SearchCreatives` に実リクエストを送り、日本向け90件・動画広告45件を取得できることを確認 |
+| Meta広告ライブラリ | 不可 | 公式APIは非政治広告についてEU/UK限定。公開UIの内部エンドポイントは応答が空 |
+| TikTok Creative Center | 不可 | `top_ads` APIは `40101 no permission`。匿名トークンの生成が別途必要 |
+| X (Twitter) | 不可 | 広告透明性センターが既に廃止 |
+
+Googleのみ実装した。鍵も認証も不要な公開データで、追加コストはゼロ。
+
+### 判明した通信仕様（自前で観測。公式ドキュメントは存在しない）
+
+```
+POST https://adstransparency.google.com/anji/_/rpc/SearchService/SearchCreatives?authuser=
+Content-Type: application/x-www-form-urlencoded
+
+f.req={"2":40,"3":{"8":[2392],"12":{"1":"<ドメイン>","2":true}},"7":{"1":1,"2":0,"3":2392}}
+```
+
+- `2` = 1ページあたりの件数（上限40）／ `4` = 次ページのトークン（応答の `2`）
+- `3.8` / `7.3` = 地域コード（日本 = 2392）
+- `3.12.1` = 対象ドメイン。鳴潮の広告主アカウントは複数あり、名前検索では引けない
+- 応答 `1[]` の各要素: `2`=クリエイティブID / `3.1.4`=プレビューURL / `4`=形式(1:画像 2:テキスト 3:動画) / `6`,`7`=初回・最終表示のUNIX秒 / `12`=広告主名
+- 動画IDはプレビュー本体が難読化されているため、埋め込まれた `ytimg.com/vi/<11文字>` から取り出している
+
+## A-3. 変更ファイル
+
+| ファイル | 内容 |
+|---|---|
+| `scraper/ad_collector.py` | 新設。ページ送り・キャッシュ・期間の取り出し |
+| `scraper/trend_collector.py` | ステップ2.5を追加。`collect_ad_videos_safely()` で本体から隔離。Notionへカテゴリ「広告」で送信。列「出稿期間」を自動追加 |
+| `scraper/config.json` | `ad_transparency` セクションを追加。**公式チャンネルIDの死活修正**（後述） |
+| `scraper/tests/test_ad_collector.py` | 新設。9件 |
+| `src/app/page.js` | タブ「広告」を追加 |
+| `src/app/api/videos/route.js` | `adPeriod` を返す |
+| `src/app/components/VideoCard.js` / `.module.css` | 出稿期間バッジ |
+| `.github/workflows/update_trends.yml` | `ad_creative_cache.json` を持ち帰る |
+
+## A-4. あわせて直した不具合
+
+`config.json` の `target_channels` にあった公式チャンネルID `UCw-Oq6UqC_U9o1mI1g4dIxg`
+は**現在404で存在しない**。RSSで両方に実リクエストを送って確認済み。
+正しいIDは `UCGc93NguHRwzv1Rw9MyIcxQ`（@wutheringwaves3352）。
+
+`fetch_channel_latest_videos()` は取得失敗を空リストで返すため、
+**公式チャンネルからの収集は一度も成立していなかったが、誰も気づけなかった。**
+
+## A-5. テスト結果
+
+```
+lint          exit=0（警告4件・すべて既存）
+JSテスト      11件 OK
+Pythonテスト  34件 OK（新規9件）
+build         exit=0
+実収集ドライラン  広告90件確認 → 動画広告45件回収（動画以外20 / 除外0）
+キャッシュ再実行  65件すべてキャッシュ命中・1.3秒
+```
+
+## A-6. 未確認事項
+
+1. **本番での実収集が未実施。** ローカルに `YOUTUBE_API_KEY` が無く、
+   再生数が0のまま登録されると二度と埋まらないため、あえて流していない。
+   次回の巡回で自動的に走る。
+2. 再生数の付与は `YouTubeKeyManager` を新規に生成している。
+   本体の検索でキー#1を使い切っていた場合、広告側でもう一度ローテーションが走る。
+   `execute()` が処理するので破綻はしないが、無駄ではある。
+3. 透明性センターの仕様変更検知は「0件ならログに警告」まで。Discord通知には繋いでいない。
+
+## A-7. Codexへの依頼
+
+1. まず本ファイルと `scraper/ad_collector.py` を読み、現状を確認してほしい。
+2. その上で、以下の観点でレビュー結果と修正方針を説明してほしい（**先に修正はしないこと**）。
+   - 内部RPCへの依存の妥当性と、壊れたときの検知方法
+   - `collect_ad_videos_safely()` の隔離が本当に漏れなく効いているか
+   - キャッシュが無限に増え続ける点（古いクリエイティブの掃除が無い）
+   - A-6の2番（キーマネージャの二重生成）の扱い
+3. 内容を確認してから修正を依頼する。
+
+### 触らないでほしいもの（前回から継続）
+
+- 未追跡の `.agents/`、`.claude/`、`skills-lock.json`
+- `src/data/upcoming_schedule.json` の形式（script_forge がローカルパス直指定で読む）
+- 除外ワード（逆境深塔・マトリクス・クライシスは**意図的**に入れている）
+- 本番Notionを自動テストに使わないこと。既存の採用・制作状況を検証目的で変更しないこと
