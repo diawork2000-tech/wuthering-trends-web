@@ -1,5 +1,14 @@
 [
   {
+    "timestamp": "2026-08-21 15:01:34",
+    "status": "Success",
+    "total_harvested": 103,
+    "final_selected": 0,
+    "breakdown": {},
+    "gemini_topic_status": "not_configured",
+    "gemini_competitor_status": "not_configured"
+  },
+  {
     "timestamp": "2026-08-21 11:46:32",
     "status": "Success",
     "total_harvested": 109,
@@ -564,17 +573,5 @@
     },
     "gemini_topic_status": "failed",
     "gemini_competitor_status": "failed"
-  },
-  {
-    "timestamp": "2026-08-14 18:46:13",
-    "status": "Success",
-    "total_harvested": 115,
-    "final_selected": 3,
-    "breakdown": {
-      "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 2,
-      "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上": 1
-    },
-    "gemini_topic_status": "failed",
-    "gemini_competitor_status": "no_items"
   }
 ]
