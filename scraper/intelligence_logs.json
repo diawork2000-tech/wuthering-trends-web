@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-08-22 00:49:15",
+    "status": "Success",
+    "total_harvested": 118,
+    "final_selected": 5,
+    "breakdown": {
+      "YouTubeショート 伸び悩み＆神プレイ解説フォーラム": 1,
+      "YouTube競合 (別枠全件枠)": 4
+    },
+    "gemini_topic_status": "failed",
+    "gemini_competitor_status": "failed"
+  },
+  {
     "timestamp": "2026-08-21 21:31:56",
     "status": "Success",
     "total_harvested": 124,
@@ -563,17 +575,5 @@
     },
     "gemini_topic_status": "success",
     "gemini_competitor_status": "success"
-  },
-  {
-    "timestamp": "2026-08-15 04:32:13",
-    "status": "Success",
-    "total_harvested": 110,
-    "final_selected": 2,
-    "breakdown": {
-      "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ": 1,
-      "YouTube競合 (別枠全件枠)": 1
-    },
-    "gemini_topic_status": "failed",
-    "gemini_competitor_status": "failed"
   }
 ]
