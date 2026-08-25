@@ -1,6 +1,6 @@
 {
   "_note": "競合タイトルのアップデート日程。鳴潮本体の予定(upcoming_schedule.json)とは別ファイルにしてある。混ぜるとネタのスコア計算(schedule_boost)が他ゲームの名前に反応してしまうため。versions は自動収集(collect_rival_schedule.py)が上書きするので、手で直す場合は confirmed:true の行だけにすること。",
-  "updated_at": "2026-08-24T05:17:43.322639+00:00",
+  "updated_at": "2026-08-25T07:20:16.842908+00:00",
   "games": [
     {
       "id": "genshin",
@@ -179,34 +179,34 @@
   ],
   "source_health": {
     "genshin": {
-      "last_fetch_ok_at": "2026-08-24T05:16:45.904579+00:00",
+      "last_fetch_ok_at": "2026-08-25T07:16:35.323711+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-08-24T05:16:45.904579+00:00",
+      "last_parse_ok_at": "2026-08-25T07:16:35.323711+00:00",
       "consecutive_parse_empty": 0
     },
     "hsr": {
-      "last_fetch_ok_at": "2026-08-24T05:16:45.904579+00:00",
+      "last_fetch_ok_at": "2026-08-25T07:16:35.323711+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-08-24T05:16:45.904579+00:00",
+      "last_parse_ok_at": "2026-08-25T07:16:35.323711+00:00",
       "consecutive_parse_empty": 0
     },
     "zzz": {
-      "last_fetch_ok_at": "2026-08-24T05:16:45.904579+00:00",
+      "last_fetch_ok_at": "2026-08-25T07:16:35.323711+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-08-24T05:16:45.904579+00:00",
+      "last_parse_ok_at": "2026-08-25T07:16:35.323711+00:00",
       "consecutive_parse_empty": 0
     },
     "nte": {
-      "last_fetch_ok_at": "2026-08-24T05:16:45.904579+00:00",
+      "last_fetch_ok_at": "2026-08-25T07:16:35.323711+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-08-24T05:16:45.904579+00:00",
+      "last_parse_ok_at": "2026-08-25T07:16:35.323711+00:00",
       "consecutive_parse_empty": 0
     },
     "endfield": {
-      "last_fetch_ok_at": "2026-08-24T05:16:45.904579+00:00",
+      "last_fetch_ok_at": "2026-08-25T07:16:35.323711+00:00",
       "consecutive_failures": 0,
-      "last_parse_empty_at": "2026-08-24T05:16:45.904579+00:00",
-      "consecutive_parse_empty": 1,
+      "last_parse_empty_at": "2026-08-25T07:16:35.323711+00:00",
+      "consecutive_parse_empty": 2,
       "last_parse_ok_at": "2026-08-23T03:16:15.910699+00:00"
     }
   }
