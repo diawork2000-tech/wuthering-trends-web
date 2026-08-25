@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-08-25 09:46:29",
+    "status": "Success",
+    "total_harvested": 123,
+    "final_selected": 2,
+    "breakdown": {
+      "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ": 1,
+      "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上": 1
+    },
+    "gemini_topic_status": "failed",
+    "gemini_competitor_status": "no_items"
+  },
+  {
     "timestamp": "2026-08-25 06:31:21",
     "status": "Success",
     "total_harvested": 122,
@@ -567,17 +579,5 @@
     },
     "gemini_topic_status": "failed",
     "gemini_competitor_status": "no_items"
-  },
-  {
-    "timestamp": "2026-08-18 14:46:45",
-    "status": "Success",
-    "total_harvested": 98,
-    "final_selected": 4,
-    "breakdown": {
-      "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ": 1,
-      "YouTube競合 (別枠全件枠)": 3
-    },
-    "gemini_topic_status": "failed",
-    "gemini_competitor_status": "failed"
   }
 ]
