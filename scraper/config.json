@@ -3,8 +3,7 @@
     "search_queries": [
       "鳴潮",
       "Wuthering Waves",
-      "鳴潮 攻略",
-      "鳴潮 最新情報"
+      "鳴潮 攻略"
     ],
     "max_results_per_query": 50,
     "region_code": "JP",
@@ -37,7 +36,7 @@
       "阿波踊り",
       "鳴潮連"
     ],
-    "shorts_ratio": 0.85,
+    "shorts_ratio": 1,
     "jp_ratio": 0.85
   },
   "ad_transparency": {
