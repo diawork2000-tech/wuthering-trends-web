@@ -32,6 +32,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# 変数名だけを書いた見本。値は入っていないので追跡する
+!.env.example
 
 # vercel
 .vercel
