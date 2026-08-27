@@ -3,7 +3,8 @@
   "AR00700200168850456577": "广州库洛科技有限公司",
   "AR02411244470184968193": "COMETS INTERNATIONAL LIMITED",
   "AR02965941824335642625": "RPL Digital, SIA",
-  "AR12990585511142752257": "JOÃO CÉSAR SIMPLÍCIO DE ALMEIDA"
+  "AR12990585511142752257": "JOÃO CÉSAR SIMPLÍCIO DE ALMEIDA",
+  "AR14437995262330798081": "Lecho"
  },
  "creatives": {
   "CR00008816167699349505": {
@@ -1752,6 +1753,12 @@
    "channel_url": "https://www.youtube.com/@WutheringWaves.ZH.official",
    "title": "《鳴潮》2026夏日遊戲節宣傳影片",
    "video_id": "OXuZfoqtDSk"
+  },
+  "CR03164571975737671681": {
+   "channel": "",
+   "misses": 3,
+   "title": "",
+   "video_id": ""
   },
   "CR03170891736645894145": {
    "channel": "",
