@@ -195,6 +195,17 @@ class TestCollectAll(unittest.TestCase):
         self.assertEqual(stats["skipped_no_rsshub"], 1)
         self.assertEqual(len(posts), 1)
 
+    def test_collected_count_excludes_skipped_accounts(self):
+        # 対象数と、実際に取れた数を混ぜない。混ぜると見送りが起きていても
+        # 全部から取れたように読めてしまう。
+        accounts = [account("x", "a"), account("reddit", "WutheringWaves", "en")]
+        entries = [{"title": "post", "link": "https://www.reddit.com/r/x/comments/1/"}]
+        with mock.patch.dict(os.environ, {"RSSHUB_BASE_URL": ""}, clear=False), \
+             mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
+            _, stats = collect_sns_posts({"interval_seconds": 0}, accounts)
+        self.assertEqual(stats["accounts"], 2)
+        self.assertEqual(stats["collected_accounts"], 1)
+
 
 class TestAccountList(unittest.TestCase):
     def test_shipped_list_is_loadable_and_scoped(self):

@@ -271,6 +271,10 @@ def collect_sns_posts(sns_config, accounts=None, translator=None):
 
     stats = {
         "accounts": len(accounts),
+        # 実際に投稿が取れたアカウント数。対象数と混ぜて報告してはいけない。
+        # 「14アカウントから20件」と書くと、13件が見送られていても
+        # 全部から取れているように読めてしまう。
+        "collected_accounts": 0,
         "posts": 0,
         "empty_accounts": [],
         "failed_accounts": [],
@@ -288,6 +292,7 @@ def collect_sns_posts(sns_config, accounts=None, translator=None):
         posts, state = collect_account(account, rsshub_base, access_key, max_items)
         if state == "ok":
             all_posts.extend(posts)
+            stats["collected_accounts"] += 1
         elif state == "empty":
             stats["empty_accounts"].append(label)
         else:

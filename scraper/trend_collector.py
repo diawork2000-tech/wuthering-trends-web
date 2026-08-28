@@ -947,7 +947,12 @@ def collect_sns_posts_safely(config):
             f"（{', '.join(stats['failed_accounts'])}）"
         )
 
-    logger.log(f"📡 公式SNS {stats['accounts']} アカウントから投稿 {stats['posts']} 件を回収")
+    # 対象数と、実際に取れた数を混ぜない。「14アカウントから20件」と書くと
+    # 13件が見送られていても全部から取れているように読めてしまう。
+    logger.log(
+        f"📡 公式SNS 対象 {stats['accounts']} アカウント中 {stats['collected_accounts']} 件から"
+        f"投稿 {stats['posts']} 件を回収"
+    )
     return posts
 
 
