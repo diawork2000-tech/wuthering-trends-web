@@ -40,6 +40,10 @@ jobs:
           NOTION_LOG_DB_ID: ${{ secrets.NOTION_LOG_DB_ID }}
           DISCORD_ALERT_WEBHOOK_URL: ${{ secrets.DISCORD_ALERT_WEBHOOK_URL }}
           DISCORD_ALERT_ENABLED: ${{ vars.DISCORD_ALERT_ENABLED }}
+          # 公式SNS(X・BiliBili・Weibo)を読むための中継サーバー。
+          # 未設定でも収集は止まらず、Reddit だけが動く。
+          RSSHUB_BASE_URL: ${{ secrets.RSSHUB_BASE_URL }}
+          RSSHUB_ACCESS_KEY: ${{ secrets.RSSHUB_ACCESS_KEY }}
         run: |
           cd scraper
           python trend_collector.py
