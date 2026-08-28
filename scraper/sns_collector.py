@@ -122,6 +122,22 @@ def feed_url(account, rsshub_base, access_key=""):
     return url
 
 
+def _error_reason(html):
+    """RSSHub のエラー画面から、失敗した理由だけを取り出す。
+
+    画面には見た目を整えるためのCSSが大量に入っており、素直にタグを外すと
+    そちらが先に出てきて肝心の理由が読めない。実際それで一度、CSSの断片が
+    ログに並んだ。理由は「Error Message:」の後ろに書かれている。
+    """
+    text = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", html or "")
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    if not text:
+        return ""
+    match = re.search(r"Error Message:\s*(.+?)(?:\s+Route:|$)", text)
+    return (match.group(1) if match else text)[:180]
+
+
 def _fetch(url, label, timeout=25):
     """取得して feedparser に渡す。落ちたら数回だけ待って試し直す。
 
@@ -144,10 +160,9 @@ def _fetch(url, label, timeout=25):
             # 本文に書いて返すので、そこを短く持ち帰る。これが無いと、
             # 毎回サーバーのログを人が見に行くことになる。
             last_error = f"HTTP {res.status_code}"
-            reason = re.sub(r"<[^>]+>", " ", res.text or "")
-            reason = re.sub(r"\s+", " ", reason).strip()
+            reason = _error_reason(res.text)
             if reason:
-                last_error += f": {reason[:180]}"
+                last_error += f": {reason}"
             # 4xx は待っても直らない。相手の設定かこちらのURLが違う。
             if 400 <= res.status_code < 500 and res.status_code != 429:
                 break

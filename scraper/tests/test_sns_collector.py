@@ -121,15 +121,21 @@ class TestCollectAccount(unittest.TestCase):
             posts, state = collect_account(account("x", "a"), RSSHUB, "", 20)
         self.assertEqual(state, "HTTP 503")
 
-    def test_error_body_is_carried_back(self):
+    def test_error_reason_is_carried_back(self):
         # 状態番号だけでは何が起きたのか分からず、毎回サーバーのログを
         # 人が見に行くことになる。理由まで持ち帰る。
-        res = mock.Mock(status_code=503, text="<html><body>Error: bilibili risk control</body></html>")
+        page = ("<html><head><style>details::-webkit-scrollbar { width: 0.25rem; }</style></head>"
+                "<body>Welcome to RSSHub! Looks like something went wrong "
+                "Error Message: RejectError: Authentication failed. "
+                "Route: /bilibili/user/dynamic/1</body></html>")
+        res = mock.Mock(status_code=503, text=page)
         with mock.patch("sns_collector.requests.get", return_value=res):
             feed, error = sns_collector._fetch("https://example.com/x", "label")
         self.assertIsNone(feed)
         self.assertIn("HTTP 503", error)
-        self.assertIn("bilibili risk control", error)
+        self.assertIn("Authentication failed", error)
+        # 見た目を整えるCSSが理由を押しのけないこと（実際に一度そうなった）
+        self.assertNotIn("scrollbar", error)
 
     def test_entries_without_link_are_skipped(self):
         entries = [{"title": "本文", "link": ""}, {"title": "本文2", "link": "https://x.com/a/status/1"}]
