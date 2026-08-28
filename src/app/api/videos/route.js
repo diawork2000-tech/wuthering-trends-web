@@ -92,6 +92,8 @@ export async function GET(request) {
       const postedAt = page.properties['投稿日時']?.date?.start || '';
       // 翻訳前の原文。訳が怪しいときに元を確かめられるようにする。
       const originalTitle = page.properties['原文']?.rich_text?.[0]?.plain_text || '';
+      // 動画付き投稿のMP4。カード上でそのまま再生する。
+      const postVideoUrl = page.properties['動画URL']?.rich_text?.[0]?.plain_text || '';
       
       const thumbnail = page.cover?.external?.url || 'https://via.placeholder.com/640x360.png?text=No+Image';
 
@@ -123,6 +125,7 @@ export async function GET(request) {
         account,
         postedAt,
         originalTitle,
+        postVideoUrl,
         created_time: page.created_time,
       };
     });

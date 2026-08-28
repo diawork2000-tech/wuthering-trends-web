@@ -667,6 +667,9 @@ def ensure_video_db_schema():
         # 媒体より細かい単位での絞り込み用。日本語Xだけで6アカウントある。
         if "アカウント" not in props:
             patch["アカウント"] = {"rich_text": {}}
+        # 動画付き投稿のMP4。カード上でそのまま再生するために持つ。
+        if "動画URL" not in props:
+            patch["動画URL"] = {"rich_text": {}}
         if "言語" not in props:
             patch["言語"] = {
                 "select": {
@@ -778,6 +781,10 @@ def send_to_notion(video_list, category, existing_urls):
         if video.get("account"):
             payload["properties"]["アカウント"] = {
                 "rich_text": [{"text": {"content": video["account"]}}]
+            }
+        if video.get("video_url"):
+            payload["properties"]["動画URL"] = {
+                "rich_text": [{"text": {"content": video["video_url"][:1900]}}]
             }
         if video.get("posted_at"):
             payload["properties"]["投稿日時"] = {"date": {"start": video["posted_at"]}}

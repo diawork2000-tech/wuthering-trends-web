@@ -169,6 +169,28 @@ def _first_image(entry):
     return match.group(1) if match else ""
 
 
+def _video_source(entry):
+    """動画付きの投稿から、動画のURLと表紙画像を取り出す。戻り値は (動画URL, 表紙)。
+
+    RSSHub は本文に <video src='….mp4' poster='….jpg'> の形で入れてくる
+    （lib/routes/twitter/utils.ts）。src は用意されている中で最も画質の
+    高いものが選ばれている。
+
+    動画そのものは Twitter の配信元に置かれたままなので、こちらの通信量は
+    増えない。再生できなかった場合も表紙画像が残るだけで、表示は崩れない。
+    """
+    html = entry.get("summary", "") or entry.get("description", "") or ""
+    tag = re.search(r"<video[^>]*>", html)
+    if not tag:
+        return "", ""
+    src = re.search(r"src=[\"']([^\"']+)[\"']", tag.group(0))
+    poster = re.search(r"poster=[\"']([^\"']+)[\"']", tag.group(0))
+    url = src.group(1) if src else ""
+    if not url.startswith("https://"):
+        return "", ""
+    return url, (poster.group(1) if poster else "")
+
+
 def _clean_title(entry):
     """投稿本文を1行の見出しに均す。
 
@@ -252,6 +274,7 @@ def collect_account(account, rsshub_base, access_key, max_items, translator=None
         link = entry.get("link", "")
         if not link or not str(link).startswith("http"):
             continue
+        video_url, poster = _video_source(entry)
         original = _clean_title(entry)
         title = original
         if translator:
@@ -266,7 +289,9 @@ def collect_account(account, rsshub_base, access_key, max_items, translator=None
             "original_title": original if original != title else "",
             "url": link,
             "channel": source_label(account),
-            "thumbnail": _first_image(entry),
+            # 動画付きなら表紙を使う。本文中の1枚目より投稿の中身に近い。
+            "thumbnail": poster or _first_image(entry),
+            "video_url": video_url,
             "view_count": 0,
             "like_count": 0,
             "platform": platform_label(account["platform"]),

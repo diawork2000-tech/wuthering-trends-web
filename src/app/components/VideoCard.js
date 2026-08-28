@@ -67,8 +67,11 @@ export default function VideoCard({ video }) {
   // 長いものだけ畳む。
   const isPost = !!video.platform;
   const hasImage = video.thumbnail && !video.thumbnail.includes(NO_IMAGE);
-  // 画像を持たない投稿で16:9の枠を確保すると、空白が本文を押し下げる。
-  const showThumbnail = !isPost || hasImage;
+  // 動画付きの投稿。YouTubeと同じくホバーで再生する。動画そのものは
+  // 投稿元の配信サーバーに置かれたままなので、こちらの通信量は増えない。
+  const postVideo = isPost ? video.postVideoUrl : '';
+  // 画像も動画も持たない投稿で16:9の枠を確保すると、空白が本文を押し下げる。
+  const showThumbnail = !isPost || hasImage || !!postVideo;
 
   const toggleAdopt = async () => {
     if (adoptBusy) return;
@@ -124,14 +127,31 @@ export default function VideoCard({ video }) {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
-        ) : (
-          <img 
-            src={video.thumbnail} 
-            alt={video.title} 
+        ) : isPlaying && postVideo ? (
+          // 音は出さない。一覧を眺めているだけで鳴ると邪魔になる。
+          // 再生できなかった場合は poster の画像がそのまま残る。
+          <video
+            className={styles.iframe}
+            src={postVideo}
+            poster={hasImage ? video.thumbnail : undefined}
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+        ) : hasImage ? (
+          <img
+            src={video.thumbnail}
+            alt={video.title}
             className={styles.thumbnailImage}
             loading="lazy"
           />
+        ) : (
+          // 表紙を持たない動画。壊れた画像を出すより、再生できることを示す。
+          <div className={styles.videoPlaceholder}>▶</div>
         ))}
+        {/* ホバーする前から、再生できる投稿だと分かるようにする */}
+        {postVideo && !isPlaying && <span className={styles.playBadge}>▶ 動画</span>}
       </div>
 
       <div className={styles.content}>

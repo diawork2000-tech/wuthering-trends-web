@@ -152,6 +152,33 @@ class TestCollectAccount(unittest.TestCase):
             posts, _ = collect_account(account("x", "a"), RSSHUB, "", 20)
         self.assertEqual(posts[0]["posted_at"], "2026-08-28T03:04:05+00:00")
 
+    def test_video_post_carries_its_mp4_and_poster(self):
+        # RSSHub は本文に <video src poster> を入れてくる。ここを読めないと
+        # 動画付きの投稿がただの静止画になる。
+        html = ("<video width='1280' height='720' src='https://video.twimg.com/a.mp4' "
+                "controls='controls' poster='https://pbs.twimg.com/b.jpg'></video>")
+        entries = [{"title": "PV公開", "link": "https://x.com/a/status/1", "summary": html}]
+        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
+            posts, _ = collect_account(account("x", "a"), RSSHUB, "", 20)
+        self.assertEqual(posts[0]["video_url"], "https://video.twimg.com/a.mp4")
+        # 表紙は本文中の1枚目より投稿の中身に近い
+        self.assertEqual(posts[0]["thumbnail"], "https://pbs.twimg.com/b.jpg")
+
+    def test_image_only_post_has_no_video(self):
+        html = "<img src='https://pbs.twimg.com/c.jpg'>"
+        entries = [{"title": "お知らせ", "link": "https://x.com/a/status/1", "summary": html}]
+        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
+            posts, _ = collect_account(account("x", "a"), RSSHUB, "", 20)
+        self.assertEqual(posts[0]["video_url"], "")
+        self.assertEqual(posts[0]["thumbnail"], "https://pbs.twimg.com/c.jpg")
+
+    def test_non_https_video_is_ignored(self):
+        html = "<video src='//video.twimg.com/a.mp4'></video>"
+        entries = [{"title": "t", "link": "https://x.com/a/status/1", "summary": html}]
+        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
+            posts, _ = collect_account(account("x", "a"), RSSHUB, "", 20)
+        self.assertEqual(posts[0]["video_url"], "")
+
     def test_post_carries_its_source(self):
         entries = [{"title": "告知です", "link": "https://x.com/a/status/1"}]
         with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
