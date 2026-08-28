@@ -16,6 +16,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import sns_collector  # noqa: E402
 from sns_collector import (  # noqa: E402
     account_label,
+    translate_posts,
     collect_account,
     collect_sns_posts,
     describe_targets,
@@ -151,34 +152,6 @@ class TestCollectAccount(unittest.TestCase):
             posts, _ = collect_account(account("x", "a"), RSSHUB, "", 20)
         self.assertEqual(posts[0]["posted_at"], "2026-08-28T03:04:05+00:00")
 
-    def test_translation_keeps_the_original(self):
-        entries = [{"title": "鸣潮 2.9版本上线", "link": "https://weibo.com/1/2"}]
-        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
-            posts, _ = collect_account(
-                account("weibo", "1", "zh-CN"), RSSHUB, "", 20,
-                translator=lambda t: "鳴潮 2.9バージョン配信",
-            )
-        self.assertEqual(posts[0]["title"], "鳴潮 2.9バージョン配信")
-        self.assertEqual(posts[0]["original_title"], "鸣潮 2.9版本上线")
-
-    def test_original_is_dropped_when_translation_changed_nothing(self):
-        # 日本語の投稿は訳す必要がない。同じ文を2つ持っても場所を取るだけ。
-        entries = [{"title": "お知らせ", "link": "https://x.com/a/status/1"}]
-        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
-            posts, _ = collect_account(account("x", "a"), RSSHUB, "", 20, translator=lambda t: t)
-        self.assertEqual(posts[0]["original_title"], "")
-
-    def test_collection_survives_a_broken_translator(self):
-        # 翻訳が落ちても収集は止めない。原文のままでも情報は伝わる。
-        def boom(_):
-            raise RuntimeError("翻訳サービスが落ちた")
-
-        entries = [{"title": "鸣潮", "link": "https://weibo.com/1/2"}]
-        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
-            posts, state = collect_account(account("weibo", "1", "zh-CN"), RSSHUB, "", 20, translator=boom)
-        self.assertEqual(state, "ok")
-        self.assertEqual(posts[0]["title"], "鸣潮")
-
     def test_post_carries_its_source(self):
         entries = [{"title": "告知です", "link": "https://x.com/a/status/1"}]
         with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
@@ -216,6 +189,42 @@ class TestCollectAll(unittest.TestCase):
             _, stats = collect_sns_posts({"interval_seconds": 0}, accounts)
         self.assertEqual(stats["accounts"], 2)
         self.assertEqual(stats["collected_accounts"], 1)
+
+
+class TestTranslation(unittest.TestCase):
+    def post(self, title, lang="韓国語"):
+        return {"title": title, "lang": lang, "original_title": ""}
+
+    def test_translated_title_replaces_the_original(self):
+        posts = [self.post("시그리카")]
+        n, failed = translate_posts(posts, lambda t: "シグリカ", interval=0)
+        self.assertEqual((n, failed), (1, 0))
+        self.assertEqual(posts[0]["title"], "シグリカ")
+        self.assertEqual(posts[0]["original_title"], "시그리카")
+
+    def test_other_languages_are_left_alone(self):
+        # 英語は読めるので訳さない。訳す件数を絞らないと翻訳側に弾かれる。
+        posts = [self.post("Resonator Preview", lang="英語"), self.post("お知らせ", lang="日本語")]
+        n, failed = translate_posts(posts, lambda t: "訳", interval=0)
+        self.assertEqual((n, failed), (0, 0))
+        self.assertEqual(posts[0]["title"], "Resonator Preview")
+
+    def test_unchanged_result_counts_as_a_failure(self):
+        # 元の実装は失敗すると黙って原文を返していたため、一度も訳せていない
+        # ことに誰も気づけなかった。同じ文が返ったら失敗として数える。
+        posts = [self.post("시그리카")]
+        n, failed = translate_posts(posts, lambda t: t, interval=0)
+        self.assertEqual((n, failed), (0, 1))
+        self.assertEqual(posts[0]["original_title"], "")
+
+    def test_exception_counts_as_a_failure(self):
+        def boom(_):
+            raise RuntimeError("翻訳サービスが落ちた")
+
+        posts = [self.post("시그리카")]
+        n, failed = translate_posts(posts, boom, interval=0)
+        self.assertEqual((n, failed), (0, 1))
+        self.assertEqual(posts[0]["title"], "시그리카")
 
 
 class TestAccountList(unittest.TestCase):

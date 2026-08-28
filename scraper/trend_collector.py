@@ -11,7 +11,7 @@ from deep_translator import GoogleTranslator
 from notion_utils import notion_request
 from shared.automation_logger import log_run
 from ad_collector import collect_ad_videos
-from sns_collector import collect_sns_posts, describe_targets
+from sns_collector import collect_sns_posts, describe_targets, translate_posts
 
 # Load environment variables
 load_dotenv()
@@ -920,8 +920,7 @@ def collect_sns_posts_safely(config):
         print(f"  [Warning] 収集対象の一覧を読めませんでした: {e}")
 
     try:
-        # 中国語・韓国語のまま並べても読めないので、見出しは日本語に訳す。
-        posts, stats = collect_sns_posts(sns_config, translator=translate_if_needed)
+        posts, stats = collect_sns_posts(sns_config)
     except Exception as e:
         msg = f"公式SNSの収集に失敗しました（本体の収集は続行します）: {e}"
         print(f"  [Warning] {msg}")
@@ -1051,6 +1050,24 @@ def main():
                 send_to_notion(target_flat, "登録チャンネル", existing_urls)
 
             if sns_posts:
+                # 訳すのは新しい投稿だけにする。毎時の巡回では同じ投稿を
+                # 取り直しており、丸ごと訳すと1回で百件近く翻訳を呼んで
+                # まとめて弾かれる。実際それで一度も訳せていなかった。
+                fresh = [p for p in sns_posts if p["url"] not in existing_urls]
+                if fresh:
+                    sns_conf = config.get("sns", {})
+                    translated, failed = translate_posts(
+                        fresh,
+                        translate_if_needed,
+                        langs=sns_conf.get("translate_langs"),
+                        interval=sns_conf.get("translate_interval_seconds", 0.4),
+                    )
+                    if failed:
+                        # 訳せなかったことを黙っていると、原文のまま並んでいる
+                        # 理由が分からなくなる。
+                        logger.log(f"⚠️ 翻訳できなかった投稿: {failed} 件（原文のまま登録します）")
+                    if translated:
+                        logger.log(f"🌐 投稿 {translated} 件を日本語に翻訳しました")
                 send_to_notion(sns_posts, "SNS", existing_urls)
 
             if ad_videos:

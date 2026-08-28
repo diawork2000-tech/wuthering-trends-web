@@ -46,6 +46,10 @@ function formatPostedAt(iso) {
   return `${stamp}（${Math.floor(hours / 24)}日前）`;
 }
 
+// 画像が無いときに入る仮の画像。提供元のサービスが終了しており、
+// そのまま出すと壊れた画像の枠だけが残る。
+const NO_IMAGE = 'via.placeholder.com';
+
 export default function VideoCard({ video }) {
   // カードは videos 読み込み後（＝クライアント側）でしか描画されないため、
   // 初期値をここで localStorage から直接読んでも SSR とのズレは起きない。
@@ -57,6 +61,14 @@ export default function VideoCard({ video }) {
   // SNSの投稿は本文がそのまま見出しになるため長い。既定は畳んでおく。
   const [expanded, setExpanded] = useState(false);
   const [showOriginal, setShowOriginal] = useState(false);
+
+  // SNSの投稿は本文がそのまま見出しになる。動画のタイトルと同じ2行で
+  // 切ると、ほぼ全ての投稿が読めなくなる。行数を広げて、はみ出すほど
+  // 長いものだけ畳む。
+  const isPost = !!video.platform;
+  const hasImage = video.thumbnail && !video.thumbnail.includes(NO_IMAGE);
+  // 画像を持たない投稿で16:9の枠を確保すると、空白が本文を押し下げる。
+  const showThumbnail = !isPost || hasImage;
 
   const toggleAdopt = async () => {
     if (adoptBusy) return;
@@ -91,7 +103,7 @@ export default function VideoCard({ video }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={styles.thumbnailContainer}>
+      <div className={`${styles.thumbnailContainer} ${showThumbnail ? '' : styles.thumbnailContainerFlat}`}>
         {isWatched && <span className={styles.watchedBadge}>✓ 視聴済み</span>}
         <button
           type="button"
@@ -103,7 +115,7 @@ export default function VideoCard({ video }) {
           {adopted ? '⭐' : '☆'}
         </button>
         {/* IFrame player only loads/shows when isPlaying is true */}
-        {isPlaying && video.videoId ? (
+        {showThumbnail && (isPlaying && video.videoId ? (
           <iframe
             className={styles.iframe}
             src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=${video.videoId}`}
@@ -116,10 +128,10 @@ export default function VideoCard({ video }) {
           <img 
             src={video.thumbnail} 
             alt={video.title} 
-            className={styles.thumbnailImage} 
+            className={styles.thumbnailImage}
             loading="lazy"
           />
-        )}
+        ))}
       </div>
 
       <div className={styles.content}>
@@ -134,14 +146,15 @@ export default function VideoCard({ video }) {
         </div>
         <a href={video.url} target="_blank" rel="noopener noreferrer" className={styles.titleLink} onClick={handleTitleClick}>
           <h3
-            className={`${styles.title} ${expanded ? styles.titleExpanded : ''}`}
+            className={`${styles.title} ${isPost ? styles.titlePost : ''} ${expanded ? styles.titleExpanded : ''}`}
             title={video.title}
           >
             {video.title}
           </h3>
         </a>
-        {/* SNSの投稿は本文がそのまま見出しになる。長文の告知が読めないと意味がないので広げられるようにする。 */}
-        {video.platform && video.title.length > 55 && (
+        {/* 畳んだ状態でもほぼ全文が読める行数にしてある。ここに引っかかるのは
+            よほど長い告知だけ。しきい値は畳んだときの行数に合わせた目安。 */}
+        {isPost && video.title.length > 170 && (
           <button
             type="button"
             className={styles.textToggle}

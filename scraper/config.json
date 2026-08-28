@@ -69,9 +69,14 @@
     "_note_channels": "本家の広告アカウントは個人配信者の動画も広告として回す。欲しいのは本家が作った素材なので、チャンネルのハンドルで線を引く。@WW-op1vs は広告専用の限定公開チャンネル。空にすると全部集める。"
   },
   "sns": {
-    "_note": "公式アカウントの投稿収集。対象アカウントは official_accounts.json の collect フラグで管理する。RSSHubのURLは秘密情報なので config ではなく環境変数 RSSHUB_BASE_URL / RSSHUB_ACCESS_KEY に置く。",
+    "_note": "公式アカウントの投稿収集。対象アカウントは official_accounts.json の collect フラグで管理する。RSSHubのURLは秘密情報なので config ではなく環境変数 RSSHUB_BASE_URL / RSSHUB_ACCESS_KEY に置く。翻訳は新規の投稿にだけ行う（毎時まとめて訳すと翻訳側に弾かれる）。",
     "enabled": true,
     "max_items_per_account": 20,
-    "interval_seconds": 1.0
+    "interval_seconds": 1.0,
+    "translate_langs": [
+      "中国語",
+      "韓国語"
+    ],
+    "translate_interval_seconds": 0.4
   }
 }

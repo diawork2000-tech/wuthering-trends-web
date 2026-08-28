@@ -197,6 +197,37 @@ def _published_iso(entry):
         return ""
 
 
+def translate_posts(posts, translator, langs=None, interval=0.4):
+    """投稿の見出しを日本語に訳す。戻り値は (訳した件数, 失敗件数)。
+
+    毎時の巡回で取り直した投稿を丸ごと訳すと、1回あたり百件近く翻訳を
+    呼ぶことになり、まとめて弾かれる。実際それで一度も訳せていなかった。
+    呼び出し側で「まだ登録していない投稿」だけに絞ってから渡すこと。
+
+    翻訳できなかったことは必ず数えて返す。黙って原文を返すと、
+    訳されていないことに誰も気づけない。
+    """
+    langs = langs or ["中国語", "韓国語"]
+    translated = failed = 0
+    for post in posts:
+        if post.get("lang") not in langs:
+            continue
+        original = post["title"]
+        try:
+            title = translator(original)
+        except Exception:
+            failed += 1
+            continue
+        if not title or title == original:
+            failed += 1
+            continue
+        post["title"] = title
+        post["original_title"] = original
+        translated += 1
+        time.sleep(interval)
+    return translated, failed
+
+
 def collect_account(account, rsshub_base, access_key, max_items, translator=None):
     """1アカウントぶん取る。戻り値は (投稿リスト, 状態)。
 

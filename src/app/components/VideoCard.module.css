@@ -266,3 +266,22 @@
   border-radius: 0 6px 6px 0;
   word-break: break-word;
 }
+
+/* SNSの投稿は本文がそのまま見出しになる。動画のタイトルと同じ2行で切ると
+   ほぼ全ての投稿が読めないので、行数を広げ、見出しではなく本文として組む。 */
+.titlePost {
+  -webkit-line-clamp: 9;
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 画像を持たない投稿では16:9の枠を確保しない。空白が本文を押し下げるため、
+   採用ボタンと既読の表示だけが乗る細い帯にする。 */
+.thumbnailContainerFlat {
+  padding-top: 0;
+  height: 36px;
+  background: transparent;
+}
