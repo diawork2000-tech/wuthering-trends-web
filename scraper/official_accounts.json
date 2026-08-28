@@ -1,0 +1,463 @@
+{
+  "_source": "https://wikiwiki.jp/w-w/公式リンク集 （鳴潮 Wiki* の公式リンク集）を主軸に、Fandom Wiki の Official Links と突き合わせて作成。2026-08-28 時点。",
+  "_note": [
+    "鳴潮の公式アカウント一覧。RSS等で「地の投稿」を拾う際の入力元（HANDOFF.md 追記6）。",
+    "verified: api  … BiliBili API で認証バッジとフォロワー数を確認済み",
+    "verified: site … kurogames.com 公式サイトのフッターから直接たどった",
+    "verified: wiki … 上記2つのWikiに載っていた（個別の目視確認まではしていない）",
+    "collect: true を付けたものだけを収集対象にする想定。全部入れると量が多すぎて埋もれる。"
+  ],
+  "_warning": "BiliBili に mid=104503138『鸣潮官方』という偽アカウント（フォロワー63・自己紹介に高仿と明記）が存在する。本物は 1955897084。",
+  "accounts": [
+    {
+      "platform": "x",
+      "id": "WW_JP_Official",
+      "lang": "ja",
+      "category": "official",
+      "name": "鳴潮 公式",
+      "url": "https://x.com/WW_JP_Official",
+      "verified": "site",
+      "collect": true
+    },
+    {
+      "platform": "x",
+      "id": "wwdevteam",
+      "lang": "ja",
+      "category": "dev",
+      "name": "鳴潮 開発チーム",
+      "url": "https://x.com/wwdevteam",
+      "verified": "wiki",
+      "collect": true
+    },
+    {
+      "platform": "x",
+      "id": "Wuthering_Waves",
+      "lang": "en",
+      "category": "official",
+      "name": "Wuthering Waves",
+      "url": "https://x.com/Wuthering_Waves",
+      "verified": "site",
+      "collect": true
+    },
+    {
+      "platform": "x",
+      "id": "WW_devteam",
+      "lang": "en",
+      "category": "dev",
+      "name": "WuWa Dev Team",
+      "url": "https://x.com/WW_devteam",
+      "verified": "wiki",
+      "collect": true
+    },
+    {
+      "platform": "x",
+      "id": "WW_KR_Official",
+      "lang": "ko",
+      "category": "official",
+      "name": "명조:워더링 웨이브",
+      "url": "https://x.com/WW_KR_Official",
+      "verified": "site",
+      "collect": true
+    },
+    {
+      "platform": "x",
+      "id": "wwdevteamKR",
+      "lang": "ko",
+      "category": "dev",
+      "name": "명조 개발진팀",
+      "url": "https://x.com/wwdevteamKR",
+      "verified": "wiki",
+      "collect": true
+    },
+    {
+      "platform": "x",
+      "id": "WW_ES_Official",
+      "lang": "es",
+      "category": "official",
+      "name": "Wuthering Waves ES",
+      "url": "https://x.com/WW_ES_Official",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "x",
+      "id": "WW_FR_Official",
+      "lang": "fr",
+      "category": "official",
+      "name": "Wuthering Waves FR",
+      "url": "https://x.com/WW_FR_Official",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "x",
+      "id": "WW_DE_Official",
+      "lang": "de",
+      "category": "official",
+      "name": "Wuthering Waves DE",
+      "url": "https://x.com/WW_DE_Official",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "x",
+      "id": "WW_TH_Official",
+      "lang": "th",
+      "category": "official",
+      "name": "Wuthering Waves TH",
+      "url": "https://x.com/WW_TH_Official",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "x",
+      "id": "WW_BR_Official_",
+      "lang": "pt",
+      "category": "official",
+      "name": "Wuthering Waves BR",
+      "url": "https://x.com/WW_BR_Official_",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "x",
+      "id": "KUROMETHEUS",
+      "lang": "ja",
+      "category": "spinoff",
+      "name": "クロゲームズ グッズ販売情報",
+      "url": "https://x.com/KUROMETHEUS",
+      "verified": "wiki",
+      "collect": true
+    },
+    {
+      "platform": "x",
+      "id": "WW_2NDFES",
+      "lang": "ja",
+      "category": "event",
+      "name": "2nd Anniversary イベント情報",
+      "url": "https://x.com/WW_2NDFES",
+      "verified": "wiki",
+      "collect": true
+    },
+    {
+      "platform": "x",
+      "id": "kuro_onroad_jp",
+      "lang": "ja",
+      "category": "spinoff",
+      "name": "クロオンロード（アニメーション）",
+      "url": "https://x.com/kuro_onroad_jp",
+      "verified": "wiki",
+      "collect": true
+    },
+    {
+      "platform": "x",
+      "id": "Ds2fgH86931",
+      "lang": "ja",
+      "category": "spinoff",
+      "name": "エイメス",
+      "url": "https://x.com/Ds2fgH86931",
+      "verified": "wiki",
+      "collect": true
+    },
+    {
+      "platform": "bilibili",
+      "id": "1955897084",
+      "lang": "zh-CN",
+      "category": "official",
+      "name": "鸣潮（認証済・535万）",
+      "url": "https://space.bilibili.com/1955897084",
+      "verified": "api",
+      "collect": true
+    },
+    {
+      "platform": "bilibili",
+      "id": "3493090606188642",
+      "lang": "zh-CN",
+      "category": "community",
+      "name": "鸣潮先行公约（同人公式・112万）",
+      "url": "https://space.bilibili.com/3493090606188642",
+      "verified": "api",
+      "collect": true
+    },
+    {
+      "platform": "weibo",
+      "id": "7730797357",
+      "lang": "zh-CN",
+      "category": "official",
+      "name": "鸣潮 公式Weibo",
+      "url": "https://weibo.com/u/7730797357",
+      "verified": "wiki",
+      "collect": true
+    },
+    {
+      "platform": "xiaohongshu",
+      "id": "624596aa000000001000e42b",
+      "lang": "zh-CN",
+      "category": "official",
+      "name": "鸣潮 公式RedNote",
+      "url": "https://www.xiaohongshu.com/user/profile/624596aa000000001000e42b",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "taptap",
+      "id": "234280",
+      "lang": "zh-CN",
+      "category": "official",
+      "name": "鸣潮 TapTap",
+      "url": "https://www.taptap.cn/app/234280",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "kurobbs",
+      "id": "main",
+      "lang": "zh-CN",
+      "category": "community",
+      "name": "库街区（Kuro公式コミュニティ）",
+      "url": "https://www.kurobbs.com/main.html",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "youtube",
+      "id": "@wutheringwaves3352",
+      "lang": "ja",
+      "category": "official",
+      "name": "鳴潮 (Wuthering Waves)公式",
+      "url": "https://www.youtube.com/@wutheringwaves3352",
+      "verified": "site",
+      "collect": false
+    },
+    {
+      "platform": "youtube",
+      "id": "@WutheringWaves",
+      "lang": "en",
+      "category": "official",
+      "name": "Wuthering Waves",
+      "url": "https://www.youtube.com/@WutheringWaves",
+      "verified": "site",
+      "collect": false
+    },
+    {
+      "platform": "youtube",
+      "id": "UCKuq0c-RXYaulECSuu5hFug",
+      "lang": "ko",
+      "category": "official",
+      "name": "명조:워더링 웨이브",
+      "url": "https://www.youtube.com/channel/UCKuq0c-RXYaulECSuu5hFug",
+      "verified": "site",
+      "collect": false
+    },
+    {
+      "platform": "youtube",
+      "id": "@WutheringWaves.ZH.official",
+      "lang": "zh-TW",
+      "category": "official",
+      "name": "鳴潮（繁中）",
+      "url": "https://www.youtube.com/@WutheringWaves.ZH.official",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "youtube",
+      "id": "UCVZqteUtWfSnwQ0ShjHixVw",
+      "lang": "zh-CN",
+      "category": "official",
+      "name": "鸣潮（中国語・未検証）",
+      "url": "https://www.youtube.com/channel/UCVZqteUtWfSnwQ0ShjHixVw",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "youtube",
+      "id": "UCAMjmQpxCVKhYdRCv4tYajA",
+      "lang": "-",
+      "category": "ads",
+      "name": "広告専用（限定公開・ATC経由でのみ発見可）",
+      "url": "https://www.youtube.com/channel/UCAMjmQpxCVKhYdRCv4tYajA",
+      "verified": "atc",
+      "collect": false
+    },
+    {
+      "platform": "tiktok",
+      "id": "@wutheringwavesjp",
+      "lang": "ja",
+      "category": "official",
+      "name": "【公式】鳴潮",
+      "url": "https://www.tiktok.com/@wutheringwavesjp",
+      "verified": "site",
+      "collect": false
+    },
+    {
+      "platform": "tiktok",
+      "id": "@wutheringwaves_official",
+      "lang": "en",
+      "category": "official",
+      "name": "Wuthering Waves",
+      "url": "https://www.tiktok.com/@wutheringwaves_official",
+      "verified": "site",
+      "collect": false
+    },
+    {
+      "platform": "instagram",
+      "id": "wuthering_waves",
+      "lang": "en",
+      "category": "official",
+      "name": "Wuthering Waves",
+      "url": "https://www.instagram.com/wuthering_waves/",
+      "verified": "site",
+      "collect": false
+    },
+    {
+      "platform": "facebook",
+      "id": "WutheringWaves.Official",
+      "lang": "en",
+      "category": "official",
+      "name": "Wuthering Waves",
+      "url": "https://www.facebook.com/WutheringWaves.Official",
+      "verified": "site",
+      "collect": false
+    },
+    {
+      "platform": "facebook",
+      "id": "WutheringWaves.ZH",
+      "lang": "zh-TW",
+      "category": "official",
+      "name": "鳴潮（繁中）",
+      "url": "https://www.facebook.com/WutheringWaves.ZH",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "reddit",
+      "id": "WutheringWaves",
+      "lang": "en",
+      "category": "community",
+      "name": "r/WutheringWaves",
+      "url": "https://www.reddit.com/r/WutheringWaves/",
+      "verified": "site",
+      "collect": true
+    },
+    {
+      "platform": "line",
+      "id": "786xfrxl",
+      "lang": "ja",
+      "category": "official",
+      "name": "鳴潮 公式LINE",
+      "url": "https://page.line.me/?accountId=786xfrxl",
+      "verified": "site",
+      "collect": false
+    },
+    {
+      "platform": "naver",
+      "id": "WutheringWaves",
+      "lang": "ko",
+      "category": "community",
+      "name": "NAVER GAME ラウンジ",
+      "url": "https://game.naver.com/lounge/WutheringWaves/home",
+      "verified": "site",
+      "collect": false
+    },
+    {
+      "platform": "discord",
+      "id": "Agw76jqvq8",
+      "lang": "ja",
+      "category": "community",
+      "name": "鳴潮 日本公式Discord",
+      "url": "https://discord.com/invite/Agw76jqvq8",
+      "verified": "site",
+      "collect": false
+    },
+    {
+      "platform": "discord",
+      "id": "wutheringwaves",
+      "lang": "en",
+      "category": "community",
+      "name": "公式Discord",
+      "url": "https://discord.com/invite/wutheringwaves",
+      "verified": "site",
+      "collect": false
+    },
+    {
+      "platform": "discord",
+      "id": "RevhyngRj7",
+      "lang": "zh",
+      "category": "community",
+      "name": "中国語Discord",
+      "url": "https://discord.com/invite/RevhyngRj7",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "web",
+      "id": "wuwaguide",
+      "lang": "ja",
+      "category": "site",
+      "name": "公式攻略サイト",
+      "url": "https://wuwaguide.kurogames.com/ja/",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "web",
+      "id": "kurobbs-wiki",
+      "lang": "zh-CN",
+      "category": "site",
+      "name": "公式Wiki（库街区）",
+      "url": "https://wiki.kurobbs.com/mc/home",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "web",
+      "id": "biligame",
+      "lang": "zh-CN",
+      "category": "site",
+      "name": "biligame 特設",
+      "url": "https://wutheringwaves.biligame.com/yy/",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "web",
+      "id": "produce-jp",
+      "lang": "ja",
+      "category": "site",
+      "name": "二次創作ガイドライン",
+      "url": "https://wutheringwaves.kurogames.com/p/jp/produce.html",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "music",
+      "id": "apple",
+      "lang": "-",
+      "category": "music",
+      "name": "Apple Music「鳴潮」",
+      "url": "https://music.apple.com/jp/artist/%E9%B3%B4%E6%BD%AE/1750699818",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "music",
+      "id": "spotify",
+      "lang": "-",
+      "category": "music",
+      "name": "Spotify「鳴潮」",
+      "url": "https://open.spotify.com/intl-ja/artist/4NJxtQzTTeO3ObGlBcxVAh",
+      "verified": "wiki",
+      "collect": false
+    },
+    {
+      "platform": "music",
+      "id": "linestamp",
+      "lang": "ja",
+      "category": "music",
+      "name": "LINEスタンプ",
+      "url": "https://store.line.me/stickershop/author/5553037/ja",
+      "verified": "wiki",
+      "collect": false
+    }
+  ]
+}

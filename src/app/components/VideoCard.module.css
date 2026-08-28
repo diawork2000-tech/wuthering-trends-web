@@ -158,3 +158,111 @@
   border-radius: 12px;
   white-space: nowrap;
 }
+
+/* 公式SNSの情報元バッジ。広告(.adPeriod)と並んでも区別が付くよう色を変える。 */
+.snsSource {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #7dd3fc;
+  background: rgba(125, 211, 252, 0.12);
+  border: 1px solid rgba(125, 211, 252, 0.25);
+  padding: 3px 9px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* 採用（お気に入り）。既読バッジが右上なので、こちらは左上に置く。 */
+.adoptStar {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 3;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 5px 7px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(15, 23, 42, 0.65);
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+
+.adoptStar:hover {
+  background: rgba(15, 23, 42, 0.9);
+  transform: scale(1.15);
+}
+
+.adoptStar:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.adoptStarOn {
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.18);
+}
+
+/* 情報元と投稿日時。1行に収まらないので折り返す。 */
+.snsMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.snsMeta .snsSource {
+  margin-top: 0;
+  white-space: normal;
+}
+
+.postedAt {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  background: rgba(148, 163, 184, 0.12);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  padding: 3px 9px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+/* 全文表示・原文表示の切り替え */
+.textToggle {
+  display: inline-block;
+  margin: 6px 8px 0 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #7dd3fc;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.textToggle:hover {
+  text-decoration: underline;
+}
+
+.titleExpanded {
+  -webkit-line-clamp: unset;
+  display: block;
+  overflow: visible;
+  max-height: none;
+}
+
+.originalText {
+  margin: 6px 0 0;
+  padding: 8px 10px;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.07);
+  border-left: 2px solid rgba(148, 163, 184, 0.3);
+  border-radius: 0 6px 6px 0;
+  word-break: break-word;
+}

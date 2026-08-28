@@ -11,8 +11,12 @@ export async function GET(request) {
   // 広告だけは別枠で引く。通常の一覧は新しい順に500件で打ち切るため、
   // 広告をまとめて取り込んだ日に古い広告が全部その枠から押し出される。
   // 出稿期間が入っている行だけを対象にすれば、件数に関係なく全部揃う。
-  const adsOnly = new URL(request.url).searchParams.get('ads') === '1';
-  const maxItems = adsOnly ? 2000 : 500;
+  const params = new URL(request.url).searchParams;
+  const adsOnly = params.get('ads') === '1';
+  // 公式SNSも広告と同じ理由で別枠。毎時14アカウント分が積み上がるため、
+  // 通常の500件枠に入れると数日で他のカテゴリを押し出してしまう。
+  const snsOnly = params.get('sns') === '1';
+  const maxItems = adsOnly || snsOnly ? 2000 : 500;
 
   try {
     let allResults = [];
@@ -32,6 +36,8 @@ export async function GET(request) {
 
       if (adsOnly) {
         body.filter = { property: '出稿期間', rich_text: { is_not_empty: true } };
+      } else if (snsOnly) {
+        body.filter = { property: 'カテゴリ', select: { equals: 'SNS' } };
       }
 
       if (nextCursor) {
@@ -78,6 +84,14 @@ export async function GET(request) {
       // 広告として実際に配信されていた期間。広告以外は空になる。
       const adPeriod = page.properties['出稿期間']?.rich_text?.[0]?.plain_text || '';
       const status = page.properties['制作状況']?.select?.name || '未着手';
+      // 公式SNSの投稿だけが持つ。どこから来た情報かを行単位で示すために使う。
+      const platform = page.properties['媒体']?.select?.name || '';
+      const lang = page.properties['言語']?.select?.name || '';
+      const account = page.properties['アカウント']?.rich_text?.[0]?.plain_text || '';
+      // 収集日ではなく、実際に投稿された日時。並べ替えの基準になる。
+      const postedAt = page.properties['投稿日時']?.date?.start || '';
+      // 翻訳前の原文。訳が怪しいときに元を確かめられるようにする。
+      const originalTitle = page.properties['原文']?.rich_text?.[0]?.plain_text || '';
       
       const thumbnail = page.cover?.external?.url || 'https://via.placeholder.com/640x360.png?text=No+Image';
 
@@ -104,6 +118,11 @@ export async function GET(request) {
         adopted,
         status,
         adPeriod,
+        platform,
+        lang,
+        account,
+        postedAt,
+        originalTitle,
         created_time: page.created_time,
       };
     });

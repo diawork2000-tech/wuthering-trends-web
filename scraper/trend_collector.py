@@ -11,6 +11,7 @@ from deep_translator import GoogleTranslator
 from notion_utils import notion_request
 from shared.automation_logger import log_run
 from ad_collector import collect_ad_videos
+from sns_collector import collect_sns_posts, describe_targets
 
 # Load environment variables
 load_dotenv()
@@ -643,6 +644,40 @@ def ensure_video_db_schema():
         # 広告として実際に配信されていた期間。広告以外の動画では空になる。
         if "出稿期間" not in props:
             patch["出稿期間"] = {"rich_text": {}}
+        # 公式SNSの投稿がどこから来たものかを示す2列。
+        # 媒体と言語が混ざったまま並ぶと、行だけ見て出所が辿れなくなる。
+        if "媒体" not in props:
+            patch["媒体"] = {
+                "select": {
+                    "options": [
+                        {"name": "X", "color": "default"},
+                        {"name": "BiliBili", "color": "pink"},
+                        {"name": "Weibo", "color": "red"},
+                        {"name": "Reddit", "color": "orange"},
+                    ]
+                }
+            }
+        # 投稿された日時。収集日と別に持たないと、まとめて登録した日の順で
+        # 並んでしまい「いつ流れた投稿か」が分からなくなる。
+        if "投稿日時" not in props:
+            patch["投稿日時"] = {"date": {}}
+        # 翻訳前の原文。訳が怪しいときに元を確かめられるようにする。
+        if "原文" not in props:
+            patch["原文"] = {"rich_text": {}}
+        # 媒体より細かい単位での絞り込み用。日本語Xだけで6アカウントある。
+        if "アカウント" not in props:
+            patch["アカウント"] = {"rich_text": {}}
+        if "言語" not in props:
+            patch["言語"] = {
+                "select": {
+                    "options": [
+                        {"name": "日本語", "color": "blue"},
+                        {"name": "英語", "color": "green"},
+                        {"name": "韓国語", "color": "purple"},
+                        {"name": "中国語", "color": "yellow"},
+                    ]
+                }
+            }
         if "制作状況" not in props:
             patch["制作状況"] = {
                 "select": {
@@ -734,6 +769,31 @@ def send_to_notion(video_list, category, existing_urls):
             payload["properties"]["出稿期間"] = {
                 "rich_text": [{"text": {"content": video["ad_period"]}}]
             }
+
+        # 公式SNSの投稿だけが媒体・言語を持つ。
+        if video.get("platform"):
+            payload["properties"]["媒体"] = {"select": {"name": video["platform"]}}
+        if video.get("lang"):
+            payload["properties"]["言語"] = {"select": {"name": video["lang"]}}
+        if video.get("account"):
+            payload["properties"]["アカウント"] = {
+                "rich_text": [{"text": {"content": video["account"]}}]
+            }
+        if video.get("posted_at"):
+            payload["properties"]["投稿日時"] = {"date": {"start": video["posted_at"]}}
+        if video.get("original_title"):
+            payload["properties"]["原文"] = {
+                "rich_text": [{"text": {"content": video["original_title"][:1900]}}]
+            }
+
+        # SNSの投稿URLは動画ではないので、動画ブロックに入れるとNotionが400で弾く。
+        # リンクとして貼れるブックマークブロックに差し替える。
+        if video.get("platform"):
+            payload["children"] = [{
+                "object": "block",
+                "type": "bookmark",
+                "bookmark": {"url": video["url"]}
+            }]
 
         try:
             res = notion_request("POST", "https://api.notion.com/v1/pages", headers, json=payload)
@@ -841,6 +901,56 @@ def collect_ad_videos_safely(config):
     return videos
 
 
+def collect_sns_posts_safely(config):
+    """公式SNSの投稿収集を、本体の収集から切り離して実行する。
+
+    経由する RSSHub は自前で立てたサーバーで、相手先(X・BiliBili・Weibo)の
+    仕様変更で止まることがある。止まった日に YouTube の収集まで巻き添えで
+    落ちるのは割に合わないので、ここで完全に受け止めて空リストを返す。
+    """
+    sns_config = config.get("sns", {})
+    if not sns_config.get("enabled", True):
+        return []
+
+    # どのアカウントを見に行っているかは、設定ファイルを開かずに分かる必要がある。
+    try:
+        targets = describe_targets()
+        logger.log(f"📡 収集対象アカウント {len(targets)} 件: {' / '.join(targets)}")
+    except Exception as e:
+        print(f"  [Warning] 収集対象の一覧を読めませんでした: {e}")
+
+    try:
+        # 中国語・韓国語のまま並べても読めないので、見出しは日本語に訳す。
+        posts, stats = collect_sns_posts(sns_config, translator=translate_if_needed)
+    except Exception as e:
+        msg = f"公式SNSの収集に失敗しました（本体の収集は続行します）: {e}"
+        print(f"  [Warning] {msg}")
+        logger.log(f"⚠️ {msg}")
+        return []
+
+    if stats.get("skipped_no_rsshub"):
+        logger.log(
+            f"ℹ️ RSSHub未設定のため {stats['skipped_no_rsshub']} アカウントを見送りました"
+            "（RSSHUB_BASE_URL を設定すると有効になります）"
+        )
+
+    # 取得できたのに0件、が一番危ない。エラーにならないので放置すると
+    # 「正常終了・0件」が続き、取り逃しに気づけない。必ず表に出す。
+    if stats.get("empty_accounts"):
+        logger.log(
+            f"⚠️ 取得はできたが投稿が0件だったアカウント: {len(stats['empty_accounts'])} 件"
+            f"（{', '.join(stats['empty_accounts'])}）"
+        )
+    if stats.get("failed_accounts"):
+        logger.log(
+            f"⚠️ 取得に失敗したアカウント: {len(stats['failed_accounts'])} 件"
+            f"（{', '.join(stats['failed_accounts'])}）"
+        )
+
+    logger.log(f"📡 公式SNS {stats['accounts']} アカウントから投稿 {stats['posts']} 件を回収")
+    return posts
+
+
 def main():
     print("--- Wuthering Waves Trend Collector (Advanced) ---")
     logger.log("🚀 YouTubeトレンド収集ツールの自動実行プロセス始動")
@@ -865,12 +975,17 @@ def main():
         logger.log("📣 [ステップ2.5] 「出稿中の広告クリエイティブ」の回収処理をスタート...")
         ad_videos = collect_ad_videos_safely(config)
 
+        print("\n[2.6] Fetching official SNS posts...")
+        logger.log("📡 [ステップ2.6] 「公式アカウントの投稿」の回収処理をスタート...")
+        sns_posts = collect_sns_posts_safely(config)
+
         collected_data = {
             "youtube": {
                 "latest": latest_data,
                 "popular_weekly": popular_data
             },
-            "ads": ad_videos
+            "ads": ad_videos,
+            "sns": sns_posts
         }
         
         output_file = "trends_output.json"
@@ -929,6 +1044,9 @@ def main():
             if target_channel_videos:
                 target_flat = get_flat_video_list({"dummy": target_channel_videos})
                 send_to_notion(target_flat, "登録チャンネル", existing_urls)
+
+            if sns_posts:
+                send_to_notion(sns_posts, "SNS", existing_urls)
 
             if ad_videos:
                 # 広告専用に作られた動画（公式チャンネルに無い尺違いなど）だけが

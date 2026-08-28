@@ -4,6 +4,18 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import VideoCard from './components/VideoCard';
 import styles from './page.module.css';
+// 収集側と同じ定義ファイルをそのまま読む。画面用に別で持つと、片方だけ
+// 直したときに「画面には載っているのに集めていない」状態が生まれる。
+import officialAccounts from '../../scraper/official_accounts.json';
+
+// 既読の記録は VideoCard が localStorage に持っている。同じ鍵を読む。
+const WATCHED_STORAGE_KEY = 'wt_watched_video_ids';
+
+const SNS_TARGETS = officialAccounts.accounts.filter((a) => a.collect);
+
+// 収集側（sns_collector.py）の表示名と揃えてある
+const SNS_PLATFORM_LABELS = { x: 'X', bilibili: 'BiliBili', weibo: 'Weibo', reddit: 'Reddit' };
+const SNS_LANG_LABELS = { ja: '日本語', en: '英語', ko: '韓国語', 'zh-CN': '中国語', 'zh-TW': '中国語(繁体)' };
 
 // 出稿期間「2026-07-31 〜 2026-08-03」から開始日・終了日を取り出す。
 // 片方しか無い場合はその日付が開始日として入っている。
@@ -18,6 +30,15 @@ export default function Home() {
   // 広告は件数が多く別枠で取るため、通常の一覧とは別に持つ
   const [adVideos, setAdVideos] = useState(null);
   const adsRequested = useRef(false);
+  // 公式SNSも広告と同じ理由で別枠。媒体と言語で絞り込めるようにする。
+  const [snsVideos, setSnsVideos] = useState(null);
+  const snsRequested = useRef(false);
+  const [snsPlatform, setSnsPlatform] = useState('すべて');
+  const [snsLang, setSnsLang] = useState('すべて');
+  const [snsAccount, setSnsAccount] = useState('すべて');
+  const [unreadOnly, setUnreadOnly] = useState(false);
+  const [watchedIds, setWatchedIds] = useState(() => new Set());
+  const [showTargets, setShowTargets] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('すべて');
@@ -57,7 +78,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState('newest'); // newest | oldest | title | channel
 
-  const tabs = ['すべて', '最新 (Shorts)', '最新 (通常)', '週間人気 (Shorts)', '週間人気 (通常)', '登録チャンネル', '広告'];
+  const tabs = ['すべて', '最新 (Shorts)', '最新 (通常)', '週間人気 (Shorts)', '週間人気 (通常)', '登録チャンネル', '広告', 'SNS'];
 
   const fetchLogs = async () => {
     setLoadingLogs(true);
@@ -116,6 +137,42 @@ export default function Home() {
         setError(err.message);
       });
   }, [activeTab, adVideos]);
+
+  // 公式SNSも同じく別枠。開いたときに一度だけ取る。
+  useEffect(() => {
+    if (activeTab !== 'SNS' || snsVideos !== null || snsRequested.current) return;
+    snsRequested.current = true;
+    fetch('/api/videos?sns=1')
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`Status: ${res.status}`))))
+      .then((data) => setSnsVideos(data.videos || []))
+      .catch((err) => {
+        snsRequested.current = false; // 失敗したらタブを開き直したときに再挑戦する
+        setError(err.message);
+      });
+  }, [activeTab, snsVideos]);
+
+  // タブごとに選べる並び順が違う。切り替えた先に無い並び順が残っていると
+  // 選択欄が空白になり、何で並んでいるのか分からなくなる。持っている値は
+  // そのままに、表示と並べ替えに使う値だけをここで補正する。
+  const sortAvailable =
+    (['adEnd', 'adStart'].includes(sortOrder) && !['広告', 'すべて'].includes(activeTab)) ||
+    (['postedNew', 'postedOld'].includes(sortOrder) && !['SNS', 'すべて'].includes(activeTab))
+      ? 'newest'
+      : sortOrder;
+
+  // 「未読のみ」を押した時点の既読一覧で絞る。表示中に読み直さないので、
+  // 一覧を見ている最中にカードが目の前から消えることはない。
+  const toggleUnreadOnly = () => {
+    const next = !unreadOnly;
+    if (next) {
+      try {
+        setWatchedIds(new Set(JSON.parse(localStorage.getItem(WATCHED_STORAGE_KEY) || '[]')));
+      } catch {
+        setWatchedIds(new Set());
+      }
+    }
+    setUnreadOnly(next);
+  };
 
   const handleSync = async () => {
     if (!window.confirm('クラウドで情報収集を開始しますか？完了まで数分かかり、Discordに通知されます。')) return;
@@ -371,6 +428,98 @@ export default function Home() {
         ))}
       </div>
 
+      {/* 公式SNSは媒体も言語も混ざって並ぶ。どこの情報かで絞れないと使えない。 */}
+      {activeTab === 'SNS' && (
+        <div className={styles.snsFilters}>
+          <div className={styles.snsFilterGroup}>
+            <span className={styles.snsFilterLabel}>媒体</span>
+            {['すべて', 'X', 'BiliBili', 'Weibo', 'Reddit'].map((p) => (
+              <button
+                key={p}
+                className={`${styles.snsChip} ${snsPlatform === p ? styles.snsChipActive : ''}`}
+                onClick={() => setSnsPlatform(p)}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+          <div className={styles.snsFilterGroup}>
+            <span className={styles.snsFilterLabel}>言語</span>
+            {['すべて', '日本語', '英語', '韓国語', '中国語'].map((l) => (
+              <button
+                key={l}
+                className={`${styles.snsChip} ${snsLang === l ? styles.snsChipActive : ''}`}
+                onClick={() => setSnsLang(l)}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
+
+          {/* アカウント単位。日本語Xだけで6アカウントあるため、媒体と言語では絞りきれない。
+              選択肢は実際に届いた投稿から作る。定義を二重に持つとズレるため。 */}
+          <div className={styles.snsFilterGroup}>
+            <span className={styles.snsFilterLabel}>アカウント</span>
+            {['すべて', ...new Set(
+              (snsVideos || [])
+                .filter((v) => snsPlatform === 'すべて' || v.platform === snsPlatform)
+                .filter((v) => snsLang === 'すべて' || v.lang === snsLang)
+                .map((v) => v.account)
+                .filter(Boolean)
+            )].map((acc) => (
+              <button
+                key={acc}
+                className={`${styles.snsChip} ${snsAccount === acc ? styles.snsChipActive : ''}`}
+                onClick={() => setSnsAccount(acc)}
+              >
+                {acc}
+              </button>
+            ))}
+          </div>
+
+          <div className={styles.snsFilterGroup}>
+            <button
+              className={`${styles.snsChip} ${unreadOnly ? styles.snsChipActive : ''}`}
+              onClick={toggleUnreadOnly}
+              title="まだ開いていない投稿だけを表示します"
+            >
+              {unreadOnly ? '✓ 未読のみ' : '未読のみ'}
+            </button>
+            <button
+              className={styles.snsChip}
+              onClick={() => setShowTargets((v) => !v)}
+              title="いま収集しているアカウントの一覧"
+            >
+              {showTargets ? '▲ 収集中の一覧' : `📋 収集中のアカウント (${SNS_TARGETS.length})`}
+            </button>
+          </div>
+
+          {/* どのアカウントを見に行っているのかを、設定ファイルを開かずに確認できるようにする */}
+          {showTargets && (
+            <div className={styles.snsTargets}>
+              {SNS_TARGETS.map((a) => (
+                <a
+                  key={`${a.platform}-${a.id}`}
+                  href={a.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.snsTargetRow}
+                >
+                  <span className={styles.snsTargetPlatform}>{SNS_PLATFORM_LABELS[a.platform] || a.platform}</span>
+                  <span className={styles.snsTargetLang}>{SNS_LANG_LABELS[a.lang] || a.lang}</span>
+                  <span className={styles.snsTargetName}>{a.name}</span>
+                  <span className={styles.snsTargetId}>{a.id}</span>
+                </a>
+              ))}
+              <p className={styles.snsTargetsNote}>
+                この一覧は収集側の設定ファイル（scraper/official_accounts.json）と同じものを読んでいます。
+                増減させたい場合はお知らせください。
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+
       <div className={styles.searchBar}>
         <input
           type="text"
@@ -384,21 +533,33 @@ export default function Home() {
         )}
         <select
           className={styles.sortSelect}
-          value={sortOrder}
+          value={sortAvailable}
           onChange={(e) => setSortOrder(e.target.value)}
         >
           <option value="newest">新しい順（収集日）</option>
           <option value="oldest">古い順（収集日）</option>
           {/* 広告はまとめて登録されるため収集日では並ばない。
               いつ流れていた広告かで並べられるようにする。 */}
-          <option value="adEnd">出稿の新しい順（終了日）</option>
-          <option value="adStart">出稿の古い順（開始日）</option>
+          {/* 出稿期間を持つのは広告だけ。他のタブで選べても並び順は変わらないので出さない。 */}
+          {(activeTab === '広告' || activeTab === 'すべて') && (
+            <>
+              <option value="adEnd">出稿の新しい順（終了日）</option>
+              <option value="adStart">出稿の古い順（開始日）</option>
+            </>
+          )}
+          {/* SNSは収集日ではなく、実際に投稿された日時で並べたい */}
+          {(activeTab === 'SNS' || activeTab === 'すべて') && (
+            <>
+              <option value="postedNew">投稿の新しい順</option>
+              <option value="postedOld">投稿の古い順</option>
+            </>
+          )}
           <option value="title">タイトル順</option>
           <option value="channel">チャンネル順</option>
         </select>
       </div>
 
-      {loading || (activeTab === '広告' && adVideos === null) ? (
+      {loading || (activeTab === '広告' && adVideos === null) || (activeTab === 'SNS' && snsVideos === null) ? (
         <div className={styles.loadingContainer}>
           <div className={styles.spinner}></div>
           <p>Loading the latest trends...</p>
@@ -412,8 +573,12 @@ export default function Home() {
           {/* 「広告」はカテゴリで絞れない。広告に使われた動画の多くは公式チャンネルの
               通常投稿で、別カテゴリで先に登録されているため。出稿期間の有無だけが
               広告として流れた目印になるので、絞り込みごとサーバー側に任せている。 */}
-          {(activeTab === '広告' ? adVideos || [] : videos)
-            .filter((video) => activeTab === 'すべて' || activeTab === '広告' || video.category === activeTab)
+          {(activeTab === '広告' ? adVideos || [] : activeTab === 'SNS' ? snsVideos || [] : videos)
+            .filter((video) => activeTab === 'すべて' || activeTab === '広告' || activeTab === 'SNS' || video.category === activeTab)
+            .filter((video) => activeTab !== 'SNS' || snsPlatform === 'すべて' || video.platform === snsPlatform)
+            .filter((video) => activeTab !== 'SNS' || snsLang === 'すべて' || video.lang === snsLang)
+            .filter((video) => activeTab !== 'SNS' || snsAccount === 'すべて' || video.account === snsAccount)
+            .filter((video) => !unreadOnly || !watchedIds.has(video.id))
             .filter((video) => {
               if (!searchQuery.trim()) return true;
               const q = searchQuery.trim().toLowerCase();
@@ -423,13 +588,21 @@ export default function Home() {
               );
             })
             .sort((a, b) => {
-              switch (sortOrder) {
+              switch (sortAvailable) {
                 case 'oldest':
                   return new Date(a.created_time) - new Date(b.created_time);
                 case 'title':
                   return (a.title || '').localeCompare(b.title || '', 'ja');
                 case 'channel':
                   return (a.channel || '').localeCompare(b.channel || '', 'ja');
+                // 投稿日時が無い行（SNS以外）は末尾に寄せる。先頭に来ると
+                // 並べ替えたのに何も変わっていないように見える。
+                case 'postedNew':
+                  return (b.postedAt || '').localeCompare(a.postedAt || '');
+                case 'postedOld':
+                  if (!a.postedAt) return 1;
+                  if (!b.postedAt) return -1;
+                  return a.postedAt.localeCompare(b.postedAt);
                 case 'adStart':
                   // 出稿期間は「2026-07-31 〜 2026-08-03」の形。日付が
                   // YYYY-MM-DD なので、文字列のまま比べても日付順になる。

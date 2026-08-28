@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RSSHub 設置手順 — 公式SNS収集の下準備</title>
+<style>
+  :root{
+    --bg:#0b1120; --panel:#111a2e; --panel2:#16213a; --line:#22304d;
+    --tx:#e2e8f0; --dim:#94a3b8; --accent:#7dd3fc; --warn:#fbbf24; --ng:#f87171; --ok:#4ade80;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:0 20px 80px;background:var(--bg);color:var(--tx);
+    font-family:"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic UI",sans-serif;line-height:1.85;}
+  .wrap{max-width:860px;margin:0 auto}
+  header{padding:56px 0 32px;border-bottom:1px solid var(--line);margin-bottom:40px}
+  h1{margin:0 0 10px;font-size:1.9rem;letter-spacing:.02em}
+  .sub{color:var(--dim);font-size:.95rem;margin:0}
+  h2{margin:52px 0 14px;font-size:1.25rem;color:var(--accent);
+    padding-left:14px;border-left:4px solid var(--accent)}
+  h3{margin:30px 0 10px;font-size:1.02rem}
+  p{margin:12px 0}
+  code{background:var(--panel2);border:1px solid var(--line);border-radius:5px;
+    padding:2px 7px;font-family:Consolas,monospace;font-size:.88em;color:var(--accent)}
+  pre{background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+    padding:16px 18px;overflow-x:auto;font-family:Consolas,monospace;font-size:.86rem;color:var(--tx)}
+  pre code{background:none;border:none;padding:0;color:inherit}
+  .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin:20px 0}
+  .warn{border-color:rgba(251,191,36,.4);background:rgba(251,191,36,.07)}
+  .warn strong{color:var(--warn)}
+  .ng{border-color:rgba(248,113,113,.4);background:rgba(248,113,113,.07)}
+  .ng strong{color:var(--ng)}
+  .ok{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.06)}
+  .ok strong{color:var(--ok)}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:18px 0}
+  ol.steps>li{counter-increment:s;position:relative;padding:0 0 20px 46px;margin:0}
+  ol.steps>li::before{content:counter(s);position:absolute;left:0;top:1px;width:30px;height:30px;
+    border-radius:50%;background:var(--accent);color:#0b1120;font-weight:700;font-size:.9rem;
+    display:flex;align-items:center;justify-content:center}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:.92rem}
+  th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:var(--panel2);color:var(--accent);font-weight:600;white-space:nowrap}
+  .flow{background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+    padding:18px;font-family:Consolas,monospace;font-size:.82rem;color:var(--dim);white-space:pre;overflow-x:auto}
+  .tag{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:10px;
+    background:rgba(125,211,252,.14);color:var(--accent);border:1px solid rgba(125,211,252,.3);
+    vertical-align:middle;margin-left:8px}
+  .tag.you{background:rgba(251,191,36,.14);color:var(--warn);border-color:rgba(251,191,36,.3)}
+  footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--dim);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>RSSHub 設置手順</h1>
+  <p class="sub">公式SNS（X・BiliBili・Weibo）の投稿を収集するための下準備 ／ 2026-08-28</p>
+</header>
+
+<h2>これは何をするための作業か</h2>
+
+<p>X・BiliBili・Weibo には、外部から投稿を読むための公式な窓口がありません。そこで <strong>RSSHub</strong> という中継サーバーを自分用に1つ立てて、そこ経由で読みます。</p>
+
+<div class="flow">GitHub Actions ──収集──> Notion ──表示──> Vercel（今までどおり）
+       │
+       └──> Railway の RSSHub  ← 今回立てるもの
+                │
+                └─ X ・ BiliBili ・ Weibo から投稿を取得</div>
+
+<div class="box ok">
+<p><strong>今動いているものには一切触れません。</strong> Vercel の画面も、GitHub 上の1時間おきの収集も、そのままです。部品を1つ増やすだけです。</p>
+</div>
+
+<h3>なぜ Vercel ではなく Railway なのか</h3>
+
+<p>RSSHub は X からの読み取りに<strong>ログイン状態を保ち続ける</strong>必要があります。Vercel は「呼ばれたら起きて、返したら寝る」仕組みで毎回記憶が消えるため、読むたびにログインし直すことになり、<strong>不審な動きと判定されてアカウントが凍結されます。</strong></p>
+
+<p>Railway はずっと起動したままなので、最初に1回ログインすればそのままです。</p>
+
+<div class="box ng">
+<p><strong>公開サーバー（rsshub.app）は使えません。</strong> 自動アクセスを Cloudflare で丸ごと拒否する設定になっており、実際に試して全部弾かれることを確認済みです。</p>
+</div>
+
+<h2>用意するもの</h2>
+
+<table>
+<tr><th>もの</th><th>備考</th></tr>
+<tr><td>収集用の X アカウント</td><td>本アカウントとは<strong>別のメールアドレス</strong>で作ったもの。凍結されても本体に影響しないようにするため</td></tr>
+<tr><td>GitHub アカウント</td><td>Railway のログインに使う。新規登録は不要</td></tr>
+<tr><td>Opera</td><td>手順1の説明は Opera に合わせてある。Chrome / Edge でも操作はほぼ同じ</td></tr>
+</table>
+
+<p>クレジットカードは要りません。Railway は登録から30日間、$5 ぶんを無料で試せます。</p>
+
+<h2>手順1 — X から <code>auth_token</code> を取り出す<span class="tag you">ご本人の作業 ／ Opera</span></h2>
+
+<p>パスワードそのものは使いません。ログイン済みであることを示す値を1つコピーするだけです。</p>
+
+<ol class="steps">
+<li><strong>収集用アカウントで X にログインします。</strong><br>
+  本アカウントでログイン中なら、必ずログアウトしてから収集用に切り替えてください。<br>
+  <span style="color:var(--dim);font-size:.9em">プライベートウィンドウ（Ctrl + Shift + N）で収集用にログインすると、本アカウントのログインを保ったまま作業できます。</span></li>
+
+<li><strong>そのまま X のページ上で <code>Ctrl + Shift + I</code> を押します。</strong><br>
+  開発者ツールが開きます。開かない場合は次のどちらかで開けます。
+  <ul style="margin:8px 0 0;color:var(--dim);font-size:.94em">
+    <li>ページ上で右クリック →「<strong>検証</strong>」</li>
+    <li>左上の <strong>O</strong> ボタン →「<strong>開発者</strong>」→「<strong>開発者用ツール</strong>」</li>
+  </ul>
+  <span style="color:var(--dim);font-size:.9em">Opera では F12 が別機能に割り当てられていることがあるため、<code>Ctrl + Shift + I</code> を使ってください。</span></li>
+
+<li><strong>開発者ツール上部のタブから「アプリケーション」を選びます。</strong><br>
+  英語表示なら「Application」です。タブが見当たらないときは、タブ列の右端の <code>&gt;&gt;</code> の中に隠れています。</li>
+
+<li><strong>左側の一覧で「ストレージ」の下にある「Cookie」を開き、「https://x.com」を選びます。</strong><br>
+  英語表示なら「Storage」→「Cookies」です。右側に表が出ます。</li>
+
+<li><strong>表の「名前」列から <code>auth_token</code> を探します。</strong><br>
+  行数が多いので、表の上にある絞り込み欄に <code>auth</code> と打つと早く見つかります。</li>
+
+<li><strong>その行をクリックし、下部に出る「Cookie の値」をコピーします。</strong><br>
+  40文字ほどの英数字です。表の「値」列は途中で切れて表示されるため、<strong>必ず下部の値欄からコピーしてください。</strong>
+  途中までしかコピーできていないと、X だけが空になります。</li>
+</ol>
+
+<div class="box warn">
+<p><strong>この値は、そのアカウントにログインできる鍵と同じです。</strong> チャットに貼ったり、他の人に見せたりしないでください。次の手順で Railway に直接貼り付けます。</p>
+</div>
+
+<h2>手順2 — Railway に登録する<span class="tag you">ご本人の作業</span></h2>
+
+<ol class="steps">
+<li><strong><code>railway.com</code> を開きます。</strong></li>
+<li><strong>「Login」から「Login with GitHub」を選びます。</strong><br>
+  GitHub アカウントでそのまま入れます。新しくパスワードを作る必要はありません。</li>
+<li><strong>権限の確認画面が出たら承認します。</strong></li>
+</ol>
+
+<h2>手順3 — RSSHub を設置する<span class="tag you">ご本人の作業</span></h2>
+
+<p>Railway 内蔵の Agent に頼むのが最も確実です。テンプレートを探して組み立ててくれます。</p>
+
+<ol class="steps">
+<li><strong>「New Project」を作り、右側の Agent に依頼します。</strong><br>
+  <code>Deploy RSSHub with Redis</code> のように伝えると、テンプレートを探して用意してくれます。</li>
+<li><strong>提示された構成を確認します。</strong> 次の2つが並んでいれば正解です。
+  <table>
+  <tr><th>サービス</th><th>役割</th></tr>
+  <tr><td><code>diygod/rsshub:chromium-bundled</code></td><td>本体。ブラウザ描画つきの版</td></tr>
+  <tr><td><code>Redis</code></td><td>取得結果の一時保存。相手先への再取得を減らす</td></tr>
+  </table>
+</li>
+<li><strong>「Deploy」を押します。</strong><br>
+  起動まで数分かかります。</li>
+</ol>
+
+<div class="box">
+<p><strong>なぜ <code>chromium-bundled</code>（ブラウザ入り）なのか。</strong><br>
+Weibo は通常の取得方法では読めず、ブラウザで実際にページを描画する必要があります（RSSHub のソース上で <code>requirePuppeteer: true</code> と指定されています）。X と BiliBili には不要ですが、Weibo を諦めるなら軽い <code>diygod/rsshub</code> に変えられます。</p>
+</div>
+
+<div class="box warn">
+<p><strong>Agent の利用自体が課金対象です。</strong> 画面上部に「Agent is now billable」と出ているとおり、使った分がワークスペースの利用額に加算されます。設置が終わったら Agent の欄は閉じてください。</p>
+</div>
+
+<h2>手順4 — 設定値を入れる<span class="tag you">ご本人の作業</span></h2>
+
+<p>作成されたサービスを開き、<strong>「Variables」タブ</strong>で次を追加します。</p>
+
+<table>
+<tr><th>名前</th><th>値</th><th>説明</th></tr>
+<tr><td><code>TWITTER_AUTH_TOKEN</code></td><td>手順1でコピーした値</td><td>X を読むために必要</td></tr>
+<tr><td><code>ACCESS_KEY</code></td><td>自分で決めた合言葉</td><td>URL が漏れても他人に使われないようにする鍵。英数字20文字程度で任意に決めてください</td></tr>
+<tr><td><code>NODE_ENV</code></td><td><code>production</code></td><td>本番動作の指定</td></tr>
+</table>
+
+<div class="box">
+<p><strong>BiliBili と Weibo は、まず何も設定せずに試してください。</strong> 公開されている投稿なので、設定なしで読める見込みです。もし読めなかった場合は、同じ要領で Cookie を追加する形になります。うまくいかなければ結果のログを見て、そのとき対応します。</p>
+</div>
+
+<h2>手順5 — URL を発行する<span class="tag you">ご本人の作業</span></h2>
+
+<ol class="steps">
+<li><strong>「Settings」タブを開きます。</strong></li>
+<li><strong>「Networking」の中の「Generate Domain」を押します。</strong></li>
+<li><strong>ポート番号を聞かれたら <code>1200</code> と入力します。</strong><br>
+  RSSHub が使うポート番号です。</li>
+<li><strong>発行された URL をコピーします。</strong><br>
+  <code>https://rsshub-production-xxxx.up.railway.app</code> のような形になります。</li>
+</ol>
+
+<h2>手順6 — 動いているか確かめる<span class="tag you">ご本人の作業</span></h2>
+
+<p>ブラウザのアドレス欄に、発行された URL の末尾に <code>/healthz</code> を付けて開きます。</p>
+
+<pre><code>https://（発行されたURL）/healthz</code></pre>
+
+<p>画面に短い応答が出れば起動できています。次に、実際に X が読めるか確認します。</p>
+
+<pre><code>https://（発行されたURL）/twitter/user/WW_JP_Official?key=（決めたACCESS_KEY）</code></pre>
+
+<table>
+<tr><th>表示</th><th>意味</th></tr>
+<tr><td>文字だらけのページ（投稿の文面が並ぶ）</td><td><strong>成功です。</strong>次に進んでください</td></tr>
+<tr><td>エラーや空のページ</td><td>まだ読めていません。Railway の「Deployments」→ログを開いて、その内容を教えてください</td></tr>
+</table>
+
+<h2>手順7 — 収集側につなぐ<span class="tag you">ご本人の作業</span></h2>
+
+<p>発行された URL と合言葉を、GitHub 側に登録します。API キーを登録したときと同じ場所です。</p>
+
+<ol class="steps">
+<li><strong>GitHub のリポジトリを開き、「Settings」→「Secrets and variables」→「Actions」へ進みます。</strong></li>
+<li><strong>「New repository secret」を押して、次の2つを登録します。</strong>
+  <table>
+  <tr><th>Name</th><th>Secret</th></tr>
+  <tr><td><code>RSSHUB_BASE_URL</code></td><td>発行された URL（末尾のスラッシュは不要）</td></tr>
+  <tr><td><code>RSSHUB_ACCESS_KEY</code></td><td>手順4で決めた合言葉</td></tr>
+  </table>
+</li>
+</ol>
+
+<div class="box ok">
+<p><strong>ここまでで、ご本人の作業は終わりです。</strong> 次の巡回から、公式SNSの投稿が画面の「SNS」タブに入り始めます。</p>
+</div>
+
+<h2>費用について</h2>
+
+<table>
+<tr><th></th><th>金額</th><th>内容</th></tr>
+<tr><td>お試し</td><td>無料</td><td>$5ぶん・30日間。カード登録不要</td></tr>
+<tr><td>Hobby</td><td>月 $5</td><td>$5ぶんの利用枠込み。超えた分だけ追加請求</td></tr>
+</table>
+
+<p>実際の課金はサービスが使った資源に対してかかります。</p>
+
+<table>
+<tr><th>資源</th><th>単価</th></tr>
+<tr><td>メモリ</td><td>$10 / GB / 月</td></tr>
+<tr><td>CPU</td><td>$20 / vCPU / 月</td></tr>
+<tr><td>保存領域</td><td>$0.15 / GB / 月</td></tr>
+</table>
+
+<div class="box warn">
+<p><strong>ブラウザ入りの版（chromium-bundled）は重く、$5 の枠を超える可能性があります。</strong> Redis と合わせて常時起動になるためです。<strong>設置から数日は「Usage」の画面で実際の消費額を確認してください。</strong></p>
+<p style="margin-bottom:0">枠を超えそうな場合の選択肢は2つです。<br>
+・ <strong>Weibo を諦める</strong> → 軽い <code>diygod/rsshub</code> に差し替える（大幅に下がる）<br>
+・ <strong>そのまま使う</strong> → 超過分だけ追加で払う</p>
+</div>
+
+<p>使わなくなったら、サービスを削除すれば課金は止まります。停止中のサービスには料金がかかりません。</p>
+
+<h2>うまくいかないとき</h2>
+
+<table>
+<tr><th>症状</th><th>見るところ</th></tr>
+<tr><td>URL を開いても何も出ない</td><td>手順5のポート番号。<code>1200</code> 以外だと繋がりません</td></tr>
+<tr><td>X だけ空になる</td><td><code>auth_token</code> の値。<strong>途中までしかコピーできていない</strong>のが最も多い原因です（表の「値」列は省略表示されるため）。開発者ツール下部の値欄から取り直してください。前後の空白、期限切れも確認を</td></tr>
+<tr><td>全部が空になる</td><td>Railway の「Deployments」タブのログ。起動に失敗している可能性があります</td></tr>
+<tr><td>しばらく動いていたのに止まった</td><td>多くは <code>auth_token</code> の期限切れです。手順1をやり直して値を入れ替えてください</td></tr>
+</table>
+
+<div class="box warn">
+<p><strong>収集が「正常終了・0件」で静かに続くのが一番危険です。</strong> そのため、収集側では「取得できたのに0件だったアカウント」を必ず警告としてログに出すようにしてあります。Discord の通知にこの警告が出ていたら、上の表を確認してください。</p>
+</div>
+
+<footer>
+このファイルはリポジトリの <code>docs/railway-rsshub-setup.html</code> に置かれています。<br>
+関連: <code>scraper/sns_collector.py</code>（収集の実装） ／ <code>scraper/official_accounts.json</code>（対象アカウントの一覧） ／ <code>HANDOFF.md</code> 追記6
+</footer>
+
+</div>
+</body>
+</html>
