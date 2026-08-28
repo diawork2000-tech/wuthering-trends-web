@@ -62,3 +62,4 @@ scraper/purge_run.log
 *.json.bak
 *.json.tmp
 scraper/purge_ads_audit.log
+scraper/purge_sns_audit.log
