@@ -13,6 +13,7 @@ from unittest import mock
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
+import sns_collector  # noqa: E402
 from sns_collector import (  # noqa: E402
     account_label,
     collect_account,
@@ -118,6 +119,16 @@ class TestCollectAccount(unittest.TestCase):
         with mock.patch("sns_collector._fetch", return_value=(None, "HTTP 503")):
             posts, state = collect_account(account("x", "a"), RSSHUB, "", 20)
         self.assertEqual(state, "HTTP 503")
+
+    def test_error_body_is_carried_back(self):
+        # 状態番号だけでは何が起きたのか分からず、毎回サーバーのログを
+        # 人が見に行くことになる。理由まで持ち帰る。
+        res = mock.Mock(status_code=503, text="<html><body>Error: bilibili risk control</body></html>")
+        with mock.patch("sns_collector.requests.get", return_value=res):
+            feed, error = sns_collector._fetch("https://example.com/x", "label")
+        self.assertIsNone(feed)
+        self.assertIn("HTTP 503", error)
+        self.assertIn("bilibili risk control", error)
 
     def test_entries_without_link_are_skipped(self):
         entries = [{"title": "本文", "link": ""}, {"title": "本文2", "link": "https://x.com/a/status/1"}]

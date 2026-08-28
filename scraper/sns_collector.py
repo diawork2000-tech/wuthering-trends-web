@@ -140,7 +140,14 @@ def _fetch(url, label, timeout=25):
         else:
             if res.status_code == 200:
                 return feedparser.parse(res.text), ""
+            # 状態番号だけでは何が起きたのか分からない。RSSHub は失敗の理由を
+            # 本文に書いて返すので、そこを短く持ち帰る。これが無いと、
+            # 毎回サーバーのログを人が見に行くことになる。
             last_error = f"HTTP {res.status_code}"
+            reason = re.sub(r"<[^>]+>", " ", res.text or "")
+            reason = re.sub(r"\s+", " ", reason).strip()
+            if reason:
+                last_error += f": {reason[:180]}"
             # 4xx は待っても直らない。相手の設定かこちらのURLが違う。
             if 400 <= res.status_code < 500 and res.status_code != 429:
                 break
