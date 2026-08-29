@@ -71,8 +71,12 @@ export default function VideoCard({ video }) {
   // 投稿元の配信サーバーに置かれたままなので、こちらの通信量は増えない。
   // Twitter は他サイトからの動画再生を参照元で弾くため、直接は貼れない。
   // サーバー側の中継(/api/media)を通す。詳しくは src/app/api/media/route.js。
+  // 末尾の v=2 は、壊れた応答を掴んでいるブラウザを救うためのもの。
+  // 中継の初版が末尾10KBだけを1日分キャッシュさせてしまい、直した後も
+  // 各自の手元にそれが残って再生できない状態になった。別のURLにすることで
+  // 掴み直させる。中継の応答を作り替えたときは、この数字を上げること。
   const postVideo = isPost && video.postVideoUrl
-    ? `/api/media?u=${encodeURIComponent(video.postVideoUrl)}`
+    ? `/api/media?v=2&u=${encodeURIComponent(video.postVideoUrl)}`
     : '';
   // 画像も動画も持たない投稿で16:9の枠を確保すると、空白が本文を押し下げる。
   const showThumbnail = !isPost || hasImage || !!postVideo;
