@@ -52,8 +52,13 @@ export async function GET(request) {
       const value = res.headers.get(key);
       if (value) headers.set(key, value);
     }
-    // 同じ投稿を何度も見に来るので、しばらく手元に置かせる
-    headers.set('Cache-Control', 'public, max-age=86400');
+    // 部分取得ごとに中身が違うので、範囲の指定まで含めて別物として扱わせる。
+    // これを書かずに public で置かせたところ、動画要素が末尾を読みに来た
+    // ときの応答（末尾10KB）が居座り、以後どの読み込みにもそれが返って
+    // 再生できなくなった。
+    headers.set('Vary', 'Range');
+    // public にすると共有の置き場に乗って同じ事故が起きる。手元だけに置かせる。
+    headers.set('Cache-Control', 'private, max-age=3600');
 
     return new NextResponse(res.body, { status: res.status, headers });
   } catch (error) {
