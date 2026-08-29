@@ -69,7 +69,11 @@ export default function VideoCard({ video }) {
   const hasImage = video.thumbnail && !video.thumbnail.includes(NO_IMAGE);
   // 動画付きの投稿。YouTubeと同じくホバーで再生する。動画そのものは
   // 投稿元の配信サーバーに置かれたままなので、こちらの通信量は増えない。
-  const postVideo = isPost ? video.postVideoUrl : '';
+  // Twitter は他サイトからの動画再生を参照元で弾くため、直接は貼れない。
+  // サーバー側の中継(/api/media)を通す。詳しくは src/app/api/media/route.js。
+  const postVideo = isPost && video.postVideoUrl
+    ? `/api/media?u=${encodeURIComponent(video.postVideoUrl)}`
+    : '';
   // 画像も動画も持たない投稿で16:9の枠を確保すると、空白が本文を押し下げる。
   const showThumbnail = !isPost || hasImage || !!postVideo;
 
