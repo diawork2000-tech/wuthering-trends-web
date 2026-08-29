@@ -3,31 +3,73 @@
   "items": [
     {
       "id": "card-0",
-      "title": "野球部姿の漂泊者と景燃に関するショート動画の話題",
+      "title": "一度に5人をフィールド上へ出現させる裏技的検証",
       "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
-      "sourceUrl": "https://www.youtube.com/shorts/7VXTaWX-PoE",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n素材では「野球部になった漂泊者と景燃が最高すぎる件」と題されたショート動画が紹介されており、「めろい」という感想とともに、新キャラ、エイメス、ダーニャ、シグリカ、緋雪、景燃、カルテジアなどのハッシュタグが記載されている。",
-      "reason": "漂泊者や景燃などのキャラクターに関連したネタ動画やファンコミュニティでの話題、新キャラ名への関心が高まっているため。",
+      "sourceUrl": "https://www.youtube.com/shorts/FW3SIzyNHTk",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n通常は少数しか同時に画面内へ呼び出せないキャラクターを、一度に5人もフィールド上へ出現させる方法についての紹介。通常プレイでは見られない珍しい画面状況を楽しむ内容となっています。",
+      "reason": "通常プレイとは異なる小ネタ・裏技系の検証はショート動画で視覚的なインパクトが高く、ユーザーの関心を惹きやすいため。",
       "score": 89,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-08-29",
-      "createdTime": "2026-08-29T17:46:59.757024+00:00"
+      "createdTime": "2026-08-29T21:04:08.932762+00:00"
     },
     {
       "id": "card-1",
-      "title": "GameWithによる『鳴潮』キャラクター一覧と性能評価",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9OWTlvb2FCTFVTYjNsY0VOd3hpb3V6ekNUeEI1WU5td1pOTThPSEJnU08yY2R1MUJPdkRfaGhxUVg0TTNYX3plaGhQVWstX1VqeGZV?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによる『鳴潮』のキャラクター一覧と評価をまとめた攻略コンテンツ。",
-      "reason": "キャラクターの育成方針やガチャの優先度を検討するユーザーにとって、性能評価や一覧情報は常に需要が高いため。",
-      "score": 72,
+      "title": "漂泊者の特定衣装に関するストーリー再登場の疑問",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/bBC-5wHIDU0",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nストーリー進行時などに登場した漂泊者の特定衣装について、今後のメインストーリーやイベント等で再び着用・登場する機会があるのかを振り返りつつ共有する内容となっています。",
+      "reason": "主人公（漂泊者）の見た目や限定衣装に関する話題はプレイヤーの共感を集めやすく、コメント欄での意見交換が活発になりやすいため。",
+      "score": 89,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-08-29",
-      "createdTime": "2026-08-29T17:46:59.757056+00:00"
+      "createdTime": "2026-08-29T21:04:08.932794+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "バグによってミニサイズ化したバイクの珍挙動",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/tD6JC_Wk9B4",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nバイクがバグにより極端に小さくなってしまった珍しい現象を紹介。通常サイズとのギャップによるコミカルな見た目と挙動を取り上げています。",
+      "reason": "思わず笑ってしまうシュールなバグや乗り物関連の珍現象は、ショート動画特有の手軽な面白さとして高い再生数を狙えるため。",
+      "score": 89,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-08-29",
+      "createdTime": "2026-08-29T21:04:08.932807+00:00"
+    },
+    {
+      "id": "card-3",
+      "title": "血を武器として扱うキャラクターのビジュアル・モーション評価",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=9pmJI_slt2I",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n血を媒介・武器として戦闘を行うキャラクターの演出やビジュアルの魅力について取り上げており、キャラクターのカッコ良さや特徴的な戦闘アクションにフォーカスした内容となっています。",
+      "reason": "スタイリッシュなアクションやダークな演出のキャラクターモーションはショート動画で視覚的訴求力が高く、高評価を獲得しやすい傾向にあるため。",
+      "score": 92,
+      "viewCount": 2120,
+      "viewsPerHour": 2086.7,
+      "mentionCount": 1,
+      "date": "2026-08-29",
+      "createdTime": "2026-08-29T21:04:08.932820+00:00"
+    },
+    {
+      "id": "card-4",
+      "title": "シュールな演出が話題を呼ぶバイクの珍現象",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=ijdw0V1c3zg",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nバイク関連の珍しい挙動やギャグ要素の強いシチュエーションを取り上げ、そのシュールさや面白さをテンポよく提示する内容となっています。",
+      "reason": "乗り物やギミックのシュールなネタ動画は初見の引きが強く、拡散性・視聴維持率ともに高く維持できるため。",
+      "score": 92,
+      "viewCount": 6206,
+      "viewsPerHour": 2054.9,
+      "mentionCount": 1,
+      "date": "2026-08-29",
+      "createdTime": "2026-08-29T21:04:08.932832+00:00"
     }
   ]
 }
