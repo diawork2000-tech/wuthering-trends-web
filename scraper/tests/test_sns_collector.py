@@ -185,6 +185,16 @@ class TestCollectAccount(unittest.TestCase):
             posts, _ = collect_account(account("x", "a"), RSSHUB, "", 20)
         self.assertEqual(posts[0]["video_url"], "")
 
+    def test_html_entities_in_urls_are_restored(self):
+        # 本文はHTMLなので & が &amp; と書かれている。戻さないと画像が404になる。
+        # 実際にこれで186件の画像が表示できていなかった。
+        html = "<img src='https://pbs.twimg.com/media/AAA?format=jpg&amp;name=orig'>"
+        entries = [{"title": "t", "link": "https://x.com/a/status/1", "summary": html}]
+        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
+            posts, _ = collect_account(account("x", "a"), RSSHUB, "", 20)
+        self.assertEqual(posts[0]["thumbnail"], "https://pbs.twimg.com/media/AAA?format=jpg&name=orig")
+        self.assertNotIn("&amp;", posts[0]["thumbnail"])
+
     def test_post_carries_its_source(self):
         entries = [{"title": "告知です", "link": "https://x.com/a/status/1"}]
         with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
@@ -258,6 +268,29 @@ class TestTranslation(unittest.TestCase):
         n, failed = translate_posts(posts, boom, interval=0)
         self.assertEqual((n, failed), (0, 1))
         self.assertEqual(posts[0]["title"], "시그리카")
+
+    def test_error_page_is_not_stored_as_a_translation(self):
+        # 翻訳先が落ちるとエラー画面の文面が返ってくる。実際に
+        # 「Error 500 (Server Error)」が7件、訳文として登録されていた。
+        posts = [self.post("시그리카")]
+        n, failed = translate_posts(
+            posts, lambda t: "Error 500 (Server Error)!!1500.That’s an error", interval=0
+        )
+        self.assertEqual((n, failed), (0, 1))
+        self.assertEqual(posts[0]["title"], "시그리카")
+        self.assertEqual(posts[0]["original_title"], "")
+
+    def test_retry_recovers_a_temporary_failure(self):
+        calls = []
+
+        def flaky(text):
+            calls.append(text)
+            return "" if len(calls) == 1 else "シグリカ"
+
+        posts = [self.post("시그리카")]
+        n, failed = translate_posts(posts, flaky, interval=0)
+        self.assertEqual((n, failed), (1, 0))
+        self.assertEqual(posts[0]["title"], "シグリカ")
 
 
 class TestAccountList(unittest.TestCase):

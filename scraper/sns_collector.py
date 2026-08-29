@@ -24,6 +24,7 @@ TikTok は常にこの形で返してくるため収集対象から外した
 0件は必ず警告として表に出すこと。
 """
 
+import html as html_lib
 import os
 import re
 import time
@@ -175,13 +176,23 @@ def _first_image(entry):
     """サムネイルに使える画像を1枚拾う。無ければ空文字。"""
     for media in entry.get("media_content", []) or []:
         if media.get("url"):
-            return media["url"]
+            return _clean_url(media["url"])
     for link in entry.get("links", []) or []:
         if str(link.get("type", "")).startswith("image/") and link.get("href"):
-            return link["href"]
+            return _clean_url(link["href"])
     html = entry.get("summary", "") or entry.get("description", "") or ""
     match = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', html)
-    return match.group(1) if match else ""
+    return _clean_url(match.group(1)) if match else ""
+
+
+def _clean_url(url):
+    """本文から取り出したURLを、そのまま開ける形に戻す。
+
+    本文はHTMLなので & が &amp; と書かれている。戻さずに使うと
+    「?format=jpg&amp;name=orig」となり、画像が404で出てこない。
+    実際にこれで186件の画像が表示できていなかった。
+    """
+    return html_lib.unescape((url or "").strip())
 
 
 def _video_source(entry):
@@ -200,10 +211,10 @@ def _video_source(entry):
         return "", ""
     src = re.search(r"src=[\"']([^\"']+)[\"']", tag.group(0))
     poster = re.search(r"poster=[\"']([^\"']+)[\"']", tag.group(0))
-    url = src.group(1) if src else ""
+    url = _clean_url(src.group(1)) if src else ""
     if not url.startswith("https://"):
         return "", ""
-    return url, (poster.group(1) if poster else "")
+    return url, (_clean_url(poster.group(1)) if poster else "")
 
 
 def _clean_title(entry):
@@ -234,6 +245,28 @@ def _published_iso(entry):
         return ""
 
 
+# 翻訳先が落ちているとき、翻訳結果としてエラー画面の文面が返ってくる。
+# 実際に「Error 500 (Server Error)!!1500.That’s an error」が7件、
+# 訳文としてそのまま登録されていた。訳せなかったものとして扱う。
+ERROR_PAGE_SIGNS = re.compile(
+    r"(Error \d{3}|Server Error|That[’']s an error|Bad Gateway|Too Many Requests|<!DOCTYPE)",
+    re.IGNORECASE,
+)
+
+
+def _translate_once(translator, original):
+    """訳して、まともな結果のときだけ返す。駄目なら空文字。"""
+    try:
+        title = translator(original)
+    except Exception:
+        return ""
+    if not title or title == original:
+        return ""
+    if ERROR_PAGE_SIGNS.search(title):
+        return ""
+    return title
+
+
 def translate_posts(posts, translator, langs=None, interval=0.4):
     """投稿の見出しを日本語に訳す。戻り値は (訳した件数, 失敗件数)。
 
@@ -250,12 +283,12 @@ def translate_posts(posts, translator, langs=None, interval=0.4):
         if post.get("lang") not in langs:
             continue
         original = post["title"]
-        try:
-            title = translator(original)
-        except Exception:
-            failed += 1
-            continue
-        if not title or title == original:
+        title = _translate_once(translator, original)
+        if not title:
+            # 一度だけ間を置いて試し直す。翻訳側が混んでいるだけのことがある。
+            time.sleep(2)
+            title = _translate_once(translator, original)
+        if not title:
             failed += 1
             continue
         post["title"] = title
