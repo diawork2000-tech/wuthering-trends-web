@@ -784,3 +784,197 @@ credentials?」で **Yes** を選ぶ。`cmdkey /delete:LegacyGeneric:target=git:
    **オーナーに提示して相談する**（先に実装しない）
 3. 対象アカウントをオーナーに確認する
 4. 合意が取れてから実装に入る
+
+---
+
+# 追記7 (2026-08-29): 公式SNSの投稿収集を実装・稼働開始（BiliBili/Weiboのみ未解決）
+
+追記6で「相談してから進めること」としていた件を、オーナーの承認を得て実装し、
+本番で稼働させた。**Codexがしばらく代理で担当する可能性があるため、
+判断の根拠と踏んだ落とし穴を残す。**
+
+## G-1. 何が動いているか（2026-08-29 20:01 時点の実測）
+
+```
+📡 公式SNS 対象 14 アカウント中 11 件から投稿 193 件を回収
+   カテゴリ「SNS」: 新規追加 4 件 / スキップ 189 件
+```
+
+| 媒体 | 件数 | 状態 |
+|---|---|---|
+| X（日本語6・英語2・韓国語2） | 10 | 正常。毎時4件前後の新着 |
+| Reddit（r/WutheringWaves） | 1 | 正常。RSSHubを介さない |
+| BiliBili 2件・Weibo 1件 | 3 | **未解決**（G-5参照） |
+
+画面側は動画一覧に「SNS」タブを新設した。媒体・言語・アカウント・未読で
+絞り込め、投稿日時で並べ替えられる。中国語・韓国語は日本語に訳し、原文は
+ボタンで確認できる。収集対象のアカウント一覧も画面から見られる。
+
+## G-2. 追加・変更したファイル
+
+| ファイル | 役割 |
+|---|---|
+| `scraper/sns_collector.py` | 新規。収集の本体 |
+| `scraper/official_accounts.json` | 新規。45アカウントの一覧。`collect: true` の14件が対象 |
+| `scraper/purge_sns_posts.py` | 新規。媒体を指定して行をゴミ箱へ移す（作りを直した後の入れ替え用） |
+| `scraper/tests/test_sns_collector.py` | 新規。34件。落とし穴を再発させないための番人 |
+| `src/app/api/media/route.js` | 新規。Twitterの動画を中継する（G-4-3参照） |
+| `scraper/trend_collector.py` | ステップ2.6を追加。Notionの列追加、翻訳の呼び出し |
+| `src/app/page.js` / `VideoCard.js` とCSS | SNSタブ・絞り込み・⭐・原文表示 |
+| `.github/workflows/update_trends.yml` | RSSHubの接続情報を渡す2行 |
+| `docs/railway-rsshub-setup.html` | RSSHub設置の手順書（オーナー向け） |
+
+**アカウントの増減はコードではなく `official_accounts.json` で行う。**
+画面側も同じファイルを読んでいるので、片方だけ直すと表示と実収集がズレる。
+
+## G-3. 構成（どこで何が動くか）
+
+```
+GitHub Actions（毎時02分）──収集──> Notion ──表示──> Vercel
+       │
+       └──> Railway の RSSHub ──> X / BiliBili / Weibo
+            （Reddit だけは直接読むので、RSSHubが落ちても生き残る）
+```
+
+- RSSHubは**自前ホストが必須**。公開インスタンス(rsshub.app)は自動アクセスを
+  Cloudflareで丸ごと拒否する（実測で確認済み）
+- 接続情報は GitHub Secrets の `RSSHUB_BASE_URL` / `RSSHUB_ACCESS_KEY`
+- Railway側の変数: `TWITTER_AUTH_TOKEN`, `ACCESS_KEY`, `NODE_ENV`,
+  `PLAYWRIGHT_BROWSERS_PATH`
+- 費用は実測で**月$2.7程度**（メモリ193MB × $10/GB/月 が主）。上限1000MBで
+  頭打ちなので、最悪でも月$10を超えない
+
+## G-4. 踏んだ落とし穴（同じ轍を踏まないこと）
+
+### G-4-1. 「HTTP 200 なのに 0 件」が最も危険
+
+TikTokは常にこの形で返す。`config_intelligence.json` にも過去の無効化メモが
+残っており、稼働開始から一度も取れていなかった。エラーで止まらないため
+「正常終了・0件」が延々と続き、取り逃しに気づけない。
+
+**0件と失敗は必ず数えてログに出すこと。** 対象数と取得数を混ぜて
+「14アカウントから20件」と書くと、13件見送られていても全部から取れたように
+読める。実際に一度そう書いて指摘を受けた。
+
+### G-4-2. 翻訳は黙って失敗する
+
+`translate_if_needed` は例外を握りつぶして原文を返す。そのため
+
+- 毎時の巡回で取り直した投稿を丸ごと訳し、1回で百件近く呼んで弾かれ、
+  **一度も訳せていなかった**（ハングルのまま39件並んでいた）
+- 翻訳先が落ちたときの**エラー画面の文面がタイトルとして7件登録されていた**
+  （`Error 500 (Server Error)!!1500.That's an error`）
+
+対処として、訳すのは**Notionに未登録の投稿だけ**に絞り、エラー画面と判別
+できる文面は失敗として扱い、失敗件数をログに出すようにした。
+
+### G-4-3. Twitterの画像と動画は挙動が違う
+
+| | 他サイトからの読み込み |
+|---|---|
+| 画像 `pbs.twimg.com` | **通る** |
+| 動画 `video.twimg.com` | **参照元(Referer)を見て403で拒否** |
+
+実測:
+```
+参照元なし     → 200 / video/mp4 / 2.3MB（範囲指定も206）
+参照元を付ける → 403 / 0 bytes
+```
+
+そのため `src/app/api/media/route.js` で中継している。中継先は
+`video.twimg.com` だけに絞ってある。**絞りを外すと踏み台になる。**
+
+さらに、この中継で二次被害を出した。範囲指定の応答を共有の置き場に
+キャッシュさせたため、**動画要素が末尾を読みに来たときの応答（末尾10KB）が
+居座り、以後どの読み込みにも返って再生できなくなった。** `Vary: Range` と
+`private` で解決。中継の応答を作り替えたときは `VideoCard.js` の
+`/api/media?v=2` の数字を上げて、古い応答を掴んでいるブラウザを救うこと。
+
+### G-4-4. HTMLから取り出したURLは実体参照を戻す
+
+本文はHTMLなので `&` が `&amp;` と書かれている。戻さずに使い、
+`?format=jpg&amp;name=orig` となって**186件の画像が404**になっていた。
+`_clean_url()` を必ず通すこと。
+
+### G-4-5. GitHub Secrets はワークフローに書かないと渡らない
+
+オーナーが正しく登録していたのに、`update_trends.yml` の `env:` に
+並べ忘れていたため、13アカウントが「RSSHub未設定」として見送られ続けた。
+**環境変数を増やしたらワークフロー側も直す。**
+
+## G-5. 未解決：BiliBili と Weibo が HTTP 503
+
+**この3件だけが残っている。** 原因は判明済みで、RSSHubがブラウザを
+起動できないこと。BiliBiliの動態もWeiboもブラウザ描画を必要とする
+（`weibo/user.ts` は `requirePuppeteer: true`）。
+
+```
+Error: browserType.launch: Executable doesn't exist at
+  /app/node_modules/.cache/ms-playwright/chromium_headless_shell-1234/
+  chrome-headless-shell-linux64/chrome-headless-shell
+```
+
+`PLAYWRIGHT_BROWSERS_PATH` を追加して探す場所は正しくなったが、そこに
+**軽量版ブラウザの実体が無い**。RSSHubのDockerfileを読んだ限り、
+
+```dockerfile
+RUN echo "CHROMIUM_EXECUTABLE_PATH=$_chrome_path" | tee /app/.env
+COPY --from=docker-minifier /app /app    # ← 直後に /app を丸ごと上書き
+```
+
+書き込んだ設定が次の行で消える作りになっており、**イメージ側の問題**。
+
+**次に試すこと（この順で）**
+
+1. Railwayの変数に `CHROMIUM_EXECUTABLE_PATH` を追加。値は
+   `/app/node_modules/.cache/ms-playwright/chromium-1234/chrome-linux/chrome`
+   （`1234` はエラーの版数から推測。**外れる可能性がある**）
+2. 外れたらRailwayのコンソールで `ls /app/node_modules/.cache/ms-playwright`
+   を実行し、実際のフォルダ名からパスを組む
+   （※オーナーはコンソールにコピペできないため、短いコマンドにすること）
+3. それも駄目なら `browserless/chrome` を別サービスとして立て、
+   `PLAYWRIGHT_WS_ENDPOINT` で繋ぐ。RSSHub公式の docker-compose と同じ構成。
+   確実だが月$1〜2増える。**費用が増えるので必ずオーナーの承認を取ること**
+
+**急ぎではない。** 日本語の一次情報はX側で揃っており、オーナーからも
+「後回しでも支障ない」との認識を共有済み。
+
+## G-6. 触ってはいけないもの・注意
+
+- **未追跡の `.agents/`, `.claude/`, `skills-lock.json` には触らない**
+- 除外ワード（逆境深塔・マトリクス・クライシス）は**意図的**。外さない
+- **削除は必ずオーナーの確認を取る。** `purge_sns_posts.py` は既定が下見で、
+  `--apply` を付けたときだけ動く。採用済み・制作中などの行は保護される
+- 本番Notionを自動テストに使わない
+- CIの `npm ci` は `package-lock.json` のズレで失敗し続けている。**既知・保留**。
+  設定変更のたびにエラーメールが飛ぶが、オーナーは「今回はいいです」との判断
+- YouTubeクォータは2本で1日約14,900/20,000。**手動実行1回で約620消費する。**
+  検証は原則、毎時の定期巡回の結果で行うこと
+
+## G-7. 作業の進め方（オーナーから受けた指摘）
+
+このセッションで実際に叱責を受けた点。**代理で入る場合も同じ基準で。**
+
+1. **確かめずに報告しない。** 「動くはず」で報告して2度手戻りした。
+   ブラウザから実際に触れる手段があるなら、自分で確認してから報告する
+2. **費用が発生する提案は、単価と概算を先に出す。** 「まず数日動かして実測を」
+   と言って課金を先行させ、不信を招いた
+3. **数字を混ぜない。** 対象数と成功数、書き込み数と変更数を分けて出す
+4. **初心者向けに書く。** git用語（commit/push）は通じない。結果で説明する
+5. 手順はチャットに流さずHTMLファイルにする（`docs/` 配下）
+
+## G-8. 検証コマンド
+
+```bash
+npm run build          # 通ること
+npm run lint           # エラー0（警告4件は既存）
+cd scraper && python -m pytest tests/ -q   # 91件 通過
+```
+
+## G-9. Codexへの依頼
+
+1. 本追記7と `scraper/sns_collector.py` を読み、現状を把握する
+2. G-5の1を試すかどうか、**オーナーに提示して判断を仰ぐ**
+   （費用が増える3を選ぶ場合は必ず承認を取る）
+3. 手を入れる前に G-4 を読むこと。**同じ落とし穴を再度踏まないため、
+   テストが34件用意してある。消さないこと**
