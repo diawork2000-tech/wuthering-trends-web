@@ -3,31 +3,59 @@
   "items": [
     {
       "id": "card-0",
-      "title": "鳴潮 9月11日 - 徳島新聞デジタル",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9xVXZ3Q1dwN0ttM3R5MXBLU2J0a0J3c2RlbVN6OURscjRGY1pSQUJfOVJraU5ka1kwRnpnQTJpM0NQaFBMY09kZV94V0thZFZTbm1rN2R3?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮 9月11日&nbsp;&nbsp;徳島新聞デジタル",
-      "reason": "約3時間前に出たばかりの新しい情報 ／ 競合が扱っている注目ワード「SP」を含む",
+      "title": "海外コミュニティにおける『鳴潮』質問メガスレッドと各種ガイド集",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1wd2vwl/daily_questions_megathread_september_11_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外フォーラム「r/WutheringWaves」にて定期更新されている質問メガスレッドの概要。投稿内では、初心者の質問やゲーム体験の共有、キーワード検索による過去ログ確認が推奨されている。さらに役立つリンクとして、u/Zapphiren氏によるスターターガイド、u/nihilistfun氏によるフルバージョン1.Xストーリーアーカイブ、Chasey氏によるキャラクタービルドガイド、u/Aizen_Myo氏による簿記データ、デバイス要件などが紹介されており、プレイヤー間の疑問解消プラットフォームとして機能している。",
+      "reason": "海外コミュニティでどのような攻略情報（ビルドやストーリーアーカイブなど）が求められ、共有されているかのトレンドを把握し、日本人プレイヤー向けの解説動画の需要を測るため。",
       "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-09-11",
-      "createdTime": "2026-09-11T08:01:44.745392+00:00"
+      "createdTime": "2026-09-11T11:17:01.130596+00:00"
     },
     {
       "id": "card-1",
-      "title": "【競合バズ実績】Someone said he is great with his hands😭 #wutheringwaves #wuwa #wuwacreator #fyp #wuwacontest36",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=hPQI6OgRDDI",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nWuthering waves jingran he is great with his hands🗿 #鳴潮 #鸣潮 #kurogames #shorts #명조: 워더링 웨이브 #wuwashorts\n\n（📊 バズ実績: deoxy.y にて現在 2,201 再生 / 高評価 92 / 約 278 再生毎時）",
-      "reason": "競合チャンネルで約 278 再生/時 のペースで伸びている実績データに基づく抽出",
-      "score": 74,
-      "viewCount": 2201,
-      "viewsPerHour": 277.5,
+      "title": "Steam売上動向：『鳴潮』をはじめとする運用型タイトルの好調が持続",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiREFVX3lxTE1oZlZSd1RNclZqblBsS0R1VUFmcEhYN1FNSUNNVHh5WXNfVGdrcE9VVThqVG1fLXRfVzFSR1JqQ1VuMzVX?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\ngamebizの報道によると、9月11日時点のSteam動向において『東方紅魔郷:New Classic』が首位を維持し、『WARDOGS』が追随する中、『PUBG』や『鳴潮』をはじめとする運用型タイトルの好調な推移が目立っていると報告されている。",
+      "reason": "プラットフォーム上での商業的な勢いやアクティブユーザーの堅調さを裏付けるデータであり、ゲームの現状の盛り上がりを端的に伝えるトピックとして有用なため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-09-11",
-      "createdTime": "2026-09-11T08:01:44.745431+00:00"
+      "createdTime": "2026-09-11T11:17:01.130624+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "『鳴潮』等身＆ミニキャラ新規描き下ろしイラストグッズの事後通販が決定",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE91ZmVFOGttbC1aYzFfdVoySDBXdEpqWlBUVUtab25Jd3Bqc003dW5kU3lfbGxWNE0tNVo1ajM1TWNUbm5fRnY2WDVxdktTbXp0NGNNNw?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\neeo公式より、『鳴潮』の等身イラストおよびミニキャラの新規イラストを用いた各種グッズに関して、一部商品の事後通販が行われることが公表された。",
+      "reason": "公式グッズ展開や新規イラストに対するファンの関心は高く、イベントに参加できなかった層への購買情報としてタイムリーな需要があるため。",
+      "score": 74,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-09-11",
+      "createdTime": "2026-09-11T11:17:01.130638+00:00"
+    },
+    {
+      "id": "card-3",
+      "title": "3Dガチャゲームのユニット説明とチュートリアルの課題（鳴潮への言及）",
+      "sourceType": "海外Redditフォーラム ガチャゲー最前線",
+      "sourceUrl": "https://www.reddit.com/r/gachagaming/comments/1wd2gar/what_are_some_3d_gachas_that_explain_their_unit/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外ガチャゲーフォーラムにおける「ゲーム内でユニットの仕組みを分かりやすく解説してくれる3Dガチャはあるか」という議論の紹介。投稿者は、各ユニットに固有の用語や複雑なバフ/デバフが多すぎること、スキルやパッシブの確認に多数の画面遷移が必要なこと、ストーリー中のゲスト使用時やお試しステージでは実際の運用感が掴みにくい点などを指摘している。その中で他社タイトル（NTEやエンドフィールド）とともに『ウーワ（鳴潮）』についても同様の傾向があると挙げられている。",
+      "reason": "アクション性の高い3Dガチャにおいて「ゲーム内説明だけではスキルやローテーションの理解が難しい」というユーザー共通の悩みを取り上げ、それを補完する分かりやすい解説ショート動画の存在意義を提示できるため。",
+      "score": 72,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-09-11",
+      "createdTime": "2026-09-11T11:17:01.130649+00:00"
     }
   ]
 }
