@@ -1,5 +1,16 @@
 [
   {
+    "timestamp": "2026-09-14 10:31:24",
+    "status": "Success",
+    "total_harvested": 117,
+    "final_selected": 1,
+    "breakdown": {
+      "YouTube競合 (別枠全件枠)": 1
+    },
+    "gemini_topic_status": "failed",
+    "gemini_competitor_status": "failed"
+  },
+  {
     "timestamp": "2026-09-14 07:17:27",
     "status": "Success",
     "total_harvested": 114,
@@ -600,14 +611,5 @@
     },
     "gemini_topic_status": "failed",
     "gemini_competitor_status": "no_items"
-  },
-  {
-    "timestamp": "2026-09-07 16:17:40",
-    "status": "Success",
-    "total_harvested": 107,
-    "final_selected": 0,
-    "breakdown": {},
-    "gemini_topic_status": "not_configured",
-    "gemini_competitor_status": "not_configured"
   }
 ]
