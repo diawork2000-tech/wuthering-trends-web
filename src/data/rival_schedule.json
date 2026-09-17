@@ -1,6 +1,6 @@
 {
   "_note": "競合タイトルのアップデート日程。鳴潮本体の予定(upcoming_schedule.json)とは別ファイルにしてある。混ぜるとネタのスコア計算(schedule_boost)が他ゲームの名前に反応してしまうため。versions は自動収集(collect_rival_schedule.py)が上書きするので、手で直す場合は confirmed:true の行だけにすること。",
-  "updated_at": "2026-09-16T02:02:48.035192+00:00",
+  "updated_at": "2026-09-17T03:48:33.755462+00:00",
   "games": [
     {
       "id": "genshin",
@@ -26,7 +26,7 @@
           "title": "冥府へのレクイエム",
           "note": "",
           "new_character_first": true,
-          "new_character_second": true
+          "new_character_second": false
         },
         {
           "version": "7.2",
@@ -34,16 +34,16 @@
           "confirmed": true,
           "title": "",
           "note": "",
-          "new_character_first": null,
-          "new_character_second": null
+          "new_character_first": false,
+          "new_character_second": false
         },
         {
           "version": "7.3",
           "title": "",
           "date": "2026-12-16",
           "confirmed": true,
-          "new_character_first": null,
-          "new_character_second": null,
+          "new_character_first": false,
+          "new_character_second": false,
           "note": ""
         },
         {
@@ -119,7 +119,7 @@
           "note": "Ver3.1の終了予定日",
           "title": "秘密と、過去と、彼女たちと",
           "new_character_first": true,
-          "new_character_second": true
+          "new_character_second": false
         }
       ],
       "has_phases": true,
@@ -136,10 +136,10 @@
         {
           "version": "1.3",
           "title": "",
-          "date": "2026-06-03",
+          "date": "2026-09-09",
           "confirmed": true,
           "new_character_first": true,
-          "new_character_second": true,
+          "new_character_second": false,
           "note": ""
         }
       ],
@@ -167,35 +167,35 @@
   ],
   "source_health": {
     "genshin": {
-      "last_fetch_ok_at": "2026-09-16T02:01:56.380627+00:00",
+      "last_fetch_ok_at": "2026-09-17T03:47:43.004834+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-09-16T02:01:56.380627+00:00",
+      "last_parse_ok_at": "2026-09-17T03:47:43.004834+00:00",
       "consecutive_parse_empty": 0
     },
     "hsr": {
-      "last_fetch_ok_at": "2026-09-16T02:01:56.380627+00:00",
+      "last_fetch_ok_at": "2026-09-17T03:47:43.004834+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-09-16T02:01:56.380627+00:00",
+      "last_parse_ok_at": "2026-09-17T03:47:43.004834+00:00",
       "consecutive_parse_empty": 0
     },
     "zzz": {
-      "last_fetch_ok_at": "2026-09-16T02:01:56.380627+00:00",
+      "last_fetch_ok_at": "2026-09-17T03:47:43.004834+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-09-16T02:01:56.380627+00:00",
+      "last_parse_ok_at": "2026-09-17T03:47:43.004834+00:00",
       "consecutive_parse_empty": 0
     },
     "nte": {
-      "last_fetch_ok_at": "2026-09-16T02:01:56.380627+00:00",
+      "last_fetch_ok_at": "2026-09-17T03:47:43.004834+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-09-16T02:01:56.380627+00:00",
+      "last_parse_ok_at": "2026-09-17T03:47:43.004834+00:00",
       "consecutive_parse_empty": 0,
       "last_parse_empty_at": "2026-08-29T15:16:13.820990+00:00"
     },
     "endfield": {
-      "last_fetch_ok_at": "2026-09-16T02:01:56.380627+00:00",
+      "last_fetch_ok_at": "2026-09-17T03:47:43.004834+00:00",
       "consecutive_failures": 0,
-      "last_parse_empty_at": "2026-09-16T02:01:56.380627+00:00",
-      "consecutive_parse_empty": 5,
+      "last_parse_empty_at": "2026-09-17T03:47:43.004834+00:00",
+      "consecutive_parse_empty": 6,
       "last_parse_ok_at": "2026-09-10T16:33:40.267778+00:00"
     }
   }
