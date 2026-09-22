@@ -1,6 +1,6 @@
 {
   "_note": "競合タイトルのアップデート日程。鳴潮本体の予定(upcoming_schedule.json)とは別ファイルにしてある。混ぜるとネタのスコア計算(schedule_boost)が他ゲームの名前に反応してしまうため。versions は自動収集(collect_rival_schedule.py)が上書きするので、手で直す場合は confirmed:true の行だけにすること。",
-  "updated_at": "2026-09-21T11:17:18.097557+00:00",
+  "updated_at": "2026-09-22T13:18:00.304699+00:00",
   "games": [
     {
       "id": "genshin",
@@ -148,7 +148,7 @@
         {
           "version": "1.4",
           "title": "",
-          "date": "2026-09-30",
+          "date": "2026-09-09",
           "confirmed": true,
           "new_character_first": true,
           "new_character_second": true,
@@ -179,35 +179,35 @@
   ],
   "source_health": {
     "genshin": {
-      "last_fetch_ok_at": "2026-09-21T11:16:20.400538+00:00",
+      "last_fetch_ok_at": "2026-09-22T13:16:32.211957+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-09-21T11:16:20.400538+00:00",
+      "last_parse_ok_at": "2026-09-22T13:16:32.211957+00:00",
       "consecutive_parse_empty": 0
     },
     "hsr": {
-      "last_fetch_ok_at": "2026-09-21T11:16:20.400538+00:00",
+      "last_fetch_ok_at": "2026-09-22T13:16:32.211957+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-09-21T11:16:20.400538+00:00",
+      "last_parse_ok_at": "2026-09-22T13:16:32.211957+00:00",
       "consecutive_parse_empty": 0
     },
     "zzz": {
-      "last_fetch_ok_at": "2026-09-21T11:16:20.400538+00:00",
+      "last_fetch_ok_at": "2026-09-22T13:16:32.211957+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-09-21T11:16:20.400538+00:00",
+      "last_parse_ok_at": "2026-09-22T13:16:32.211957+00:00",
       "consecutive_parse_empty": 0
     },
     "nte": {
-      "last_fetch_ok_at": "2026-09-21T11:16:20.400538+00:00",
+      "last_fetch_ok_at": "2026-09-22T13:16:32.211957+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-09-21T11:16:20.400538+00:00",
+      "last_parse_ok_at": "2026-09-22T13:16:32.211957+00:00",
       "consecutive_parse_empty": 0,
       "last_parse_empty_at": "2026-08-29T15:16:13.820990+00:00"
     },
     "endfield": {
-      "last_fetch_ok_at": "2026-09-21T11:16:20.400538+00:00",
+      "last_fetch_ok_at": "2026-09-22T13:16:32.211957+00:00",
       "consecutive_failures": 0,
-      "last_parse_empty_at": "2026-09-21T11:16:20.400538+00:00",
-      "consecutive_parse_empty": 10,
+      "last_parse_empty_at": "2026-09-22T13:16:32.211957+00:00",
+      "consecutive_parse_empty": 11,
       "last_parse_ok_at": "2026-09-10T16:33:40.267778+00:00"
     }
   }
