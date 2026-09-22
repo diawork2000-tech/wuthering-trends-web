@@ -1,45 +1,45 @@
 {
-  "updated_at": "2026-09-20T19:02:12.695717+00:00",
+  "updated_at": "2026-09-22T10:02:25.882430+00:00",
   "events": [
     {
-      "character": "Ver3.6「幻雲纏いし灯の影、俗世憂いし剣の心」",
+      "character": "Ver.3.6「幻雲纏いし灯の影、俗世憂いし剣の心」",
       "event": "バージョンアップデート期間",
       "category": "version",
       "start_date": "2026-08-20",
       "end_date": "2026-09-29",
       "confirmed": true,
-      "notes": "Ver3.6実装期間"
+      "notes": "Ver.3.6開催期間"
     },
     {
       "character": "景燃",
-      "event": "新星5共鳴者限定集音（バナー）",
+      "event": "限定キャラガチャ「幾千の導き」開催",
       "category": "character",
       "start_date": "2026-09-10",
       "end_date": "2026-09-29",
       "confirmed": true,
-      "notes": "Ver3.6後半限定キャラガチャ"
+      "notes": "Ver.3.6後半 新星5キャラピックアップ"
     },
     {
       "character": "雲棲みの翼",
-      "event": "新星5武器限定集音（バナー）",
+      "event": "限定武器ガチャ開催",
       "category": "weapon",
       "start_date": "2026-09-10",
       "end_date": "2026-09-29",
       "confirmed": true,
-      "notes": "景燃モチーフ長刃武器ピックアップ"
+      "notes": "景燃モチーフ武器ピックアップ"
     },
     {
       "character": "緋雪",
-      "event": "星5共鳴者復刻集音（バナー）",
+      "event": "復刻キャラガチャ「灼霜」開催",
       "category": "character",
       "start_date": "2026-09-10",
       "end_date": "2026-09-29",
       "confirmed": true,
-      "notes": "Ver3.6後半復刻キャラガチャ"
+      "notes": "Ver.3.6後半 初復刻ピックアップ"
     },
     {
-      "character": "灼霜",
-      "event": "星5武器復刻集音（バナー）",
+      "character": "赤いスズラン",
+      "event": "復刻武器ガチャ開催",
       "category": "weapon",
       "start_date": "2026-09-10",
       "end_date": "2026-09-29",
@@ -48,16 +48,16 @@
     },
     {
       "character": "モーニエ",
-      "event": "星5共鳴者復刻集音（バナー）",
+      "event": "復刻キャラガチャ「スターキャリブレーター」開催",
       "category": "character",
       "start_date": "2026-09-10",
       "end_date": "2026-09-29",
       "confirmed": true,
-      "notes": "Ver3.6後半復刻キャラガチャ"
+      "notes": "Ver.3.6後半 復刻ピックアップ"
     },
     {
-      "character": "スターキャリブレーター",
-      "event": "星5武器復刻集音（バナー）",
+      "character": "ジェミニ・ファンガス",
+      "event": "復刻武器ガチャ開催",
       "category": "weapon",
       "start_date": "2026-09-10",
       "end_date": "2026-09-29",
@@ -66,12 +66,12 @@
     },
     {
       "character": "雲煙のプレゼント",
-      "event": "ログインイベント開催",
+      "event": "ログインボーナスイベント開催",
       "category": "event",
       "start_date": "2026-08-20",
       "end_date": "2026-09-29",
       "confirmed": true,
-      "notes": "Ver3.6通期ログインボーナス"
+      "notes": "金髓の波模様・唱喚の渦模様配布"
     },
     {
       "character": "群響シミュレーション",
@@ -80,7 +80,7 @@
       "start_date": "2026-08-22",
       "end_date": "2026-09-29",
       "confirmed": true,
-      "notes": "星声×1200、異相・万囮の檻・朽躯"
+      "notes": "星声1200、異相・万囮の檻・朽躯"
     },
     {
       "character": "清らかな調べ、過ぎゆく歳月を記す",
@@ -89,7 +89,7 @@
       "start_date": "2026-09-03",
       "end_date": "2026-09-21",
       "confirmed": true,
-      "notes": "星声×400"
+      "notes": "星声400"
     },
     {
       "character": "夢がまだ、響き続けているなら",
@@ -98,7 +98,7 @@
       "start_date": "2026-09-10",
       "end_date": "2026-09-29",
       "confirmed": true,
-      "notes": "星声×600"
+      "notes": "星声600"
     },
     {
       "character": "潮汐の探り手",
@@ -107,7 +107,7 @@
       "start_date": "2026-09-17",
       "end_date": "2026-09-29",
       "confirmed": true,
-      "notes": "星声×800"
+      "notes": "星声800"
     },
     {
       "character": "響き渡る音弦",
@@ -119,89 +119,53 @@
       "notes": "1日3回まで無音区報酬2倍"
     },
     {
-      "character": "Ver3.7予告特別通信シリアルコード",
-      "event": "記念ギフトコード有効期限",
-      "category": "event",
-      "start_date": "2026-09-19",
-      "end_date": "2026-09-22",
-      "confirmed": true,
-      "notes": "WAKINGMOON/FINDSENTINEL/FALLINGSANCTUM"
-    },
-    {
-      "character": "Ver3.7「鏡に鎖す妄世、心で照らす紅塵」",
-      "event": "バージョン大型アップデート",
+      "character": "Ver.3.7「鏡に鎖す妄世、心で照らす紅塵」",
+      "event": "バージョンアップデート",
       "category": "version",
       "start_date": "2026-09-30",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "新エリア「夢枢天羅」実装"
+      "notes": "Ver.3.7大型アップデート"
     },
     {
-      "character": "潮汐任務4章4幕「夢枢の有り様、心のまま生ず」",
-      "event": "メインストーリー新幕実装",
+      "character": "第4章第4幕「夢枢の有り様、心のまま生ず」",
+      "event": "潮汐任務（メインストーリー）実装",
       "category": "story",
       "start_date": "2026-09-30",
       "end_date": null,
       "confirmed": true,
-      "notes": "漂泊者と鎖暝が心の痕跡を探す物語"
-    },
-    {
-      "character": "奇譚任務「璇心、月の如く世の情を寄す」",
-      "event": "奇譚ストーリー任務実装",
-      "category": "story",
-      "start_date": "2026-09-30",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "フルボイス演出付き新ストーリー"
-    },
-    {
-      "character": "危地任務「匣の中の奇譚・蒼狐記」",
-      "event": "危地任務実装",
-      "category": "story",
-      "start_date": "2026-09-30",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "バイクペイント「幻寂の狐影」報酬"
-    },
-    {
-      "character": "危地任務「幾年月、月を待ちて」",
-      "event": "危地任務実装",
-      "category": "story",
-      "start_date": "2026-09-30",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "バイクペイント「千灯の狐影」報酬"
+      "notes": "Ver.3.7新ストーリー開幕"
     },
     {
       "character": "心",
-      "event": "新星5共鳴者限定集音（バナー）",
+      "event": "新キャラガチャ実装・開催",
       "category": "character",
       "start_date": "2026-09-30",
       "end_date": "2026-10-22",
       "confirmed": true,
-      "notes": "Ver3.7前半、電導・増幅器キャラ"
+      "notes": "Ver.3.7前半 星5電導・増幅器キャラ"
     },
     {
       "character": "玉殿に咲き満ちる玄華",
-      "event": "新星5武器限定集音（バナー）",
+      "event": "新武器ガチャ開催",
       "category": "weapon",
       "start_date": "2026-09-30",
       "end_date": "2026-10-22",
       "confirmed": true,
-      "notes": "心モチーフ増幅器武器ピックアップ"
+      "notes": "心のモチーフ武器ピックアップ"
     },
     {
       "character": "ユーノ",
-      "event": "星5共鳴者復刻集音（バナー）",
+      "event": "復刻キャラガチャ開催",
       "category": "character",
       "start_date": "2026-09-30",
       "end_date": "2026-10-22",
       "confirmed": true,
-      "notes": "Ver3.7前半復刻ガチャ"
+      "notes": "Ver.3.7前半 復刻ピックアップ"
     },
     {
       "character": "万物を書き留める月相",
-      "event": "星5武器復刻集音（バナー）",
+      "event": "復刻武器ガチャ開催",
       "category": "weapon",
       "start_date": "2026-09-30",
       "end_date": "2026-10-22",
@@ -210,16 +174,16 @@
     },
     {
       "character": "千咲",
-      "event": "星5共鳴者復刻集音（バナー）",
+      "event": "復刻キャラガチャ開催",
       "category": "character",
       "start_date": "2026-09-30",
       "end_date": "2026-10-22",
       "confirmed": true,
-      "notes": "Ver3.7前半復刻ガチャ"
+      "notes": "Ver.3.7前半 復刻ピックアップ"
     },
     {
       "character": "曇斬",
-      "event": "星5武器復刻集音（バナー）",
+      "event": "復刻武器ガチャ開催",
       "category": "weapon",
       "start_date": "2026-09-30",
       "end_date": "2026-10-22",
@@ -228,34 +192,34 @@
     },
     {
       "character": "鎖暝",
-      "event": "新星5共鳴者限定集音（バナー）",
+      "event": "新キャラガチャ実装・開催",
       "category": "character",
       "start_date": "2026-10-22",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "Ver3.7後半、電導・迅刀キャラ"
+      "notes": "Ver.3.7後半 星5電導・迅刀キャラ"
     },
     {
       "character": "沈冥",
-      "event": "新星5武器限定集音（バナー）",
+      "event": "新武器ガチャ開催",
       "category": "weapon",
       "start_date": "2026-10-22",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "鎖暝モチーフ迅刀武器ピックアップ"
+      "notes": "鎖暝モチーフ武器ピックアップ"
     },
     {
       "character": "リンネー",
-      "event": "星5共鳴者復刻集音（バナー）",
+      "event": "復刻キャラガチャ開催",
       "category": "character",
       "start_date": "2026-10-22",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "Ver3.7後半復刻ガチャ"
+      "notes": "Ver.3.7後半 復刻ピックアップ"
     },
     {
       "character": "スペクトル・ブラスター",
-      "event": "星5武器復刻集音（バナー）",
+      "event": "復刻武器ガチャ開催",
       "category": "weapon",
       "start_date": "2026-10-22",
       "end_date": "2026-11-11",
@@ -264,16 +228,16 @@
     },
     {
       "character": "ルシラー",
-      "event": "星5共鳴者初復刻集音（バナー）",
+      "event": "復刻キャラガチャ開催",
       "category": "character",
       "start_date": "2026-10-22",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "Ver3.7後半、初復刻ガチャ"
+      "notes": "Ver.3.7後半 初復刻ピックアップ"
     },
     {
       "character": "フリーズフレーム",
-      "event": "星5武器復刻集音（バナー）",
+      "event": "復刻武器ガチャ開催",
       "category": "weapon",
       "start_date": "2026-10-22",
       "end_date": "2026-11-11",
@@ -287,34 +251,34 @@
       "start_date": "2026-09-30",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "Ver3.7ログインボーナス（金髓の波模様×5、唱喚の渦模様×5）"
+      "notes": "金髓の波模様*5、唱喚の渦模様*5"
     },
     {
       "character": "傍らに響く雨音のプレゼント",
-      "event": "限定ガチャ石配布ログインイベント",
+      "event": "ログインイベント開催",
       "category": "event",
       "start_date": "2026-10-22",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "金髓の波模様×10等配布"
+      "notes": "限定ガチャ10連分（金髓の波模様*10等）"
     },
     {
       "character": "月が照らす道",
-      "event": "チャージ報酬・星5共鳴者交換イベント",
+      "event": "チャージ報酬イベント開催",
       "category": "event",
       "start_date": "2026-09-30",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "カルロッタ/ショアキーパー/フィービーから1体選択可能"
+      "notes": "星5共鳴者選択（カルロッタ、ショアキーパー、フィービー等）"
     },
     {
       "character": "匣の中の夢",
-      "event": "新エリア探索イベント開催",
+      "event": "エリア探索イベント開催",
       "category": "event",
       "start_date": "2026-09-30",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "新エリア「夢枢天羅」探索・任務クリアイベント"
+      "notes": "新エリア「夢枢天羅」探索・任務イベント"
     },
     {
       "character": "過ぎし夢の契り",
@@ -323,16 +287,16 @@
       "start_date": "2026-09-30",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "心域エリアの景色と記憶を撮影するイベント"
+      "notes": "心域エリアの景色と記憶の撮影"
     },
     {
       "character": "勇者ダンダン大乱闘",
-      "event": "シミュレーション戦闘ミニイベント開催",
+      "event": "シミュレーションミニイベント開催",
       "category": "event",
       "start_date": "2026-09-30",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "準備と自動戦闘フェーズによるミニイベント"
+      "notes": "準備と自動戦闘フェーズのシミュレーション戦"
     },
     {
       "character": "無音イレイサー",
@@ -341,16 +305,16 @@
       "start_date": "2026-09-30",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "盤上のピースを繋げて消すパズルゲーム"
+      "notes": "盤上ピースを繋げて消すパズルゲーム"
     },
     {
       "character": "天工の探し物",
-      "event": "ウェーブ制戦闘イベント開催",
+      "event": "ウェーブ戦闘イベント開催",
       "category": "event",
       "start_date": "2026-09-30",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "特殊バフを得ながら戦う挑戦イベント"
+      "notes": "特殊バフを得ながら戦う戦闘コンテンツ"
     },
     {
       "character": "潮騒探検・玄方地界",
@@ -359,25 +323,25 @@
       "start_date": "2026-09-30",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "玄方地界を対象とした依頼イベント"
+      "notes": "玄方地界エリアの依頼探索"
     },
     {
       "character": "朝月の魚群",
-      "event": "公式Webイベント開催",
+      "event": "Webイベント開催",
       "category": "event",
       "start_date": "2026-09-30",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "Ver3.7開催記念Webイベント"
+      "notes": "Ver.3.7記念Webイベント"
     },
     {
       "character": "ソラリス復帰招待",
-      "event": "Web招待イベント開催",
+      "event": "Web復帰招待イベント開催",
       "category": "event",
       "start_date": "2026-09-30",
       "end_date": "2026-11-11",
       "confirmed": true,
-      "notes": "プレイヤー復帰支援Webイベント"
+      "notes": "プレイヤー招待キャンペーン"
     }
   ]
 }
