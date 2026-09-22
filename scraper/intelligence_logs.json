@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-09-22 12:31:44",
+    "status": "Success",
+    "total_harvested": 113,
+    "final_selected": 2,
+    "breakdown": {
+      "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上": 1,
+      "YouTube競合 (別枠全件枠)": 1
+    },
+    "gemini_topic_status": "not_configured",
+    "gemini_competitor_status": "not_configured"
+  },
+  {
     "timestamp": "2026-09-22 09:16:45",
     "status": "Success",
     "total_harvested": 126,
@@ -593,19 +605,6 @@
       "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上": 3,
       "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 2,
       "YouTube競合 (別枠全件枠)": 3
-    },
-    "gemini_topic_status": "failed",
-    "gemini_competitor_status": "failed"
-  },
-  {
-    "timestamp": "2026-09-15 19:01:58",
-    "status": "Success",
-    "total_harvested": 115,
-    "final_selected": 6,
-    "breakdown": {
-      "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ": 4,
-      "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 1,
-      "YouTube競合 (別枠全件枠)": 1
     },
     "gemini_topic_status": "failed",
     "gemini_competitor_status": "failed"
