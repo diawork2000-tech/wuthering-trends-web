@@ -3,17 +3,59 @@
   "items": [
     {
       "id": "card-0",
-      "title": "【競合バズ実績】画伯による漂泊者とカルテジアの簡単アブ#鳴潮 #wutheringwaves #shorts",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=bDmtrZZhNvo",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n画伯による漂泊者とカルテジアの簡単アブ#鳴潮 #wutheringwaves #shorts に関するキャラクター性能評価、パーティ組み上げや立ち回り攻略の詳細論証。\n\n（📊 バズ実績: hiragi-e4x にて現在 1,510 再生 / 高評価 22 / 約 85 再生毎時）",
-      "reason": "競合チャンネルで約 85 再生/時 のペースで伸びている実績データに基づく抽出",
-      "score": 68,
-      "viewCount": 1510,
-      "viewsPerHour": 85.0,
+      "title": "新ボス「デニア」は作中最高難度？攻撃頻度と約3000ダメージの猛攻に苦戦するプレイヤーの反応",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1wqfw5g/denia_has_gotta_be_the_hardest_boss_in_the_game/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外コミュニティにおいて、ボス「デニア（Denia）」がゲーム内で最も難しいボスではないかという議論が提起されている。\n投稿者によると、普段のボス戦では攻撃を受け止めるか回避で問題なく立ち回れるのに対し、デニア戦では何が起きているのか把握できないほどの攻撃頻度を誇り、共鳴者に対して1ヒットあたり約3,000ダメージを与えてくるという。\n使用編成として「フロロヴァ／カンタレラ／ショアキーパー」および「チサ／チャッコーナ／カルテシア」を試したものの、ゲーム内の視覚情報の追従が追いつかず苦戦を強いられており、数ヶ月プレイしていなかった自身の腕前の問題なのか、それともデニア自体が客観的に高難易度なのか意見を求めている。",
+      "reason": "ボス「デニア」の高頻度な攻撃パターンや被ダメージ（約3000）という具体的な被弾数値、実戦投入されたパーティ編成が明記されており、高難度アクションに挑むプレイヤーや復帰勢の間で攻略難易度の共感と議論を呼びやすいため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-09-26",
-      "createdTime": "2026-09-26T13:46:19.038737+00:00"
+      "createdTime": "2026-09-26T17:01:47.283043+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "共鳴者「心（Hsin）」の戦闘ショウケース公開！「覚醒の月が昇った」と話題に",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1wqh7wp/wuthering_waves_resonator_combat_showcase_hsin/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外フォーラムにて、共鳴者「心（Hsin）」の戦闘ショウケース（Combat Showcase）が共有された。\n投稿には「All kneel... the Waking Moon has risen!（皆ひざまずけ…覚醒の月が昇った！）」という象徴的なキャッチコピーが添えられており、新共鳴者「心」の戦闘アクションやビジュアル演出に対して大きな関心が寄せられている。",
+      "reason": "新キャラクター「心（Hsin）」の戦闘アクション映像は新情報としての鮮度が高く、ショート動画の尺でモーションの格好良さや特徴を視覚的に伝えるのに最も適した題材であるため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-09-26",
+      "createdTime": "2026-09-26T17:01:47.283095+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "フェス・コンサート衣装に「ブラント」の登場頻度が多すぎると話題に",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/34RRe9wWbdo",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮の公式フェスやコンサートなどの特別衣装展開において、「ブラント」が抜擢される機会が非常に多いことがトピックとなっている。\n投稿ではそのビジュアルの完成度について「かっこいい」と絶賛されており、新キャラクター展開や各種イベント衣装におけるブラントの際立った存在感と優遇ぶりがプレイヤー間で注目を集めている。",
+      "reason": "ゲーム内性能だけでなく、公式イベントやコンサート衣装などの外部展開における特定キャラクターの露出度はキャラクター推しのファンの間で関心が高く、共感を呼びやすいテーマであるため。",
+      "score": 77,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-09-26",
+      "createdTime": "2026-09-26T17:01:47.283112+00:00"
+    },
+    {
+      "id": "card-3",
+      "title": "チサはプレイヤーの存在を認識している？唯一「第四の壁」を越える共鳴者説",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1wpycyh/fun_fact_chisa_is_the_only_character_in_wuthering/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外コミュニティにて、「チサ（Chisa）は鳴潮の中で唯一、我々（プレイヤー）の存在を潜在的に認識しているキャラクターである」という豆知識（Fun Fact）が提示された。\n通常のゲーム内設定にとどまらず、第四の壁を認識しているかのようなチサのキャラクター設定や言動の謎について、プレイヤーの間で興味深い考察材料となっている。",
+      "reason": "キャラクターのメタ的な設定や裏設定に関する小ネタは、短尺で知的好奇心を刺激するショート動画と非常に相性が良く、コメント欄での考察や意見交換を活発化させやすいため。",
+      "score": 74,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-09-26",
+      "createdTime": "2026-09-26T17:01:47.283125+00:00"
     }
   ]
 }
