@@ -3,45 +3,17 @@
   "items": [
     {
       "id": "card-0",
-      "title": "【鳴潮】リューク・ヘルセンの性能評価とおすすめビルド攻略情報",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1aY29CUlUxMnBObEVMMk16M0E0Qm51RGpvNkpEaVRQTUd6TTZRMlQzaWZkWk0xNjIxa2JFdWozN0MtaW03OUw5YW9yWkVRLUVLVENZ?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n大手攻略サイトGameWithに掲載された「リューク・ヘルセン」の攻略まとめ。キャラクターの総合的な評価をはじめ、相性の良いおすすめパーティ編成、推奨される音骸セット、最適な武器の組み合わせが解説されている（※素材内に具体的なビルド数値や編成メンバーの個別名称等の記載なし）。",
-      "reason": "キャラクターの育成方針や最適装備、パーティ編成に関する攻略情報は、プレイヤーの検索需要が常に高く、動画化による視聴維持率が見込めるため。",
-      "score": 68,
+      "title": "海外コミュニティにおける漂泊者向けデイリー質問スレッド",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1wr7wny/daily_questions_megathread_september_27_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外Redditの『鳴潮』コミュニティにおいて、全般的な疑問を持つプレイヤー（漂泊者）に向けた質問専用メガスレッドが用意されている。旅を始めたばかりの初心者からプレイ体験を共有したいユーザーまでを対象とし、個別スレッドの乱立を防ぐための利用ルールや、キーワード検索による事前確認、質問時の具体的な状況説明を推奨するガイドラインが示されている。",
+      "reason": "日常的にプレイヤーが抱く疑問や共有したいトピックが集まる場であり、コミュニティ内でどのような疑問や情報共有の需要があるかを把握するための参考になるため。",
+      "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-09-27",
-      "createdTime": "2026-09-27T12:31:57.439964+00:00"
-    },
-    {
-      "id": "card-1",
-      "title": "鳴潮キャラクターのピザーラコラボ衣装に対する注目と反響",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=saS1Pqa58LU",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nピザーラコラボレーションに伴い登場した各キャラクターの特別衣装ビジュアルを取り上げ、そのクオリティやデザインの良さを解説・紹介している。",
-      "reason": "企業コラボの限定ビジュアルという話題性の高いトピックであり、普段とは異なる衣装デザインがファン層の視覚的興味を強く惹きつけているため。",
-      "score": 58,
-      "viewCount": 1918,
-      "viewsPerHour": 49.7,
-      "mentionCount": 1,
-      "date": "2026-09-27",
-      "createdTime": "2026-09-27T12:31:57.439997+00:00"
-    },
-    {
-      "id": "card-2",
-      "title": "シグリカの復刻未実施に関する現状とユーザーの動向",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=NOiy774R5pI",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nガチャの復刻がまだ来ていないキャラクター「シグリカ」に着目し、復刻の待ち望まれている状況やガチャ実装スケジュールに対する疑問・現状を論説している。",
-      "reason": "未復刻キャラクターの再入手機会やピックアップの時期はプレイヤーの関心・懸念事項として非常に高く、共感やコメント欄での議論を誘発しやすいため。",
-      "score": 54,
-      "viewCount": 1669,
-      "viewsPerHour": 18.8,
-      "mentionCount": 1,
-      "date": "2026-09-27",
-      "createdTime": "2026-09-27T12:31:57.440011+00:00"
+      "createdTime": "2026-09-27T15:46:21.819403+00:00"
     }
   ]
 }
