@@ -3,17 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "海外コミュニティにおける漂泊者向けデイリー質問スレッド",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1wr7wny/daily_questions_megathread_september_27_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外Redditの『鳴潮』コミュニティにおいて、全般的な疑問を持つプレイヤー（漂泊者）に向けた質問専用メガスレッドが用意されている。旅を始めたばかりの初心者からプレイ体験を共有したいユーザーまでを対象とし、個別スレッドの乱立を防ぐための利用ルールや、キーワード検索による事前確認、質問時の具体的な状況説明を推奨するガイドラインが示されている。",
-      "reason": "日常的にプレイヤーが抱く疑問や共有したいトピックが集まる場であり、コミュニティ内でどのような疑問や情報共有の需要があるかを把握するための参考になるため。",
-      "score": 78,
+      "title": "【鳴潮】心の毛づくろいが可愛すぎる件【Wuthering Waves】#鳴潮",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/6n2nXrIdIzM",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nチャンネル登録と高評価お願いします\nいいね\n#新キャラ#鳴潮 #wutheringwaves #エイメス#wuwa#ダーニャ#シグリカ#緋雪#景燃#カルテジア#心",
+      "reason": "約0時間前に出たばかりの新しい情報 ／ 競合が扱っている注目ワード「her」を含む",
+      "score": 77,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-09-27",
-      "createdTime": "2026-09-27T15:46:21.819403+00:00"
+      "createdTime": "2026-09-27T19:02:01.174650+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "【鳴潮】心の共鳴解放が修正されたらしい【Wuthering Waves】#鳴潮",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/knlIGYiRq38",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nチャンネル登録と高評価お願いします\n話題になってたやつ\n#新キャラ#鳴潮 #wutheringwaves #エイメス#wuwa#ダーニャ#シグリカ#緋雪#景燃#カルテジア#心",
+      "reason": "約1時間前に出たばかりの新しい情報 ／ 競合が扱っている注目ワード「her」を含む",
+      "score": 77,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-09-27",
+      "createdTime": "2026-09-27T19:02:01.174666+00:00"
     }
   ]
 }
