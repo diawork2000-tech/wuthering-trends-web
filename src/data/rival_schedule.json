@@ -1,6 +1,6 @@
 {
   "_note": "競合タイトルのアップデート日程。鳴潮本体の予定(upcoming_schedule.json)とは別ファイルにしてある。混ぜるとネタのスコア計算(schedule_boost)が他ゲームの名前に反応してしまうため。versions は自動収集(collect_rival_schedule.py)が上書きするので、手で直す場合は confirmed:true の行だけにすること。",
-  "updated_at": "2026-09-26T21:02:47.499346+00:00",
+  "updated_at": "2026-09-27T23:02:28.035046+00:00",
   "games": [
     {
       "id": "genshin",
@@ -107,15 +107,6 @@
       "source": "https://wikiwiki.jp/zenless/%E3%82%A2%E3%83%83%E3%83%97%E3%83%87%E3%83%BC%E3%83%88%E5%B1%A5%E6%AD%B4",
       "versions": [
         {
-          "version": "3.1",
-          "title": "ロング・グッドバイ",
-          "date": "2026-07-29",
-          "confirmed": true,
-          "new_character_first": true,
-          "new_character_second": false,
-          "note": ""
-        },
-        {
           "version": "3.2",
           "date": "2026-09-09",
           "confirmed": true,
@@ -179,35 +170,35 @@
   ],
   "source_health": {
     "genshin": {
-      "last_fetch_ok_at": "2026-09-26T21:02:10.558865+00:00",
+      "last_fetch_ok_at": "2026-09-27T23:01:52.608328+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-09-26T21:02:10.558865+00:00",
+      "last_parse_ok_at": "2026-09-27T23:01:52.608328+00:00",
       "consecutive_parse_empty": 0
     },
     "hsr": {
-      "last_fetch_ok_at": "2026-09-26T21:02:10.558865+00:00",
+      "last_fetch_ok_at": "2026-09-27T23:01:52.608328+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-09-26T21:02:10.558865+00:00",
+      "last_parse_ok_at": "2026-09-27T23:01:52.608328+00:00",
       "consecutive_parse_empty": 0
     },
     "zzz": {
-      "last_fetch_ok_at": "2026-09-26T21:02:10.558865+00:00",
+      "last_fetch_ok_at": "2026-09-27T23:01:52.608328+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-09-26T21:02:10.558865+00:00",
+      "last_parse_ok_at": "2026-09-27T23:01:52.608328+00:00",
       "consecutive_parse_empty": 0
     },
     "nte": {
-      "last_fetch_ok_at": "2026-09-26T21:02:10.558865+00:00",
+      "last_fetch_ok_at": "2026-09-27T23:01:52.608328+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-09-26T21:02:10.558865+00:00",
+      "last_parse_ok_at": "2026-09-27T23:01:52.608328+00:00",
       "consecutive_parse_empty": 0,
       "last_parse_empty_at": "2026-08-29T15:16:13.820990+00:00"
     },
     "endfield": {
-      "last_fetch_ok_at": "2026-09-26T21:02:10.558865+00:00",
+      "last_fetch_ok_at": "2026-09-27T23:01:52.608328+00:00",
       "consecutive_failures": 0,
-      "last_parse_empty_at": "2026-09-26T21:02:10.558865+00:00",
-      "consecutive_parse_empty": 3,
+      "last_parse_empty_at": "2026-09-27T23:01:52.608328+00:00",
+      "consecutive_parse_empty": 4,
       "last_parse_ok_at": "2026-09-23T15:02:24.497495+00:00"
     }
   }
