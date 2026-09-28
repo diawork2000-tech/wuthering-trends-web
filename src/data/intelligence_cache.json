@@ -3,17 +3,59 @@
   "items": [
     {
       "id": "card-0",
-      "title": "鳴潮 9月28日付 - 徳島新聞デジタル",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFB3ZDVaVTFCNEo2dkVQbk5KZUw0c2FvbHQydzFLMi0zcG1DX19ZcHJGMDBQUEpBTDliajFySnJSa21YbkptUnh3UXBWWG5LR05ZQ3M2UzRn?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮 9月28日付&nbsp;&nbsp;徳島新聞デジタル",
-      "reason": "約9時間前に出たばかりの新しい情報",
-      "score": 64,
+      "title": "【鳴潮】ただの学生がずっと強化され続けている件【Wuthering Waves】#鳴潮",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/Dqz7dWbwd8c",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nチャンネル登録と高評価お願いします\nつよい　\n#新キャラ#鳴潮 #wutheringwaves #エイメス#wuwa#ダーニャ#シグリカ#緋雪#景燃#カルテジア#心",
+      "reason": "約1時間前に出たばかりの新しい情報 ／ 競合が扱っている注目ワード「WuWa」を含む",
+      "score": 77,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-09-28",
-      "createdTime": "2026-09-28T14:31:24.576533+00:00"
+      "createdTime": "2026-09-28T21:01:46.175804+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "【鳴潮】心の寝起きの背伸びが最高すぎる件【Wuthering Waves】#鳴潮",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/T_yG5kEynyI",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nチャンネル登録と高評価お願いします\nこれは\n#新キャラ#鳴潮 #wutheringwaves #エイメス#wuwa#ダーニャ#シグリカ#緋雪#景燃#カルテジア#心",
+      "reason": "約2時間前に出たばかりの新しい情報 ／ 競合が扱っている注目ワード「WuWa」を含む",
+      "score": 77,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-09-28",
+      "createdTime": "2026-09-28T21:01:46.175835+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "【鳴潮】二つの要素を持つカルテジアが最高な件【Wuthering Waves】#鳴潮",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/qrlf7-93B5U",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nチャンネル登録と高評価お願いします\n強い\n#新キャラ#鳴潮 #wutheringwaves #エイメス#wuwa#ダーニャ#シグリカ#緋雪#景燃#カルテジア#心",
+      "reason": "約2時間前に出たばかりの新しい情報 ／ 競合が扱っている注目ワード「要素」を含む",
+      "score": 77,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-09-28",
+      "createdTime": "2026-09-28T21:01:46.175852+00:00"
+    },
+    {
+      "id": "card-3",
+      "title": "【競合バズ実績】I think Hsin’s Resonator is dead or she’s going to die #wutheringwaves #wuwa #wuwacreator #fyp",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=FxwOI84hAHQ",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nWuthering waves Hsin resonator #鳴潮 #鸣潮 #kurogames #shorts #명조: 워더링 웨이브 #wuwashorts\n\n（📊 バズ実績: deoxy.y にて現在 2,061 再生 / 高評価 129 / 約 687 再生毎時）",
+      "reason": "競合チャンネルで約 687 再生/時 のペースで伸びている実績データに基づく抽出",
+      "score": 84,
+      "viewCount": 2061,
+      "viewsPerHour": 686.7,
+      "mentionCount": 1,
+      "date": "2026-09-28",
+      "createdTime": "2026-09-28T21:01:46.175868+00:00"
     }
   ]
 }
