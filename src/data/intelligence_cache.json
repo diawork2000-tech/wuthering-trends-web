@@ -3,45 +3,17 @@
   "items": [
     {
       "id": "card-0",
-      "title": "序盤のグラフィック再評価：グローバルライティング等の改善とVer1.xからのビジュアル比較",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1wrp5tm/been_seeing_a_lot_of_people_praising_early_game/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外コミュニティにおいて、ゲーム初期（バージョン1.x時代）のビジュアルが改めて賞賛されている点を取り上げる。投稿者の主張によれば、鳴潮はバージョン1.xの時点から常に優れたグラフィック品質を誇っていたものの、当時は作品への批判的なトレンドが強く、ビジュアルの質の高さが見過ごされがちであったと指摘している。さらに、グローバルライティングやDFAO（Distance Field Ambient Occlusion）といったグラフィック機能のサポート・改善が行われたことで、改めて映像表現の高さが評価されるようになっているという論説を展開する。",
-      "reason": "グラフィックの改善や初期からの映像美の再評価はコミュニティ内で共感を呼びやすく、技術的な向上点を取り上げることでプレイヤーのモチベーション向上や復帰のきっかけになりやすい。",
-      "score": 74,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-09-28",
-      "createdTime": "2026-09-28T08:01:51.602502+00:00"
-    },
-    {
-      "id": "card-1",
-      "title": "GameWith選定：最強音骸ランキングとメイン音骸の基準",
+      "title": "【鳴潮】相里要（そうりよう）の評価・おすすめパーティ編成・音骸・武器解説",
       "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9CdVdkUmIycm1EREtfTFFVSjFPaTFwWE01OWlTX2xqRTJiWTBHZjFhRkNTWXp6dWFuN3RielpPUDNwSFdGY19ITWpYaFNQeDB0UGNr?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithが公開している『鳴潮』の最強音骸ランキングおよびおすすめメイン音骸の攻略解説。プレイヤーの育成効率を左右するメイン音骸の選定基準や、各音骸の優先度についてGameWithの攻略基準に基づき紹介する。（※素材側には個別の音骸名や詳細数値の記載がないため、概要の提示に留める）",
-      "reason": "音骸の選定と厳選は全プレイヤーにとって関心の高い育成要素であり、攻略メディアのランキングを取り上げることで初心者から中級者の視聴維持を狙いやすい。",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9VVHZ0aWtURUdlYWtOdHdxUU81akZpWkJqdkxFWksxaV9lNG45Y0ZNRXBaT19aRE4yeDZuWDdjOVQ5THJyaUlsRm5obWhmR0g5eXZF?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nキャラクター「相里要（そうりよう）」に関する評価と育成・運用のまとめ。相里要の性能面における評価、相性の良いおすすめパーティ編成の提案、適正となる音骸、および推奨武器に関する解説。（※素材内に具体的な武器名・音骸セット名・数値などの個別データは記載されていないため、素材に明示されている評価とビルド構成要素に沿って解説）",
+      "reason": "新キャラクターまたは注目キャラクターである相里要の育成や装備ビルド、パーティ編成に対するプレイヤーの攻略需要・関心が高いため。",
       "score": 68,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-09-28",
-      "createdTime": "2026-09-28T08:01:51.602531+00:00"
-    },
-    {
-      "id": "card-2",
-      "title": "フィービー徹底解説：性能評価とおすすめパーティ・音骸・武器",
-      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBKWUh1ak5yaDVNOUxNT09OZy1JY2YwUzh2R3FUTHZ5YmRhZmFzRzl2bnJmSk5zTnV2cElUSFNOaGhPTzl5UG5OMTdJa2xNa1htbUYw?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによるキャラクター「フィービー」の総合攻略情報。フィービーの評価をはじめ、相性の良いおすすめパーティ編成、装備すべき音骸、推奨武器の選定について解説する。（※素材側には具体的なスキル数値や個別武器・音骸名の詳細記述がないため、構成論点の提示に留める）",
-      "reason": "キャラクターのビルド情報（武器・音骸・パーティ編成）は育成段階において需要が極めて高く、ショート動画でも回転率と保存率が見込める定番ネタであるため。",
-      "score": 64,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-09-28",
-      "createdTime": "2026-09-28T08:01:51.602544+00:00"
+      "createdTime": "2026-09-28T11:16:04.039355+00:00"
     }
   ]
 }
