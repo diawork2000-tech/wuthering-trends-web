@@ -3,17 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "鳴潮 9月29日 - 徳島新聞デジタル",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1kVWtXUjJxejBYWDZwNlBOMXFhR21nTlY4OFpDT29CQjE1dmNZRjBZSGZVbmtzMlE1dWlROGVGdkxKay0zXzZCWmM2eU9wOTNsdjVkZElB?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮 9月29日&nbsp;&nbsp;徳島新聞デジタル",
-      "reason": "約1時間前に出たばかりの新しい情報",
+      "title": "【鳴潮】アールトの評価とおすすめパーティ編成・音骸・武器 - GameWith",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBzOEpwR2daWWQyTmxwSVhNdGp3WUJVMmFIQUQyZEl6UEZJYVZBWExTSndYR0ZoYXp1bEdPS2hYUlRHUnBXN3J0UXI4QkVrbVFVVVNB?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】アールトの評価とおすすめパーティ編成・音骸・武器&nbsp;&nbsp;GameWith",
+      "reason": "競合が扱っている注目ワード「with」を含む",
       "score": 68,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-09-29",
-      "createdTime": "2026-09-29T06:46:20.649557+00:00"
+      "createdTime": "2026-09-29T13:16:11.309295+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "【鳴潮】ブラントの評価とおすすめパーティ編成・音骸・武器 - GameWith",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5vakFmSnhRc1kzdFQ4SHBoZjZlMnAya1hsX0hUVFBIREkxY3RsV0FWZ24zb25OeTlXTVQ2VmdtYlNVSlpEWjB3NmtMaXBETnl2Tk9V?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】ブラントの評価とおすすめパーティ編成・音骸・武器&nbsp;&nbsp;GameWith",
+      "reason": "競合が扱っている注目ワード「with」を含む",
+      "score": 64,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-09-29",
+      "createdTime": "2026-09-29T13:16:11.309319+00:00"
     }
   ]
 }
