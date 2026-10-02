@@ -3,31 +3,17 @@
   "items": [
     {
       "id": "card-0",
-      "title": "鳴潮公式コミュニティの日替わり総合質問掲示板：初心者の疑問からTips共有まで",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1wvhqqz/daily_questions_megathread_october_02_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外公式掲示板で設置されているデイリー質問スレッドの概要。個別スレッドを立てる前の簡易質問受付窓口として機能しており、初心者プレイヤーの育成や攻略に関する疑問解消、プレイヤー同士の初期体験やTipsの共有を推奨している。過去ログのキーワード検索を用いた疑問解決や、文脈と詳細な状況説明を添えた質問投稿が推奨されている。",
-      "reason": "海外コミュニティで日々どのような疑問や躓きポイントが寄せられているかを収集・定点観測するリサーチソースとして重要度が高いため。",
+      "title": "【鳴潮】キャラ一覧と評価 - GameWith",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9OWTlvb2FCTFVTYjNsY0VOd3hpb3V6ekNUeEI1WU5td1pOTThPSEJnU08yY2R1MUJPdkRfaGhxUVg0TTNYX3plaGhQVWstX1VqeGZV?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】キャラ一覧と評価&nbsp;&nbsp;GameWith",
+      "reason": "競合が扱っている注目ワード「with」を含む",
       "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-02",
-      "createdTime": "2026-10-02T12:32:00.627184+00:00"
-    },
-    {
-      "id": "card-1",
-      "title": "海外プレイヤーが注目するボス戦ショートクリップ",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=EGaYd32yITw",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nクリエイターdeoxy.yによるボス戦クリップ動画。ボス戦（suhsin boss fight）を題材とし、キャラクターへの言及とともに戦闘シーンを展開している。約60再生/時ペースで推移しており、ハッシュタグ（#wuwacontest37等）を活用したコンテスト参加型ショートとして投稿されている。",
-      "reason": "ショート動画特有のミーム的なフック（キャラクターの魅力表現）と実際の戦闘映像を組み合わせることで、視聴者のリアクションと高評価率を稼ぎやすい構成になっているため。",
-      "score": 72,
-      "viewCount": 1146,
-      "viewsPerHour": 60.4,
-      "mentionCount": 1,
-      "date": "2026-10-02",
-      "createdTime": "2026-10-02T12:32:00.627217+00:00"
+      "createdTime": "2026-10-02T15:46:41.515951+00:00"
     }
   ]
 }
