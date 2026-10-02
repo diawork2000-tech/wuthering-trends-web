@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-10-02 19:01:35",
+    "status": "Success",
+    "total_harvested": 113,
+    "final_selected": 5,
+    "breakdown": {
+      "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 4,
+      "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)": 1
+    },
+    "gemini_topic_status": "failed",
+    "gemini_competitor_status": "no_items"
+  },
+  {
     "timestamp": "2026-10-02 15:48:38",
     "status": "Success",
     "total_harvested": 100,
@@ -591,18 +603,6 @@
     "breakdown": {
       "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)": 1,
       "YouTubeショート 伸び悩み＆神プレイ解説フォーラム": 1,
-      "YouTube競合 (別枠全件枠)": 2
-    },
-    "gemini_topic_status": "failed",
-    "gemini_competitor_status": "failed"
-  },
-  {
-    "timestamp": "2026-09-26 00:46:44",
-    "status": "Success",
-    "total_harvested": 116,
-    "final_selected": 3,
-    "breakdown": {
-      "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 1,
       "YouTube競合 (別枠全件枠)": 2
     },
     "gemini_topic_status": "failed",
