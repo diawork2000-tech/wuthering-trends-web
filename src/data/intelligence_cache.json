@@ -3,59 +3,17 @@
   "items": [
     {
       "id": "card-0",
-      "title": "海外コミュニティ公式『鳴潮』デイリー質問相談スレッド",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1wxwqgq/daily_questions_megathread_october_05_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外公式Redditコミュニティに設置されたデイリー質問メガスレッドの概要。漂泊者（プレイヤー）向けに、ゲーム全般に関する疑問の解決、プレイ初期の体験談の共有、相互のヒント提供を目的としている。重複投稿を防ぐため個別投稿ではなく本スレッドの活用が推奨されており、キーワード検索の利用や具体的な文脈・詳細を添えて質問することが案内されている。",
-      "reason": "海外プレイヤーコミュニティで実際に交わされている質問や疑問点の傾向を把握し、ユーザーが直面しやすい悩みへの解説動画を作成するためのリサーチ対象として有用。",
-      "score": 74,
+      "title": "【鳴潮】熾霞(しか)の評価とおすすめパーティ編成・音骸・武器 - GameWith",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9DVFNLRUFtSGVVbTYweWZmZFlHUExtZWhmZW1OZlJiNVYyX0hpcUV5blg1QThBVU80YWZObXpGVTRTX05yREp4N0FwQVp2YVBoOG9N?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】熾霞(しか)の評価とおすすめパーティ編成・音骸・武器&nbsp;&nbsp;GameWith",
+      "reason": "競合が扱っている注目ワード「with」を含む",
+      "score": 68,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-06",
-      "createdTime": "2026-10-06T07:16:29.526613+00:00"
-    },
-    {
-      "id": "card-1",
-      "title": "海外で流行する鳴潮ネタ動画『Wuwa slander』パート2",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1wy4fe0/wuwa_slander_part_2/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nユーザー/u/MasterHafezによる投稿。ネットミーム形式である「Slander（あるある・風刺動画）」の鳴潮版パート2。投稿者曰くサイバーパンク要素をネタ（slander）にしようと試みたものの、クオリティが高すぎて（so peak）ネタにすることができなかったと言及されている。",
-      "reason": "海外の鳴潮コミュニティでどのような演出や世界観がプレイヤーに評価され、ミームとして消費されているのかのトレンドを捉える企画の着想源となるため。",
-      "score": 74,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-10-06",
-      "createdTime": "2026-10-06T07:16:29.526648+00:00"
-    },
-    {
-      "id": "card-2",
-      "title": "鳴潮コミュニティで人気の風刺ミーム『Wuwa slander』",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1wxycxe/wuwa_slander/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nユーザー/u/MasterHafezによる鳴潮を題材にしたミーム投稿。この手のトレンド（slander形式のネタ動画）が非常に好評であり、続編となるパート2の存在も告知されている。",
-      "reason": "コミュニティ内の熱量が高いミーム形式を把握することで、ショート動画におけるテンポ感やユーモアの取り入れ方の参考になるため。",
-      "score": 74,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-10-06",
-      "createdTime": "2026-10-06T07:16:29.526662+00:00"
-    },
-    {
-      "id": "card-3",
-      "title": "なぜVer3.7が最高のアップデートなのか？海外ショート分析",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=F8WTWLZQkps",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\ndeoxy.yによるショート動画。「The reason why 3.7 is one of their best updates（なぜ3.7が最高のアップデートの一つであるのか）」と題し、大型アップデートの内容が高く評価される理由を提示している。具体的な要素の解説を通じて視聴者の共感を集める構成となっている。",
-      "reason": "アップデートの評価というタイムリーな話題を「最高の理由」として言い切る強いフックで提示しており、時速約666再生と高い初速を獲得している。",
-      "score": 80,
-      "viewCount": 2647,
-      "viewsPerHour": 665.9,
-      "mentionCount": 1,
-      "date": "2026-10-06",
-      "createdTime": "2026-10-06T07:16:29.526675+00:00"
+      "createdTime": "2026-10-06T10:31:33.325251+00:00"
     }
   ]
 }
