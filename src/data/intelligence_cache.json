@@ -3,17 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "散華（さんか）の性能評価およびおすすめパーティ・音骸・武器解説",
-      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE04S0tXYi1rUjVkTnVMVHFXdWR6enRSdFd5NHZjajVrV1dVeDluZl9OeFkzQ05tZ2NvbmpSTkI1QnJfWWh2YjRlb1V6anh3dTlIVFFV?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nゲームウィズによる散華（さんか）のキャラクター性能評価、推奨されるパーティ編成、適正音骸セット、おすすめ武器の解説記事に基づく紹介。",
-      "reason": "散華の育成方針やパーティ構築、装備（音骸・武器）の選定はプレイヤーの関心が高く、ショート動画での要点解説の需要が見込めるため。",
+      "title": "【鳴潮】アールトの評価とおすすめパーティ編成・音骸・武器 - ゲームウィズ",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBzOEpwR2daWWQyTmxwSVhNdGp3WUJVMmFIQUQyZEl6UEZJYVZBWExTSndYR0ZoYXp1bEdPS2hYUlRHUnBXN3J0UXI4QkVrbVFVVVNB?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】アールトの評価とおすすめパーティ編成・音骸・武器&nbsp;&nbsp;ゲームウィズ",
+      "reason": "競合が扱っている注目ワード「編成」を含む",
+      "score": 68,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-09",
+      "createdTime": "2026-10-09T14:01:45.590224+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "鳴潮 10月9日付 - 徳島新聞デジタル",
+      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1KYnlPYng2YzVZdS0zaG1xUWFqQVFFX1lvV2pQUlBkRXIzdXRPc3hqVUNjOXB1UnM2U2RoZGNQNjhXMmJFQ0FKMnVJV09mYlBHalhHdXl3?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮 10月9日付&nbsp;&nbsp;徳島新聞デジタル",
+      "reason": "約9時間前に出たばかりの新しい情報",
       "score": 64,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-09",
-      "createdTime": "2026-10-09T10:46:34.040804+00:00"
+      "createdTime": "2026-10-09T14:01:45.590256+00:00"
     }
   ]
 }
