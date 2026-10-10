@@ -3,59 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "【鳴潮】カンタレラ最新攻略ガイド：評価・おすすめ編成・音骸・武器の要点",
-      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1vSnZFV1NLNmJtOUhONTVSWlV4bHBoT2NkVDZNZzZxRE9GekhsdGdqNGZEOFlsaUZrTHBiWVJLT2E4bEpkbTRya2JtQk5mTlUzUUVz?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n記事タイトルおよび概要に基づき、カンタレラのキャラクター評価、理想的なパーティ編成方針、推奨される音骸および装備武器のガイドが展開されている。（※元素材内に個別の数値・スキル効果・特定装備名称などの詳細パラメータは明記されていないため、育成・ビルドの総合まとめとして提示）。",
-      "reason": "キャラクターの育成方針や編成情報に対するプレイヤーの検索需要が常に高く、最新のビルド指標を簡潔に知りたい層に向けたショート企画として適しているため。",
-      "score": 74,
+      "title": "アンコの性能評価とおすすめパーティ編成・音骸・武器の解説",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5XVWhyZldHVklVM2xKWjN6aEhPSGF6ay1hRUhVX2g1UFBBZkl1bk96c0ctMHFraEZIeEpaY01GYVJjSGh3UmpJNzYwemI2TE9ZbEFn?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n提供された素材では、『鳴潮』のプレイアブルキャラクター「アンコ」を対象とした総合評価、おすすめのパーティ編成、装備すべき音骸、適正武器の解説記事であることが示されています（※素材内に具体的な武器名、音骸セット名、編成候補キャラクター名、詳細な数値データの記載はありません）。",
+      "reason": "恒常星5キャラクターであるアンコの育成方針や適正装備、編成の最適解を求めるプレイヤーの検索需要が安定して存在するため。",
+      "score": 64,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-10",
-      "createdTime": "2026-10-10T12:46:31.715095+00:00"
+      "createdTime": "2026-10-10T16:02:06.666143+00:00"
     },
     {
       "id": "card-1",
-      "title": "【鳴潮】折枝（オリエ）育成徹底解説：評価・おすすめパーティ編成・音骸・武器まとめ",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBfaFpLTXVNUXV0aEZUUWhEMzY1anhadmd5V1FQWnpDRTl4Uzh5WUdGUV9vV2lXTS1KeC1qMjd6NmZ5VndlQUtrVjRaaTRlR2JlbHQw?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n折枝（オリエ）に関する運用評価、相性の良いキャラクターを組み合わせたパーティ編成、推奨音骸および武器選択に関する攻略情報。（※元素材内に具体的な武器名や音骸セット名、ダメージ計算等の詳細は記載されていないため、キャラの総合運用ガイドとして取り扱う）。",
-      "reason": "折枝の運用やパーティ構築に悩むプレイヤーが多く、主要攻略メディアの評価や推奨ビルドの要点を整理した動画は再生数を集めやすいため。",
-      "score": 68,
+      "title": "主人公(消滅)・漂泊者の性能評価とおすすめパーティ編成・音骸・武器の解説",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5mYkoyQURVanJlSmczdFdfUnFTbW95OFJMOWFWbUh2cFJYb3R0UWdIUHVaZ2tGS3I2MkJIM3c2MWp4WlZUT1V6eTcwd2V3Mmg3eUNn?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n提供された素材では、『鳴潮』の「主人公(消滅)（漂泊者）」に関する評価、相性の良いパーティ構成、おすすめ音骸、推奨武器のガイドが扱われています（※素材内に具体的な武器名、音骸セット名、編成キャラ名、詳細な数値データの記載はありません）。",
+      "reason": "全プレイヤーが育成可能な消滅属性主人公（漂泊者）のビルド方針や編成解説は、無課金・微課金層を中心に幅広いプレイヤー層から継続的な視聴需要が期待できるため。",
+      "score": 64,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-10",
-      "createdTime": "2026-10-10T12:46:31.715131+00:00"
-    },
-    {
-      "id": "card-2",
-      "title": "鳴潮の物語考察：オープニング映像に見る「彼女の悲しみ」と空の崩壊",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1x218jg/journey_well_pro_max/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外掲示板にて、オープニング映像（シネマティック）で描かれた女性の悲痛な表情と、その直後に背後の空がひび割れていく演出に注目が集まっている。鳴潮の世界においてキャラクターがこれほどの悲しみを見せている場合、その背後には必ずさらに深い悲しい真相が存在するという論説。",
-      "reason": "世界観やストーリーの重厚な設定・シネマティック演出の伏線に関する考察はコミュニティで議論を呼びやすく、ショート動画でも視聴維持率を高めやすいため。",
-      "score": 78,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-10-10",
-      "createdTime": "2026-10-10T12:46:31.715143+00:00"
-    },
-    {
-      "id": "card-3",
-      "title": "漂泊者のための知恵袋：公式デイリー質問メガ掲示板の活用法",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1x23b5g/daily_questions_megathread_october_10_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮を始めたばかりのプレイヤーから経験者まで、全般的な疑問の質問・回答やTipsの共有を行うためのメガ掲示板。個別に投稿を立てる前にキーワード検索で既存の回答を確認することや、質問時には明確な文脈と詳細な状況説明を添えることが推奨されている。",
-      "reason": "コミュニティ内で初心者がつまずきやすいポイントや共通の疑問点を把握するための情報源として機能し、よくある質問に答えるノウハウ動画のネタ元として有益なため。",
-      "score": 78,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-10-10",
-      "createdTime": "2026-10-10T12:46:31.715153+00:00"
+      "createdTime": "2026-10-10T16:02:06.666170+00:00"
     }
   ]
 }
