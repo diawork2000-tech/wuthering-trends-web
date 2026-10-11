@@ -3,17 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "鳴潮 11日付 - 徳島新聞デジタル",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5WOWgzdU9TelExRktQNUxHcjhCbWdDVUJvUF9pOEVBUGtEZnpRMEpIaVB4UVhiT0xrYmZyUi1VeVhUZm1sRDVwSzM0TUlkMzUtTDQ5cDln?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮 11日付&nbsp;&nbsp;徳島新聞デジタル",
-      "reason": "約3時間前に出たばかりの新しい情報",
-      "score": 68,
+      "title": "海外コミュニティにおける日常的な疑問・攻略情報共有の場（公式質問スレッド）",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1x2w4va/daily_questions_megathread_october_11_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外公式Redditコミュニティに開設されたデイリー質問スレッドの概要。新規プレイヤーから熟練者まで、鳴潮に関する全般的な疑問への回答や攻略ヒントの共有、初期体験の交換を行う場として機能している。個別の投稿を乱立させる代わりに本スレッド内で簡潔な質問を投稿し、過去ログのキーワード検索を活用して疑問を解決することが案内されている。",
+      "reason": "海外コミュニティでプレイヤーが直面している疑問や悩みをリアルタイムに把握でき、ユーザーのつまずきやすいポイントや需要の高いQ&Aを取り入れたショート動画企画のネタ元として有効なため。",
+      "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-11",
-      "createdTime": "2026-10-11T08:16:20.145625+00:00"
+      "createdTime": "2026-10-11T11:31:34.440723+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "キャラクター固有モーションの注目ポイント：サメイ独自の走り方",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=W5lgLvnoenw",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nキャラクター「サメイ」の走り方が他のキャラクターと異なるという点を取り上げた動画。ゲーム内における細かなモーションの違いやキャラクター個別の作り込みといった小ネタ・仕様に焦点を当てて紹介している。",
+      "reason": "チャンネル「セリーナ鳴潮メイン」にて毎時約168再生ペースで伸びており、戦闘性能や攻略法だけでなく、キャラクターごとの固有モーションや細かな演出の違いを取り上げた発見系のショート動画が視聴者の興味を引きやすく、手軽に拡散されやすいため。",
+      "score": 68,
+      "viewCount": 2203,
+      "viewsPerHour": 168.0,
+      "mentionCount": 1,
+      "date": "2026-10-11",
+      "createdTime": "2026-10-11T11:31:34.440761+00:00"
     }
   ]
 }
