@@ -3,31 +3,45 @@
   "items": [
     {
       "id": "card-0",
-      "title": "4章第4幕ストーリー「夢枢の有り様、心のまま生ず」攻略情報",
-      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9pX0p4TUVsU2lVOVdPckVuVXZIRi1jaFJkckJVQ3lLWkhCSVk3X0VrZF9CX21PLVlWa04yalR0Q3R0Q091cGxicHcxcmoxVWlvd280?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n『鳴潮』4章-第4幕「夢枢の有り様、心のまま生ず」の攻略解説。本編ストーリーの進行やギミック攻略に関する要点をまとめる構成。",
-      "reason": "ストーリー進行に伴う攻略情報への需要が高く、クリア手順や要点を確認したいプレイヤー層へアプローチできるため。",
+      "title": "絵画のように美しいオープンワールド！開発元のこだわりが光るフィールド景観への海外評価",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1x31t8l/the_overworld_design_of_wuthering_waves_to_me_is/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外プレイヤーが『鳴潮』のワールドデザインの美しさについて論じた投稿。投稿者はフィールドの景観が息をのむほど素晴らしく、視界に入るあらゆる風景がまるで絵画のようだと評している。開発元であるKuro Gamesが環境や景観の設計に非常に多くの労力を注いで制作したことが画面越しに明確に伝わってくるという感想が述べられている。",
+      "reason": "バトルシステムに注目が集まりがちな本作において、海外コミュニティでフィールドの美しさやアートワークのクオリティに再評価が集まっているため、ゲームのビジュアル的魅力に焦点を当てた切り口として需要がある。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-11",
+      "createdTime": "2026-10-11T18:04:45.746482+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "漂泊者・電導の性能評価とビルド！おすすめ武器・音骸・編成ガイド",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1mVFBMY0xXXzI4Qy14d1BUdHFGRENXMDVKQ0xVaVJZNHNLUTlrbjBvVmF1OUlBcWdHaTJtdEtDUnFTVnBTRUktMXduWkQtQUFUa2c4?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n電導属性の主人公（漂泊者）の性能評価を軸に、育成やビルド方針を取り上げた攻略ガイド。電導主人公の強みや評価点に加え、適した武器の選択肢、推奨される音骸セット、相乗効果を発揮できるおすすめパーティ編成の構成指針についてまとめられている。",
+      "reason": "主人公（漂泊者）の属性派生や育成優先度は全プレイヤー共通の関心事であり、電導属性の評価やビルド方針に関する解説は幅広い層に検索されやすく定着した需要があるため。",
+      "score": 72,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-11",
+      "createdTime": "2026-10-11T18:04:45.746515+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "第3回鳴潮GW攻略X クイズキャンペーン開催情報と概要まとめ",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFA3LWZ2Skt2bS1BTk1iUmZ1bl9tXzBZcVIwVC1BejJDaEhzVTN4YkZSalJ2SnpxWjhhNGtKWWtHRmI0QUZOMzB5dlFPbkFzdks1dlRz?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithが実施する「第3回鳴潮GW攻略X クイズキャンペーン」に関するまとめ情報。公式X上で行われるクイズ企画の出題内容や参加方法、キャンペーンの詳細情報が網羅されている。",
+      "reason": "コミュニティ主導のプレゼントやキャンペーン企画はプレイヤーの参加意欲が高く、情報周知や回答解説を兼ねた速報系コンテンツとして反応を得やすいため。",
       "score": 68,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-11",
-      "createdTime": "2026-10-11T14:46:27.274107+00:00"
-    },
-    {
-      "id": "card-1",
-      "title": "新キャラクター「リリー」公開と新舞台「ネオユニオン」の最新情報",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1OUmJwOUFqaWtmWjVYNU5Xb2Zick9SRTVhSy12SkxjR1ZscVJXbHo2blJRZXpELXVWaE9rOWFJNHk5UjRDSnBfbmg1ZG95TXZMa1FYYi1xZS1VRzAwMS1aT1FrcnE0aWRKYnRkZFpoVExGM2stN2c?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n新たに発表されたキャラクター「リリー」のビジュアルおよび、今後展開される新たな舞台「ネオユニオン」の物語に関する公式公開情報の整理。",
-      "reason": "新キャラクターや新エリアの発表はプレイヤーの関心が最も集中するトピックであり、速報性の高いショート動画として初動の再生数を獲得しやすいため。",
-      "score": 66,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-10-11",
-      "createdTime": "2026-10-11T14:46:27.274134+00:00"
+      "createdTime": "2026-10-11T18:04:45.746531+00:00"
     }
   ]
 }
