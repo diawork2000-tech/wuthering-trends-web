@@ -3,45 +3,59 @@
   "items": [
     {
       "id": "card-0",
-      "title": "【シリアルコード情報】合計160星声がもらえる未引換コードのリマインダー",
+      "title": "ボス「心」の起き上がり方モーション比較",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/cI5D2pWjIVw",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nボス「心」のダウン復帰時における起き上がり方の動作パターンや違いを取り上げた内容。素材の関連タグとして「エイメス」「ダーニャ」「シグリカ」「緋雪」「景燃」「カルテジア」「心」などが挙げられており、ボスの細かなアニメーション演出を検証している。",
+      "reason": "ボスのモーション差分や細部の演出に注目するプレイヤー層が存在し、視覚的な違いを短尺で比較するショート動画と相性が良いため。",
+      "score": 77,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-12",
+      "createdTime": "2026-10-12T20:05:14.594173+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "人型ボス撃破時の倒れ方モーションの差異",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/ZFXHxAztc6M",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n人型ボスの撃破モーションにおける倒れ方のバリエーションを比較・紹介する内容。両膝をついて倒れる挙動など、キャラクターやボスごとの演出の違いを扱っている（関連タグ：エイメス、ダーニャ、シグリカ、緋雪、景燃、カルテジア、心）。",
+      "reason": "戦闘の撃破演出という細かいグラフィック・演出表現に焦点を当てた切り口は、キャラクターの造形や演出にこだわりを持つ層の関心を惹きやすいため。",
+      "score": 77,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-12",
+      "createdTime": "2026-10-12T20:05:14.594200+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "海外掲示板における公式デイリー質問・情報交換スレッド",
       "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1x388tq/reminder_to_anyone_who_hasnt_redeem_the_codes_yet/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮のファン創作特別プログラム「Solaris Starry Stage Season 2」にて発表された交換コードのリマインダー。\n・交換コード1: STARRYSTAGE2（80星声）\n・交換コード2: KEEPONSHINING（80星声）\n2つのコードをゲーム内で入力することで、合計160星声を獲得可能。まだ引き換えていないプレイヤーに対して、入力忘れがないよう注意を喚起する内容。",
-      "reason": "星声を直接獲得できるシリアルコード情報は全プレイヤーにとって実利が高く、コード入力期限切れを警戒するユーザーからの即時視聴・保存・シェアが強く期待できるため。",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1x3pppi/daily_questions_megathread_october_12_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n『鳴潮（Wuthering Waves）』のプレイヤー（Rover）向けに設置された総合質問掲示板。ゲームを始めたばかりのプレイヤーからの質問や体験共有、Tipsの交換など、個別スレッドを立てる前の簡易な疑問解消の場として機能している。",
+      "reason": "海外コミュニティでプレイヤーが日常的にどのような疑問や課題を抱えているかを把握し、攻略ネタやQ&A形式のショート動画の着想を得るのに適しているため。",
       "score": 74,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-12",
-      "createdTime": "2026-10-12T10:16:33.256133+00:00"
+      "createdTime": "2026-10-12T20:05:14.594211+00:00"
     },
     {
-      "id": "card-1",
-      "title": "ゲーム内の巨大彫像に注目したショートクリップ動画",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=--xt2HOJPSM",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n「彼女の大きな彫像を見ていただけなのに」というタイトルとともに投稿されたショート動画。投稿者deoxy.yによるクリップで、概要欄には「Wuthering waves Hsin」および関連ハッシュタグが記載されている。攻略やビルド情報ではなく、ゲーム内の彫像やキャラクターに関連した状況・ハプニングを短尺で楽しむ内容。",
-      "reason": "イベントハッシュタグ（#wuwacontest37など）を活用し、インパクトのあるタイトルと短尺のシチュエーション映像で視聴者の興味を引き、毎時約250再生のペースで視聴されているため。",
-      "score": 74,
-      "viewCount": 2007,
-      "viewsPerHour": 249.6,
+      "id": "card-3",
+      "title": "モルトフィーの評価とおすすめパーティ編成・音骸・武器",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5IRE83a3lZWldNRndFSTVHZG1EOGlSYmF6NlJueGYxRmNodVAyb0piWFY4ekRibVlKVmd2cHZTUURPUEh0bFlYcXN2R1VlTmlTenV3?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによるキャラクター「モルトフィー」の総合攻略情報。モルトフィーのキャラ評価をはじめ、相性の良いおすすめパーティ編成、推奨される音骸セット、適性武器の選定基準についての解説がまとめられている（※元素材テキストに具体的な装備・数値の詳細記載なし）。",
+      "reason": "特定キャラクターのビルドや運用方法を端的に知りたいプレイヤーの検索需要が安定して存在するため。",
+      "score": 72,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-12",
-      "createdTime": "2026-10-12T10:16:33.256165+00:00"
-    },
-    {
-      "id": "card-2",
-      "title": "【ストーリー考察】次回展開の鍵を握る重要人物についての考察動画",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=28RThOPQLIs",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nノタルchが投稿したストーリー考察動画。タイトル「次のストーリーの鍵を握っているのは◯◯博士です」の通り、今後のメインシナリオ展開において核心に関わる特定の博士キャラクターの存在とその役割にスポットを当てて解説・予想を展開している。（素材の概要欄には外部リンク等のメタ情報のみ記載）",
-      "reason": "今後のストーリーアップデートへの期待感が高まる中、伏線や重要人物に焦点を当てた考察コンテンツはコア層の関心を集めやすく、安定した毎時再生数を記録しているため。",
-      "score": 68,
-      "viewCount": 2732,
-      "viewsPerHour": 193.8,
-      "mentionCount": 1,
-      "date": "2026-10-12",
-      "createdTime": "2026-10-12T10:16:33.256178+00:00"
+      "createdTime": "2026-10-12T20:05:14.594221+00:00"
     }
   ]
 }
