@@ -1,6 +1,6 @@
 {
   "_note": "競合タイトルのアップデート日程。鳴潮本体の予定(upcoming_schedule.json)とは別ファイルにしてある。混ぜるとネタのスコア計算(schedule_boost)が他ゲームの名前に反応してしまうため。versions は自動収集(collect_rival_schedule.py)が上書きするので、手で直す場合は confirmed:true の行だけにすること。",
-  "updated_at": "2026-10-10T23:17:28.130830+00:00",
+  "updated_at": "2026-10-12T01:16:59.971807+00:00",
   "games": [
     {
       "id": "genshin",
@@ -10,15 +10,6 @@
       "enabled": true,
       "source": "https://wikiwiki.jp/genshinwiki/%E4%BB%8A%E5%BE%8C%E3%81%AE%E5%AE%9F%E8%A3%85%E6%83%85%E5%A0%B1",
       "versions": [
-        {
-          "version": "7.0",
-          "title": "神に愛されぬ雪国",
-          "date": "2026-08-12",
-          "confirmed": true,
-          "new_character_first": true,
-          "new_character_second": true,
-          "note": ""
-        },
         {
           "version": "7.1",
           "date": "2026-09-23",
@@ -170,35 +161,35 @@
   ],
   "source_health": {
     "genshin": {
-      "last_fetch_ok_at": "2026-10-10T23:16:44.998389+00:00",
+      "last_fetch_ok_at": "2026-10-12T01:16:34.421486+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-10-10T23:16:44.998389+00:00",
+      "last_parse_ok_at": "2026-10-12T01:16:34.421486+00:00",
       "consecutive_parse_empty": 0
     },
     "hsr": {
-      "last_fetch_ok_at": "2026-10-10T23:16:44.998389+00:00",
+      "last_fetch_ok_at": "2026-10-12T01:16:34.421486+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-10-10T23:16:44.998389+00:00",
+      "last_parse_ok_at": "2026-10-12T01:16:34.421486+00:00",
       "consecutive_parse_empty": 0
     },
     "zzz": {
-      "last_fetch_ok_at": "2026-10-10T23:16:44.998389+00:00",
+      "last_fetch_ok_at": "2026-10-12T01:16:34.421486+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-10-10T23:16:44.998389+00:00",
+      "last_parse_ok_at": "2026-10-12T01:16:34.421486+00:00",
       "consecutive_parse_empty": 0
     },
     "nte": {
-      "last_fetch_ok_at": "2026-10-10T23:16:44.998389+00:00",
+      "last_fetch_ok_at": "2026-10-12T01:16:34.421486+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-10-10T23:16:44.998389+00:00",
+      "last_parse_ok_at": "2026-10-12T01:16:34.421486+00:00",
       "consecutive_parse_empty": 0,
       "last_parse_empty_at": "2026-10-02T06:47:09.283843+00:00"
     },
     "endfield": {
-      "last_fetch_ok_at": "2026-10-10T23:16:44.998389+00:00",
+      "last_fetch_ok_at": "2026-10-12T01:16:34.421486+00:00",
       "consecutive_failures": 0,
-      "last_parse_empty_at": "2026-10-10T23:16:44.998389+00:00",
-      "consecutive_parse_empty": 16,
+      "last_parse_empty_at": "2026-10-12T01:16:34.421486+00:00",
+      "consecutive_parse_empty": 17,
       "last_parse_ok_at": "2026-09-23T15:02:24.497495+00:00"
     }
   }
