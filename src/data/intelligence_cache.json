@@ -3,31 +3,17 @@
   "items": [
     {
       "id": "card-0",
-      "title": "桃祈（たおき）の性能評価・おすすめパーティ編成・音骸・武器ガイド",
-      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE16Q19IYWJaWmRqQ3VqOE5QVGNFQmVCeC1Ydy1iNWdXa3BjY3YwRmdxbUVlb2RoVGdHanU5cldRVWhubG1mZlhuRkJtb2o4OW00ZG84?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nキャラクター「桃祈（たおき）」の評価、おすすめパーティ編成、装備すべき音骸、相性の良い武器について解説された攻略情報です。（※素材内に具体的な武器名・音骸名・編成キャラ名・数値効果の記載がないため、素材に明記された構成項目のみを整理しています）",
-      "reason": "桃祈の運用方法（パーティ編成、音骸、武器のビルド）に関心を持つプレイヤーに向けた育成・運用の疑問を解消する需要があるため。",
-      "score": 64,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-10-13",
-      "createdTime": "2026-10-13T12:16:32.263001+00:00"
-    },
-    {
-      "id": "card-1",
-      "title": "鳴潮公式コミュニティ デイリー質問・情報共有スレッド",
+      "title": "公式ストーリーシネマティクス「Joy Beneath the Waking Moon」公開への反響",
       "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1x4kfac/daily_questions_megathread_october_13_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外フォーラムRedditにおける『鳴潮』プレイヤー向けの総合質問スレッドです。旅を始めたばかりのプレイヤーから初期体験を共有したいプレイヤーまで、全般的な疑問の質問・回答やヒントの共有を行う場として機能しています。重複投稿を避けキーワード検索を活用することや、質問時には状況を詳細に説明することが推奨されています。（※具体的な攻略数値や個別ビルドの記載はありません）",
-      "reason": "コミュニティ内でプレイヤーが抱える質問や悩みの傾向を把握し、初心者がつまずきやすいポイントを抽出して動画コンテンツへ反映させるリサーチ材料として価値があるため。",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1x4n8pk/wuthering_waves_story_cinematics_joy_beneath_the/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外掲示板Redditの鳴潮コミュニティにおいて、公式のストーリーシネマティクス映像「Joy Beneath the Waking Moon」に関する投稿が共有されました。ゲーム内の重要な物語を彩るカットシーンやシネマティック演出に対してプレイヤーの間で関心が集まっており、公式映像の演出や物語描写に関する情報共有が行われています。",
+      "reason": "公式から供給される高品質なストーリーシネマティクスはプレイヤー全体の関心度が高く、演出やストーリー展開を振り返る切り抜きや解説コンテンツはタイムリーに再生数を集めやすいため。",
       "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-13",
-      "createdTime": "2026-10-13T12:16:32.263044+00:00"
+      "createdTime": "2026-10-13T15:31:39.289669+00:00"
     }
   ]
 }
