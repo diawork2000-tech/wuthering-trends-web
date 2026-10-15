@@ -3,17 +3,45 @@
   "items": [
     {
       "id": "card-0",
-      "title": "鳴潮10月15日付 - 徳島新聞デジタル",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBGWUVMbGZ5bDVlcWVUQXVWSHVxZ01iODJGNkM4N0M4S0twOUlmb2trTjBrbVlnME54bXBvTUpJOHdfaHVoRzktTFFwYTlKV2xrQ1JyZXlR?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮10月15日付&nbsp;&nbsp;徳島新聞デジタル",
-      "reason": "約1時間前に出たばかりの新しい情報",
+      "title": "「夢造の心傀」の攻略ポイントとクリア報酬の確認",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBRNjZ1X2hpcjNlUDJjU09MNUdrOW5fS0YxTmhaRlVLU2h4cU0tTEhmTFlqOWVYYTVCV1p3YTBVaHdhX282QXctZzhkcEZoc2lzYTU4?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithに掲載された「夢造の心傀の攻略と報酬」に関する情報です。素材内には具体的な戦闘手順、出現敵の耐性・ギミック、推奨編成、報酬の数値やアイテム名などの詳細テキストは記載されていないため、プレイヤーに対して「夢造の心傀」の攻略情報および得られる報酬一覧の確認を促す要点のみを簡潔にまとめます。",
+      "reason": "コンテンツ攻略および報酬内容の確認はプレイヤーにとって直接的な需要があり、攻略に悩む層へのショート動画による訴求が期待できるため。",
       "score": 68,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-15",
-      "createdTime": "2026-10-15T06:31:22.120652+00:00"
+      "createdTime": "2026-10-15T09:46:26.001665+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "Ver3.7ガチャのおすすめキャラクターと引くべき優先度",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5kWHB6WHg0MDU3TFdXbjlZSU9aRXZWbFBDX09FZDRrV3h0c1phTV9Rcjd4a3VUa3NPOXcycld4ZHJMOVR1R0lOSkFFV3B0bHViTW9n?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによる「Ver3.7ガチャは誰を引くべき？｜おすすめキャラ」に関する見出し情報です。素材内にピックアップ対象の具体的なキャラクター名、武器性能、ガチャ開催スケジュールなどの詳細データは記載されていないため、ガチャ優先度の基準やおすすめ対象キャラを整理・確認するアジェンダとして提示します。",
+      "reason": "ガチャの引きどきやキャラ選択の優先度は常にコミュニティの関心が高く、ガチャ更新・検討のタイミングで多くの視聴者に見られやすいため。",
+      "score": 68,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-15",
+      "createdTime": "2026-10-15T09:46:26.001689+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "鳴潮モーニエ関連楽曲『風の名前』MIMI feat.ヰ世界情緒",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE91dGE0cHp4d09LbUJPTlUxLVptcHNYM0pFRHlEUE5wWERPdWdJZDdfNmxUOWNFVllpaXRGMkxZcGFFYUcyNnZreThxelVzeDNuZzJPeFNEWlJSdWd1?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nYouTube上で公開された、鳴潮のモーニエに関連する楽曲『風の名前』（作編曲：MIMI、歌唱：ヰ世界情緒）の情報です。素材内には歌詞の詳細、MVの演出内容、楽曲の配信日程などは記載されていないため、モーニエを題材としたアーティストコラボ楽曲が公開されているという事実をシンプルに伝える構成とします。",
+      "reason": "人気アーティストとのタイアップやイメージ楽曲の公開はファンコミュニティでの拡散力が高く、世界観やキャラクターへの注目度を引き上げるフックになるため。",
+      "score": 64,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-15",
+      "createdTime": "2026-10-15T09:46:26.001699+00:00"
     }
   ]
 }
