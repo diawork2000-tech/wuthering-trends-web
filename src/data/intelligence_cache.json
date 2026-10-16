@@ -3,17 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "【競合バズ実績】【鳴潮】この2人いろいろと似てるよね",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=PnEd3EYZ-2k",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n#鳴潮#wutheringwaves\n\n（📊 バズ実績: セリーナ鳴潮メイン にて現在 1,604 再生 / 高評価 37 / 約 89 再生毎時）",
-      "reason": "競合チャンネルで約 89 再生/時 のペースで伸びている実績データに基づく抽出",
-      "score": 68,
-      "viewCount": 1604,
-      "viewsPerHour": 89.4,
+      "title": "【鳴潮】でか心を登ろうとするとすでに対策されていた件【Wuthering Waves】#鳴潮",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/cmbc1oNAStQ",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nチャンネル登録と高評価お願いします\n泣いた\n#新キャラ#鳴潮 #wutheringwaves #エイメス#wuwa#ダーニャ#シグリカ#緋雪#景燃#カルテジア#心",
+      "reason": "約0時間前に出たばかりの新しい情報 ／ 競合が扱っている注目ワード「in」を含む",
+      "score": 77,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-16",
-      "createdTime": "2026-10-16T15:01:34.185854+00:00"
+      "createdTime": "2026-10-16T18:16:11.291870+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "【鳴潮】リセマラ当たりランキング - GameWith",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1UZjlMWExyQlJ1X2VNQkpDSUpjc3RBVnVqYW9yVHdfQ0IzcVkxSllrbXJvNEx6YWpyQ2E4OUJFX3hpMkFuSDVaVi03SWM5c000N21z?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】リセマラ当たりランキング&nbsp;&nbsp;GameWith",
+      "reason": "競合が扱っている注目ワード「game」を含む",
+      "score": 72,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-16",
+      "createdTime": "2026-10-16T18:16:11.291904+00:00"
     }
   ]
 }
