@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-10-18 06:02:45",
+    "status": "Success",
+    "total_harvested": 68,
+    "final_selected": 5,
+    "breakdown": {
+      "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)": 1,
+      "YouTube競合 (別枠全件枠)": 4
+    },
+    "gemini_topic_status": "success",
+    "gemini_competitor_status": "success"
+  },
+  {
     "timestamp": "2026-10-18 02:49:42",
     "status": "Success",
     "total_harvested": 120,
@@ -586,17 +598,5 @@
     },
     "gemini_topic_status": "success",
     "gemini_competitor_status": "no_items"
-  },
-  {
-    "timestamp": "2026-10-11 11:31:35",
-    "status": "Success",
-    "total_harvested": 103,
-    "final_selected": 2,
-    "breakdown": {
-      "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)": 1,
-      "YouTube競合 (別枠全件枠)": 1
-    },
-    "gemini_topic_status": "success",
-    "gemini_competitor_status": "success"
   }
 ]
