@@ -3,17 +3,59 @@
   "items": [
     {
       "id": "card-0",
-      "title": "釉瑚(ユウゴ)の性能評価と育成方針ガイドまとめ",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5lbWRlVXZLNGI0WE0zekh1TTZNSW00Nk9ZOWk3Zm9KSVFsdUVjNTVTUm5sVjlUTDFJU3BoMGlFNGhDalBjS1ptZ0Zpb3JKV3ZzcDdN?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによるキャラクター「釉瑚(ユウゴ)」の総合解説記事。素材内では具体的な装備・編成の数値や固有名称までは言及されていないものの、釉瑚のキャラクター性能評価をはじめ、おすすめとされるパーティ編成、相性の良い音骸、適正武器についての育成・運用指針を取り扱っている。",
-      "reason": "新キャラクターや注目キャラクターの育成・編成需要が高まっているタイミングにおいて、おすすめパーティや音骸・武器といったビルド情報はプレイヤーが最も求める実用性の高いコンテンツであるため。",
-      "score": 72,
+      "title": "キャラクター「Hsin」のカジュアル私服ファンアート",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1x7sx7h/hsin_portrait/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外掲示板Redditにおいて、投稿者（/u/ui_uiiiiiiiii）が鳴潮のキャラクター「Hsin」をカジュアルな私服ファッション姿で描いた肖像イラスト作品を公開。「鳴潮のキャラクターをカジュアルなテーマやファッションで描くのは久しぶり」と述べており、今後も追加で制作する可能性に触れている。素材内には戦闘性能やゲーム内ステータスなどの記載はなく、純粋なコミュニティによるファンアート作品の紹介となっている。",
+      "reason": "ゲーム内とは異なるカジュアルな衣装を着たキャラクター表現はファン層からの反響が大きく、コミュニティ発の創作トレンドとして注目を集めやすいため。",
+      "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-17",
-      "createdTime": "2026-10-17T07:16:15.108281+00:00"
+      "createdTime": "2026-10-17T10:32:06.156127+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "音骸セット「銜夢照世の心」に対応する音骸一覧",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5lQTVMaS15X3BoNk9OdmdjRGhxMEt0Zjl6aFkxdk9UcDJNQ2NBTlNHb2Y4VVhRd0JVMWJuSzllOS1tRU9oQnRiVXN6SE5ad0lVam4w?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nゲーム攻略メディアGameWithによる、「銜夢照世の心」の音骸一覧をまとめたデータベース記事。素材には対象となる具体的な個別音骸の名称やセット効果の数値・仕様などの細部は記載されていないが、該当するセット効果を発動させるためにどの音骸を厳選・装備すべきかを確認するための基礎的な攻略情報となっている。",
+      "reason": "音骸厳選やビルド構築を行うプレイヤーにとって、特定のセット効果に対応する音骸の把握は必須の情報であり、ショート動画で素早く確認できるまとめとして実用性が高いため。",
+      "score": 74,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-17",
+      "createdTime": "2026-10-17T10:32:06.156158+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "初心者ガチャ（集音）のおすすめピックアップ解説",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1ONlB3LUptTXBBSFR4RmI1amh3dmN4c2ZEN29rSmplUEh2cEZ3dkFSekY2dnJPVmRIUXZWamhlUmh0bVV6dVpDMHRNcVZKajBveHBR?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮を始めたばかりのプレイヤー向けに用意されている「初心者ガチャ（集音）」において、どのピックアップを優先して引くべきかを案内するGameWithの攻略記事。素材内に個別のキャラクター名や順位付けの詳細は含まれていないが、序盤の貴重なガチャ資源を有効活用するための手引きとして位置づけられている。",
+      "reason": "新規参入プレイヤーが最初に直面する選択肢であり、「誰を選ぶべきか」という疑問に対する回答はショート動画において高い視聴維持率と需要が見込めるため。",
+      "score": 74,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-17",
+      "createdTime": "2026-10-17T10:32:06.156174+00:00"
+    },
+    {
+      "id": "card-3",
+      "title": "参加型配信「マトリクス20万点達成耐久」の事例",
+      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiO0FVX3lxTE45VFp2VFAyZ3M2aF9TdUNGREZjcGY3ek96aWFKdnp4UzNIMVo3WjVPOUlMWWp6Q294M2E0?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nVtuber「汐ゴマ」による鳴潮の第177回配信。高難度コンテンツ「マトリクス」において目標スコア20万点に到達するまでプレイを継続する参加型企画となっている。素材情報からは具体的な編成キャラや攻略手順の詳細は不明であるものの、プレイヤーコミュニティにおけるやりこみ企画やスコアアタックの盛り上がりを示す事例となっている。",
+      "reason": "高難度コンテンツへの挑戦企画や参加型配信はコミュニティの熱量が高く、高スコアを目指すプレイヤーのやりこみ意欲を刺激する題材として適しているため。",
+      "score": 74,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-17",
+      "createdTime": "2026-10-17T10:32:06.156188+00:00"
     }
   ]
 }
