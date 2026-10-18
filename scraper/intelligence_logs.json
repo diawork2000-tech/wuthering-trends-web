@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-10-18 19:03:57",
+    "status": "Success",
+    "total_harvested": 121,
+    "final_selected": 3,
+    "breakdown": {
+      "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 1,
+      "YouTube競合 (別枠全件枠)": 2
+    },
+    "gemini_topic_status": "success",
+    "gemini_competitor_status": "success"
+  },
+  {
     "timestamp": "2026-10-18 15:46:33",
     "status": "Success",
     "total_harvested": 107,
@@ -585,14 +597,5 @@
     },
     "gemini_topic_status": "failed",
     "gemini_competitor_status": "failed"
-  },
-  {
-    "timestamp": "2026-10-12 00:33:16",
-    "status": "Success",
-    "total_harvested": 113,
-    "final_selected": 0,
-    "breakdown": {},
-    "gemini_topic_status": "failed",
-    "gemini_competitor_status": "no_items"
   }
 ]
