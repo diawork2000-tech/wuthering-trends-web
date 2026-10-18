@@ -1,5 +1,14 @@
 [
   {
+    "timestamp": "2026-10-19 01:32:50",
+    "status": "Success",
+    "total_harvested": 119,
+    "final_selected": 0,
+    "breakdown": {},
+    "gemini_topic_status": "not_configured",
+    "gemini_competitor_status": "not_configured"
+  },
+  {
     "timestamp": "2026-10-18 22:17:15",
     "status": "Success",
     "total_harvested": 118,
@@ -589,14 +598,5 @@
     },
     "gemini_topic_status": "success",
     "gemini_competitor_status": "success"
-  },
-  {
-    "timestamp": "2026-10-12 07:02:25",
-    "status": "Success",
-    "total_harvested": 116,
-    "final_selected": 0,
-    "breakdown": {},
-    "gemini_topic_status": "failed",
-    "gemini_competitor_status": "no_items"
   }
 ]
