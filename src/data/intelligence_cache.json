@@ -3,59 +3,17 @@
   "items": [
     {
       "id": "card-0",
-      "title": "熾霞（しか）の評価・おすすめ編成・音骸・武器ガイド",
+      "title": "リューク・ヘルセンの性能評価とおすすめパーティ編成・音骸・武器まとめ",
       "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9DVFNLRUFtSGVVbTYweWZmZFlHUExtZWhmZW1OZlJiNVYyX0hpcUV5blg1QThBVU80YWZObXpGVTRTX05yREp4N0FwQVp2YVBoOG9N?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nゲーム攻略メディアGameWithによる「熾霞(しか)」の総合解説記事。熾霞の強みや評価基準、相性の良いおすすめパーティ編成の構成例、装備すべき推奨音骸、適正武器の選定基準についての網羅的な解説がまとめられている。",
-      "reason": "初期配布キャラクターである熾霞のビルドや育成方針、相性の良い編成に関する攻略情報は、初心者からやり込み勢まで安定して検索需要が高いため。",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1aY29CUlUxMnBObEVMMk16M0E0Qm51RGpvNkpEaVRQTUd6TTZRMlQzaWZkWk0xNjIxa2JFdWozN0MtaW03OUw5YW9yWkVRLUVLVENZ?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n素材に記載された情報に基づき、リューク・ヘルセンの総合評価、おすすめのパーティ編成、装備すべき音骸、適性武器についての解説企画を展開します（※素材内に具体的な武器名・音骸名・数値データの詳細記載がないため、概要の提示に留めます）。",
+      "reason": "GameWith等の主要攻略サイトでトレンドとして扱われており、リューク・ヘルセンの運用法やビルドを求めて検索するプレイヤーの需要が高いため。",
       "score": 72,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-19",
-      "createdTime": "2026-10-19T11:16:38.583328+00:00"
-    },
-    {
-      "id": "card-1",
-      "title": "鳴潮のシナリオテーマに対する海外SNSでの議論と反響",
-      "sourceType": "海外Redditフォーラム ガチャゲー最前線",
-      "sourceUrl": "https://www.reddit.com/r/gachagaming/comments/1x8oxxp/i_just_saw_a_tweet_saying_wuwa_is_the_first_ever/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外ガチャゲームコミュニティにおいて、「鳴潮は重いテーマ（自死などのシリアスな描写）を扱った初のメジャーガチャゲームなのか」というSNS上の言及を発端にした議論が投稿されている。鳴潮のストーリーの方向性や描写の深さに対するプレイヤー層の関心が示されている。",
-      "reason": "鳴潮のシナリオや世界観のシリアスさに焦点を当てた話題は、ストーリー考察や作品評価をテーマにしたショート動画として高い視聴維持率が期待できるため。",
-      "score": 64,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-10-19",
-      "createdTime": "2026-10-19T11:16:38.583388+00:00"
-    },
-    {
-      "id": "card-2",
-      "title": "鳴潮公式コミュニティのマルチプレイ・フレンド募集動向",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1x9kn4a/weekly_friends_coop_megathread_week_42_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外公式Redditコミュニティにおける週刊マルチプレイ募集スレッド。プレイヤーはサーバー（America、Asia、Europe、HMT、SEA）とUIDを共有し、マップ探索、ドメイン、無音区（Tacet Fields）、音骸厳選（Echo Farming）といった目的ごとに仲間を募り、協力プレイを行っている。",
-      "reason": "音骸厳選や高難度コンテンツの効率周回においてマルチプレイの活用法や需要が高まっており、共闘のメリットを紹介する企画に直結するため。",
-      "score": 78,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-10-19",
-      "createdTime": "2026-10-19T11:16:38.583408+00:00"
-    },
-    {
-      "id": "card-3",
-      "title": "海外鳴潮コミュニティの日次Q&Aスレッドに見るプレイヤーの疑問点",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1x9kne1/daily_questions_megathread_october_19_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n公式コミュニティで毎日開催されている総合質問メガスレッド。ゲームを開始したばかりの漂泊者から熟練者までが集まり、システム面の疑問解消や攻略のコツ、アドバイスを互いに提供し合うプラットフォームとして機能している。",
-      "reason": "一般プレイヤーが実際にどこでつまずいているか、どのような疑問を抱えているかのリアルなデータを集約でき、視聴者目線のQ&A解説動画を設計しやすいため。",
-      "score": 78,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-10-19",
-      "createdTime": "2026-10-19T11:16:38.583421+00:00"
+      "createdTime": "2026-10-19T14:31:36.125671+00:00"
     }
   ]
 }
