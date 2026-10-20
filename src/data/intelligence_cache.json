@@ -3,17 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "【鳴潮】最強音骸ランキングとおすすめメイン音骸の解説",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9CdVdkUmIycm1EREtfTFFVSjFPaTFwWE01OWlTX2xqRTJiWTBHZjFhRkNTWXp6dWFuN3RielpPUDNwSFdGY19ITWpYaFNQeDB0UGNr?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによる『鳴潮』の最強音骸ランキングおよびおすすめメイン音骸のまとめ。装備ビルドの根幹をなすメイン音骸の性能評価や優先度を解説する企画。（※提供素材内に具体的なキャラクター名・音骸名・数値・効果の記載がないため、事実の捏造防止指令に基づき素材に記載された範囲のみを記述）",
-      "reason": "音骸の選定や装備構成は育成リソースに直結する重要な要素であり、最新の環境に合わせた最強ランキングやおすすめ情報は常にプレイヤーからの関心が高いため。",
-      "score": 68,
+      "title": "鎖暝武器「沈冥」の性能情報",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9RM24ycEJ0VXN2Z1dNOFNJS1ZDWGhKa2N1czllTTBvRmxPNEtDRVhoZlJGU1hoOGpEZDdlLVh3RXgyNUZDWHRIZXJvSWNzLU9kV1o0?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nゲームメディアGameWithによる鳴潮の鎖暝武器「沈冥」の性能解説。素材内には具体的なステータス数値や追加効果の文面は明記されていないため、武器「沈冥」の性能データとして掲載されている事実を基に紹介する。",
+      "reason": "武器の性能や適性キャラクターに関する情報は育成を進めるプレイヤーからの需要が常に高く、攻略情報の検索流入が狙えるため。",
+      "score": 94,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-20",
-      "createdTime": "2026-10-20T06:46:15.636496+00:00"
+      "createdTime": "2026-10-20T10:02:39.732487+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "海外ファンによる全鳴潮キャラ実装順イラスト制作",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xaag60/i_drew_every_wuwa_character_in_release_order/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外ファンが鳴潮の全キャラクターを実装順に描いたプロジェクトの報告。非常に長い制作期間を経て完成されており、投稿者によると作業中のアクシデント（同級生が机を動かして口元の線がずれたため、qingxiaoに黒いリップを描いて隠した等）の裏話とともに共有されている。",
+      "reason": "海外コミュニティの大規模なファンアート企画はプレイヤーの作品愛やキャラクターへの共感を引き出しやすく、ショート動画でもビジュアルとエピソードで視聴維持率を保ちやすいため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-20",
+      "createdTime": "2026-10-20T10:02:39.732517+00:00"
     }
   ]
 }
