@@ -3,31 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "鎖暝武器「沈冥」の性能情報",
-      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9RM24ycEJ0VXN2Z1dNOFNJS1ZDWGhKa2N1czllTTBvRmxPNEtDRVhoZlJGU1hoOGpEZDdlLVh3RXgyNUZDWHRIZXJvSWNzLU9kV1o0?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nゲームメディアGameWithによる鳴潮の鎖暝武器「沈冥」の性能解説。素材内には具体的なステータス数値や追加効果の文面は明記されていないため、武器「沈冥」の性能データとして掲載されている事実を基に紹介する。",
-      "reason": "武器の性能や適性キャラクターに関する情報は育成を進めるプレイヤーからの需要が常に高く、攻略情報の検索流入が狙えるため。",
-      "score": 94,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-10-20",
-      "createdTime": "2026-10-20T10:02:39.732487+00:00"
-    },
-    {
-      "id": "card-1",
-      "title": "海外ファンによる全鳴潮キャラ実装順イラスト制作",
+      "title": "共鳴者紹介動画「Suoming — PROMISE」の話題",
       "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xaag60/i_drew_every_wuwa_character_in_release_order/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外ファンが鳴潮の全キャラクターを実装順に描いたプロジェクトの報告。非常に長い制作期間を経て完成されており、投稿者によると作業中のアクシデント（同級生が机を動かして口元の線がずれたため、qingxiaoに黒いリップを描いて隠した等）の裏話とともに共有されている。",
-      "reason": "海外コミュニティの大規模なファンアート企画はプレイヤーの作品愛やキャラクターへの共感を引き出しやすく、ショート動画でもビジュアルとエピソードで視聴維持率を保ちやすいため。",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xagzv3/wuthering_waves_resonator_showcase_suoming_promise/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n素材には「Wuthering Waves | Resonator Showcase | Suoming — PROMISE」というタイトルおよびユーザー「cakeel-」による投稿であることのみが記載されており、性能や映像の詳細データは含まれていません。共鳴者Suomingに焦点を当てたショーケース映像が海外コミュニティで共有されています。",
+      "reason": "海外コミュニティで特定の共鳴者に関するショーケースやファンメイド・公式紹介などの映像コンテンツが投稿されており、キャラクター関連の動向として注目されるため。",
       "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-20",
-      "createdTime": "2026-10-20T10:02:39.732517+00:00"
+      "createdTime": "2026-10-20T13:18:26.530544+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "海外コミュニティにおけるデイリー質問掲示板（10月20日付）",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xafrvj/daily_questions_megathread_october_20_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外Redditフォーラムにて設置された初心者から熟練者までを対象とした総合質問掲示板です。個別の投稿を乱立させず、簡潔な質問や팁の共有、キーワード検索による過去ログの確認、質問時の前提状況の説明などがルールとして案内されています。",
+      "reason": "プレイヤー間でどのような疑問や課題が共有されているか、コミュニティの関心領域やトレンドを拾い上げるための情報源となるため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-20",
+      "createdTime": "2026-10-20T13:18:26.530582+00:00"
     }
   ]
 }
