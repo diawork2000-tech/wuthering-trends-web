@@ -1,6 +1,6 @@
 {
   "_note": "競合タイトルのアップデート日程。鳴潮本体の予定(upcoming_schedule.json)とは別ファイルにしてある。混ぜるとネタのスコア計算(schedule_boost)が他ゲームの名前に反応してしまうため。versions は自動収集(collect_rival_schedule.py)が上書きするので、手で直す場合は confirmed:true の行だけにすること。",
-  "updated_at": "2026-10-21T19:16:58.760234+00:00",
+  "updated_at": "2026-10-22T21:18:04.592328+00:00",
   "games": [
     {
       "id": "genshin",
@@ -105,6 +105,14 @@
           "title": "秘密と、過去と、彼女たちと",
           "new_character_first": true,
           "new_character_second": false
+        },
+        {
+          "version": "3.3",
+          "title": "もう一度、空へと飛び立って",
+          "date": "2026-10-21",
+          "confirmed": true,
+          "new_character_first": null,
+          "new_character_second": null
         }
       ],
       "has_phases": true,
@@ -161,43 +169,40 @@
   ],
   "source_health": {
     "genshin": {
-      "last_fetch_ok_at": "2026-10-20T17:16:39.480413+00:00",
-      "consecutive_failures": 1,
-      "last_parse_ok_at": "2026-10-20T17:16:39.480413+00:00",
-      "consecutive_parse_empty": 1,
-      "last_error": "HTTP 503",
+      "last_fetch_ok_at": "2026-10-22T21:16:25.515033+00:00",
+      "consecutive_failures": 0,
+      "last_parse_ok_at": "2026-10-22T21:16:25.515033+00:00",
+      "consecutive_parse_empty": 0,
       "last_error_at": "2026-10-21T19:16:23.460291+00:00",
       "last_parse_empty_at": "2026-10-21T19:16:23.460291+00:00"
     },
     "hsr": {
-      "last_fetch_ok_at": "2026-10-21T19:16:23.460291+00:00",
+      "last_fetch_ok_at": "2026-10-22T21:16:25.515033+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-10-21T19:16:23.460291+00:00",
+      "last_parse_ok_at": "2026-10-22T21:16:25.515033+00:00",
       "consecutive_parse_empty": 0
     },
     "zzz": {
-      "last_fetch_ok_at": "2026-10-20T17:16:39.480413+00:00",
-      "consecutive_failures": 1,
-      "last_parse_ok_at": "2026-10-20T17:16:39.480413+00:00",
-      "consecutive_parse_empty": 1,
-      "last_error": "HTTP 503",
+      "last_fetch_ok_at": "2026-10-22T21:16:25.515033+00:00",
+      "consecutive_failures": 0,
+      "last_parse_ok_at": "2026-10-22T21:16:25.515033+00:00",
+      "consecutive_parse_empty": 0,
       "last_error_at": "2026-10-21T19:16:23.460291+00:00",
       "last_parse_empty_at": "2026-10-21T19:16:23.460291+00:00"
     },
     "nte": {
-      "last_fetch_ok_at": "2026-10-21T19:16:23.460291+00:00",
+      "last_fetch_ok_at": "2026-10-22T21:16:25.515033+00:00",
       "consecutive_failures": 0,
       "last_parse_ok_at": "2026-10-21T19:16:23.460291+00:00",
-      "consecutive_parse_empty": 0,
-      "last_parse_empty_at": "2026-10-02T06:47:09.283843+00:00"
+      "consecutive_parse_empty": 1,
+      "last_parse_empty_at": "2026-10-22T21:16:25.515033+00:00"
     },
     "endfield": {
-      "last_fetch_ok_at": "2026-10-20T17:16:39.480413+00:00",
-      "consecutive_failures": 1,
-      "last_parse_empty_at": "2026-10-21T19:16:23.460291+00:00",
-      "consecutive_parse_empty": 2,
+      "last_fetch_ok_at": "2026-10-22T21:16:25.515033+00:00",
+      "consecutive_failures": 0,
+      "last_parse_empty_at": "2026-10-22T21:16:25.515033+00:00",
+      "consecutive_parse_empty": 3,
       "last_parse_ok_at": "2026-10-19T15:16:29.763778+00:00",
-      "last_error": "HTTP 500",
       "last_error_at": "2026-10-21T19:16:23.460291+00:00"
     }
   }
