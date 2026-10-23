@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-10-24 08:19:39",
+    "status": "Success",
+    "total_harvested": 123,
+    "final_selected": 9,
+    "breakdown": {
+      "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上": 1,
+      "YouTube競合 (別枠全件枠)": 8
+    },
+    "gemini_topic_status": "failed",
+    "gemini_competitor_status": "failed"
+  },
+  {
     "timestamp": "2026-10-24 05:01:47",
     "status": "Success",
     "total_harvested": 121,
@@ -600,17 +612,5 @@
     },
     "gemini_topic_status": "failed",
     "gemini_competitor_status": "no_items"
-  },
-  {
-    "timestamp": "2026-10-17 13:46:24",
-    "status": "Success",
-    "total_harvested": 101,
-    "final_selected": 2,
-    "breakdown": {
-      "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)": 1,
-      "YouTube競合 (別枠全件枠)": 1
-    },
-    "gemini_topic_status": "success",
-    "gemini_competitor_status": "success"
   }
 ]
