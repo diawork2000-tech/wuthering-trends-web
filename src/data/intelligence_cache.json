@@ -3,45 +3,59 @@
   "items": [
     {
       "id": "card-0",
-      "title": "海外公式掲示板のデイリー質問スレッド情報",
+      "title": "海外コミュニティで話題の「iPhone Duo」による鳴潮プレイ",
       "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xdwgc5/daily_questions_megathread_october_24_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外掲示板Redditの『鳴潮』コミュニティにおいて設置されているデイリー質問メガスレッド（2026年10月24日付）の案内です。旅を始めたばかりの初心者から初期体験を共有したいプレイヤーまで、ゲーム全般に関する質問、情報交換、互いの支援を行う場として提供されています。短い質問の個別投稿乱立を防ぐための利用が求められており、投稿前にキーワード検索で過去ログを確認することや、質問時には明確な状況説明を添えることが推奨されています。",
-      "reason": "海外コミュニティで初心者がつまずきやすい点や頻出の疑問点を把握し、国内プレイヤー向けのQ&Aや解説ショート動画の題材を抽出・先行対策できるため。",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xe1nt7/wuwa_on_iphone_duo/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外掲示板Redditの鳴潮コミュニティにて、ユーザー「superquanganh」氏より「Wuwa on iPhone Duo」と題された投稿が行われた。素材内には端末の具体的スペックや操作感の詳細記述はないものの、特殊な端末環境における鳴潮の動作・プレイ実態に注目が集まっている。",
+      "reason": "特殊なデバイスや2画面端末での動作事例は視覚的インパクトが強く、ガジェット好きや最適化環境に関心のあるユーザーの目を引きやすいため。",
       "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-24",
-      "createdTime": "2026-10-24T11:32:42.235609+00:00"
+      "createdTime": "2026-10-24T18:03:44.410907+00:00"
     },
     {
       "id": "card-1",
-      "title": "GameWithによる『鳴潮』イベント最新情報まとめ",
-      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFB6TlFqNjhrcTZuQTFxVTZXSkZMaGl0elNkZjNpLTV0d3RJQVVDRkQ5eS1faUg0UVBpZGRodUFFb3RDcFpjTkpYTWEzNG1McG9UQ0RF?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによる『鳴潮』の最新イベント情報を集約した記事です。素材上はタイトルのみの提供のため詳細なイベント一覧や個別仕様の記述はありませんが、開催中および開催予定のイベント情報を追跡・整理する内容となっています。",
-      "reason": "イベントの開催状況や見逃し防止に関するリマインド情報は、プレイヤーが日常的に短い尺ですばやく把握したい実用性の高いコンテンツであるため。",
-      "score": 78,
+      "title": "心とサメイの各キャラ呼称と漂泊者からの呼ばれ方まとめ",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/cI9SnuIBtdc",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nキャラクター「心」や「サメイ」を中心として、各キャラクター同士がどのように呼び合っているか、また主人公である「漂泊者」からどのように呼ばれているかを整理したショート動画。素材のタグにはエイメス、ダーニャ、シグリカ、緋雪、景燃、カルテジア、心などのキャラクター名が挙げられており、キャラ間の関係性や呼称の違いに焦点を当てている。",
+      "reason": "キャラクター間の関係性や呼び方の違いは世界観やストーリーを重視するファン層からの需要が高く、短時間で手軽に確認できるショート動画の定番ネタとして安定した視聴が見込めるため。",
+      "score": 77,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-24",
-      "createdTime": "2026-10-24T11:32:42.235639+00:00"
+      "createdTime": "2026-10-24T18:03:44.410930+00:00"
     },
     {
       "id": "card-2",
-      "title": "Ver.3.7新キャラ映像がお披露目！妖艶な狐の女性「心」と傘を回す少女「サメイ」",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE5YREFESnBBM2JxWVlpS281Rm0wNjVDekkyVDJkWXZTWHp5bkEtQ19pcFFOWGJ3QUY2YnhxcTQzTjV2eERGSGlveEljLVRXenFpTnJQWFU2RzY1aUxIY2lBNA?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nゲームメディアAUTOMATONの報道によると、『鳴潮』Ver.3.7に登場する新キャラクターの映像が先行してお披露目されました。公開された映像では、妖艶な佇まいの狐のお姉さんキャラクター「心」と、傘をグルグルと回転させるアクションを繰り出す少女キャラクター「サメイ」の姿が紹介されています。",
-      "reason": "将来のバージョンで実装される新キャラクターのビジュアルやモーションの初出情報はユーザーの関心が極めて高く、ガチャ石の温存計画やキャラ評価の議論を呼ぶ強力なトレンドネタであるため。",
-      "score": 74,
+      "title": "無課金プレイヤーの救世主とされるサンカの強さ検証",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/LtRHX8OA3-I",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n「サンカが無課金の星すぎる件」として投稿されたショート動画。動画概要にて「コイツは最強」と明記されており、無課金でも育成・運用が推奨される強力なキャラクターとしてサンカを評価・発信している。",
+      "reason": "無課金・微課金層にとって育成コストパフォーマンスの高いキャラクター情報は常に需要が高く、初心者の獲得やコメント欄での性能議論を生みやすいため。",
+      "score": 77,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-24",
-      "createdTime": "2026-10-24T11:32:42.235650+00:00"
+      "createdTime": "2026-10-24T18:03:44.410940+00:00"
+    },
+    {
+      "id": "card-3",
+      "title": "夢州キャラクターの公式イラストと3Dプレイアブルモデルの比較検証",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=nruZ-2sUBw8",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nチャンネル「セリーナ鳴潮メイン」によって投稿された、夢州キャラクターの2Dイラストと実際のプレイアブル3Dモデルの再現性を比較・検証した動画。素材時点において再生数2,803回、高評価数78、約145再生/時を記録している。",
+      "reason": "新地域・新グループ（夢州）のキャラクター造形に対するファンの関心が高く、イラストとインゲームモデルの差異を一目で比較できる動画構成が視覚的な満足度と視聴維持率を高く保っているため。",
+      "score": 68,
+      "viewCount": 2803,
+      "viewsPerHour": 144.8,
+      "mentionCount": 1,
+      "date": "2026-10-24",
+      "createdTime": "2026-10-24T18:03:44.410950+00:00"
     }
   ]
 }
