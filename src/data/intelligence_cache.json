@@ -3,45 +3,17 @@
   "items": [
     {
       "id": "card-0",
-      "title": "鳴潮LAコンサート現地レポート：アジア公演とLA公演の熱量の違い",
+      "title": "海外掲示板で議論される「鳴潮で最もダメな存在」についての話題提起",
       "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xee51a/a_week_late_but_here_are_my_thoughts_recap_from/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nアジアサーバーのプレイヤーが、上海コンサートの配信を視聴し、実際に東京公演へ現地参加した体験を振り返る。東京公演では座席の視界が芳しくなく、会場の観客の雰囲気も非常に控えめで大人しかったため、完全に満足しきれない感情が残っていた。アジア圏の公演チケットが数秒で即完売した一方で、ロサンゼルス（LA）公演のチケットにはまだ余裕がある状況を目にし、突如LAへ渡航することを決断。現地での体験や熱気の違いをレポートしている。",
-      "reason": "公式オフラインイベントの体験談や各国の会場の空気感の違いはコミュニティ内で高い関心を集め、ゲーム外の大型施策に関するプレイヤーのリアルな反応として話題性があるため。",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xelkye/biggest_bum_in_wuwa/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外の鳴潮コミュニティ（Reddit）において、ユーザーMasterHafezにより「Biggest bum in wuwa（鳴潮で最も使えない・ダメな存在）」と題したスレッドが投稿された。作中のキャラクターや要素の中で誰が最も評価が低いか、あるいは期待外れであったかについて意見を募るコミュニティ内の議論提起となっている（素材内に特定のキャラクター名や具体的な数値・理由は明記されていない）。",
+      "reason": "プレイヤー間で評価が分かれる要素や性能・扱いに対する疑問・不満をテーマにした議論トピックは、視聴者の共感や個々の意見を呼び起こしやすく、コメント欄での活発な議論・高いエンゲージメントが期待できるため。",
       "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-25",
-      "createdTime": "2026-10-25T07:02:12.581684+00:00"
-    },
-    {
-      "id": "card-1",
-      "title": "鳴潮攻略：音骸ハーモニー「銜夢照世の心」の対象音骸一覧",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5lQTVMaS15X3BoNk9OdmdjRGhxMEt0Zjl6aFkxdk9UcDJNQ2NBTlNHb2Y4VVhRd0JVMWJuSzllOS1tRU9oQnRiVXN6SE5ad0lVam4w?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithに掲載された、音骸セット「銜夢照世の心」に対応する音骸一覧の攻略データ。素材上には個別モンスター名や詳細数値の記載はないものの、当該ハーモニー効果を発動するために必要な音骸の組み合わせを整理・網羅した基礎データとなっている。",
-      "reason": "キャラクターのビルド構築においてハーモニー効果に合致する音骸の選定と厳選は全プレイヤー必須の基礎情報であり、安定した検索・閲覧需要が存在するため。",
-      "score": 68,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-10-25",
-      "createdTime": "2026-10-25T07:02:12.581718+00:00"
-    },
-    {
-      "id": "card-2",
-      "title": "期限終了前に回収必須！無料星声1,605個の獲得リマインド",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=1A9W3BwRDAU",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n期限切れによって消滅する前に獲得しておくべき無料の星声（Astrites）合計1,605個について注意喚起を行うショート動画。見落としがちな報酬の回収を促すリマインドを中心とした内容となっている。",
-      "reason": "「無料配布」「期限切れ前に回収」という損失回避の訴求に加え、「1,605個」という具体的でキリの良い数字を掲げることでクリック率と視聴維持を高め、時速約490再生の勢いを獲得しているため。",
-      "score": 78,
-      "viewCount": 2644,
-      "viewsPerHour": 490.3,
-      "mentionCount": 1,
-      "date": "2026-10-25",
-      "createdTime": "2026-10-25T07:02:12.581736+00:00"
+      "createdTime": "2026-10-25T10:17:12.469929+00:00"
     }
   ]
 }
