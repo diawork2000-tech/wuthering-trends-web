@@ -1,5 +1,36 @@
 [
   {
+    "id": "2026-10-26T08:01:34.722190+00:00",
+    "timestamp": "2026/10/26 08:01 (JST)",
+    "status": "Success",
+    "api_key_status": "⚠️ Key #2 へ交代適用済 (2枚体制)",
+    "new_items_count": 5,
+    "summary": "正常完了 (新着Notion追加: 5 件)",
+    "details": [
+      "🎬 [08:01] 起動: トレンド収集＆自動整理プロセス始動",
+      "• [08:01:34] 🚀 YouTubeトレンド収集ツールの自動実行プロセス始動",
+      "• [08:01:34] 📋 検索設定ロード: キーワード 3個 / 1ワード最大 50 件",
+      "• [08:01:34] 🆕 [ステップ1] 「最新トレンド (Shorts & 長尺)」の検索・回収処理をスタート...",
+      "• [08:01:34] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
+      "• [08:01:42] ⚠️ Key #1 にて1日上限に到達！予備キー #2 へ即時オートローテーション移行！",
+      "• [08:01:48] 🔥 [ステップ2] 「週間人気ランキング (直近7日間)」の回収処理をスタート...",
+      "• [08:01:48] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
+      "• [08:02:01] 📣 [ステップ2.5] 「出稿中の広告クリエイティブ」の回収処理をスタート...",
+      "• [08:02:22] 📣 広告 1362 件を確認し、動画広告 367 件を回収（動画以外 318 件 / 除外 0 件）",
+      "• [08:02:22] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
+      "• [08:02:23] 📡 [ステップ2.6] 「公式アカウントの投稿」の回収処理をスタート...",
+      "• [08:02:23] 📡 収集対象アカウント 14 件: X ・ 日本語 ・ @WW_JP_Official / X ・ 日本語 ・ @wwdevteam / X ・ 英語 ・ @Wuthering_Waves / X ・ 英語 ・ @WW_devteam / X ・ 韓国語 ・ @WW_KR_Official / X ・ 韓国語 ・ @wwdevteamKR / X ・ 日本語 ・ @KUROMETHEUS / X ・ 日本語 ・ @WW_2NDFES / X ・ 日本語 ・ @kuro_onroad_jp / X ・ 日本語 ・ @Ds2fgH86931 / BiliBili ・ 中国語 ・ 鸣潮 / BiliBili ・ 中国語 ・ 鸣潮先行公约 / Weibo ・ 中国語 ・ 鸣潮 公式Weibo / Reddit ・ 英語 ・ r/WutheringWaves",
+      "• [08:02:41] ⚠️ 取得に失敗したアカウント: 13 件（X ・ 日本語 ・ @WW_JP_Official（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"JeOQHtYfTvGPw5phWVMv1w\"}）, X ・ 日本語 ・ @wwdevteam（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"ZhSRRcF4S8qR5rrBm3z_FQ\"}）, X ・ 英語 ・ @Wuthering_Waves（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"YTs_DCFXQaCbPGAbALIuDA\"}）, X ・ 英語 ・ @WW_devteam（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"MvGNuRvYSXmzkq958Hk9cQ\"}）, X ・ 韓国語 ・ @WW_KR_Official（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"GTXR5aNlTRSanp5t8Hk9cQ\"}）, X ・ 韓国語 ・ @wwdevteamKR（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"QQ01_fOnRSugroSW0-QtfA\"}）, X ・ 日本語 ・ @KUROMETHEUS（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"ln8YI2GfSziSSIya21mRUA\"}）, X ・ 日本語 ・ @WW_2NDFES（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"Ztuk7VxfQk6zPoC_w9P4nw\"}）, X ・ 日本語 ・ @kuro_onroad_jp（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"s2aXeV1zQ86lbhOf5nX1uw\"}）, X ・ 日本語 ・ @Ds2fgH86931（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"dkOP9epxSVyrQ_AVYqdHTg\"}）, BiliBili ・ 中国語 ・ 鸣潮（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"zS9UzE05QV2sG1Czss7a6g\"}）, BiliBili ・ 中国語 ・ 鸣潮先行公约（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"_oFvu0MxQJ6rSD31YqdHTg\"}）, Weibo ・ 中国語 ・ 鸣潮 公式Weibo（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"n2Lv8YEJSaeu2WULnbOCzg\"}））",
+      "• [08:02:41] 📡 公式SNS 対象 14 アカウント中 1 件から投稿 20 件を回収",
+      "• [08:02:41] 📤 [ステップ3] Notionデータベースへの差分・新規アップロード検証を開始...",
+      "• [08:03:13] カテゴリ「最新 (Shorts)」: 新規追加 2 件 / スキップ 77 件 (登録済)",
+      "• [08:03:14] カテゴリ「SNS」: 新規追加 2 件 / スキップ 18 件 (登録済)",
+      "• [08:03:14] カテゴリ「広告」: 新規追加 1 件 / スキップ 366 件 (登録済)",
+      "• [08:03:23] 📣 出稿期間を 0 件に記録しました（対象 367 件 / 変更なし 366 件） ※DB未登録 1 件",
+      "• [08:03:23] ✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: 5 件)"
+    ]
+  },
+  {
     "id": "2026-10-26T07:01:25.803748+00:00",
     "timestamp": "2026/10/26 07:01 (JST)",
     "status": "Success",
@@ -5017,35 +5048,6 @@
       "• [07:02:29] 📤 [ステップ3] Notionデータベースへの差分・新規アップロード検証を開始...",
       "• [07:03:10] 📣 出稿期間を 0 件に記録しました（対象 365 件 / 変更なし 365 件）",
       "• [07:03:10] ✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: 0 件)"
-    ]
-  },
-  {
-    "id": "2026-10-19T06:01:32.340552+00:00",
-    "timestamp": "2026/10/19 06:01 (JST)",
-    "status": "Success",
-    "api_key_status": "Key #1 (メイン構成運用)",
-    "new_items_count": 4,
-    "summary": "正常完了 (新着Notion追加: 4 件)",
-    "details": [
-      "🎬 [06:01] 起動: トレンド収集＆自動整理プロセス始動",
-      "• [06:01:32] 🚀 YouTubeトレンド収集ツールの自動実行プロセス始動",
-      "• [06:01:32] 📋 検索設定ロード: キーワード 3個 / 1ワード最大 50 件",
-      "• [06:01:32] 🆕 [ステップ1] 「最新トレンド (Shorts & 長尺)」の検索・回収処理をスタート...",
-      "• [06:01:32] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
-      "• [06:01:46] 🔥 [ステップ2] 「週間人気ランキング (直近7日間)」の回収処理をスタート...",
-      "• [06:01:46] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
-      "• [06:02:00] 📣 [ステップ2.5] 「出稿中の広告クリエイティブ」の回収処理をスタート...",
-      "• [06:02:16] 📣 広告 1360 件を確認し、動画広告 365 件を回収（動画以外 320 件 / 除外 0 件）",
-      "• [06:02:16] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
-      "• [06:02:18] 📡 [ステップ2.6] 「公式アカウントの投稿」の回収処理をスタート...",
-      "• [06:02:18] 📡 収集対象アカウント 14 件: X ・ 日本語 ・ @WW_JP_Official / X ・ 日本語 ・ @wwdevteam / X ・ 英語 ・ @Wuthering_Waves / X ・ 英語 ・ @WW_devteam / X ・ 韓国語 ・ @WW_KR_Official / X ・ 韓国語 ・ @wwdevteamKR / X ・ 日本語 ・ @KUROMETHEUS / X ・ 日本語 ・ @WW_2NDFES / X ・ 日本語 ・ @kuro_onroad_jp / X ・ 日本語 ・ @Ds2fgH86931 / BiliBili ・ 中国語 ・ 鸣潮 / BiliBili ・ 中国語 ・ 鸣潮先行公约 / Weibo ・ 中国語 ・ 鸣潮 公式Weibo / Reddit ・ 英語 ・ r/WutheringWaves",
-      "• [06:02:37] ⚠️ 取得に失敗したアカウント: 13 件（X ・ 日本語 ・ @WW_JP_Official（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"HfTSzq1VRD-KIQ6L0-QtfA\"}）, X ・ 日本語 ・ @wwdevteam（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"sA5pWCbZRRWfvP75nbOCzg\"}）, X ・ 英語 ・ @Wuthering_Waves（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"itJ8JX1gT3-o0fet5nX1uw\"}）, X ・ 英語 ・ @WW_devteam（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"zTewDcBJRN-l1DYsss7a6g\"}）, X ・ 韓国語 ・ @WW_KR_Official（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"S9YGRoFGRAmZIJoqN8N_Fg\"}）, X ・ 韓国語 ・ @wwdevteamKR（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"0xe5RbyySWWR6fvV7fhULg\"}）, X ・ 日本語 ・ @KUROMETHEUS（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"iHNj71-CTfCjh__tYqdHTg\"}）, X ・ 日本語 ・ @WW_2NDFES（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"ezmwZTLFS0aLrxa6s_GTAg\"}）, X ・ 日本語 ・ @kuro_onroad_jp（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"sHu3m7C_STKB3PcmWVMv1w\"}）, X ・ 日本語 ・ @Ds2fgH86931（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"V92-ZDwlR7ix2pP4EuroCg\"}）, BiliBili ・ 中国語 ・ 鸣潮（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"QQDkQUMnQ5u1MiqO5nX1uw\"}）, BiliBili ・ 中国語 ・ 鸣潮先行公约（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"lIF5Y6zCTTGwUGVDjUJq2g\"}）, Weibo ・ 中国語 ・ 鸣潮 公式Weibo（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"mRmSivm-R4GoiBfQYqdHTg\"}））",
-      "• [06:02:37] 📡 公式SNS 対象 14 アカウント中 1 件から投稿 20 件を回収",
-      "• [06:02:37] 📤 [ステップ3] Notionデータベースへの差分・新規アップロード検証を開始...",
-      "• [06:03:16] カテゴリ「最新 (Shorts)」: 新規追加 3 件 / スキップ 75 件 (登録済)",
-      "• [06:03:16] カテゴリ「SNS」: 新規追加 1 件 / スキップ 19 件 (登録済)",
-      "• [06:03:28] 📣 出稿期間を 0 件に記録しました（対象 365 件 / 変更なし 365 件）",
-      "• [06:03:28] ✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: 4 件)"
     ]
   }
 ]
