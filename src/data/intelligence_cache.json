@@ -3,17 +3,45 @@
   "items": [
     {
       "id": "card-0",
-      "title": "海外掲示板で議論される「鳴潮で最もダメな存在」についての話題提起",
+      "title": "海外コミュニティのデイリー質問メガスレッド",
       "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xelkye/biggest_bum_in_wuwa/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外の鳴潮コミュニティ（Reddit）において、ユーザーMasterHafezにより「Biggest bum in wuwa（鳴潮で最も使えない・ダメな存在）」と題したスレッドが投稿された。作中のキャラクターや要素の中で誰が最も評価が低いか、あるいは期待外れであったかについて意見を募るコミュニティ内の議論提起となっている（素材内に特定のキャラクター名や具体的な数値・理由は明記されていない）。",
-      "reason": "プレイヤー間で評価が分かれる要素や性能・扱いに対する疑問・不満をテーマにした議論トピックは、視聴者の共感や個々の意見を呼び起こしやすく、コメント欄での活発な議論・高いエンゲージメントが期待できるため。",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xeq3u0/daily_questions_megathread_october_25_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nRedditの『鳴潮』コミュニティに設置されたデイリー質問メガスレッド。初心者から経験者までの漂泊者が質問を投稿し、ヒントの共有や助け合いを行うための場として案内されている。個別の短い質問投稿を作成する代わりに本スレッドの利用が推奨されており、質問前のキーワード検索や質問時の明確な文脈提示が求められている。",
+      "reason": "プレイヤー層がつまずきやすいポイントや疑問点が多く集まる場所であり、ユーザーが真に求めているQ&A系ショート動画のネタを把握する上で有効なため。",
       "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-25",
-      "createdTime": "2026-10-25T10:17:12.469929+00:00"
+      "createdTime": "2026-10-25T13:33:42.010640+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "鳴潮世界観トレイラー「TRANSCENDO」の共有投稿",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xer9p0/wuthering_waves_lore_trailer_transcendo/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nRedditユーザー「/u/cakeel-」によって投稿された、『鳴潮』のストーリー・世界観トレイラー「TRANSCENDO」へのリンクトピック。素材には具体的な映像内容やキャラクター名の記述はなく、トレイラーの共有が行われたことのみが確認できる。",
+      "reason": "世界観やストーリー（ロア）関連の公式トレイラーはファンの関心が高く、トレイラーから読み取れる公式情報の解説動画として展開する余地があるため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-25",
+      "createdTime": "2026-10-25T13:33:42.010677+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "GameWithによる鳴潮キャラクター一覧と評価まとめ",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9OWTlvb2FCTFVTYjNsY0VOd3hpb3V6ekNUeEI1WU5td1pOTThPSEJnU08yY2R1MUJPdkRfaGhxUVg0TTNYX3plaGhQVWstX1VqeGZV?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n国内大手攻略メディアのGameWithが掲載している『鳴潮』のキャラクター一覧および評価情報。素材には個別のキャラクター名や数値評価などの具体的な内訳は記載されておらず、キャラクター一覧と評価を網羅したまとめ記事であることのみが示されている。",
+      "reason": "キャラクターの評価や一覧情報は初心者から上級者まで常に需要が途切れないテーマであり、ショート動画での簡易キャラ解説や育成優先度解説の企画として安定した再生数が見込めるため。",
+      "score": 74,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-25",
+      "createdTime": "2026-10-25T13:33:42.010689+00:00"
     }
   ]
 }
