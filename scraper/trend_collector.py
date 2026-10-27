@@ -932,9 +932,11 @@ def collect_sns_posts_safely(config):
         return []
 
     if stats.get("skipped_no_rsshub"):
+        # RSSHub は巡回ごとに立ち上げている。ここに来るのは、その起動に
+        # 失敗した回（GitHub Actions の「Start RSSHub for this run」を見る）。
         logger.log(
-            f"ℹ️ RSSHub未設定のため {stats['skipped_no_rsshub']} アカウントを見送りました"
-            "（RSSHUB_BASE_URL を設定すると有効になります）"
+            f"⚠️ RSSHubを使えないため {stats['skipped_no_rsshub']} アカウントを見送りました"
+            "（巡回の中での起動に失敗した可能性があります）"
         )
 
     # 取得できたのに0件、が一番危ない。エラーにならないので放置すると

@@ -30,6 +30,34 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
+      # 公式SNS(X)を読むための中継サーバー(RSSHub)を、この巡回の間だけ立ち上げる。
+      # 以前は Railway に常時置いていたが、無料期間が終わって止まった（2026-10）。
+      # X は RSSHub がブラウザを使わず auth_token 1つで読めるため、毎回の起動で足りる
+      # （lib/routes/twitter/user.ts は requirePuppeteer: false）。公開リポジトリなので費用はかからない。
+      # 起動に失敗しても収集本体は止めない。YouTube・広告・Reddit はそのまま動く。
+      - name: Start RSSHub for this run
+        id: rsshub
+        continue-on-error: true
+        env:
+          TWITTER_AUTH_TOKEN: ${{ secrets.TWITTER_AUTH_TOKEN }}
+        run: |
+          # 値はコマンドに書かず、環境変数の名前だけを渡す（ログに残さないため）
+          docker run -d --name rsshub -p 1200:1200 \
+            -e NODE_ENV=production \
+            -e TWITTER_AUTH_TOKEN \
+            diygod/rsshub
+          for i in $(seq 1 45); do
+            if curl -sf http://localhost:1200/healthz > /dev/null; then
+              echo "RSSHub ready (${i} checks)"
+              echo "url=http://localhost:1200" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "RSSHub did not become ready"
+          docker logs rsshub 2>&1 | tail -30
+          exit 1
+
       - name: Run Trend Collector
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
@@ -40,10 +68,9 @@ jobs:
           NOTION_LOG_DB_ID: ${{ secrets.NOTION_LOG_DB_ID }}
           DISCORD_ALERT_WEBHOOK_URL: ${{ secrets.DISCORD_ALERT_WEBHOOK_URL }}
           DISCORD_ALERT_ENABLED: ${{ vars.DISCORD_ALERT_ENABLED }}
-          # 公式SNS(X・BiliBili・Weibo)を読むための中継サーバー。
-          # 未設定でも収集は止まらず、Reddit だけが動く。
-          RSSHUB_BASE_URL: ${{ secrets.RSSHUB_BASE_URL }}
-          RSSHUB_ACCESS_KEY: ${{ secrets.RSSHUB_ACCESS_KEY }}
+          # 上の手順で立ち上げた RSSHub。起動に失敗した回は空になり、
+          # 収集側は X・BiliBili・Weibo を見送って Reddit だけを読む。
+          RSSHUB_BASE_URL: ${{ steps.rsshub.outputs.url }}
         run: |
           cd scraper
           python trend_collector.py

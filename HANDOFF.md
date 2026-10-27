@@ -1032,3 +1032,25 @@ Railwayの30日無料トライアル（8/28開始）が終わり、サービス�
 カード登録が必要で、**オーナーの作業と判断が要る。** 勝手に進めないこと。
 
 BiliBili・Weibo のブラウザ起動の問題（追記7 G-5）は、再開後に改めて確認が要る。
+
+## H-5. 対処：RSSHub を巡回の中で毎回立ち上げる（Railway を使わない）
+
+オーナーの承認を得て、Railway をやめた。`update_trends.yml` の
+「Start RSSHub for this run」で `diygod/rsshub` を docker で起動し、
+`http://localhost:1200` を収集に渡す。巡回が終われば実行環境ごと消える。
+
+- 費用は0円（公開リポジトリなので GitHub Actions は無料）
+- X は RSSHub がブラウザを使わず、`TWITTER_AUTH_TOKEN` 1つで読める
+  （`lib/routes/twitter/user.ts` が `requirePuppeteer: false`）。常時起動は不要
+- 必要な値は GitHub Secrets の `TWITTER_AUTH_TOKEN` だけ。
+  `RSSHUB_BASE_URL` / `RSSHUB_ACCESS_KEY` の Secrets はもう使っていない
+- 起動に失敗しても収集本体は止まらない（`continue-on-error`）。その回は
+  ログに「RSSHubを使えないため N アカウントを見送りました」と出る
+- 起動に約30秒〜1分かかり、巡回の所要時間が少し延びる
+- BiliBili・Weibo はブラウザが要るので、軽い版の `diygod/rsshub` では読めない。
+  読みたくなったら `diygod/rsshub:chromium-bundled` に替えて試す（毎回の取得が重くなる）
+- 巡回ごとに接続元のIPが変わるため、X に不審と見なされて auth_token が
+  無効になる可能性がある。そうなったら「auth_token を使えない」系のエラーが
+  ログに出るので、オーナーに取り直しを依頼する（`docs/railway-rsshub-setup.html` の
+  手順1。Railway の部分はもう使わない）
+- この手元のPCには docker が無いので、起動の確認は本番の巡回のログで行う
