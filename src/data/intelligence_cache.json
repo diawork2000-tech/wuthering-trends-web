@@ -3,45 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "鳴潮10月27日付 - 徳島新聞デジタル",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE16dGpWWmVqWmx1bm5Fb3pkRUhiS2hKckkxUlhRSnYwNC1WQzR1NkVqejJvU05adlE3NG9oU3V5QUs4UDNybE16R3dfTWVWdG9OZzJrQm9n?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮10月27日付&nbsp;&nbsp;徳島新聞デジタル",
-      "reason": "約6時間前に出たばかりの新しい情報 ／ 競合が扱っている注目ワード「10」を含む",
-      "score": 74,
+      "title": "海外コミュニティ公式質問スレッド：初心者の疑問から攻略Tipsまでの情報共有",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xgg427/daily_questions_megathread_october_27_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外Redditの鳴潮コミュニティにおける定期質問スレッドの概要。当スレッドはプレイヤー全般の質問受付に特化しており、ゲームを始めたばかりの漂泊者から初期のプレイ体験を共有したいユーザーまでを対象としている。個別投稿を乱立させずに短い疑問を解消する場として機能しており、キーワード検索による過去ログの参照や、質問時の明確な状況説明が推奨されている。",
+      "reason": "コミュニティ内でプレイヤーが直面している疑問点や関心事項の傾向を把握し、初心者がつまずきやすいポイントを動画のネタとして抽出するのに適しているため。",
+      "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-27",
-      "createdTime": "2026-10-27T11:06:03.902031+00:00"
+      "createdTime": "2026-10-27T14:19:09.914987+00:00"
     },
     {
       "id": "card-1",
-      "title": "【鳴潮】アンコの評価とおすすめパーティ編成・音骸・武器 - GameWith",
+      "title": "鳴潮『フィービー』の性能評価・パーティ編成・音骸・武器ガイド",
       "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5XVWhyZldHVklVM2xKWjN6aEhPSGF6ay1hRUhVX2g1UFBBZkl1bk96c0ctMHFraEZIeEpaY01GYVJjSGh3UmpJNzYwemI2TE9ZbEFn?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】アンコの評価とおすすめパーティ編成・音骸・武器&nbsp;&nbsp;GameWith",
-      "reason": "競合が扱っている注目ワード「It」を含む",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBKWUh1ak5yaDVNOUxNT09OZy1JY2YwUzh2R3FUTHZ5YmRhZmFzRzl2bnJmSk5zTnV2cElUSFNOaGhPTzl5UG5OMTdJa2xNa1htbUYw?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによる鳴潮のキャラクター「フィービー」の育成・運用ガイド。フィービーの全体的な評価をはじめ、相性の良いおすすめパーティ編成、装備すべき音骸、適性武器に関する情報を扱っている（※素材元の概要文内に具体的な数値や個別装備・スキル等の詳細テキストは未記載）。",
+      "reason": "キャラクター「フィービー」を所持している、あるいは育成を検討しているプレイヤーにとって、編成や装備ビルドの指針となる情報は常に検索需要が高いため。",
       "score": 64,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-27",
-      "createdTime": "2026-10-27T11:06:03.902060+00:00"
-    },
-    {
-      "id": "card-2",
-      "title": "【競合バズ実績】【鳴潮】残星組織がブラックショアに来る",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=uSCoEYTEJSA",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n#鳴潮#wutheringwaves\n\n（📊 バズ実績: セリーナ鳴潮メイン にて現在 1,695 再生 / 高評価 17 / 約 44 再生毎時）",
-      "reason": "競合チャンネルで約 44 再生/時 のペースで伸びている実績データに基づく抽出",
-      "score": 58,
-      "viewCount": 1695,
-      "viewsPerHour": 43.9,
-      "mentionCount": 1,
-      "date": "2026-10-27",
-      "createdTime": "2026-10-27T11:06:03.902075+00:00"
+      "createdTime": "2026-10-27T14:19:09.915015+00:00"
     }
   ]
 }
