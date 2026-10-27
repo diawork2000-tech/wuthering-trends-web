@@ -1,5 +1,17 @@
 [
   {
+    "timestamp": "2026-10-27 20:46:27",
+    "status": "Success",
+    "total_harvested": 120,
+    "final_selected": 4,
+    "breakdown": {
+      "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 3,
+      "YouTubeショート 伸び悩み＆神プレイ解説フォーラム": 1
+    },
+    "gemini_topic_status": "failed",
+    "gemini_competitor_status": "no_items"
+  },
+  {
     "timestamp": "2026-10-27 17:40:40",
     "status": "Success",
     "total_harvested": 125,
@@ -609,14 +621,5 @@
     },
     "gemini_topic_status": "success",
     "gemini_competitor_status": "success"
-  },
-  {
-    "timestamp": "2026-10-21 02:19:12",
-    "status": "Success",
-    "total_harvested": 115,
-    "final_selected": 0,
-    "breakdown": {},
-    "gemini_topic_status": "not_configured",
-    "gemini_competitor_status": "not_configured"
   }
 ]
