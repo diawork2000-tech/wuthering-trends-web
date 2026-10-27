@@ -51,9 +51,15 @@ NOTION_QUERY_CAP = 10000
 def query_database_all(headers, database_id, filter=None, page_size=100):
     """データベースの行を、1万件の上限を越えて全部たどる。
 
-    登録日時の古い順に並べて読み、上限に当たったら、最後に読んだ行の
-    登録日時から続きを問い合わせ直す。登録日時は分単位なので境目の行は
-    2回返ってくるが、行のIDで重複を除く。
+    登録日時の古い順に並べて読み、1回の問い合わせが終わるたびに、最後に
+    読んだ行の登録日時から続きを問い合わせ直す。新しい行が1件も出てこなく
+    なったら読み終わり。登録日時は分単位なので境目の行は2回返ってくるが、
+    行のIDで重複を除く。
+
+    「1万件ちょうどで止まったら続きがある」とは判定しない。Notion は
+    ゴミ箱に入れたばかりの行も上限の数に含めるらしく、1万件より手前
+    （実測 9,998件）で has_more を立てずに終わることがある。件数で
+    判定していた版は、1万3千件あるDBを9,998件で「全部読めた」と扱った。
 
     戻り値は (行のリスト, 全部読めたか)。途中で失敗したら False を返す。
     全部読めていない一覧で重複判定や削除をしてはいけない。
@@ -74,7 +80,7 @@ def query_database_all(headers, database_id, filter=None, page_size=100):
         elif conditions:
             body["filter"] = {"and": conditions}
 
-        cursor, got, last_time = None, 0, since
+        cursor, new_rows, last_time = None, 0, since
         while True:
             if cursor:
                 body["start_cursor"] = cursor
@@ -87,22 +93,18 @@ def query_database_all(headers, database_id, filter=None, page_size=100):
                 print(f"  [Error] Notionの問い合わせに失敗しました: {res.status_code} {res.text[:200]}")
                 return rows, False
             data = res.json()
-            results = data.get("results", [])
-            got += len(results)
-            for page in results:
+            for page in data.get("results", []):
                 if page["id"] not in seen:
                     seen.add(page["id"])
                     rows.append(page)
+                    new_rows += 1
                 last_time = page.get("created_time", last_time)
             if not data.get("has_more") or not data.get("next_cursor"):
                 break
             cursor = data["next_cursor"]
 
-        if got < NOTION_QUERY_CAP:
+        # 続きを問い合わせて新しい行が出てこなければ、そこで全部。
+        # 行の総数は有限なので、新しい行が出続けることはなく必ず止まる。
+        if new_rows == 0:
             return rows, True
-        if last_time == since:
-            # 同じ分に1万件以上登録されていることになり、先へ進めない。
-            # 現実には起きないが、無限に回らないよう止める。
-            print("  [Error] 同じ登録時刻の行が多すぎて、続きを読めませんでした")
-            return rows, False
         since = last_time

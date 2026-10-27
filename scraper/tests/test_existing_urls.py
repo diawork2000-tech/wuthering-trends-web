@@ -23,9 +23,12 @@ import trend_collector  # noqa: E402
 class FakeNotion:
     """本物の Notion と同じく、1回の問い合わせを cap 件で黙って打ち切る偽物。"""
 
-    def __init__(self, rows, cap, fail_on_call=None):
+    def __init__(self, rows, cap, fail_on_call=None, short_by=0):
         self.rows = rows
         self.cap = cap
+        # ゴミ箱に入れたばかりの行も上限の数に含まれるため、上限より手前で
+        # 黙って終わることがある（実測 9,998件）。その再現。
+        self.short_by = short_by
         self.fail_on_call = fail_on_call
         self.calls = 0
         self._served = {}
@@ -42,7 +45,7 @@ class FakeNotion:
         matched = sorted(
             (r for r in self.rows if since is None or r["created_time"] >= since),
             key=lambda r: r["created_time"],
-        )[: self.cap]
+        )[: self.cap - self.short_by]
         start = int(json.get("start_cursor") or 0)
         page = matched[start:start + json["page_size"]]
         end = start + len(page)
@@ -84,14 +87,22 @@ class TestQueryDatabaseAll(unittest.TestCase):
             _, complete = notion_utils.query_database_all({}, "db", page_size=3)
         self.assertFalse(complete)
 
-    def test_stops_instead_of_looping_forever(self):
-        # 同じ分に上限以上の行がある場合、先へ進めない。無限に回らず諦めること。
+    def test_reads_on_when_notion_stops_short_of_the_cap(self):
+        # 1万件ちょうどで止まったら続きあり、と件数で判定していた版は、
+        # 1万3千件あるDBを9,998件で「全部読めた」と扱った。
+        rows = make_rows(25)
+        fake = FakeNotion(rows, cap=7, short_by=2)
+        with mock.patch.object(notion_utils, "notion_request", fake):
+            got, complete = notion_utils.query_database_all({}, "db", page_size=3)
+        self.assertTrue(complete)
+        self.assertEqual(len(got), len(rows))
+
+    def test_always_terminates(self):
+        # 同じ分に上限以上の行がある極端な場合でも、無限に回らないこと。
         rows = make_rows(20, per_minute=20)
         fake = FakeNotion(rows, cap=7)
-        with mock.patch.object(notion_utils, "notion_request", fake), \
-             mock.patch.object(notion_utils, "NOTION_QUERY_CAP", 7):
-            _, complete = notion_utils.query_database_all({}, "db", page_size=3)
-        self.assertFalse(complete)
+        with mock.patch.object(notion_utils, "notion_request", fake):
+            notion_utils.query_database_all({}, "db", page_size=3)
         self.assertLess(fake.calls, 50)
 
 
