@@ -472,39 +472,44 @@ def get_youtube_trends(config, mode="latest"):
     return results
 
 def get_existing_notion_urls(headers, database_id):
-    """Notionデータベースから既に登録されている動画URLのリスト（セット）を取得する"""
+    """Notionに登録済みの動画URLを全部取る。取り切れなかったら None を返す。
+
+    ここで途中までの一覧を返してはいけない。以前は通信が途中で失敗しても
+    黙って「そこまでの一覧」を返しており、登録済みの広告が未登録と判定されて
+    1回あたり約370件がまるごと再登録されていた（9/13・10/1・10/8・10/24）。
+    同じ広告が最大6回入り、広告タブ2000件のうち重複を除くと430件しかなかった。
+
+    1時間分の登録を見送っても次の巡回で取り戻せるが、重複は手で消すしかない。
+    取り切れない回は登録しないほうが安全なので、呼び出し側に判断させる。
+    """
     print("Fetching existing video URLs from Notion database...")
     existing_urls = set()
-    has_more = True
     next_cursor = None
-    
     url = f"https://api.notion.com/v1/databases/{database_id}/query"
-    
-    while has_more:
+
+    while True:
         payload = {"page_size": 100}
         if next_cursor:
             payload["start_cursor"] = next_cursor
-            
         try:
-            res = requests.post(url, headers=headers, json=payload)
-            if res.status_code == 200:
-                data = res.json()
-                for page in data.get("results", []):
-                    # プロパティ名が "URL" であることを前提とする
-                    props = page.get("properties", {})
-                    url_prop = props.get("URL", {}).get("url")
-                    if url_prop:
-                        existing_urls.add(url_prop)
-                        
-                has_more = data.get("has_more", False)
-                next_cursor = data.get("next_cursor")
-            else:
-                print(f"  [Error] Failed to fetch existing URLs: {res.text}")
-                break
+            # 混雑(429)や一時的な障害(5xx)は待って試し直す
+            res = notion_request("POST", url, headers, json=payload, timeout=30)
         except Exception as e:
-            print(f"  [Error] Communication with Notion failed during query: {str(e)}")
+            print(f"  [Error] 登録済みURLの取得中に通信が失敗しました: {e}")
+            return None
+        if res.status_code != 200:
+            print(f"  [Error] 登録済みURLの取得に失敗しました: {res.status_code} {res.text[:200]}")
+            return None
+
+        data = res.json()
+        for page in data.get("results", []):
+            url_prop = page.get("properties", {}).get("URL", {}).get("url")
+            if url_prop:
+                existing_urls.add(url_prop)
+        if not data.get("has_more"):
             break
-            
+        next_cursor = data.get("next_cursor")
+
     print(f"Found {len(existing_urls)} existing videos in Notion.")
     return existing_urls
 
@@ -1046,42 +1051,47 @@ def main():
                 "Notion-Version": "2022-06-28"
             }
             existing_urls = get_existing_notion_urls(headers, database_id)
+            if existing_urls is None:
+                # 途中までの一覧で進めると、登録済みの行を未登録と見なして重複登録する。
+                msg = "登録済みURLの一覧を取り切れなかったため、今回はNotionへの登録を見送りました（重複登録を防ぐため。次の巡回で取り戻します）"
+                print(f"  [Warning] {msg}")
+                logger.log(f"⚠️ {msg}")
+            else:
+                send_to_notion([v for v in popular_flat if v.get("video_type") == "Shorts"], "週間人気 (Shorts)", existing_urls)
+                send_to_notion([v for v in popular_flat if v.get("video_type") == "通常"], "週間人気 (通常)", existing_urls)
+                send_to_notion([v for v in latest_flat if v.get("video_type") == "Shorts"], "最新 (Shorts)", existing_urls)
+                send_to_notion([v for v in latest_flat if v.get("video_type") == "通常"], "最新 (通常)", existing_urls)
             
-            send_to_notion([v for v in popular_flat if v.get("video_type") == "Shorts"], "週間人気 (Shorts)", existing_urls)
-            send_to_notion([v for v in popular_flat if v.get("video_type") == "通常"], "週間人気 (通常)", existing_urls)
-            send_to_notion([v for v in latest_flat if v.get("video_type") == "Shorts"], "最新 (Shorts)", existing_urls)
-            send_to_notion([v for v in latest_flat if v.get("video_type") == "通常"], "最新 (通常)", existing_urls)
-            
-            if target_channel_videos:
-                target_flat = get_flat_video_list({"dummy": target_channel_videos})
-                send_to_notion(target_flat, "登録チャンネル", existing_urls)
+                if target_channel_videos:
+                    target_flat = get_flat_video_list({"dummy": target_channel_videos})
+                    send_to_notion(target_flat, "登録チャンネル", existing_urls)
 
-            if sns_posts:
-                # 訳すのは新しい投稿だけにする。毎時の巡回では同じ投稿を
-                # 取り直しており、丸ごと訳すと1回で百件近く翻訳を呼んで
-                # まとめて弾かれる。実際それで一度も訳せていなかった。
-                fresh = [p for p in sns_posts if p["url"] not in existing_urls]
-                if fresh:
-                    sns_conf = config.get("sns", {})
-                    translated, failed = translate_posts(
-                        fresh,
-                        translate_if_needed,
-                        langs=sns_conf.get("translate_langs"),
-                        interval=sns_conf.get("translate_interval_seconds", 0.4),
-                    )
-                    if failed:
-                        # 訳せなかったことを黙っていると、原文のまま並んでいる
-                        # 理由が分からなくなる。
-                        logger.log(f"⚠️ 翻訳できなかった投稿: {failed} 件（原文のまま登録します）")
-                    if translated:
-                        logger.log(f"🌐 投稿 {translated} 件を日本語に翻訳しました")
-                send_to_notion(sns_posts, "SNS", existing_urls)
+                if sns_posts:
+                    # 訳すのは新しい投稿だけにする。毎時の巡回では同じ投稿を
+                    # 取り直しており、丸ごと訳すと1回で百件近く翻訳を呼んで
+                    # まとめて弾かれる。実際それで一度も訳せていなかった。
+                    fresh = [p for p in sns_posts if p["url"] not in existing_urls]
+                    if fresh:
+                        sns_conf = config.get("sns", {})
+                        translated, failed = translate_posts(
+                            fresh,
+                            translate_if_needed,
+                            langs=sns_conf.get("translate_langs"),
+                            interval=sns_conf.get("translate_interval_seconds", 0.4),
+                        )
+                        if failed:
+                            # 訳せなかったことを黙っていると、原文のまま並んでいる
+                            # 理由が分からなくなる。
+                            logger.log(f"⚠️ 翻訳できなかった投稿: {failed} 件（原文のまま登録します）")
+                        if translated:
+                            logger.log(f"🌐 投稿 {translated} 件を日本語に翻訳しました")
+                    send_to_notion(sns_posts, "SNS", existing_urls)
 
-            if ad_videos:
-                # 広告専用に作られた動画（公式チャンネルに無い尺違いなど）だけが
-                # 新規行になる。大半は既にある行なので、期間の書き足しが本命。
-                send_to_notion(ad_videos, "広告", existing_urls)
-                apply_ad_periods(headers, database_id, ad_videos)
+                if ad_videos:
+                    # 広告専用に作られた動画（公式チャンネルに無い尺違いなど）だけが
+                    # 新規行になる。大半は既にある行なので、期間の書き足しが本命。
+                    send_to_notion(ad_videos, "広告", existing_urls)
+                    apply_ad_periods(headers, database_id, ad_videos)
         else:
             print("Notion API is not configured. Skipping upload.")
             logger.log("ℹ️ Notion設定不備のためアップロードスキップ")
