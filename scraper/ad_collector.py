@@ -537,6 +537,9 @@ def collect_ad_videos(ad_config, exclude_checker=None):
             "video_type": "広告",
             "ad_period": format_period(info["first_shown"], info["last_shown"]),
             "ad_advertiser": info["advertiser"],
+            # 広告専用チャンネル(@ww-op1vs)は表示名が英語版公式と同じ
+            # 「Wuthering Waves」なので、名前では見分けられない。ハンドルで持つ。
+            "ad_channel": channel_handle(entry.get("channel_url", "")),
         })
 
     return videos, stats

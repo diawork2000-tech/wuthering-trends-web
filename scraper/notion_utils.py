@@ -39,3 +39,70 @@ def notion_request(method, url, headers, json=None, timeout=10, max_retries=5):
         return res
 
     return res
+
+
+# Notion は1回の問い合わせで最大1万件までしか返さない。その先は has_more が
+# 立たずに黙って終わる。動画DBは2026-10時点で1万5千件を超えており、
+# 登録済みURLの確認がこの上限で頭打ちになった結果、見えない側の行を
+# 「未登録」と判定して同じ動画を何度も登録していた（広告が最大6回）。
+NOTION_QUERY_CAP = 10000
+
+
+def query_database_all(headers, database_id, filter=None, page_size=100):
+    """データベースの行を、1万件の上限を越えて全部たどる。
+
+    登録日時の古い順に並べて読み、上限に当たったら、最後に読んだ行の
+    登録日時から続きを問い合わせ直す。登録日時は分単位なので境目の行は
+    2回返ってくるが、行のIDで重複を除く。
+
+    戻り値は (行のリスト, 全部読めたか)。途中で失敗したら False を返す。
+    全部読めていない一覧で重複判定や削除をしてはいけない。
+    """
+    url = f"https://api.notion.com/v1/databases/{database_id}/query"
+    rows, seen = [], set()
+    since = None
+    while True:
+        conditions = [filter] if filter else []
+        if since:
+            conditions.append({"timestamp": "created_time", "created_time": {"on_or_after": since}})
+        body = {
+            "page_size": page_size,
+            "sorts": [{"timestamp": "created_time", "direction": "ascending"}],
+        }
+        if len(conditions) == 1:
+            body["filter"] = conditions[0]
+        elif conditions:
+            body["filter"] = {"and": conditions}
+
+        cursor, got, last_time = None, 0, since
+        while True:
+            if cursor:
+                body["start_cursor"] = cursor
+            try:
+                res = notion_request("POST", url, headers, json=body, timeout=30)
+            except Exception as e:
+                print(f"  [Error] Notionの問い合わせ中に通信が失敗しました: {e}")
+                return rows, False
+            if res.status_code != 200:
+                print(f"  [Error] Notionの問い合わせに失敗しました: {res.status_code} {res.text[:200]}")
+                return rows, False
+            data = res.json()
+            results = data.get("results", [])
+            got += len(results)
+            for page in results:
+                if page["id"] not in seen:
+                    seen.add(page["id"])
+                    rows.append(page)
+                last_time = page.get("created_time", last_time)
+            if not data.get("has_more") or not data.get("next_cursor"):
+                break
+            cursor = data["next_cursor"]
+
+        if got < NOTION_QUERY_CAP:
+            return rows, True
+        if last_time == since:
+            # 同じ分に1万件以上登録されていることになり、先へ進めない。
+            # 現実には起きないが、無限に回らないよう止める。
+            print("  [Error] 同じ登録時刻の行が多すぎて、続きを読めませんでした")
+            return rows, False
+        since = last_time

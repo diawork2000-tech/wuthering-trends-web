@@ -83,6 +83,8 @@ export async function GET(request) {
       const adopted = page.properties['採用']?.checkbox || false;
       // 広告として実際に配信されていた期間。広告以外は空になる。
       const adPeriod = page.properties['出稿期間']?.rich_text?.[0]?.plain_text || '';
+      // 広告として流れた動画のチャンネル(@ハンドル)。表示名では広告専用と英語版公式を見分けられない。
+      const adChannel = page.properties['出稿チャンネル']?.rich_text?.[0]?.plain_text || '';
       const status = page.properties['制作状況']?.select?.name || '未着手';
       // 公式SNSの投稿だけが持つ。どこから来た情報かを行単位で示すために使う。
       const platform = page.properties['媒体']?.select?.name || '';
@@ -120,6 +122,7 @@ export async function GET(request) {
         adopted,
         status,
         adPeriod,
+        adChannel,
         platform,
         lang,
         account,

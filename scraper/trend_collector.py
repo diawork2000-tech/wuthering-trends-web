@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, timezone
 from googleapiclient.discovery import build
 from dotenv import load_dotenv
 from deep_translator import GoogleTranslator
-from notion_utils import notion_request
+from notion_utils import notion_request, query_database_all
 from shared.automation_logger import log_run
 from ad_collector import collect_ad_videos
 from sns_collector import collect_sns_posts, describe_targets, translate_posts
@@ -474,43 +474,23 @@ def get_youtube_trends(config, mode="latest"):
 def get_existing_notion_urls(headers, database_id):
     """Notionに登録済みの動画URLを全部取る。取り切れなかったら None を返す。
 
-    ここで途中までの一覧を返してはいけない。以前は通信が途中で失敗しても
-    黙って「そこまでの一覧」を返しており、登録済みの広告が未登録と判定されて
-    1回あたり約370件がまるごと再登録されていた（9/13・10/1・10/8・10/24）。
-    同じ広告が最大6回入り、広告タブ2000件のうち重複を除くと430件しかなかった。
+    ここで途中までの一覧を返してはいけない。見えていない行を未登録と判定し、
+    同じ動画をまるごと再登録してしまう。実際に起きたのは2つ:
+      - 通信が途中で失敗しても、黙ってそこまでの一覧を返していた
+      - Notion は1回の問い合わせで1万件までしか返さず、DBが1万5千件を
+        超えた時点で、それより先の行が常に見えなくなっていた
+    結果、広告が1回あたり約370件ずつ再登録され、同じ動画が最大6回入った。
 
     1時間分の登録を見送っても次の巡回で取り戻せるが、重複は手で消すしかない。
-    取り切れない回は登録しないほうが安全なので、呼び出し側に判断させる。
     """
     print("Fetching existing video URLs from Notion database...")
-    existing_urls = set()
-    next_cursor = None
-    url = f"https://api.notion.com/v1/databases/{database_id}/query"
-
-    while True:
-        payload = {"page_size": 100}
-        if next_cursor:
-            payload["start_cursor"] = next_cursor
-        try:
-            # 混雑(429)や一時的な障害(5xx)は待って試し直す
-            res = notion_request("POST", url, headers, json=payload, timeout=30)
-        except Exception as e:
-            print(f"  [Error] 登録済みURLの取得中に通信が失敗しました: {e}")
-            return None
-        if res.status_code != 200:
-            print(f"  [Error] 登録済みURLの取得に失敗しました: {res.status_code} {res.text[:200]}")
-            return None
-
-        data = res.json()
-        for page in data.get("results", []):
-            url_prop = page.get("properties", {}).get("URL", {}).get("url")
-            if url_prop:
-                existing_urls.add(url_prop)
-        if not data.get("has_more"):
-            break
-        next_cursor = data.get("next_cursor")
-
-    print(f"Found {len(existing_urls)} existing videos in Notion.")
+    rows, complete = query_database_all(headers, database_id)
+    if not complete:
+        return None
+    existing_urls = {
+        url for url in (page.get("properties", {}).get("URL", {}).get("url") for page in rows) if url
+    }
+    print(f"Found {len(existing_urls)} existing videos in Notion ({len(rows)} rows).")
     return existing_urls
 
 def apply_ad_periods(headers, database_id, ad_videos):
@@ -561,9 +541,11 @@ def apply_ad_periods(headers, database_id, ad_videos):
                 if not page_url:
                     continue
                 current = props.get("出稿期間", {}).get("rich_text", [])
+                current_ch = props.get("出稿チャンネル", {}).get("rich_text", [])
                 targets[page_url] = {
                     "id": page["id"],
                     "current": current[0].get("plain_text", "") if current else "",
+                    "current_channel": current_ch[0].get("plain_text", "") if current_ch else "",
                 }
             # 同じURLの行が重複していると100件を超えうる。打ち切ると
             # 「対象が見つからなかった」ことにされて黙って書き漏らす。
@@ -578,12 +560,14 @@ def apply_ad_periods(headers, database_id, ad_videos):
         target = targets.get(url_key)
         if not target:
             continue
-        if target["current"] == video["ad_period"]:
+        channel = video.get("ad_channel", "")
+        if target["current"] == video["ad_period"] and (not channel or target["current_channel"] == channel):
             unchanged += 1
             continue
-        payload = {"properties": {
-            "出稿期間": {"rich_text": [{"text": {"content": video["ad_period"]}}]}
-        }}
+        props = {"出稿期間": {"rich_text": [{"text": {"content": video["ad_period"]}}]}}
+        if channel:
+            props["出稿チャンネル"] = {"rich_text": [{"text": {"content": channel}}]}
+        payload = {"properties": props}
         try:
             res = notion_request(
                 "PATCH", f"https://api.notion.com/v1/pages/{target['id']}",
@@ -602,7 +586,7 @@ def apply_ad_periods(headers, database_id, ad_videos):
     # 成功・据え置き・失敗を別々に数える。まとめて引き算で出すと、
     # 失敗が「変更なし」に紛れて成功したように見えてしまう。
     missing = len(by_url) - len(targets)
-    msg = f"出稿期間を {updated} 件に記録しました（対象 {len(by_url)} 件 / 変更なし {unchanged} 件）"
+    msg = f"出稿期間・チャンネルを {updated} 件に記録しました（対象 {len(by_url)} 件 / 変更なし {unchanged} 件）"
     if failed > 0:
         msg += f" ⚠️ 書き込み失敗 {failed} 件"
     if missing > 0:
@@ -649,6 +633,10 @@ def ensure_video_db_schema():
         # 広告として実際に配信されていた期間。広告以外の動画では空になる。
         if "出稿期間" not in props:
             patch["出稿期間"] = {"rich_text": {}}
+        # 広告として流れた動画のチャンネル(@ハンドル)。広告専用チャンネルは
+        # 表示名が英語版公式と同じなので、名前の列では見分けられない。
+        if "出稿チャンネル" not in props:
+            patch["出稿チャンネル"] = {"rich_text": {}}
         # 公式SNSの投稿がどこから来たものかを示す2列。
         # 媒体と言語が混ざったまま並ぶと、行だけ見て出所が辿れなくなる。
         if "媒体" not in props:
@@ -776,6 +764,10 @@ def send_to_notion(video_list, category, existing_urls):
         if video.get("ad_period"):
             payload["properties"]["出稿期間"] = {
                 "rich_text": [{"text": {"content": video["ad_period"]}}]
+            }
+        if video.get("ad_channel"):
+            payload["properties"]["出稿チャンネル"] = {
+                "rich_text": [{"text": {"content": video["ad_channel"]}}]
             }
 
         # 公式SNSの投稿だけが媒体・言語を持つ。

@@ -15,6 +15,18 @@ const SNS_TARGETS = officialAccounts.accounts.filter((a) => a.collect);
 
 // 収集側（sns_collector.py）の表示名と揃えてある
 const SNS_PLATFORM_LABELS = { x: 'X', bilibili: 'BiliBili', weibo: 'Weibo', reddit: 'Reddit' };
+// 広告の出稿チャンネル(@ハンドル)と表示名。広告専用チャンネルは表示名が
+// 英語版公式と同じ「Wuthering Waves」なので、ハンドルで見分ける。
+const AD_CHANNEL_LABELS = [
+  ['@ww-op1vs', '広告専用'],
+  ['@wutheringwaves3352', '日本公式'],
+  ['@wutheringwaves', '英語公式'],
+  ['@ww_kr_official', '韓国公式'],
+  ['@wutheringwaves.zh.official', '繁中公式'],
+];
+const adChannelLabel = (handle) =>
+  (AD_CHANNEL_LABELS.find(([h]) => h === (handle || '').toLowerCase()) || [null, ''])[1];
+
 const SNS_LANG_LABELS = { ja: '日本語', en: '英語', ko: '韓国語', 'zh-CN': '中国語', 'zh-TW': '中国語(繁体)' };
 
 // 出稿期間「2026-07-31 〜 2026-08-03」から開始日・終了日を取り出す。
@@ -36,6 +48,7 @@ export default function Home() {
   const [snsPlatform, setSnsPlatform] = useState('すべて');
   const [snsLang, setSnsLang] = useState('すべて');
   const [snsAccount, setSnsAccount] = useState('すべて');
+  const [adChannel, setAdChannel] = useState('すべて');
   const [unreadOnly, setUnreadOnly] = useState(false);
   const [watchedIds, setWatchedIds] = useState(() => new Set());
   const [showTargets, setShowTargets] = useState(false);
@@ -429,6 +442,30 @@ export default function Home() {
       </div>
 
       {/* 公式SNSは媒体も言語も混ざって並ぶ。どこの情報かで絞れないと使えない。 */}
+      {/* 広告はチャンネルで絞る。広告専用チャンネルの動画は限定公開で、
+          ここ以外では探せない。件数はまだ出稿チャンネルが記録されていない行を除いて数える。 */}
+      {activeTab === '広告' && (
+        <div className={styles.snsFilters}>
+          <div className={styles.snsFilterGroup}>
+            <span className={styles.snsFilterLabel}>チャンネル</span>
+            {['すべて', ...AD_CHANNEL_LABELS.map(([, label]) => label)].map((label) => {
+              const n = label === 'すべて'
+                ? (adVideos || []).length
+                : (adVideos || []).filter((v) => adChannelLabel(v.adChannel) === label).length;
+              return (
+                <button
+                  key={label}
+                  className={`${styles.snsChip} ${adChannel === label ? styles.snsChipActive : ''}`}
+                  onClick={() => setAdChannel(label)}
+                >
+                  {label} <span style={{ opacity: 0.6 }}>{n}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {activeTab === 'SNS' && (
         <div className={styles.snsFilters}>
           <div className={styles.snsFilterGroup}>
@@ -578,6 +615,7 @@ export default function Home() {
             .filter((video) => activeTab !== 'SNS' || snsPlatform === 'すべて' || video.platform === snsPlatform)
             .filter((video) => activeTab !== 'SNS' || snsLang === 'すべて' || video.lang === snsLang)
             .filter((video) => activeTab !== 'SNS' || snsAccount === 'すべて' || video.account === snsAccount)
+            .filter((video) => activeTab !== '広告' || adChannel === 'すべて' || adChannelLabel(video.adChannel) === adChannel)
             .filter((video) => !unreadOnly || !watchedIds.has(video.id))
             .filter((video) => {
               if (!searchQuery.trim()) return true;
