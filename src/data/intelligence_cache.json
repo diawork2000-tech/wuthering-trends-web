@@ -3,59 +3,45 @@
   "items": [
     {
       "id": "card-0",
-      "title": "海外ファンによる鳴潮カードグッズ開封！スターターデッキとブースターボックスの結果",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xg4l74/got_my_wuwa_cards_today/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外掲示板にて、鳴潮のカード製品を購入したユーザーによる開封結果が報告された。投稿者は女性漂泊者（FRover）および男性漂泊者（MRover）のスターターデッキ2種と、1パック7枚入りが12パック封入されたブースターボックスを2箱購入。開封結果としてレアカードはいくつか入手できたものの、自身が本当に欲しかったカードや女性漂泊者（FRover）のカードは惜しくも引けなかったと語られている。しかしながら収録されているアートワークは非常に優れており、デスク周りに綺麗に飾る方法を模索しているという満足度の高い内容となっている。",
-      "reason": "ゲーム内コンテンツだけでなく公式リアルグッズやコレクションアイテムに対するファンの関心が高まっており、海外の開封事例やグッズ情報は視聴者の収集欲や興味を惹きつけるため。",
-      "score": 78,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-10-27",
-      "createdTime": "2026-10-27T07:48:06.371541+00:00"
-    },
-    {
-      "id": "card-1",
-      "title": "ガチャすり抜け対策と旧キャラ常設ローテーション！海外ユーザーからの新仕様提案",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xftyn9/kuro_need_to_introduce_a_new_banner_that_is/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n開発元のKuro Gamesに対し、過去キャラクターを順次ローテーションさせる常設ガチャの設置やすり抜け救済機能（捕獲の光輝のような仕組み）の導入を求める提案が投稿された。投稿者の友人が5回連続ですり抜け（50/50に敗北）を経験して鳴潮を引退してしまったことを問題視し、救済措置の必要性を訴えている。具体的には、旧キャラクターの凸（重複獲得）を進めやすくするために通常より低価格・低天井（最大60連）かつピックアップ率75/25に設定する案が提示された。これにより旧キャラクターの実質的な緩やかバフとして機能し、復刻を待つストレスや離脱者を減らしプレイヤーと開発双方にメリットがあると主張している。",
-      "reason": "ガチャの連続すり抜けはプレイヤーの離脱に直結する大きなストレス要因であり、天井設定や救済システムの改善に関する議論はコミュニティ内で共感と議論を呼びやすいため。",
+      "title": "鳴潮10月27日付 - 徳島新聞デジタル",
+      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE16dGpWWmVqWmx1bm5Fb3pkRUhiS2hKckkxUlhRSnYwNC1WQzR1NkVqejJvU05adlE3NG9oU3V5QUs4UDNybE16R3dfTWVWdG9OZzJrQm9n?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮10月27日付&nbsp;&nbsp;徳島新聞デジタル",
+      "reason": "約6時間前に出たばかりの新しい情報 ／ 競合が扱っている注目ワード「10」を含む",
       "score": 74,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-27",
-      "createdTime": "2026-10-27T07:48:06.371567+00:00"
+      "createdTime": "2026-10-27T11:06:03.902031+00:00"
     },
     {
-      "id": "card-2",
-      "title": "忌炎（きえん）の総合評価！おすすめパーティ編成・音骸・武器の攻略情報",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE96UVpzT2ktbkFfZnNMWi1FaWQ5ckJvdU42MU12WkR0MFNXZUUzWEhOLXhFVUNUS0hQdjJycDJNV0tMYkl0UXlYY09MNzJhNDNXNjRz?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n攻略サイトGameWithによるキャラクター「忌炎（きえん）」の性能評価およびおすすめパーティ編成、音骸、武器選定に関する解説記事。提供素材上には具体的な数値や装備名の詳細記述は含まれていないが、忌炎の運用法および装備構築の最適化を目的とした総合的なビルド指針がまとめられている。",
-      "reason": "主力キャラクターとしての忌炎の育成方針やパーティ構築に悩むプレイヤーに向けて、定評のある攻略情報を手短に確認できる動画需要があるため。",
-      "score": 68,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-10-27",
-      "createdTime": "2026-10-27T07:48:06.371579+00:00"
-    },
-    {
-      "id": "card-3",
-      "title": "シャコンヌの性能評価とビルド指針！パーティ編成・音骸・武器情報",
+      "id": "card-1",
+      "title": "【鳴潮】アンコの評価とおすすめパーティ編成・音骸・武器 - GameWith",
       "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE0xZU5RMkNDY0k3T3pNMDJHaVpjTDAxQXlXVlJhVGFUUUllRVFpdzdDTXBGNFJLeFpRYS1fazBodTFveFdIRXQxS2lhOUZtNi0tQ1Vv?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n攻略サイトGameWithによるキャラクター「シャコンヌ」の評価、おすすめパーティ編成、音骸、武器の選定に関する解説記事。素材内において詳細なステータス値や具体的な装備アイテム名は示されていないものの、シャコンヌを効率的に運用・育成するための基礎指針を提供する記事内容となっている。",
-      "reason": "キャラクターごとの最新評価や装備構成の確認需要は常に高く、ショート動画形式で育成の結論を素早く得たいユーザー層に適しているため。",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5XVWhyZldHVklVM2xKWjN6aEhPSGF6ay1hRUhVX2g1UFBBZkl1bk96c0ctMHFraEZIeEpaY01GYVJjSGh3UmpJNzYwemI2TE9ZbEFn?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】アンコの評価とおすすめパーティ編成・音骸・武器&nbsp;&nbsp;GameWith",
+      "reason": "競合が扱っている注目ワード「It」を含む",
       "score": 64,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-27",
-      "createdTime": "2026-10-27T07:48:06.371588+00:00"
+      "createdTime": "2026-10-27T11:06:03.902060+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "【競合バズ実績】【鳴潮】残星組織がブラックショアに来る",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=uSCoEYTEJSA",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n#鳴潮#wutheringwaves\n\n（📊 バズ実績: セリーナ鳴潮メイン にて現在 1,695 再生 / 高評価 17 / 約 44 再生毎時）",
+      "reason": "競合チャンネルで約 44 再生/時 のペースで伸びている実績データに基づく抽出",
+      "score": 58,
+      "viewCount": 1695,
+      "viewsPerHour": 43.9,
+      "mentionCount": 1,
+      "date": "2026-10-27",
+      "createdTime": "2026-10-27T11:06:03.902075+00:00"
     }
   ]
 }
