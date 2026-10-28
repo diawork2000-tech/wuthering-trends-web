@@ -3,31 +3,59 @@
   "items": [
     {
       "id": "card-0",
-      "title": "海外公式コミュニティの日常質問スレッドに見るプレイヤーの疑問と情報共有",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xhbop5/daily_questions_megathread_october_28_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外公式Redditコミュニティにおけるデイリー質問メガスレッドの役割についての解説。新しく旅を始めたばかりのプレイヤーからゲームの初期体験を共有したい漂泊者までを対象とし、短文の質問や簡易的な疑問を個別投稿ではなく一箇所に集約して回答・情報共有し合う場として設置されている。既出の質問をキーワード検索して解決を図ることや、質問投稿時には明確な文脈と詳細な状況説明を添えることが推奨されている。",
-      "reason": "日常的にプレイヤーがつまずくポイントや初心者層のリアルな疑問が集中する場であり、コミュニティの需要に即したQ&A形式のショート動画企画を抽出するリサーチ元として適しているため。",
-      "score": 78,
+      "title": "鳴潮ストリーマー朝月会が閉幕 リーダー部門1位は夜魅さん メンバー部門1位は甘守ノーラさん",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFB4bVNCY0JoY3hCVXZMelRIUHk3Nkhza2xfbHE3bmttSXBjX2hYZWhqbjJjNmkzbmw2ZGRpandkdFhmemI5eDFtYm4yVjNXNlI0NUdUTC1yc1FqSUU?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n『鳴潮』のVTuber配信イベント「鳴潮ストリーマー朝月会」の全日程が終了し結果が確定。リーダー部門第1位は夜魅さん、メンバー部門第1位は甘守ノーラさんとなった。",
+      "reason": "公式が絡むコミュニティ・ストリーマーイベントの結果発表直後であり、参加配信者のリスナー層やコミュニティ内で話題性が高いため。",
+      "score": 86,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-28",
-      "createdTime": "2026-10-28T16:19:42.333676+00:00"
+      "createdTime": "2026-10-28T19:50:31.941397+00:00"
     },
     {
       "id": "card-1",
-      "title": "GameWithによるカカロの性能評価とおすすめパーティ・音骸・武器ガイド",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5OdG1QN3JNcjQ1VUdlb2NLZFNVT2o1eTJtRFhuR1BaV0VDRmczb2lhVlZJTTJzUVVXekZxZTNUZlZVUWViMWplUWx4RlRWU0R2LWhN?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n国内大手攻略メディアGameWithによるキャラクター「カカロ」のビルド指南。カカロの性能面における評価をはじめ、相乗効果を狙えるおすすめパーティ編成の提案、装備させるべき音骸の選定、相性の良い武器の解説が網羅されている（素材側に具体的な武器名や数値等の詳細テキストは記載されていないため、カカロの育成・装備・編成の要点を総括する構成として扱う）。",
-      "reason": "カカロを入手したプレイヤーや育成を進める層に向けて、ビルド方針や編成の結論を簡潔にまとめたショート動画は検索流入と安定した視聴維持が期待できるため。",
-      "score": 72,
+      "title": "リンネーの新衣装に関する細かな気づきポイント",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/7LttXQsS0ho",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nリンネーの新衣装に関して、後から気づいたデザインや演出の細かなポイントを提示し、衣装のこだわりを共有する内容。",
+      "reason": "新衣装関連の細部検証や小ネタは、ビジュアルに関心を持つプレイヤー層にショート動画として手軽に視聴されやすいため。",
+      "score": 77,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-28",
-      "createdTime": "2026-10-28T16:19:42.333700+00:00"
+      "createdTime": "2026-10-28T19:50:31.941424+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "無料と有料の足跡エフェクトの演出の違い",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/_JQHySJWBlU",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮のコスメティック要素である足跡エフェクトについて、無料で入手できるものと有料のものそれぞれの演出差を提示し、その作り込みの高さに言及する内容。",
+      "reason": "課金や報酬で手に入るコスメティック要素の視覚的な違いは、プレイヤーが入手を判断する際の関心が高いテーマであるため。",
+      "score": 77,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-28",
+      "createdTime": "2026-10-28T19:50:31.941440+00:00"
+    },
+    {
+      "id": "card-3",
+      "title": "他視点で確認する共鳴解放時の変身演出",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/QPoC338lyF4",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n共鳴解放によって姿が変化する瞬間を、通常プレイ時の自視点ではなく他視点から捉え、その変身挙動や演出の見え方の迫力を検証・提示する内容。",
+      "reason": "マルチプレイや他視点ならではの特殊なアングル映像は視覚的インパクトが強く、ショート動画でのエンタメ性が高いため。",
+      "score": 77,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-28",
+      "createdTime": "2026-10-28T19:50:31.941453+00:00"
     }
   ]
 }
