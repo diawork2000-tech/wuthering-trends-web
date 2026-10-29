@@ -3,17 +3,45 @@
   "items": [
     {
       "id": "card-0",
-      "title": "海外Reddit公式：鳴潮デイリー総合質問メガスレッド",
+      "title": "『魔法少女ウィッチ・トライアルズ』二階堂ヒロの衣装が似合う鳴潮キャラの議論",
       "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xi7gpz/daily_questions_megathread_october_29_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外掲示板Redditの鳴潮コミュニティ（r/WutheringWaves）に開設されたデイリー質問メガスレッドの内容です。このスレッドは鳴潮に関する全般的な質問を受け付ける専用の場として機能しており、旅を始めたばかりの新規プレイヤーからプレイ体験を共有したいプレイヤーまで、漂泊者同士で質問・回答・攻略ヒントを共有し助け合うことが目的とされています。個別の質問投稿を乱立させず手軽な疑問は本スレッドに集約すること、過去の回答をキーワードで事前に検索すること、質問の際は明確な文脈と詳細な状況説明を記載することが案内されています。",
-      "reason": "海外コミュニティで日々寄せられるプレイヤーのリアルな疑問や初心者がつまずきやすいポイントを抽出し、ショート動画のQ&A企画や基礎解説コンテンツの需要に応えるネタ元として有効なため。",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xiadn2/which_wuwa_character_would_look_good_in_this/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外フォーラムにて、『Magical Girls Wotch Trials』の登場人物である二階堂ヒロ（Hiro Nikaido）の衣装を取り上げ、鳴潮のどのキャラクターにこの服装が似合うかをコミュニティ内で問いかけるトピック。素材内には具体的な選定キャラクターの結論や特定効果などの記載はなく、衣装デザインとキャラクターのビジュアル適合性をテーマとしたディスカッションとなっています。",
+      "reason": "キャラクターの外見や衣装デザインに関する話題はファンコミュニティで親しみやすく、ビジュアル比較やユーザーコメントを巻き込みやすいため。",
       "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-29",
-      "createdTime": "2026-10-29T12:03:50.393926+00:00"
+      "createdTime": "2026-10-29T15:19:38.680729+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "壁紙に最適な鳴潮キャラクターのビジュアル美に関する話題",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xibboy/wuwa_characters_are_too_beautiful_not_to_be/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外コミュニティにおいて「鳴潮のキャラクターは壁紙にしないともったいないほど美しい」と言及されているトピック。具体的なキャラクター名や性能数値の言及は素材に含まれていませんが、ゲーム内のビジュアルやグラフィック表現の高さが評価点として挙げられています。",
+      "reason": "鳴潮の強みである高品質な3Dグラフィックやキャラクター造形への賞賛は、ショート動画でもビジュアル訴求として扱いやすいため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-29",
+      "createdTime": "2026-10-29T15:19:38.680773+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "ゲーム内コンテンツ「夢造の玉柱」の攻略手順と報酬情報",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFB4TGdNRldaNVdWdkwzaTNERXpia3NmMmZxUXBFTFc5a3V6dWtySVNjaWRVU0NoZkNNamtBUWIzdk5md3NlR3ZoTXUtcHBWbk0yRl9F?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮内のコンテンツ「夢造の玉柱」を対象とした攻略情報。素材上はタイトルのみで詳細なギミック数値や具体的報酬アイテム名は示されていませんが、「夢造の玉柱」のクリア手順および得られる報酬の把握に焦点を当てた攻略ガイドであることが明記されています。",
+      "reason": "ゲーム内ギミックやチャレンジの攻略・報酬確認はプレイヤーの検索需要が常に安定して存在するため。",
+      "score": 58,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-29",
+      "createdTime": "2026-10-29T15:19:38.680792+00:00"
     }
   ]
 }
