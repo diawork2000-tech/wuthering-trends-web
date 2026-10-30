@@ -3,17 +3,59 @@
   "items": [
     {
       "id": "card-0",
-      "title": "【競合バズ実績】The red-themed mommy got the special treatment #wutheringwaves #wuwa #wuwacreator #fyp",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=sfCEJwG2DUM",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\nWuthering waves red-themed mommy #鳴潮 #鸣潮 #kurogames #shorts #명조: 워더링 웨이브 #wuwashorts\n\n（📊 バズ実績: deoxy.y にて現在 6,234 再生 / 高評価 398 / 約 806 再生毎時）",
-      "reason": "競合チャンネルで約 806 再生/時 のペースで伸びている実績データに基づく抽出",
-      "score": 84,
-      "viewCount": 6234,
-      "viewsPerHour": 805.9,
+      "title": "海外コミュニティで話題！鳴潮のノベルゲーム風展開か？新規衣装への期待高まる",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xj4l34/they_cant_be_teasing_us_with_a_wuwa_visual_novel/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外掲示板Redditにおいて、鳴潮のノベルゲーム風展開や新規スキンに関する話題が投稿されました。投稿者は「みんなとても美しく見える。もしこれが公式の企画でなかったり、少なくとも誰か1人でもスキンとして登場しないなら耐えられない」と強い期待と興奮を語っています。キャラクターたちの普段と異なるビジュアルに対するユーザーの熱狂と、ゲーム内での衣装実装への要望が寄せられています。",
+      "reason": "キャラクターの新規ビジュアルやスキン実装はユーザーの関心が極めて高く、コミュニティでの盛り上がりを紹介することで視聴者の期待感やコメントを活性化させやすいため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-30",
-      "createdTime": "2026-10-30T11:16:23.022214+00:00"
+      "createdTime": "2026-10-30T14:35:24.856458+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "Ver3.8プレビュー特別放送が11月6日に配信決定！海外掲示板で告知情報が共有",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xj48d3/wuthering_waves_version_38_preview_special/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外掲示板Redditにて、鳴潮のバージョン3.8プレビュー特別放送が11月6日19:00（UTC+8）に配信予定である旨の情報が共有されました。公式生放送・告知番組の日時情報として、次期アップデート内容に備えるプレイヤーたちの注目を集めています。",
+      "reason": "アプデ予告番組の日程は全プレイヤーにとって最重要情報の一つであり、配信前のスケジュール確認や期待感を高めるネタとして即効性があるため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-30",
+      "createdTime": "2026-10-30T14:35:24.856485+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "イベント「心影に映る華」の効率的な進め方と獲得報酬まとめ",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBQNndzZkJYSnUxZDVvYklSMVpMOXpOd2RlOWF3SUNiU1NxanlHaGR2U0E0aThFdTFUckxvSjUtbjlzRW90LW43Y0hfQlBIcFpxS3lz?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによるイベント「心影に映る華」の攻略ガイド情報です。本イベントの進め方や、クリア時に獲得できる報酬内容について解説されています。プレイヤーがイベントを逃さず消化し、育成素材や各種報酬を回収するための攻略情報となっています。",
+      "reason": "期間限定イベントの進め方と報酬情報は、報酬を取り逃したくない全プレイヤーからの検索需要が常に高いため。",
+      "score": 68,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-30",
+      "createdTime": "2026-10-30T14:35:24.856501+00:00"
+    },
+    {
+      "id": "card-3",
+      "title": "公式フォーラムのデイリー質問スレッド！初心者から熟練漂泊者の情報交換の場",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xj30iv/daily_questions_megathread_october_30_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外の鳴潮公式コミュニティRedditで設置されているデイリー質問メガレッド（10月30日付）です。ゲームを始めたばかりのプレイヤーから序盤の体験を共有したい漂泊者まで、簡単な疑問や役立つヒントを相互に共有・解決するための場として提供されています。個別スレッドを乱立させず、キーワード検索で過去の回答を探すことが推奨されています。",
+      "reason": "新規ユーザーや質問を抱えるプレイヤーが日々どのような疑問を持っているかを知るためのリサーチ源として有用であり、Q&A形式のショート動画作成のネタ元になるため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-30",
+      "createdTime": "2026-10-30T14:35:24.856513+00:00"
     }
   ]
 }
