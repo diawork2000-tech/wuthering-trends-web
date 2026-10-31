@@ -3,17 +3,59 @@
   "items": [
     {
       "id": "card-0",
-      "title": "【鳴潮】灯灯(トウトウ)の評価とおすすめパーティ編成・音骸・武器 - GameWith",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFA5dlptc2VEYS1UZXpsSWgzSHhKbzMta1lSNGhadk5KRWxTVmY4U0o3MnBnRHRGZ0lyUzBPUi12cnVZeldqQWFNWTJSM0NELTZPZTY4?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】灯灯(トウトウ)の評価とおすすめパーティ編成・音骸・武器&nbsp;&nbsp;GameWith",
-      "reason": "競合が扱っている注目ワード「武器」を含む",
-      "score": 72,
+      "title": "鳴潮の裏設定考察：謎の悲鳴「White Tower」の歴史と現在の正史設定",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xk0i70/hi_can_someone_answer_my_questions_about_this_guy/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nゲームの現行ストーリーをクリアした海外プレイヤーが、鳴潮の伝承（ロア）を深掘りする中で生じた疑問に関する投稿。作中の悲鳴（Threnodian）である「White Tower」について、ベータテスト版のストーリーでは漂泊者（Rover）の文明を破壊した存在として登場していた。その後Kuro Gamesがベータ版の物語をほぼ全面的に書き直したことで非公式扱いになったとされていたが、最新の設定では再び正史（カノン）に組み込まれ、現在は「Somno」の最深層に投獄・封印されているという設定になっていることが語られている。ベータ版からの改変履歴と現在のゲーム内世界設定における立ち位置の整理が求められている。",
+      "reason": "ストーリーをクリアした層が世界観や伝承の深掘りに移行するタイミングであり、ベータ版からの設定改変や公式ロアの変遷といったコアな考察ネタは熱心なプレイヤーの関心を引きつけやすいため。",
+      "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-31",
-      "createdTime": "2026-10-31T13:16:50.650451+00:00"
+      "createdTime": "2026-10-31T16:35:34.207092+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "PC版鳴潮関連ツール「WuWa Tappo」起動時の管理者権限要求に対するセキュリティ懸念",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xjzjew/wuwa_tappo_shouldnt_need_admin_access_on_windows/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nPC環境で動作する鳴潮関連のデスクトップペットツール「WuWa Tappo」が、起動時に「このアプリがデバイスに変更を加えることを許可しますか？」というUACポップアップを表示し、管理者権限を要求する点についての問題提起。キー入力を検知する仕組みを持つツールが管理者権限を要求することはマルウェアとしての危険性を疑わせる要因になると指摘されている。Discord等のアプリが管理者権限なしでもショートカット用のキー入力を検出できることや、類似の先行ツールであるBongo Catでも管理者権限が不要であった事実を挙げ、Tappoにおいて管理者権限を要求する必要性について技術的な疑問が呈されている。",
+      "reason": "PCでプレイするユーザーにとって非公式ツールや周辺ツールの安全性・セキュリティは重大な関心事であり、トラブル回避や注意喚起を兼ねたトピックとして話題性が高いため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-31",
+      "createdTime": "2026-10-31T16:35:34.207125+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "鳴潮海外公式サイトの記載内容と未実装キャラクター情報に関する話題",
+      "sourceType": "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ",
+      "sourceUrl": "https://www.youtube.com/shorts/o1KphfwlRkY",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮の海外公式サイトに掲載されている内容を取り上げた動画。投稿文には「まあ多分大丈夫だと思うけど」と添えられており、ハッシュタグには新キャラクターに関するタグとともに「エイメス」「ダーニャ」「シグリカ」「緋雪」「景燃」「カルテジア」「心」といった複数のキャラクター名が記載されている。公式サイト側の公開情報と今後の登場キャラクターの動向に注目が集まっている。",
+      "reason": "今後のアップデートで登場する新キャラクターや未公開情報に関する動向は、プレイヤー全体のガチャ計画や期待感に直結するため、非常にエンゲージメントが高まりやすいテーマであるため。",
+      "score": 77,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-31",
+      "createdTime": "2026-10-31T16:35:34.207144+00:00"
+    },
+    {
+      "id": "card-3",
+      "title": "散華（さんか）のキャラ評価・おすすめパーティ編成・音骸・武器の攻略情報",
+      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE04S0tXYi1rUjVkTnVMVHFXdWR6enRSdFd5NHZjajVrV1dVeDluZl9OeFkzQ05tZ2NvbmpSTkI1QnJfWWh2YjRlb1V6anh3dTlIVFFV?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nゲーム攻略メディアGameWithによる「散華(さんか)」の育成・運用ガイド。散華のキャラクター評価をはじめ、実戦で強みを発揮するためのパーティ編成案、推奨される音骸セット、相性の良い武器選定についてまとめられている（素材元記事タイトルに基づく網羅的ガイド）。",
+      "reason": "散華は入手性が高くサブアタッカーやサポートとしても広く採用されるキャラクターであり、育成方針や装備の最適解を求めるプレイヤーからの需要が常に安定しているため。",
+      "score": 68,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-31",
+      "createdTime": "2026-10-31T16:35:34.207159+00:00"
     }
   ]
 }
