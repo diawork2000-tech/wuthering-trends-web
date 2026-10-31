@@ -3,17 +3,45 @@
   "items": [
     {
       "id": "card-0",
-      "title": "鳴潮 10月31日付 - 徳島新聞デジタル",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9NV0VTcUJkOWV1dHdyQnlaWjNINXZTS1ZqTmZEaXRwTDIzc0xSVDE2ZlEzRDQ0TzdSRUE2RkNIcUZjMmJLRUE0ZVNYUWFyOHdtcUxRbklB?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮 10月31日付&nbsp;&nbsp;徳島新聞デジタル",
-      "reason": "約1時間前に出たばかりの新しい情報 ／ 競合が扱っている注目ワード「10」を含む",
+      "title": "『鳴潮』×『パニシング：グレイレイヴン』コラボへの複雑な反応",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xju180/no_kuro_please_no_kagawaraifu/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外掲示板Redditにおいて、「猿の手（叶う過程で災いをもたらす願い）に鳴潮とパニシング：グレイレイヴン（PGR）のコラボをお願いしてしまった時」というミームが投稿されました。Kuro Games開発作品同士のコラボレーションに対する期待と、意図しない実装形式に対するユーザーの懸念がユーモラスに語られています。素材内に具体的な実装内容の詳細は記載されていません。",
+      "reason": "開発元の前作であるPGRとのコラボはコミュニティ内で根強い関心を集めるテーマであり、ユーザーの共感を呼ぶ切り口として注目されているため。",
       "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-10-31",
-      "createdTime": "2026-10-31T06:49:47.340482+00:00"
+      "createdTime": "2026-10-31T10:03:30.318812+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "相里要（そうりよう）の総合評価・おすすめパーティ編成と装備ガイド",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9VVHZ0aWtURUdlYWtOdHdxUU81akZpWkJqdkxFWksxaV9lNG45Y0ZNRXBaT19aRE4yeDZuWDdjOVQ5THJyaUlsRm5obWhmR0g5eXZF?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによる相里要（そうりよう）の解説記事。相里要のキャラクターとしての性能評価、運用に適したパーティ編成例、推奨される音骸セットおよび武器の選択肢が取り上げられています。※素材テキスト内には具体的な装備名やステータス数値などの詳細データは記載されていません。",
+      "reason": "相里要の育成やビルドに関する情報はプレイヤー層の検索需要が高く、攻略ショート動画としての需要が常に存在するため。",
+      "score": 72,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-10-31",
+      "createdTime": "2026-10-31T10:03:30.318852+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "共鳴者の物理演算（揺れ演出）に注目したショート動画",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=6LcUkS9agX4",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n「ストーリーに物理演算は不可欠」というタイトルのもと、鳴潮に登場する共鳴者のキャラクターモデルにおける物理挙動（揺れ演出）を強調して紹介する動画。現在1,398再生、高評価101件、毎時約159再生のペースを記録しています。",
+      "reason": "キャラクターのグラフィックやモデルの挙動美に焦点を当てたショート動画は、視覚的な引きが強く海外・国内問わず手軽に再生数が伸びやすい傾向があるため。",
+      "score": 72,
+      "viewCount": 1398,
+      "viewsPerHour": 159.2,
+      "mentionCount": 1,
+      "date": "2026-10-31",
+      "createdTime": "2026-10-31T10:03:30.318871+00:00"
     }
   ]
 }
