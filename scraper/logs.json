@@ -1,5 +1,36 @@
 [
   {
+    "id": "2026-11-01T10:01:47.847592+00:00",
+    "timestamp": "2026/11/01 10:01 (JST)",
+    "status": "Success",
+    "api_key_status": "⚠️ Key #2 へ交代適用済 (2枚体制)",
+    "new_items_count": 13,
+    "summary": "正常完了 (新着Notion追加: 13 件)",
+    "details": [
+      "🎬 [10:01] 起動: トレンド収集＆自動整理プロセス始動",
+      "• [10:01:47] 🚀 YouTubeトレンド収集ツールの自動実行プロセス始動",
+      "• [10:01:47] 📋 検索設定ロード: キーワード 3個 / 1ワード最大 50 件",
+      "• [10:01:48] 🆕 [ステップ1] 「最新トレンド (Shorts & 長尺)」の検索・回収処理をスタート...",
+      "• [10:01:48] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
+      "• [10:01:56] ⚠️ Key #1 にて1日上限に到達！予備キー #2 へ即時オートローテーション移行！",
+      "• [10:02:02] 🔥 [ステップ2] 「週間人気ランキング (直近7日間)」の回収処理をスタート...",
+      "• [10:02:02] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
+      "• [10:02:02] ⚠️ Key #1 にて1日上限に到達！予備キー #2 へ即時オートローテーション移行！",
+      "• [10:02:16] 📣 [ステップ2.5] 「出稿中の広告クリエイティブ」の回収処理をスタート...",
+      "• [10:02:32] 📣 広告 1357 件を確認し、動画広告 367 件を回収（動画以外 316 件 / 除外 0 件）",
+      "• [10:02:32] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
+      "• [10:02:34] 📡 [ステップ2.6] 「公式アカウントの投稿」の回収処理をスタート...",
+      "• [10:02:34] 📡 収集対象アカウント 14 件: X ・ 日本語 ・ @WW_JP_Official / X ・ 日本語 ・ @wwdevteam / X ・ 英語 ・ @Wuthering_Waves / X ・ 英語 ・ @WW_devteam / X ・ 韓国語 ・ @WW_KR_Official / X ・ 韓国語 ・ @wwdevteamKR / X ・ 日本語 ・ @KUROMETHEUS / X ・ 日本語 ・ @WW_2NDFES / X ・ 日本語 ・ @kuro_onroad_jp / X ・ 日本語 ・ @Ds2fgH86931 / BiliBili ・ 中国語 ・ 鸣潮 / BiliBili ・ 中国語 ・ 鸣潮先行公约 / Weibo ・ 中国語 ・ 鸣潮 公式Weibo / Reddit ・ 英語 ・ r/WutheringWaves",
+      "• [10:03:41] ⚠️ 取得に失敗したアカウント: 3 件（BiliBili ・ 中国語 ・ 鸣潮（HTTP 503: Error: browserType.launch: Executable doesn&#39;t exist at /app/node_modules/.cache/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell ╔）, BiliBili ・ 中国語 ・ 鸣潮先行公约（HTTP 503: Error: browserType.launch: Executable doesn&#39;t exist at /app/node_modules/.cache/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell ╔）, Weibo ・ 中国語 ・ 鸣潮 公式Weibo（HTTP 503: Error: Cooling down before new visitor Cookies from https://m.weibo.cn/ may be fetched））",
+      "• [10:03:41] 📡 公式SNS 対象 14 アカウント中 11 件から投稿 191 件を回収",
+      "• [10:03:41] 📤 [ステップ3] Notionデータベースへの差分・新規アップロード検証を開始...",
+      "• [10:04:36] カテゴリ「最新 (Shorts)」: 新規追加 5 件 / スキップ 73 件 (登録済)",
+      "• [10:04:42] カテゴリ「SNS」: 新規追加 8 件 / スキップ 183 件 (登録済)",
+      "• [10:04:45] 📣 出稿期間・チャンネルを 0 件に記録しました（対象 367 件 / 変更なし 367 件）",
+      "• [10:04:45] ✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: 13 件)"
+    ]
+  },
+  {
     "id": "2026-11-01T09:01:40.606241+00:00",
     "timestamp": "2026/11/01 09:01 (JST)",
     "status": "Success",
@@ -5023,36 +5054,6 @@
       "• [09:03:07] カテゴリ「SNS」: 新規追加 1 件 / スキップ 19 件 (登録済)",
       "• [09:03:17] 📣 出稿期間を 3 件に記録しました（対象 366 件 / 変更なし 363 件）",
       "• [09:03:17] ✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: 3 件)"
-    ]
-  },
-  {
-    "id": "2026-10-25T08:01:29.993493+00:00",
-    "timestamp": "2026/10/25 08:01 (JST)",
-    "status": "Success",
-    "api_key_status": "⚠️ Key #2 へ交代適用済 (2枚体制)",
-    "new_items_count": 4,
-    "summary": "正常完了 (新着Notion追加: 4 件)",
-    "details": [
-      "🎬 [08:01] 起動: トレンド収集＆自動整理プロセス始動",
-      "• [08:01:29] 🚀 YouTubeトレンド収集ツールの自動実行プロセス始動",
-      "• [08:01:29] 📋 検索設定ロード: キーワード 3個 / 1ワード最大 50 件",
-      "• [08:01:30] 🆕 [ステップ1] 「最新トレンド (Shorts & 長尺)」の検索・回収処理をスタート...",
-      "• [08:01:30] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
-      "• [08:01:44] 🔥 [ステップ2] 「週間人気ランキング (直近7日間)」の回収処理をスタート...",
-      "• [08:01:44] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
-      "• [08:01:44] ⚠️ Key #1 にて1日上限に到達！予備キー #2 へ即時オートローテーション移行！",
-      "• [08:01:59] 📣 [ステップ2.5] 「出稿中の広告クリエイティブ」の回収処理をスタート...",
-      "• [08:02:13] 📣 広告 1355 件を確認し、動画広告 366 件を回収（動画以外 318 件 / 除外 0 件）",
-      "• [08:02:13] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
-      "• [08:02:14] 📡 [ステップ2.6] 「公式アカウントの投稿」の回収処理をスタート...",
-      "• [08:02:14] 📡 収集対象アカウント 14 件: X ・ 日本語 ・ @WW_JP_Official / X ・ 日本語 ・ @wwdevteam / X ・ 英語 ・ @Wuthering_Waves / X ・ 英語 ・ @WW_devteam / X ・ 韓国語 ・ @WW_KR_Official / X ・ 韓国語 ・ @wwdevteamKR / X ・ 日本語 ・ @KUROMETHEUS / X ・ 日本語 ・ @WW_2NDFES / X ・ 日本語 ・ @kuro_onroad_jp / X ・ 日本語 ・ @Ds2fgH86931 / BiliBili ・ 中国語 ・ 鸣潮 / BiliBili ・ 中国語 ・ 鸣潮先行公约 / Weibo ・ 中国語 ・ 鸣潮 公式Weibo / Reddit ・ 英語 ・ r/WutheringWaves",
-      "• [08:02:32] ⚠️ 取得に失敗したアカウント: 13 件（X ・ 日本語 ・ @WW_JP_Official（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"Dssn8YdVRFuWm1q90-QtfA\"}）, X ・ 日本語 ・ @wwdevteam（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"8xGyDDdDSpiVlkRIN8N_Fg\"}）, X ・ 英語 ・ @Wuthering_Waves（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"tgskY67RQJqOnICi55So4g\"}）, X ・ 英語 ・ @WW_devteam（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"wWlts0LPRWan2PMT63j4Ww\"}）, X ・ 韓国語 ・ @WW_KR_Official（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"XZHrzsTrTYaaC2mRALIuDA\"}）, X ・ 韓国語 ・ @wwdevteamKR（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"U2qMKI0TSiCV7YVzjUJq2g\"}）, X ・ 日本語 ・ @KUROMETHEUS（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"ohE7sr2wQfm3Qcv87fhULg\"}）, X ・ 日本語 ・ @WW_2NDFES（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"uHfBmCBQSSqDvHqLw9P4nw\"}）, X ・ 日本語 ・ @kuro_onroad_jp（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"Prq9DdGKRB-H4cfC55So4g\"}）, X ・ 日本語 ・ @Ds2fgH86931（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"dEZtKk8ISHKc97Q87fhULg\"}）, BiliBili ・ 中国語 ・ 鸣潮（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"FkaWNiZzQXCktPfDEuroCg\"}）, BiliBili ・ 中国語 ・ 鸣潮先行公约（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"6W8FvehySpO6TBBTYqdHTg\"}）, Weibo ・ 中国語 ・ 鸣潮 公式Weibo（HTTP 404: {\"status\":\"error\",\"code\":404,\"message\":\"Application not found\",\"request_id\":\"YCnMu4Q6T62Bk88nEuroCg\"}））",
-      "• [08:02:32] 📡 公式SNS 対象 14 アカウント中 1 件から投稿 20 件を回収",
-      "• [08:02:32] 📤 [ステップ3] Notionデータベースへの差分・新規アップロード検証を開始...",
-      "• [08:03:03] カテゴリ「最新 (Shorts)」: 新規追加 1 件 / スキップ 75 件 (登録済)",
-      "• [08:03:05] カテゴリ「SNS」: 新規追加 3 件 / スキップ 17 件 (登録済)",
-      "• [08:03:15] 📣 出稿期間を 1 件に記録しました（対象 366 件 / 変更なし 365 件）",
-      "• [08:03:15] ✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: 4 件)"
     ]
   }
 ]
