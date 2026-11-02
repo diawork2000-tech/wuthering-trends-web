@@ -3,45 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "海外公式フォーラムにおけるマルチプレイ・フレンド募集動向",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xlkxld/weekly_friends_coop_megathread_week_44_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外フォーラムの週刊メガスレッドにおける協力プレイ募集の取り組み。プレイヤーはサーバー（America、Asia、Europe、HMT、SEA）、UID、そして目的（探索、領域、無音区、音骸周回など）を明記してフレンドや強敵戦の助っ人を募集する形式が取られている。",
-      "reason": "音骸周回や強敵討伐といったマルチプレイ需要は常に存在し、プレイヤー間のマッチングや協力プレイの効率的な募集形式に関する情報はコミュニティで共感を得やすいため。",
-      "score": 78,
+      "title": "「おこった？ おこってないよ。」鳴潮の新共鳴者・鎖暝に公式も便乗するファン人気 - shiritomo",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiREFVX3lxTE1iWGJwaUlSTms3UnhlaGFzX1lwMGc3bHlBcFNqaGNLaXNraXRobnVoNHBjamNLa1AxMm5Wb1g0RFdFbHdw?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n「おこった？ おこってないよ。」鳴潮の新共鳴者・鎖暝に公式も便乗するファン人気&nbsp;&nbsp;shiritomo",
+      "reason": "約1時間前に出たばかりの新しい情報 ／ 競合が扱っている注目ワード「共鳴者」を含む",
+      "score": 86,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-11-02",
-      "createdTime": "2026-11-02T11:04:46.045729+00:00"
+      "createdTime": "2026-11-02T14:16:57.926948+00:00"
     },
     {
       "id": "card-1",
-      "title": "ユーノの性能評価・おすすめパーティ編成と音骸・武器ガイド",
-      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE50LWY1Uy1XZ0w5NVFyMEtiUXpQakhsVFJhZ2VRUjNYcWJyTWw2anE2VkUzU21pU2NIRm5WbzZOWlc4OUp3WUJXcnVyUlF4cmtIaWdz?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n素材内ではキャラクター「ユーノ」についての性能評価、推奨パーティ編成、最適な音骸および武器のビルド情報がまとめられている（※素材内に具体的な数値や装備名等の詳細テキストは記載されていないため、記載範囲のみ提示）。",
-      "reason": "キャラクターのビルド情報（武器・音骸・編成）は攻略動画において最も検索・再生需要が高く、ショート動画でも要点をまとめることで視聴維持率が見込めるため。",
+      "title": "鳴潮 11月2日付 - 徳島新聞デジタル",
+      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE05T1JlUnVDcmROM08xNk9rcUhpaGhaMEFXVlBnMzBhS2t6YWYtS1phRTFXWGh1SmVvNHJsdXdJZGZtMFN1RXV2bUlRSi1CeVlDTXRZQUtR?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮 11月2日付&nbsp;&nbsp;徳島新聞デジタル",
+      "reason": "約9時間前に出たばかりの新しい情報",
       "score": 64,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-11-02",
-      "createdTime": "2026-11-02T11:04:46.045758+00:00"
-    },
-    {
-      "id": "card-2",
-      "title": "鳴潮の不気味・恐怖要素まとめショート動画",
-      "sourceType": "YouTube競合 (別枠全件枠)",
-      "sourceUrl": "https://www.youtube.com/watch?v=pabF_FeZcjg",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮の世界に存在する「不気味な要素（The Creepiest Things）」を紹介する構成。通常プレイでは見過ごしがちなダークな世界観や設定、演出に着目した内容となっている（※個別のスポット名やキャラクター名等の詳細は素材内に記載なし）。",
-      "reason": "一般的な性能解説や攻略情報とは一線を画す「ゲーム内の小ネタ・不気味な要素」という切り口が視聴者の知的好奇心を刺激し、1時間あたり約173再生という高いペースで視聴回数と高評価を獲得しているため。",
-      "score": 72,
-      "viewCount": 1656,
-      "viewsPerHour": 172.9,
-      "mentionCount": 1,
-      "date": "2026-11-02",
-      "createdTime": "2026-11-02T11:04:46.045773+00:00"
+      "createdTime": "2026-11-02T14:16:57.926973+00:00"
     }
   ]
 }
