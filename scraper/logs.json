@@ -1,5 +1,35 @@
 [
   {
+    "id": "2026-11-06T08:01:39.042841+00:00",
+    "timestamp": "2026/11/06 08:01 (JST)",
+    "status": "Success",
+    "api_key_status": "⚠️ Key #2 へ交代適用済 (2枚体制)",
+    "new_items_count": 10,
+    "summary": "正常完了 (新着Notion追加: 10 件)",
+    "details": [
+      "🎬 [08:01] 起動: トレンド収集＆自動整理プロセス始動",
+      "• [08:01:39] 🚀 YouTubeトレンド収集ツールの自動実行プロセス始動",
+      "• [08:01:39] 📋 検索設定ロード: キーワード 3個 / 1ワード最大 50 件",
+      "• [08:01:39] 🆕 [ステップ1] 「最新トレンド (Shorts & 長尺)」の検索・回収処理をスタート...",
+      "• [08:01:39] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
+      "• [08:01:47] ⚠️ Key #1 にて1日上限に到達！予備キー #2 へ即時オートローテーション移行！",
+      "• [08:01:51] 🔥 [ステップ2] 「週間人気ランキング (直近7日間)」の回収処理をスタート...",
+      "• [08:01:51] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
+      "• [08:01:51] ⚠️ Key #1 にて1日上限に到達！予備キー #2 へ即時オートローテーション移行！",
+      "• [08:02:01] 📣 [ステップ2.5] 「出稿中の広告クリエイティブ」の回収処理をスタート...",
+      "• [08:02:13] 📣 広告 1323 件を確認し、動画広告 358 件を回収（動画以外 313 件 / 除外 0 件）",
+      "• [08:02:13] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
+      "• [08:02:14] 📡 [ステップ2.6] 「公式アカウントの投稿」の回収処理をスタート...",
+      "• [08:02:14] 📡 収集対象アカウント 14 件: X ・ 日本語 ・ @WW_JP_Official / X ・ 日本語 ・ @wwdevteam / X ・ 英語 ・ @Wuthering_Waves / X ・ 英語 ・ @WW_devteam / X ・ 韓国語 ・ @WW_KR_Official / X ・ 韓国語 ・ @wwdevteamKR / X ・ 日本語 ・ @KUROMETHEUS / X ・ 日本語 ・ @WW_2NDFES / X ・ 日本語 ・ @kuro_onroad_jp / X ・ 日本語 ・ @Ds2fgH86931 / BiliBili ・ 中国語 ・ 鸣潮 / BiliBili ・ 中国語 ・ 鸣潮先行公约 / Weibo ・ 中国語 ・ 鸣潮 公式Weibo / Reddit ・ 英語 ・ r/WutheringWaves",
+      "• [08:03:20] ⚠️ 取得に失敗したアカウント: 3 件（BiliBili ・ 中国語 ・ 鸣潮（HTTP 503: Error: browserType.launch: Executable doesn&#39;t exist at /app/node_modules/.cache/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell ╔）, BiliBili ・ 中国語 ・ 鸣潮先行公约（HTTP 503: Error: browserType.launch: Executable doesn&#39;t exist at /app/node_modules/.cache/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell ╔）, Weibo ・ 中国語 ・ 鸣潮 公式Weibo（HTTP 503: Error: Cooling down before new visitor Cookies from https://m.weibo.cn/ may be fetched））",
+      "• [08:03:20] 📡 公式SNS 対象 14 アカウント中 11 件から投稿 191 件を回収",
+      "• [08:03:20] 📤 [ステップ3] Notionデータベースへの差分・新規アップロード検証を開始...",
+      "• [08:04:11] カテゴリ「SNS」: 新規追加 10 件 / スキップ 181 件 (登録済)",
+      "• [08:04:15] 📣 出稿期間・チャンネルを 1 件に記録しました（対象 358 件 / 変更なし 357 件）",
+      "• [08:04:15] ✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: 10 件)"
+    ]
+  },
+  {
     "id": "2026-11-06T07:01:34.958671+00:00",
     "timestamp": "2026/11/06 07:01 (JST)",
     "status": "Success",
@@ -5035,34 +5065,6 @@
       "• [05:04:10] カテゴリ「最新 (Shorts)」: 新規追加 1 件 / スキップ 82 件 (登録済)",
       "• [05:04:13] 📣 出稿期間・チャンネルを 0 件に記録しました（対象 367 件 / 変更なし 367 件）",
       "• [05:04:13] ✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: 1 件)"
-    ]
-  },
-  {
-    "id": "2026-10-30T04:01:38.673381+00:00",
-    "timestamp": "2026/10/30 04:01 (JST)",
-    "status": "Success",
-    "api_key_status": "Key #1 (メイン構成運用)",
-    "new_items_count": 5,
-    "summary": "正常完了 (新着Notion追加: 5 件)",
-    "details": [
-      "🎬 [04:01] 起動: トレンド収集＆自動整理プロセス始動",
-      "• [04:01:38] 🚀 YouTubeトレンド収集ツールの自動実行プロセス始動",
-      "• [04:01:38] 📋 検索設定ロード: キーワード 3個 / 1ワード最大 50 件",
-      "• [04:01:38] 🆕 [ステップ1] 「最新トレンド (Shorts & 長尺)」の検索・回収処理をスタート...",
-      "• [04:01:38] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
-      "• [04:01:51] 🔥 [ステップ2] 「週間人気ランキング (直近7日間)」の回収処理をスタート...",
-      "• [04:01:51] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
-      "• [04:02:04] 📣 [ステップ2.5] 「出稿中の広告クリエイティブ」の回収処理をスタート...",
-      "• [04:02:17] 📣 広告 1357 件を確認し、動画広告 367 件を回収（動画以外 316 件 / 除外 0 件）",
-      "• [04:02:17] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
-      "• [04:02:19] 📡 [ステップ2.6] 「公式アカウントの投稿」の回収処理をスタート...",
-      "• [04:02:19] 📡 収集対象アカウント 14 件: X ・ 日本語 ・ @WW_JP_Official / X ・ 日本語 ・ @wwdevteam / X ・ 英語 ・ @Wuthering_Waves / X ・ 英語 ・ @WW_devteam / X ・ 韓国語 ・ @WW_KR_Official / X ・ 韓国語 ・ @wwdevteamKR / X ・ 日本語 ・ @KUROMETHEUS / X ・ 日本語 ・ @WW_2NDFES / X ・ 日本語 ・ @kuro_onroad_jp / X ・ 日本語 ・ @Ds2fgH86931 / BiliBili ・ 中国語 ・ 鸣潮 / BiliBili ・ 中国語 ・ 鸣潮先行公约 / Weibo ・ 中国語 ・ 鸣潮 公式Weibo / Reddit ・ 英語 ・ r/WutheringWaves",
-      "• [04:03:25] ⚠️ 取得に失敗したアカウント: 3 件（BiliBili ・ 中国語 ・ 鸣潮（HTTP 503: Error: browserType.launch: Executable doesn&#39;t exist at /app/node_modules/.cache/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell ╔）, BiliBili ・ 中国語 ・ 鸣潮先行公约（HTTP 503: Error: browserType.launch: Executable doesn&#39;t exist at /app/node_modules/.cache/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell ╔）, Weibo ・ 中国語 ・ 鸣潮 公式Weibo（HTTP 503: Error: Cooling down before new visitor Cookies from https://m.weibo.cn/ may be fetched））",
-      "• [04:03:25] 📡 公式SNS 対象 14 アカウント中 11 件から投稿 196 件を回収",
-      "• [04:03:25] 📤 [ステップ3] Notionデータベースへの差分・新規アップロード検証を開始...",
-      "• [04:04:09] カテゴリ「最新 (Shorts)」: 新規追加 5 件 / スキップ 77 件 (登録済)",
-      "• [04:04:13] 📣 出稿期間・チャンネルを 0 件に記録しました（対象 367 件 / 変更なし 367 件）",
-      "• [04:04:13] ✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: 5 件)"
     ]
   }
 ]
