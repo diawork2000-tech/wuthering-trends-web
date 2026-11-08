@@ -53,6 +53,29 @@ LANG_LABELS = {
     "ko": "韓国語",
     "zh-CN": "中国語",
     "zh-TW": "中国語(繁体)",
+    "es": "スペイン語",
+    "fr": "フランス語",
+    "de": "ドイツ語",
+    "th": "タイ語",
+    "pt": "ポルトガル語",
+}
+
+# Notion の「情報源の種類」。公式と、公式以外（x_watch.json）を見分けるための列。
+SOURCE_TYPE_LABELS = {
+    "official": "公式",
+    "media": "メディア",
+    "creator": "クリエイター",
+    "community": "コミュニティ",
+}
+
+# official_accounts.json の category を情報源の種類に寄せる。
+# 開発チーム・派生・イベントのアカウントも公式が運営しているので「公式」。
+_CATEGORY_TO_SOURCE_TYPE = {
+    "official": "official",
+    "dev": "official",
+    "spinoff": "official",
+    "event": "official",
+    "community": "community",
 }
 
 
@@ -62,6 +85,27 @@ def platform_label(platform):
 
 def lang_label(lang):
     return LANG_LABELS.get(lang, lang)
+
+
+def source_type_of(account):
+    """アカウントの「情報源の種類」を返す（公式／メディア／クリエイター／コミュニティ）。"""
+    kind = account.get("source_type") or _CATEGORY_TO_SOURCE_TYPE.get(account.get("category", ""), "official")
+    return SOURCE_TYPE_LABELS.get(kind, kind)
+
+
+def detect_lang(text):
+    """本文の文字から言語を推し量る。公式以外のアカウントは言語を決め打ちできないため。
+
+    かなが1文字でもあれば日本語。中国語の投稿にも漢字は入るが、かなは入らない。
+    """
+    text = text or ""
+    if re.search(r"[ぁ-んァ-ヶ]", text):
+        return "ja"
+    if re.search(r"[가-힣]", text):
+        return "ko"
+    if re.search(r"[一-鿿]", text):
+        return "zh-CN"
+    return "en"
 
 
 def account_label(account):
@@ -79,12 +123,15 @@ def account_label(account):
     return account["id"]
 
 
-def source_label(account):
+def source_label(account, lang=None):
     """「X ・ 日本語 ・ @WW_JP_Official」の形。どこから来た情報かを一目で分かるようにする。
 
     タブ上で媒体も言語も混ざるので、行だけ見て出所が辿れないと使い物にならない。
+    言語を投稿ごとに判定するアカウント（lang が auto）は、判定した言語を渡す。
     """
-    return f"{platform_label(account['platform'])} ・ {lang_label(account['lang'])} ・ {account_label(account)}"
+    lang = lang or account["lang"]
+    lang_text = "言語自動" if lang == "auto" else lang_label(lang)
+    return f"{platform_label(account['platform'])} ・ {lang_text} ・ {account_label(account)}"
 
 
 def feed_url(account, rsshub_base, access_key=""):
@@ -109,6 +156,10 @@ def feed_url(account, rsshub_base, access_key=""):
     base = rsshub_base.rstrip("/")
     if platform == "x":
         path = f"/twitter/user/{account['id']}"
+        if account.get("exclude_retweets"):
+            # リポストを取らない。リポストは投稿者がリポストした人になり、
+            # 元の投稿者（リーク系かもしれない）を投稿者の照合では落とせないため。
+            path += "/includeRts=false"
     elif platform == "bilibili":
         # 投稿動画だけでなく告知文も拾いたいので動態(dynamic)を使う
         path = f"/bilibili/user/dynamic/{account['id']}"
@@ -298,7 +349,25 @@ def translate_posts(posts, translator, langs=None, interval=0.4):
     return translated, failed
 
 
-def collect_account(account, rsshub_base, access_key, max_items, translator=None):
+# x.com/〈ID〉 のうち、人ではないもの
+_NOT_USER_PATHS = {"i", "home", "search", "hashtag", "intent", "share", "explore", "settings"}
+
+
+def mentioned_handles(link, html):
+    """投稿に関わる X の ID をすべて小文字で返す。
+
+    投稿者（リンクのID）だけでは足りない。引用元の投稿者は本文の中にしか出てこない。
+    リーク系のアカウントを除外するとき、これを全部照らし合わせる。
+    """
+    found = set()
+    for text in (link or "", html or ""):
+        for handle in re.findall(r"(?:x|twitter)\.com/([A-Za-z0-9_]{1,15})(?![A-Za-z0-9_])", text):
+            if handle.lower() not in _NOT_USER_PATHS:
+                found.add(handle.lower())
+    return found
+
+
+def collect_account(account, rsshub_base, access_key, max_items, translator=None, exclude=None):
     """1アカウントぶん取る。戻り値は (投稿リスト, 状態)。
 
     状態は "ok" / "empty" / エラー内容。呼び出し側で集計して表に出す。
@@ -317,13 +386,18 @@ def collect_account(account, rsshub_base, access_key, max_items, translator=None
         # ここが一番大事。取れたのに0件は「静かな失敗」なので必ず返す。
         return [], "empty"
 
+    exclude = {h.lstrip("@").lower() for h in (exclude or [])}
     posts = []
     for entry in feed.entries[:max_items]:
         link = entry.get("link", "")
         if not link or not str(link).startswith("http"):
             continue
+        # 除外したアカウント（リーク系）が投稿・引用・リポストに関わっていたら落とす。
+        if exclude and mentioned_handles(link, entry.get("summary") or entry.get("description") or "") & exclude:
+            continue
         video_url, poster = _video_source(entry)
         original = _clean_title(entry)
+        lang = detect_lang(original) if account.get("lang") == "auto" else account["lang"]
         title = original
         if translator:
             try:
@@ -336,14 +410,15 @@ def collect_account(account, rsshub_base, access_key, max_items, translator=None
             # 訳した文と原文が同じなら、わざわざ原文を持つ意味がない
             "original_title": original if original != title else "",
             "url": link,
-            "channel": source_label(account),
+            "channel": source_label(account, lang),
             # 動画付きなら表紙を使う。本文中の1枚目より投稿の中身に近い。
             "thumbnail": poster or _first_image(entry),
             "video_url": video_url,
             "view_count": 0,
             "like_count": 0,
             "platform": platform_label(account["platform"]),
-            "lang": lang_label(account["lang"]),
+            "lang": lang_label(lang),
+            "source_type": source_type_of(account),
             "account": account_label(account),
             "account_url": account.get("url", ""),
             "posted_at": _published_iso(entry),
@@ -361,24 +436,77 @@ def load_accounts(path=None):
     return [a for a in data.get("accounts", []) if a.get("collect")]
 
 
+def load_watch(path=None):
+    """x_watch.json（公式以外の X）を読む。戻り値は (アカウント, 除外ID, 間隔の時間)。
+
+    公式と同じ形のアカウントに直して返すので、収集の処理は公式と共通で使える。
+    """
+    import json
+
+    path = path or os.path.join(os.path.dirname(os.path.abspath(__file__)), "x_watch.json")
+    if not os.path.exists(path):
+        return [], [], 3
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    accounts = []
+    for a in data.get("accounts", []):
+        accounts.append({
+            "platform": "x",
+            "id": a["id"],
+            "lang": a.get("lang", "auto"),
+            "name": a.get("name", ""),
+            "source_type": a.get("source_type", "creator"),
+            "url": f"https://x.com/{a['id']}",
+            "exclude_retweets": True,
+            "watch": True,
+        })
+    return accounts, data.get("exclude", []), int(data.get("interval_hours", 3))
+
+
+def watch_due(interval_hours, now=None):
+    """公式以外のアカウントを、この回に読むかどうか。
+
+    日本時間の時刻が interval_hours で割り切れる回だけ読む（3なら 0・3・6…21時）。
+    公式と同じ auth_token を使うので、毎時読むと問い合わせが約2.7倍になり、
+    token が止まりやすくなる。止まれば公式の収集まで道連れになる。
+    """
+    import datetime as _dt
+
+    interval_hours = max(1, int(interval_hours or 1))
+    now = now or _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=9)))
+    return now.hour % interval_hours == 0
+
+
 def describe_targets(accounts=None):
     """収集対象のアカウント一覧を1行ずつの文字列で返す。
 
     どのアカウントを見に行っているのかは、ログを読むだけで分かる必要がある。
     設定ファイルを開かないと確認できない状態にしてはいけない。
     """
-    accounts = accounts if accounts is not None else load_accounts()
+    accounts = accounts if accounts is not None else load_accounts() + load_watch()[0]
     return [source_label(a) for a in accounts]
 
 
-def collect_sns_posts(sns_config, accounts=None, translator=None):
-    """公式SNSの投稿をまとめて取る。戻り値は (投稿リスト, 集計)。"""
+def collect_sns_posts(sns_config, accounts=None, translator=None, exclude=None):
+    """公式SNSと、公式以外の X の投稿をまとめて取る。戻り値は (投稿リスト, 集計)。
+
+    accounts を渡さなければ、公式の全部と、読む回に当たっていれば公式以外を読む。
+    公式を先に読む。公式以外で token が止められても、公式の分は取り終えているように。
+    """
     rsshub_base = os.getenv("RSSHUB_BASE_URL", "").strip()
     access_key = os.getenv("RSSHUB_ACCESS_KEY", "").strip()
     max_items = int(sns_config.get("max_items_per_account", 20))
     interval = float(sns_config.get("interval_seconds", 1.0))
 
-    accounts = accounts if accounts is not None else load_accounts()
+    watch_skipped = 0
+    if accounts is None:
+        accounts = load_accounts()
+        watch, watch_exclude, interval_hours = load_watch()
+        exclude = list(exclude or []) + list(watch_exclude)
+        if watch_due(interval_hours):
+            accounts = accounts + watch
+        else:
+            watch_skipped = len(watch)
 
     stats = {
         "accounts": len(accounts),
@@ -390,6 +518,8 @@ def collect_sns_posts(sns_config, accounts=None, translator=None):
         "empty_accounts": [],
         "failed_accounts": [],
         "skipped_no_rsshub": 0,
+        # 公式以外のアカウントのうち、読む回ではなかったので見送った数
+        "watch_skipped": watch_skipped,
     }
     all_posts = []
 
@@ -400,7 +530,7 @@ def collect_sns_posts(sns_config, accounts=None, translator=None):
             stats["skipped_no_rsshub"] += 1
             continue
 
-        posts, state = collect_account(account, rsshub_base, access_key, max_items)
+        posts, state = collect_account(account, rsshub_base, access_key, max_items, exclude=exclude)
         if state == "ok":
             all_posts.extend(posts)
             stats["collected_accounts"] += 1

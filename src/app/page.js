@@ -7,11 +7,26 @@ import styles from './page.module.css';
 // 収集側と同じ定義ファイルをそのまま読む。画面用に別で持つと、片方だけ
 // 直したときに「画面には載っているのに集めていない」状態が生まれる。
 import officialAccounts from '../../scraper/official_accounts.json';
+import xWatch from '../../scraper/x_watch.json';
 
 // 既読の記録は VideoCard が localStorage に持っている。同じ鍵を読む。
 const WATCHED_STORAGE_KEY = 'wt_watched_video_ids';
 
-const SNS_TARGETS = officialAccounts.accounts.filter((a) => a.collect);
+// 公式（official_accounts.json）と公式以外の X（x_watch.json）。収集側と同じ2つのファイルを読む。
+const SOURCE_TYPE_LABELS = { media: 'メディア', creator: 'クリエイター' };
+const SNS_TARGETS = [
+  ...officialAccounts.accounts
+    .filter((a) => a.collect)
+    .map((a) => ({ ...a, typeLabel: a.category === 'community' ? 'コミュニティ' : '公式' })),
+  ...xWatch.accounts.map((a) => ({
+    platform: 'x',
+    id: a.id,
+    lang: 'auto',
+    name: a.name || `@${a.id}`,
+    url: `https://x.com/${a.id}`,
+    typeLabel: `${SOURCE_TYPE_LABELS[a.source_type] || a.source_type}（${xWatch.interval_hours}時間おき）`,
+  })),
+];
 
 // 収集側（sns_collector.py）の表示名と揃えてある
 const SNS_PLATFORM_LABELS = { x: 'X', bilibili: 'BiliBili', weibo: 'Weibo', reddit: 'Reddit' };
@@ -27,7 +42,11 @@ const AD_CHANNEL_LABELS = [
 const adChannelLabel = (handle) =>
   (AD_CHANNEL_LABELS.find(([h]) => h === (handle || '').toLowerCase()) || [null, ''])[1];
 
-const SNS_LANG_LABELS = { ja: '日本語', en: '英語', ko: '韓国語', 'zh-CN': '中国語', 'zh-TW': '中国語(繁体)' };
+const SNS_LANG_LABELS = {
+  ja: '日本語', en: '英語', ko: '韓国語', 'zh-CN': '中国語', 'zh-TW': '中国語(繁体)',
+  es: 'スペイン語', fr: 'フランス語', de: 'ドイツ語', th: 'タイ語', pt: 'ポルトガル語',
+  auto: '投稿ごとに判定',
+};
 
 // 出稿期間「2026-07-31 〜 2026-08-03」から開始日・終了日を取り出す。
 // 片方しか無い場合はその日付が開始日として入っている。
@@ -47,6 +66,7 @@ export default function Home() {
   const snsRequested = useRef(false);
   const [snsPlatform, setSnsPlatform] = useState('すべて');
   const [snsLang, setSnsLang] = useState('すべて');
+  const [snsSourceType, setSnsSourceType] = useState('すべて');
   const [snsAccount, setSnsAccount] = useState('すべて');
   const [adChannel, setAdChannel] = useState('すべて');
   const [unreadOnly, setUnreadOnly] = useState(false);
@@ -482,13 +502,27 @@ export default function Home() {
           </div>
           <div className={styles.snsFilterGroup}>
             <span className={styles.snsFilterLabel}>言語</span>
-            {['すべて', '日本語', '英語', '韓国語', '中国語'].map((l) => (
+            {['すべて', ...new Set((snsVideos || []).map((v) => v.lang).filter(Boolean))].map((l) => (
               <button
                 key={l}
                 className={`${styles.snsChip} ${snsLang === l ? styles.snsChipActive : ''}`}
                 onClick={() => setSnsLang(l)}
               >
                 {l}
+              </button>
+            ))}
+          </div>
+
+          {/* 公式と、公式以外（攻略サイト・個人）を分けて見る */}
+          <div className={styles.snsFilterGroup}>
+            <span className={styles.snsFilterLabel}>種類</span>
+            {['すべて', '公式', 'メディア', 'クリエイター', 'コミュニティ'].map((t) => (
+              <button
+                key={t}
+                className={`${styles.snsChip} ${snsSourceType === t ? styles.snsChipActive : ''}`}
+                onClick={() => setSnsSourceType(t)}
+              >
+                {t}
               </button>
             ))}
           </div>
@@ -501,6 +535,7 @@ export default function Home() {
               (snsVideos || [])
                 .filter((v) => snsPlatform === 'すべて' || v.platform === snsPlatform)
                 .filter((v) => snsLang === 'すべて' || v.lang === snsLang)
+                .filter((v) => snsSourceType === 'すべて' || v.sourceType === snsSourceType)
                 .map((v) => v.account)
                 .filter(Boolean)
             )].map((acc) => (
@@ -544,12 +579,12 @@ export default function Home() {
                 >
                   <span className={styles.snsTargetPlatform}>{SNS_PLATFORM_LABELS[a.platform] || a.platform}</span>
                   <span className={styles.snsTargetLang}>{SNS_LANG_LABELS[a.lang] || a.lang}</span>
-                  <span className={styles.snsTargetName}>{a.name}</span>
+                  <span className={styles.snsTargetName}>{a.name}<span style={{ opacity: 0.55 }}> ・ {a.typeLabel}</span></span>
                   <span className={styles.snsTargetId}>{a.id}</span>
                 </a>
               ))}
               <p className={styles.snsTargetsNote}>
-                この一覧は収集側の設定ファイル（scraper/official_accounts.json）と同じものを読んでいます。
+                この一覧は収集側の設定ファイル（公式は scraper/official_accounts.json、公式以外は scraper/x_watch.json）と同じものを読んでいます。
                 増減させたい場合はお知らせください。
               </p>
             </div>
@@ -615,6 +650,7 @@ export default function Home() {
             .filter((video) => activeTab !== 'SNS' || snsPlatform === 'すべて' || video.platform === snsPlatform)
             .filter((video) => activeTab !== 'SNS' || snsLang === 'すべて' || video.lang === snsLang)
             .filter((video) => activeTab !== 'SNS' || snsAccount === 'すべて' || video.account === snsAccount)
+            .filter((video) => activeTab !== 'SNS' || snsSourceType === 'すべて' || video.sourceType === snsSourceType)
             .filter((video) => activeTab !== '広告' || adChannel === 'すべて' || adChannelLabel(video.adChannel) === adChannel)
             .filter((video) => !unreadOnly || !watchedIds.has(video.id))
             .filter((video) => {

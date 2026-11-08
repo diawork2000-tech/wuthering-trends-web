@@ -660,6 +660,18 @@ def ensure_video_db_schema():
         # 媒体より細かい単位での絞り込み用。日本語Xだけで6アカウントある。
         if "アカウント" not in props:
             patch["アカウント"] = {"rich_text": {}}
+        # 公式か、公式以外（x_watch.json）かを見分ける列。
+        if "情報源の種類" not in props:
+            patch["情報源の種類"] = {
+                "select": {
+                    "options": [
+                        {"name": "公式", "color": "blue"},
+                        {"name": "メディア", "color": "green"},
+                        {"name": "クリエイター", "color": "orange"},
+                        {"name": "コミュニティ", "color": "gray"},
+                    ]
+                }
+            }
         # 動画付き投稿のMP4。カード上でそのまま再生するために持つ。
         if "動画URL" not in props:
             patch["動画URL"] = {"rich_text": {}}
@@ -779,6 +791,8 @@ def send_to_notion(video_list, category, existing_urls):
             payload["properties"]["アカウント"] = {
                 "rich_text": [{"text": {"content": video["account"]}}]
             }
+        if video.get("source_type"):
+            payload["properties"]["情報源の種類"] = {"select": {"name": video["source_type"]}}
         if video.get("video_url"):
             payload["properties"]["動画URL"] = {
                 "rich_text": [{"text": {"content": video["video_url"][:1900]}}]
@@ -958,6 +972,9 @@ def collect_sns_posts_safely(config):
         f"📡 公式SNS 対象 {stats['accounts']} アカウント中 {stats['collected_accounts']} 件から"
         f"投稿 {stats['posts']} 件を回収"
     )
+    if stats.get("watch_skipped"):
+        # 公式以外は数時間おき。見送りは異常ではないので、そう分かる書き方にする。
+        logger.log(f"ℹ️ 公式以外のX {stats['watch_skipped']} 件は今回の巡回では読まない回です（数時間おき）")
     return posts
 
 

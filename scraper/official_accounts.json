@@ -77,7 +77,7 @@
       "name": "Wuthering Waves ES",
       "url": "https://x.com/WW_ES_Official",
       "verified": "wiki",
-      "collect": false
+      "collect": true
     },
     {
       "platform": "x",
@@ -87,7 +87,7 @@
       "name": "Wuthering Waves FR",
       "url": "https://x.com/WW_FR_Official",
       "verified": "wiki",
-      "collect": false
+      "collect": true
     },
     {
       "platform": "x",
@@ -97,7 +97,7 @@
       "name": "Wuthering Waves DE",
       "url": "https://x.com/WW_DE_Official",
       "verified": "wiki",
-      "collect": false
+      "collect": true
     },
     {
       "platform": "x",
@@ -107,7 +107,7 @@
       "name": "Wuthering Waves TH",
       "url": "https://x.com/WW_TH_Official",
       "verified": "wiki",
-      "collect": false
+      "collect": true
     },
     {
       "platform": "x",
@@ -117,7 +117,7 @@
       "name": "Wuthering Waves BR",
       "url": "https://x.com/WW_BR_Official_",
       "verified": "wiki",
-      "collect": false
+      "collect": true
     },
     {
       "platform": "x",

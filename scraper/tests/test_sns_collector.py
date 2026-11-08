@@ -308,8 +308,112 @@ class TestAccountList(unittest.TestCase):
     def test_targets_can_be_listed_for_the_log(self):
         # どのアカウントを見に行っているかは、設定ファイルを開かずに分かる必要がある。
         targets = describe_targets()
-        self.assertEqual(len(targets), len(load_accounts()))
+        # 公式と公式以外（x_watch.json）の両方が並ぶこと
+        self.assertEqual(len(targets), len(load_accounts()) + len(sns_collector.load_watch()[0]))
         self.assertTrue(any("@WW_JP_Official" in t for t in targets))
+
+
+
+
+class TestWatchAccounts(unittest.TestCase):
+    """公式以外の X（x_watch.json）。オーナーの X のリストから 2026-11-08 に足した。"""
+
+    def test_shipped_watch_list(self):
+        accounts, exclude, interval = sns_collector.load_watch()
+        self.assertEqual(len(accounts), 11)
+        # 除外は最初は空（オーナー判断。リーク系でも小ネタが多いので今は落とさない）
+        self.assertEqual(exclude, [])
+        self.assertGreaterEqual(interval, 2)
+        for a in accounts:
+            self.assertEqual(a["platform"], "x")
+            self.assertEqual(a["lang"], "auto")
+            self.assertTrue(a["exclude_retweets"])
+        # 公式と重ねない（WW_2NDFES は公式側で収集している）
+        official = {a["id"].lower() for a in load_accounts() if a["platform"] == "x"}
+        self.assertFalse({a["id"].lower() for a in accounts} & official)
+
+    def test_watch_feed_drops_retweets(self):
+        # リポストは投稿者がリポストした人になり、元の投稿者を照合で落とせない
+        url = feed_url({"platform": "x", "id": "wuwaguy", "lang": "auto", "exclude_retweets": True}, RSSHUB)
+        self.assertEqual(url, f"{RSSHUB}/twitter/user/wuwaguy/includeRts=false")
+
+    def test_official_feed_keeps_its_route(self):
+        self.assertEqual(feed_url(account("x", "WW_JP_Official"), RSSHUB), f"{RSSHUB}/twitter/user/WW_JP_Official")
+
+    def test_watch_runs_every_few_hours_in_japan_time(self):
+        import datetime as dt
+        jst = dt.timezone(dt.timedelta(hours=9))
+        self.assertTrue(sns_collector.watch_due(3, dt.datetime(2026, 11, 8, 21, 1, tzinfo=jst)))
+        self.assertFalse(sns_collector.watch_due(3, dt.datetime(2026, 11, 8, 22, 1, tzinfo=jst)))
+        self.assertTrue(sns_collector.watch_due(3, dt.datetime(2026, 11, 9, 0, 1, tzinfo=jst)))
+
+    def test_official_is_read_before_watch(self):
+        # 公式以外で token が止められても、公式の分は先に取り終えているように
+        order = []
+
+        def fake_collect(acc, *args, **kwargs):
+            order.append(acc["id"])
+            return [], "ok"
+
+        watch = [{"platform": "x", "id": "wuwaguy", "lang": "auto", "source_type": "creator",
+                  "exclude_retweets": True, "watch": True}]
+        with mock.patch.dict(os.environ, {"RSSHUB_BASE_URL": RSSHUB}),              mock.patch.object(sns_collector, "load_accounts", return_value=[account("x", "WW_JP_Official")]),              mock.patch.object(sns_collector, "load_watch", return_value=(watch, [], 3)),              mock.patch.object(sns_collector, "watch_due", return_value=True),              mock.patch.object(sns_collector, "collect_account", side_effect=fake_collect):
+            collect_sns_posts({"interval_seconds": 0})
+        self.assertEqual(order, ["WW_JP_Official", "wuwaguy"])
+
+    def test_watch_is_skipped_when_not_due(self):
+        watch = [{"platform": "x", "id": "wuwaguy", "lang": "auto", "exclude_retweets": True}]
+        with mock.patch.dict(os.environ, {"RSSHUB_BASE_URL": RSSHUB}),              mock.patch.object(sns_collector, "load_accounts", return_value=[account("x", "WW_JP_Official")]),              mock.patch.object(sns_collector, "load_watch", return_value=(watch, [], 3)),              mock.patch.object(sns_collector, "watch_due", return_value=False),              mock.patch.object(sns_collector, "collect_account", return_value=([], "ok")):
+            _, stats = collect_sns_posts({"interval_seconds": 0})
+        self.assertEqual(stats["accounts"], 1)
+        self.assertEqual(stats["watch_skipped"], 1)
+
+
+class TestExclusionAndLanguage(unittest.TestCase):
+    def test_handles_from_link_and_quoted_post(self):
+        html = "<div>本文 <a href='https://x.com/leaker_x/status/9'>引用</a> https://x.com/i/status/1</div>"
+        found = sns_collector.mentioned_handles("https://x.com/wuwaguy/status/1", html)
+        self.assertEqual(found, {"wuwaguy", "leaker_x"})
+
+    def test_excluded_author_or_quote_is_dropped(self):
+        entries = [
+            {"title": "自分の投稿", "link": "https://x.com/leaker_x/status/1", "summary": ""},
+            {"title": "引用した投稿", "link": "https://x.com/wuwaguy/status/2",
+             "summary": "<a href='https://x.com/Leaker_X/status/9'>引用</a>"},
+            {"title": "普通の投稿", "link": "https://x.com/wuwaguy/status/3", "summary": ""},
+        ]
+        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
+            posts, _ = collect_account(account("x", "wuwaguy"), RSSHUB, "", 20, exclude=["@leaker_x"])
+        self.assertEqual([p["title"] for p in posts], ["普通の投稿"])
+
+    def test_empty_exclude_keeps_everything(self):
+        entries = [{"title": "t", "link": "https://x.com/leaker_x/status/1", "summary": ""}]
+        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
+            posts, _ = collect_account(account("x", "leaker_x"), RSSHUB, "", 20, exclude=[])
+        self.assertEqual(len(posts), 1)
+
+    def test_language_is_detected_per_post_for_watch_accounts(self):
+        acc = {"platform": "x", "id": "wuwaguy", "lang": "auto", "source_type": "creator", "url": ""}
+        entries = [
+            {"title": "新キャラの小ネタです", "link": "https://x.com/wuwaguy/status/1"},
+            {"title": "New character tips", "link": "https://x.com/wuwaguy/status/2"},
+            {"title": "신규 캐릭터", "link": "https://x.com/wuwaguy/status/3"},
+        ]
+        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
+            posts, _ = collect_account(acc, RSSHUB, "", 20)
+        self.assertEqual([p["lang"] for p in posts], ["日本語", "英語", "韓国語"])
+        self.assertEqual(posts[0]["channel"], "X ・ 日本語 ・ @wuwaguy")
+        self.assertEqual(posts[0]["source_type"], "クリエイター")
+
+    def test_source_type_of_official_accounts(self):
+        self.assertEqual(sns_collector.source_type_of({"category": "dev"}), "公式")
+        self.assertEqual(sns_collector.source_type_of({"category": "community"}), "コミュニティ")
+        self.assertEqual(sns_collector.source_type_of({"source_type": "media"}), "メディア")
+
+    def test_chinese_is_not_mistaken_for_japanese(self):
+        # 中国語にも漢字は入るが、かなは入らない
+        self.assertEqual(sns_collector.detect_lang("鸣潮 新版本上线"), "zh-CN")
+        self.assertEqual(sns_collector.detect_lang("鳴潮の新バージョン"), "ja")
 
 
 if __name__ == "__main__":

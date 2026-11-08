@@ -1,0 +1,25 @@
+{
+  "_note": [
+    "公式以外の X アカウント。公式は official_accounts.json に置く。",
+    "オーナーの X のリストから（2026-11-08）。リーク系は入れない。",
+    "source_type: media（攻略サイトなど） / creator（個人）。Notion の「情報源の種類」になる。",
+    "lang は auto。1件ずつ本文の文字から判定する（アカウント単位では決められないため）。",
+    "interval_hours ごとにだけ読む。公式と同じ auth_token を使うので、問い合わせを増やしすぎて公式の収集まで止まらないようにするため。",
+    "exclude に入れた ID の投稿は、投稿者だけでなく本文中の x.com/ID（引用元・リポスト元）も見て落とす。リーク系を見つけたらここに足す。"
+  ],
+  "interval_hours": 3,
+  "exclude": [],
+  "accounts": [
+    { "id": "WutheringW_GW", "source_type": "media", "name": "GameWith 鳴潮" },
+    { "id": "WW_Game8", "source_type": "media", "name": "Game8 鳴潮" },
+    { "id": "wuwaguy", "source_type": "creator", "name": "WuWa Timeline" },
+    { "id": "Narushio_666", "source_type": "creator", "name": "" },
+    { "id": "meicyououenbu", "source_type": "creator", "name": "" },
+    { "id": "yadonnu_meityo", "source_type": "creator", "name": "" },
+    { "id": "WuWa_Verse1", "source_type": "creator", "name": "" },
+    { "id": "AboutWuwa", "source_type": "creator", "name": "" },
+    { "id": "Jiyan0117", "source_type": "creator", "name": "" },
+    { "id": "Naruvt0", "source_type": "creator", "name": "" },
+    { "id": "meicyonews", "source_type": "creator", "name": "" }
+  ]
+}

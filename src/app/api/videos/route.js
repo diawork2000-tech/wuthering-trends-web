@@ -90,6 +90,8 @@ export async function GET(request) {
       const platform = page.properties['媒体']?.select?.name || '';
       const lang = page.properties['言語']?.select?.name || '';
       const account = page.properties['アカウント']?.rich_text?.[0]?.plain_text || '';
+      // 公式／メディア／クリエイター／コミュニティ。公式以外の X と公式を分けて見るため。
+      const sourceType = page.properties['情報源の種類']?.select?.name || '';
       // 収集日ではなく、実際に投稿された日時。並べ替えの基準になる。
       const postedAt = page.properties['投稿日時']?.date?.start || '';
       // 翻訳前の原文。訳が怪しいときに元を確かめられるようにする。
@@ -126,6 +128,7 @@ export async function GET(request) {
         platform,
         lang,
         account,
+        sourceType,
         postedAt,
         originalTitle,
         postVideoUrl,

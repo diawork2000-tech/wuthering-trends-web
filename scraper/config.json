@@ -75,7 +75,12 @@
     "interval_seconds": 1.0,
     "translate_langs": [
       "中国語",
-      "韓国語"
+      "韓国語",
+      "スペイン語",
+      "フランス語",
+      "ドイツ語",
+      "タイ語",
+      "ポルトガル語"
     ],
     "translate_interval_seconds": 0.4
   }
