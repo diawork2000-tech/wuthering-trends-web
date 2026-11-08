@@ -3,45 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "新キャラクター「リリー」のプロフィール公開：夢紡ぎの調香師",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xqoeli/profile_reveal_dream_weaving_lily/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n公式より公開されたキャラクター「Dream Weaving — Lily（夢紡ぎ — リリー）」のプロフィール情報です。リリーは連合都市の共鳴者戦争に巻き込まれた若い調香師であり、その稀有な共鳴能力によって周囲の兵士たちを癒やす心理療法士としての役割を担っていました。戦争を止めることはできなかったものの、目の前に立つ人々を全霊で救おうとした心優しい少女であることが語られています。",
-      "reason": "新キャラクターの公式設定やバックストーリーに関する一次情報はユーザーの注目度が極めて高く、今後の実装や物語の展開に対する期待感から動画の再生数を大きく伸ばしやすいため。",
-      "score": 78,
+      "title": "Ver.3.8「旧夢で朽ちゆく小百合花」11月12日配信決定！新星5「リリー」登場と学園ミニイベント",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBIWFM0OWM4YnFKNTc3WVNWSmk1SEZjLXRKNFBvenAtSjRmMGlvYzRZWWZaZXN6d3hXR0tkZ3F1bXRtNHRrNC12aVV2QXNXSU5hSEt6ZWZJR19URzByOFZYNVVsODhrUDZESHdMcmxNekwyUzctSzllbmpEbw?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n『鳴潮』のVer.3.8アップデート「旧夢で朽ちゆく小百合花」が11月12日に配信されることが告知されました。本アップデートでは新星5キャラクター「リリー」が登場するほか、学園生活を楽しむミニイベントなどの施策が展開される予定です。（※素材のテキスト情報に基づく内容）",
+      "reason": "11月12日のアップデート配信直前であり、新星5キャラクター「リリー」の登場や新イベントの開催についてユーザーの関心が最も高まっている旬のトピックであるため。",
+      "score": 100,
       "viewCount": 0,
       "viewsPerHour": 0.0,
-      "mentionCount": 1,
+      "mentionCount": 2,
       "date": "2026-11-08",
-      "createdTime": "2026-11-08T13:33:28.636361+00:00"
+      "createdTime": "2026-11-08T16:49:02.992036+00:00"
     },
     {
       "id": "card-1",
-      "title": "最新ガチャスケジュールとおすすめ度の動向",
-      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9FUUU0RmFTb0NDWnRUd3haalI3Wm95RS1ibDV2eGlsVVFwQlpWLUZnM2hqck9Va1NZM2hITGUyWTUtTDdaUmZxWmFmQTV5M3JQaGZJ?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによるガチャスケジュールおよびおすすめ度のまとめ情報です（※元素材には具体的なガチャ名称やおすすめ度などの数値・本文テキストが記載されていないため、概要のみ言及）。",
-      "reason": "ガチャのスケジュールやおすすめ度は、限られたリソースの配分に悩むプレイヤー層から常に高い需要があり、動画の視聴完了率やエンゲージメントを高めやすいため。",
-      "score": 72,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
+      "title": "新星5「リリー」の同奏＆音骸特化性能解説と効率260%ビルド・編成考察",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=8YY_F6Z2Tg4",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n動画内ではVer.3.8で実装予定の「リリー」に関して判明した性能を基に、以下の論点で詳細な使い方やビルド考察を展開しています。\n・キャラ概要・性能：同奏編成でのバフ提供、大量の攻撃バフや音骸率ダメバフに特化した支援・戦闘能力。\n・スキル・回路詳細：回路ゲージの仕様、基本攻撃、共鳴スキル、共鳴回路、共鳴解放、変奏／終奏スキル、固有スキルの効果整理とバフ性能の総括。\n・おすすめビルド方針：効率260%を達成するための手法、適正武器、ハーモニー効果、音骸メインステータスおよびサブステータスの選択基準。\n・編成と火力検証：相性の良いパーティー編成予想、アタッカー＋サブアタッカーの合計DPR暫定計算に基づく既存編成からの火力上昇幅の試算。",
+      "reason": "新キャラ「リリー」の実装を控え、判明した性能数値から「効率260%」という明確なビルド指標やDPR試算を提示しており、育成方針やガチャの引き時を検討する層の需要を的確に捉えているため。",
+      "score": 86,
+      "viewCount": 1894,
+      "viewsPerHour": 1447.9,
       "mentionCount": 1,
       "date": "2026-11-08",
-      "createdTime": "2026-11-08T13:33:28.636399+00:00"
-    },
-    {
-      "id": "card-2",
-      "title": "漂泊者向けデイリー質問スレッドのコミュニティ動向",
-      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
-      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xqo64h/daily_questions_megathread_november_08_2026/",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外Redditの鳴潮コミュニティにおける定期質問スレッド「Daily Questions Megathread」です。旅を始めたばかりのプレイヤーから初期体験を共有したい漂泊者全般を対象としており、短時間の質問やヒントの共有、相互扶助を目的とした場として運用されています。質問投稿前のキーワード検索活用などが推奨されています。",
-      "reason": "一般プレイヤーがどのような点に疑問を抱えているかというコミュニティ内のリアルな課題感を吸い上げ、Q&A形式や初心者向け解説動画の企画立案に繋げることができるため。",
-      "score": 78,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-11-08",
-      "createdTime": "2026-11-08T13:33:28.636412+00:00"
+      "createdTime": "2026-11-08T16:49:02.992069+00:00"
     }
   ]
 }
