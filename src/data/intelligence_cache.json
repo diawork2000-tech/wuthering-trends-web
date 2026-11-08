@@ -3,17 +3,45 @@
   "items": [
     {
       "id": "card-0",
-      "title": "Ver.3.8「新連邦」序幕と新共鳴者の調香師「リリー」情報",
-      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5vMHd0MTBDMEUzRDdiT0tUVWdOQVFVMVZ0Um5iRHZJUWZSTk9mT2NnbzR0MkpicWlxTWNxZmI0UU5Ub2xJX1dhOWpWX3FiLUp5c0hEeldpY0NWMVNI?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nメディア報道により、Ver.3.8「新連邦」の序幕が示され、そこで登場する初の共鳴者として調香師「リリー」の存在が言及されています。素材内に詳細な属性、武器種、スキル倍率や音骸ビルド等の追加データは明記されていないため、現段階で判明している確定事項は「Ver.3.8 新連邦の序幕」および「調香師リリーの実装」のみとなります。",
-      "reason": "新バージョンや新勢力・新キャラクターに関する速報は全プレイヤーの関心が高く、初期情報の段階で共有することで最新動向を追う層の視聴を獲得しやすいため。",
-      "score": 94,
+      "title": "新キャラクター「リリー」のプロフィール公開：夢紡ぎの調香師",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xqoeli/profile_reveal_dream_weaving_lily/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n公式より公開されたキャラクター「Dream Weaving — Lily（夢紡ぎ — リリー）」のプロフィール情報です。リリーは連合都市の共鳴者戦争に巻き込まれた若い調香師であり、その稀有な共鳴能力によって周囲の兵士たちを癒やす心理療法士としての役割を担っていました。戦争を止めることはできなかったものの、目の前に立つ人々を全霊で救おうとした心優しい少女であることが語られています。",
+      "reason": "新キャラクターの公式設定やバックストーリーに関する一次情報はユーザーの注目度が極めて高く、今後の実装や物語の展開に対する期待感から動画の再生数を大きく伸ばしやすいため。",
+      "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-11-08",
-      "createdTime": "2026-11-08T10:21:56.796095+00:00"
+      "createdTime": "2026-11-08T13:33:28.636361+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "最新ガチャスケジュールとおすすめ度の動向",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9FUUU0RmFTb0NDWnRUd3haalI3Wm95RS1ibDV2eGlsVVFwQlpWLUZnM2hqck9Va1NZM2hITGUyWTUtTDdaUmZxWmFmQTV5M3JQaGZJ?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによるガチャスケジュールおよびおすすめ度のまとめ情報です（※元素材には具体的なガチャ名称やおすすめ度などの数値・本文テキストが記載されていないため、概要のみ言及）。",
+      "reason": "ガチャのスケジュールやおすすめ度は、限られたリソースの配分に悩むプレイヤー層から常に高い需要があり、動画の視聴完了率やエンゲージメントを高めやすいため。",
+      "score": 72,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-11-08",
+      "createdTime": "2026-11-08T13:33:28.636399+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "漂泊者向けデイリー質問スレッドのコミュニティ動向",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xqo64h/daily_questions_megathread_november_08_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外Redditの鳴潮コミュニティにおける定期質問スレッド「Daily Questions Megathread」です。旅を始めたばかりのプレイヤーから初期体験を共有したい漂泊者全般を対象としており、短時間の質問やヒントの共有、相互扶助を目的とした場として運用されています。質問投稿前のキーワード検索活用などが推奨されています。",
+      "reason": "一般プレイヤーがどのような点に疑問を抱えているかというコミュニティ内のリアルな課題感を吸い上げ、Q&A形式や初心者向け解説動画の企画立案に繋げることができるため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-11-08",
+      "createdTime": "2026-11-08T13:33:28.636412+00:00"
     }
   ]
 }
