@@ -3,31 +3,45 @@
   "items": [
     {
       "id": "card-0",
-      "title": "【鳴潮】アールトの評価とおすすめパーティ編成・音骸・武器 - GameWith",
+      "title": "【鳴潮】最強キャラランキング - GameWith",
       "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBzOEpwR2daWWQyTmxwSVhNdGp3WUJVMmFIQUQyZEl6UEZJYVZBWExTSndYR0ZoYXp1bEdPS2hYUlRHUnBXN3J0UXI4QkVrbVFVVVNB?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】アールトの評価とおすすめパーティ編成・音骸・武器&nbsp;&nbsp;GameWith",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBTeWZFblNyVW1UMGZlWTF0elBQV2RzZzVzLXI2TXJ3ODdQVGwwVERhcEZYWE0xMEFxVERiQkFxZjdiZ3ppYTVXNUxuZ3VKelRjWlFv?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】最強キャラランキング&nbsp;&nbsp;GameWith",
+      "reason": "競合が扱っている注目ワード「キャラ」を含む",
+      "score": 68,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-11-09",
+      "createdTime": "2026-11-09T19:06:12.552844+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "【鳴潮】初心者向け序盤の効率的な進め方 - GameWith",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1pVWR6bnl5aUtiU3UzS1RVbWxDNFhiSFVjc2wwOEd6SnRUdTc5bzkzYU1iMF96MHNuVkNzOU5hX0wxTGc3VWU4eE9ZVkdSOS1NcVY0?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】初心者向け序盤の効率的な進め方&nbsp;&nbsp;GameWith",
       "reason": "競合が扱っている注目ワード「with」を含む",
       "score": 68,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-11-09",
-      "createdTime": "2026-11-09T15:31:35.650439+00:00"
+      "createdTime": "2026-11-09T19:06:12.552872+00:00"
     },
     {
-      "id": "card-1",
-      "title": "【鳴潮】キャラ一覧と評価 - GameWith",
-      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9OWTlvb2FCTFVTYjNsY0VOd3hpb3V6ekNUeEI1WU5td1pOTThPSEJnU08yY2R1MUJPdkRfaGhxUVg0TTNYX3plaGhQVWstX1VqeGZV?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】キャラ一覧と評価&nbsp;&nbsp;GameWith",
-      "reason": "競合が扱っている注目ワード「with」を含む",
-      "score": 64,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
+      "id": "card-2",
+      "title": "【競合バズ実績】【鳴潮】Ver3.8の生放送の元ネタ",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=rLF2LDHQzIA",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【動画の概要と発信内容詳細】\n#鳴潮#wutheringwaves\n\n（📊 バズ実績: セリーナ鳴潮メイン にて現在 1,752 再生 / 高評価 31 / 約 400 再生毎時）",
+      "reason": "競合チャンネルで約 400 再生/時 のペースで伸びている実績データに基づく抽出",
+      "score": 74,
+      "viewCount": 1752,
+      "viewsPerHour": 400.4,
       "mentionCount": 1,
       "date": "2026-11-09",
-      "createdTime": "2026-11-09T15:31:35.650496+00:00"
+      "createdTime": "2026-11-09T19:06:12.552887+00:00"
     }
   ]
 }
