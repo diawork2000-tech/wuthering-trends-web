@@ -79,6 +79,15 @@ class TestGameName(unittest.TestCase):
         self.assertEqual(self.sent_text("『명조:워더링 웨이브』 소식"), "『鳴潮』 소식")
         self.assertEqual(self.sent_text("鸣潮 新版本"), "鳴潮 新版本")
 
+    def test_hashtags_are_left_alone(self):
+        self.assertEqual(self.sent_text("cute #wuwa #WutheringWaves"), "cute #wuwa #WutheringWaves")
+
+    def test_only_the_name_changed_counts_as_failure(self):
+        # 訳されずに返ってきたのに、ゲーム名の置き換えだけで「訳せた」と数えてはいけない
+        with mock.patch.object(tc.requests, "get", return_value=gtx_response("Tips 鳴潮")):
+            self.assertEqual(tc.translate_if_needed("Tips Wuthering Waves"), "Tips Wuthering Waves")
+        self.assertEqual(tc.TRANSLATION_STATS["failed"], 1)
+
     def test_words_containing_wuwa_are_left_alone(self):
         self.assertEqual(self.sent_text("WuWawesome edit"), "WuWawesome edit")
 

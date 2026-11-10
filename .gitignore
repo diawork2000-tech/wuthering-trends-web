@@ -64,3 +64,4 @@ scraper/purge_run.log
 scraper/purge_ads_audit.log
 scraper/purge_sns_audit.log
 scraper/purge_duplicates_audit.log
+scraper/retranslate_audit.log

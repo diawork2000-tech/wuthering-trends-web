@@ -84,8 +84,9 @@ TRANSLATION_STATS = {"ok": 0, "failed": 0}
 # 何の動画か一目で分からなくなる。長いものから順に置き換える。
 GAME_NAME_GLOSSARY = [
     (re.compile(r"명조\s*:\s*워더링\s*웨이브"), "鳴潮"),
-    (re.compile(r"(?<![A-Za-z])Wuthering\s+Waves(?![A-Za-z])", re.IGNORECASE), "鳴潮"),
-    (re.compile(r"(?<![A-Za-z])WuWa(?![A-Za-z])", re.IGNORECASE), "鳴潮"),
+    # ハッシュタグ（#wuwa など）は置き換えない。投稿者が付けた目印なので、そのまま残す。
+    (re.compile(r"(?<![#A-Za-z])Wuthering\s+Waves(?![A-Za-z])", re.IGNORECASE), "鳴潮"),
+    (re.compile(r"(?<![#A-Za-z])WuWa(?![A-Za-z])", re.IGNORECASE), "鳴潮"),
     (re.compile(r"鸣潮"), "鳴潮"),
     (re.compile(r"명조"), "鳴潮"),
 ]
@@ -137,7 +138,8 @@ def translate_if_needed(text):
         TRANSLATION_STATS["failed"] += 1
         return text
 
-    if not translated or translated == text:
+    # ゲーム名を置き換えただけで中身が訳されていないものは、訳せなかったものとして数える。
+    if not translated or translated == source_text:
         TRANSLATION_STATS["failed"] += 1
         return text
     TRANSLATION_STATS["ok"] += 1
