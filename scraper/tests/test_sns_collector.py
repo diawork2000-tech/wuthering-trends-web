@@ -43,7 +43,7 @@ def account(platform, ident, lang="ja", name=""):
 class TestFeedUrl(unittest.TestCase):
     def test_x_uses_twitter_route(self):
         url = feed_url(account("x", "WW_JP_Official"), RSSHUB)
-        self.assertEqual(url, f"{RSSHUB}/twitter/user/WW_JP_Official")
+        self.assertEqual(url, f"{RSSHUB}/twitter/user/WW_JP_Official/showLikesCountInTitle=true")
 
     def test_bilibili_uses_dynamic_not_video(self):
         # 動画だけでなく告知文も拾いたいので dynamic を使う。
@@ -335,10 +335,10 @@ class TestWatchAccounts(unittest.TestCase):
     def test_watch_feed_drops_retweets(self):
         # リポストは投稿者がリポストした人になり、元の投稿者を照合で落とせない
         url = feed_url({"platform": "x", "id": "wuwaguy", "lang": "auto", "exclude_retweets": True}, RSSHUB)
-        self.assertEqual(url, f"{RSSHUB}/twitter/user/wuwaguy/includeRts=false")
+        self.assertEqual(url, f"{RSSHUB}/twitter/user/wuwaguy/showLikesCountInTitle=true&includeRts=false")
 
     def test_official_feed_keeps_its_route(self):
-        self.assertEqual(feed_url(account("x", "WW_JP_Official"), RSSHUB), f"{RSSHUB}/twitter/user/WW_JP_Official")
+        self.assertEqual(feed_url(account("x", "WW_JP_Official"), RSSHUB), f"{RSSHUB}/twitter/user/WW_JP_Official/showLikesCountInTitle=true")
 
     def test_watch_runs_every_few_hours_in_japan_time(self):
         import datetime as dt
@@ -414,6 +414,43 @@ class TestExclusionAndLanguage(unittest.TestCase):
         # 中国語にも漢字は入るが、かなは入らない
         self.assertEqual(sns_collector.detect_lang("鸣潮 新版本上线"), "zh-CN")
         self.assertEqual(sns_collector.detect_lang("鳴潮の新バージョン"), "ja")
+
+
+class TestLikes(unittest.TestCase):
+    """X のいいね数。RSSHub がタイトルの先頭に「[123] 」で付けてくる。"""
+
+    def test_likes_are_read_and_removed_from_the_title(self):
+        entries = [{"title": "[1234] 新キャラPV公開！", "link": "https://x.com/WW_JP_Official/status/1"}]
+        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
+            posts, _ = collect_account(account("x", "WW_JP_Official"), RSSHUB, "", 20)
+        self.assertEqual(posts[0]["like_count"], 1234)
+        self.assertEqual(posts[0]["title"], "新キャラPV公開！")
+
+    def test_zero_likes(self):
+        entries = [{"title": "[0] お知らせ", "link": "https://x.com/a/status/1"}]
+        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
+            posts, _ = collect_account(account("x", "a"), RSSHUB, "", 20)
+        self.assertEqual((posts[0]["like_count"], posts[0]["title"]), (0, "お知らせ"))
+
+    def test_missing_count_leaves_title_alone(self):
+        entries = [{"title": "お知らせ", "link": "https://x.com/a/status/1"}]
+        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
+            posts, _ = collect_account(account("x", "a"), RSSHUB, "", 20)
+        self.assertEqual((posts[0]["like_count"], posts[0]["title"]), (0, "お知らせ"))
+
+    def test_reddit_titles_are_not_touched(self):
+        # 角かっこで始まる Reddit の見出しを、いいね数と取り違えないこと
+        entries = [{"title": "[3] tips for new players", "link": "https://www.reddit.com/r/x/comments/1/"}]
+        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
+            posts, _ = collect_account(account("reddit", "WutheringWaves", "en"), RSSHUB, "", 20)
+        self.assertEqual((posts[0]["like_count"], posts[0]["title"]), (0, "[3] tips for new players"))
+
+    def test_language_is_judged_without_the_count(self):
+        acc = {"platform": "x", "id": "wuwaguy", "lang": "auto", "source_type": "creator", "url": ""}
+        entries = [{"title": "[12] 小ネタ", "link": "https://x.com/wuwaguy/status/1"}]
+        with mock.patch("sns_collector._fetch", return_value=(FakeFeed(entries), "")):
+            posts, _ = collect_account(acc, RSSHUB, "", 20)
+        self.assertEqual((posts[0]["lang"], posts[0]["like_count"]), ("日本語", 12))
 
 
 if __name__ == "__main__":

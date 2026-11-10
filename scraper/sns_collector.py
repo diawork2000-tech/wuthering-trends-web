@@ -155,11 +155,15 @@ def feed_url(account, rsshub_base, access_key=""):
 
     base = rsshub_base.rstrip("/")
     if platform == "x":
-        path = f"/twitter/user/{account['id']}"
+        # いいね数をタイトルの先頭に「[123] 」の形で付けさせる。X から取れる
+        # 反応の数はこれだけ（リポスト数・表示回数は RSSHub が出さない）。
+        # 読み取りと取り外しは _split_likes で行う。
+        params = ["showLikesCountInTitle=true"]
         if account.get("exclude_retweets"):
             # リポストを取らない。リポストは投稿者がリポストした人になり、
             # 元の投稿者（リーク系かもしれない）を投稿者の照合では落とせないため。
-            path += "/includeRts=false"
+            params.append("includeRts=false")
+        path = f"/twitter/user/{account['id']}/" + "&".join(params)
     elif platform == "bilibili":
         # 投稿動画だけでなく告知文も拾いたいので動態(dynamic)を使う
         path = f"/bilibili/user/dynamic/{account['id']}"
@@ -266,6 +270,19 @@ def _video_source(entry):
     if not url.startswith("https://"):
         return "", ""
     return url, (_clean_url(poster.group(1)) if poster else "")
+
+
+def _split_likes(title):
+    """タイトル先頭の「[123] 」からいいね数を取り出し、外した見出しと一緒に返す。
+
+    X の経路には showLikesCountInTitle を付けているので、RSSHub が先頭に
+    付けてくる（lib/routes/twitter/utils.ts）。数が読めなければ None。
+    取った時点の数で、後から取り直してはいない。
+    """
+    match = re.match(r"\[(\d+)\]\s*", title or "")
+    if not match:
+        return None, title
+    return int(match.group(1)), title[match.end():] or "(本文なし)"
 
 
 def _clean_title(entry):
@@ -397,6 +414,9 @@ def collect_account(account, rsshub_base, access_key, max_items, translator=None
             continue
         video_url, poster = _video_source(entry)
         original = _clean_title(entry)
+        likes = None
+        if account["platform"] == "x":
+            likes, original = _split_likes(original)
         lang = detect_lang(original) if account.get("lang") == "auto" else account["lang"]
         title = original
         if translator:
@@ -415,7 +435,8 @@ def collect_account(account, rsshub_base, access_key, max_items, translator=None
             "thumbnail": poster or _first_image(entry),
             "video_url": video_url,
             "view_count": 0,
-            "like_count": 0,
+            # Notion の「高評価数」に入る。X のいいね数（取った時点の値）。
+            "like_count": likes or 0,
             "platform": platform_label(account["platform"]),
             "lang": lang_label(lang),
             "source_type": source_type_of(account),
