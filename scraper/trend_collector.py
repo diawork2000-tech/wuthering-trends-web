@@ -7,7 +7,6 @@ import requests
 from datetime import datetime, timedelta, timezone
 from googleapiclient.discovery import build
 from dotenv import load_dotenv
-from deep_translator import GoogleTranslator
 from notion_utils import notion_request, query_database_all
 from shared.automation_logger import log_run
 from ad_collector import collect_ad_videos
@@ -67,29 +66,82 @@ def should_exclude(title, exclude_words):
             return True
     return False
 
+# Google 翻訳の窓口。以前は deep-translator が使うスマホ向けの翻訳ページ
+# (translate.google.com/m) を読み取っていたが、2026-09-11 以降は自動アクセスが
+# 「ロボットではないことの確認画面」(google.com/sorry) へ転送されるようになり、
+# 1件も訳せていなかった（ライブラリは「リクエストが多すぎる」と報告していた）。
+# こちらは別の無料の窓口で、2026-11-10 時点で訳せることを確認した。
+# どちらも正式なAPIではないので、また止められうる。止まったら件数がログに出る。
+GTX_URL = "https://translate.googleapis.com/translate_a/single"
+
+# この実行で訳した数と、訳せなかった数。黙って原文を返すだけだと、
+# 2か月止まっていても誰も気づけなかった。ログに出すために数える。
+TRANSLATION_STATS = {"ok": 0, "failed": 0}
+
+
+# 訳す前にゲーム名を「鳴潮」に置き換える。そのまま訳させると
+# 「Wuthering Waves」が「嵐の波」「荒波」に、「鸣潮」が「Mingchao」になり、
+# 何の動画か一目で分からなくなる。長いものから順に置き換える。
+GAME_NAME_GLOSSARY = [
+    (re.compile(r"명조\s*:\s*워더링\s*웨이브"), "鳴潮"),
+    (re.compile(r"(?<![A-Za-z])Wuthering\s+Waves(?![A-Za-z])", re.IGNORECASE), "鳴潮"),
+    (re.compile(r"(?<![A-Za-z])WuWa(?![A-Za-z])", re.IGNORECASE), "鳴潮"),
+    (re.compile(r"鸣潮"), "鳴潮"),
+    (re.compile(r"명조"), "鳴潮"),
+]
+
+
+def _apply_game_name(text):
+    for pattern, name in GAME_NAME_GLOSSARY:
+        text = pattern.sub(name, text)
+    return text
+
+
+# 中国語の文では「鳴潮」と渡しても、訳文で「Mingchao」「ミンチャオ」と読みに
+# 置き換えられる。訳した後で戻す。
+_ROMANIZED_GAME_NAME = re.compile(r"(?<![A-Za-z])Ming\s?chao(?![A-Za-z])|ミン・?チャオ", re.IGNORECASE)
+
+
+def _gtx_translate(text, source="auto"):
+    """日本語に訳した文を返す。応答が想定と違えば例外を投げる。"""
+    res = requests.get(
+        GTX_URL,
+        params={"client": "gtx", "sl": source, "tl": "ja", "dt": "t", "q": text},
+        timeout=15,
+    )
+    if res.status_code != 200:
+        raise RuntimeError(f"HTTP {res.status_code}")
+    data = res.json()
+    # [[["訳文", "原文", ...], ["続きの訳文", ...]], null, "検出した言語", ...]
+    # 長い文は区切って返ってくるので、つなげる。
+    return "".join(seg[0] for seg in (data[0] or []) if seg and seg[0])
+
+
 def translate_if_needed(text):
-    """日本語が含まれていなければGoogle翻訳で日本語に変換する"""
+    """日本語が含まれていなければ日本語に訳す。訳せなければ原文を返し、失敗を数える。"""
     if not text:
         return text
-        
+
     if is_japanese(text):
         return text
-        
+
+    source_text = _apply_game_name(text)
     try:
-        # 短い中国語などが自動判定で日本語(ja)と誤判定されるのを防ぐため、
-        # autoで翻訳前と同じ結果になった場合はzh-TWからの翻訳を試す
-        translator_auto = GoogleTranslator(source='auto', target='ja')
-        trans_auto = translator_auto.translate(text)
-        
-        if trans_auto != text:
-            return trans_auto
-            
-        # それでも変わらない場合は中国語（繁体字）として強制翻訳
-        translator_zh = GoogleTranslator(source='zh-TW', target='ja')
-        return translator_zh.translate(text)
+        translated = _gtx_translate(source_text)
+        # 短い中国語は日本語と取り違えられ、訳されずに返ってくることがある。
+        # そのときは中国語（繁体字）として訳し直す。
+        if translated == source_text:
+            translated = _gtx_translate(source_text, source="zh-TW")
     except Exception as e:
         print(f"Translation error: {e}")
+        TRANSLATION_STATS["failed"] += 1
         return text
+
+    if not translated or translated == text:
+        TRANSLATION_STATS["failed"] += 1
+        return text
+    TRANSLATION_STATS["ok"] += 1
+    return _ROMANIZED_GAME_NAME.sub("鳴潮", translated)
 
 # Activity Logger for Web UI Tracking
 class ActivityLogger:
@@ -386,7 +438,7 @@ def get_youtube_trends(config, mode="latest"):
                 shorts_foreign_count += 1
                 
             videos.append({
-                "title": translate_if_needed(title),
+                "title": title,  # 訳すのは登録する直前（send_to_notion）。登録済みの動画まで毎時訳し直さないため
                 "original_title": title,
                 "channel": snippet.get("channelTitle", ""),
                 "url": f"https://www.youtube.com/watch?v={item['id']['videoId']}",
@@ -413,7 +465,7 @@ def get_youtube_trends(config, mode="latest"):
                 long_foreign_count += 1
             
             videos.append({
-                "title": translate_if_needed(title),
+                "title": title,  # 訳すのは登録する直前（send_to_notion）。登録済みの動画まで毎時訳し直さないため
                 "original_title": title,
                 "channel": snippet.get("channelTitle", ""),
                 "url": f"https://www.youtube.com/watch?v={item['id']['videoId']}",
@@ -452,7 +504,7 @@ def get_youtube_trends(config, mode="latest"):
                 v_type = "Shorts" if is_shorts else "通常"
                 
                 channel_videos.append({
-                    "title": translate_if_needed(title),
+                    "title": title,  # 訳すのは登録する直前（send_to_notion）。登録済みの動画まで毎時訳し直さないため
                     "original_title": title,
                     "channel": snippet.get("channelTitle", ""),
                     "url": f"https://www.youtube.com/watch?v={item['id']['videoId']}",
@@ -730,7 +782,13 @@ def send_to_notion(video_list, category, existing_urls):
         if video["url"] in existing_urls:
             skip_count += 1
             continue
-            
+
+        # YouTube の見出しはここで訳す。取得した時点で訳していたころは、登録済みで
+        # 読み飛ばす動画まで毎時数百件訳しており、翻訳の窓口に止められる元になる。
+        # SNS は収集側(translate_posts)で訳し済み、広告の見出しは素材のファイル名なので訳さない。
+        if category not in ("SNS", "広告"):
+            video["title"] = translate_if_needed(video.get("original_title") or video["title"])
+
         payload = {
             "parent": {"database_id": database_id},
             "cover": {
@@ -1106,7 +1164,16 @@ def main():
         else:
             print("Notion API is not configured. Skipping upload.")
             logger.log("ℹ️ Notion設定不備のためアップロードスキップ")
-        
+
+        # 翻訳の成否を毎回出す。失敗しても原文のまま登録されるだけで止まらないため、
+        # 数を出さないと、翻訳の窓口が止められても気づけない（実際2か月気づけなかった）。
+        if TRANSLATION_STATS["ok"] or TRANSLATION_STATS["failed"]:
+            mark = "⚠️" if TRANSLATION_STATS["failed"] else "🌐"
+            logger.log(
+                f"{mark} 見出しの翻訳（YouTube・SNSの合計）: 成功 {TRANSLATION_STATS['ok']} 件 / "
+                f"失敗 {TRANSLATION_STATS['failed']} 件"
+            )
+
         logger.log(f"✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: {logger.log_data['new_items_count']} 件)")
         logger.set_summary(f"正常完了 (新着Notion追加: {logger.log_data['new_items_count']} 件)")
         logger.save_to_json()
