@@ -3,17 +3,31 @@
   "items": [
     {
       "id": "card-0",
-      "title": "アンコの評価・おすすめパーティ編成・音骸・武器まとめ",
-      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5XVWhyZldHVklVM2xKWjN6aEhPSGF6ay1hRUhVX2g1UFBBZkl1bk96c0ctMHFraEZIeEpaY01GYVJjSGh3UmpJNzYwemI2TE9ZbEFn?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n素材内ではキャラクター「アンコ」を対象とした総合攻略情報が提示されており、アンコのキャラクター評価、おすすめとされるパーティ編成、推奨される音骸、装備武器の選定基準およびビルド方針についての解説が扱われています。（※素材内に具体的な武器名・音骸名・構成キャラ名などの詳細データは記載されていないため、記載範囲の情報のみを取り扱います）",
-      "reason": "キャラクター「アンコ」の育成やビルド方針（武器・音骸・パーティ構成）に対するユーザーの検索需要が安定して存在するため。",
-      "score": 64,
+      "title": "鳴潮におけるシギルムの入手方法と性能解説",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1xWWJxanVuVzkzaE96THAwbS1nS21fcHdseHZ4dUl5RUgyY0ttY0lCYmxMN3ppaVhvS3Ixc2VRVi1HellBRUk2Yl9JNDhHUHBVVEs0?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithに掲載された鳴潮攻略情報であり、「シギルム」の入手方法と性能について言及されている。提供素材内には具体的な獲得場所の座標や数値データ、効果の詳細記述は含まれていないため、プレイヤーがシギルムの獲得経路と性能仕様を把握するための攻略トピックとして扱われている。",
+      "reason": "ゲーム内要素であるシギルムの具体的な入手方法や性能について、仕様を確認したいプレイヤーの検索・攻略需要が存在するため。",
+      "score": 68,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-11-11",
-      "createdTime": "2026-11-11T07:17:19.534453+00:00"
+      "createdTime": "2026-11-11T13:46:37.289890+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "海外Reddit公式：鳴潮デイリー質問メガスレッドの運用",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xt6pbj/daily_questions_megathread_november_11_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外掲示板Redditの鳴潮総合フォーラムに設置されたデイリー質問メガスレッド。新規プレイヤーの疑問解消から序盤体験の共有、漂泊者（プレイヤー）同士のアドバイス提供を行う場として機能している。単独スレッド乱立を防止するための簡易質問窓口となっており、重複質問を避けるためのキーワード検索利用や、質問時の明確な文脈・詳細な状況説明が推奨されている。",
+      "reason": "日々のメガスレッドに集まるプレイヤーの疑問や質問傾向を把握することで、ユーザーがつまずきやすいポイントや関心のある仕様を特定するための参考情報となるため。",
+      "score": 78,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-11-11",
+      "createdTime": "2026-11-11T13:46:37.289914+00:00"
     }
   ]
 }
