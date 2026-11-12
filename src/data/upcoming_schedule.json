@@ -1,342 +1,216 @@
 {
-  "updated_at": "2026-11-10T22:19:03.129445+00:00",
+  "updated_at": "2026-11-12T10:37:36.148824+00:00",
   "events": [
-    {
-      "character": "Ver3.7「鏡に鎖す妄世、心で照らす紅塵」",
-      "event": "バージョンアップデート開催中",
-      "category": "version",
-      "start_date": "2026-09-30",
-      "end_date": "2026-11-12",
-      "confirmed": true,
-      "notes": "Ver3.7アップデート期間"
-    },
-    {
-      "character": "鎖暝",
-      "event": "共鳴者集音（キャラピックアップ）開催中",
-      "category": "character",
-      "start_date": "2026-10-22",
-      "end_date": "2026-11-11",
-      "confirmed": true,
-      "notes": "Ver3.7後半新星5キャラ"
-    },
-    {
-      "character": "沈冥",
-      "event": "武器集音（武器ピックアップ）開催中",
-      "category": "weapon",
-      "start_date": "2026-10-22",
-      "end_date": "2026-11-11",
-      "confirmed": true,
-      "notes": "鎖暝モチーフ武器"
-    },
-    {
-      "character": "リンネー",
-      "event": "共鳴者集音（復刻ピックアップ）開催中",
-      "category": "character",
-      "start_date": "2026-10-22",
-      "end_date": "2026-11-11",
-      "confirmed": true,
-      "notes": "Ver3.7後半復刻キャラ"
-    },
-    {
-      "character": "スペクトル・ブラスター",
-      "event": "武器集音（復刻武器ピックアップ）開催中",
-      "category": "weapon",
-      "start_date": "2026-10-22",
-      "end_date": "2026-11-11",
-      "confirmed": true,
-      "notes": "リンネーモチーフ武器"
-    },
-    {
-      "character": "ルシラー",
-      "event": "共鳴者集音（復刻ピックアップ）開催中",
-      "category": "character",
-      "start_date": "2026-10-22",
-      "end_date": "2026-11-11",
-      "confirmed": true,
-      "notes": "Ver3.7後半復刻キャラ"
-    },
-    {
-      "character": "フリーズフレーム",
-      "event": "武器集音（復刻武器ピックアップ）開催中",
-      "category": "weapon",
-      "start_date": "2026-10-22",
-      "end_date": "2026-11-11",
-      "confirmed": true,
-      "notes": "ルシラーモチーフ武器"
-    },
-    {
-      "character": "朝月のプレゼント",
-      "event": "ログインイベント開催中",
-      "category": "event",
-      "start_date": "2026-09-30",
-      "end_date": "2026-11-11",
-      "confirmed": true,
-      "notes": "金髓の波模様・唱喚の渦模様獲得"
-    },
-    {
-      "character": "匣の中の夢",
-      "event": "エリア探索イベント開催中",
-      "category": "event",
-      "start_date": "2026-09-30",
-      "end_date": "2026-11-11",
-      "confirmed": true,
-      "notes": "星声報酬"
-    },
-    {
-      "character": "月が照らす道",
-      "event": "チャージ報酬イベント開催中",
-      "category": "event",
-      "start_date": "2026-09-30",
-      "end_date": "2026-11-11",
-      "confirmed": true,
-      "notes": "Ver3.7イベント"
-    },
-    {
-      "character": "勇者ダンダン大乱闘",
-      "event": "ミニイベント開催中",
-      "category": "event",
-      "start_date": "2026-09-30",
-      "end_date": "2026-11-11",
-      "confirmed": true,
-      "notes": "テーマイベント、星声*1200獲得"
-    },
-    {
-      "character": "傍らに響く雨音のプレゼント",
-      "event": "ログインイベント開催中",
-      "category": "event",
-      "start_date": "2026-10-22",
-      "end_date": "2026-11-11",
-      "confirmed": true,
-      "notes": "金髓の波模様*10獲得"
-    },
-    {
-      "character": "潮騒探検・玄方地界",
-      "event": "依頼イベント開催中",
-      "category": "event",
-      "start_date": "2026-10-29",
-      "end_date": "2026-11-11",
-      "confirmed": true,
-      "notes": "星声*400、唱喚の渦模様*5獲得"
-    },
-    {
-      "character": "響き渡る音弦",
-      "event": "無音区報酬2倍イベント開催中",
-      "category": "event",
-      "start_date": "2026-11-04",
-      "end_date": "2026-11-11",
-      "confirmed": true,
-      "notes": "1日3回まで無音区報酬2倍"
-    },
-    {
-      "character": "ソラリス復帰招待（Ver3.7）",
-      "event": "Webイベント開催中",
-      "category": "event",
-      "start_date": "2026-09-30",
-      "end_date": "2026-11-12",
-      "confirmed": true,
-      "notes": "復帰招待キャンペーン"
-    },
     {
       "character": "Ver3.8「旧夢で朽ちゆく小百合花」",
       "event": "バージョンアップデート",
       "category": "version",
       "start_date": "2026-11-12",
-      "end_date": "2026-12-21",
+      "end_date": "2026-12-22",
       "confirmed": true,
-      "notes": "Ver3.8アップデート期間"
+      "notes": "Ver3.8実装期間"
     },
     {
-      "character": "潮汐任務4章5幕「明日へ捧ぐ花束」",
-      "event": "メインストーリー追加",
+      "character": "潮汐任務 第4章第5幕「明日へ捧ぐ花束」",
+      "event": "ストーリー章追加",
       "category": "story",
       "start_date": "2026-11-12",
       "end_date": null,
       "confirmed": true,
-      "notes": "魂の列車を舞台とした新ストーリー"
+      "notes": "Ver3.8メインストーリー（常設）"
     },
     {
       "character": "リリー",
-      "event": "共鳴者集音（新キャラ実装バナー）",
+      "event": "新キャラクター実装・ピックアップバナー開催",
       "category": "character",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8前半新星5キャラ（回折・拳銃）"
-    },
-    {
-      "character": "ララバイ",
-      "event": "武器集音（武器ピックアップ）",
-      "category": "weapon",
-      "start_date": "2026-11-12",
-      "end_date": "2026-12-21",
-      "confirmed": true,
-      "notes": "リリーモチーフ星5拳銃"
+      "notes": "Ver3.8前半限定集音"
     },
     {
       "character": "シグリカ",
-      "event": "共鳴者集音（復刻ピックアップ）",
+      "event": "ピックアップバナー復刻",
       "category": "character",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8前半復刻キャラ"
-    },
-    {
-      "character": "ソル・スウォーンの注釈",
-      "event": "武器集音（復刻武器ピックアップ）",
-      "category": "weapon",
-      "start_date": "2026-11-12",
-      "end_date": "2026-12-21",
-      "confirmed": true,
-      "notes": "シグリカモチーフ武器復刻"
+      "notes": "Ver3.8前半復刻集音"
     },
     {
       "character": "仇遠",
-      "event": "共鳴者集音（復刻ピックアップ）",
+      "event": "ピックアップバナー復刻",
       "category": "character",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8前半復刻キャラ"
+      "notes": "Ver3.8前半復刻集音"
+    },
+    {
+      "character": "ララバイ",
+      "event": "新武器ピックアップバナー開催",
+      "category": "weapon",
+      "start_date": "2026-11-12",
+      "end_date": "2026-12-21",
+      "confirmed": true,
+      "notes": "リリーモチーフ星5拳銃、Ver3.8前半"
+    },
+    {
+      "character": "ソル・スウォーンの注釈",
+      "event": "武器ピックアップバナー復刻",
+      "category": "weapon",
+      "start_date": "2026-11-12",
+      "end_date": "2026-12-21",
+      "confirmed": true,
+      "notes": "シグリカモチーフ武器復刻、Ver3.8前半"
     },
     {
       "character": "破敵の鋭竹",
-      "event": "武器集音（復刻武器ピックアップ）",
+      "event": "武器ピックアップバナー復刻",
       "category": "weapon",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "仇遠モチーフ武器復刻"
+      "notes": "仇遠モチーフ武器復刻、Ver3.8前半"
     },
     {
       "character": "秧秧・玄翎",
-      "event": "共鳴者集音（復刻ピックアップ）",
+      "event": "ピックアップバナー復刻",
       "category": "character",
-      "start_date": "2026-12-03",
+      "start_date": null,
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8後半復刻キャラ（開始日は後半推定）"
-    },
-    {
-      "character": "天つ蒼淵",
-      "event": "武器集音（復刻武器ピックアップ）",
-      "category": "weapon",
-      "start_date": "2026-12-03",
-      "end_date": "2026-12-21",
-      "confirmed": true,
-      "notes": "秧秧・玄翎モチーフ武器復刻"
+      "notes": "Ver3.8後半復刻集音"
     },
     {
       "character": "穂穂",
-      "event": "共鳴者集音（復刻ピックアップ）",
+      "event": "ピックアップバナー復刻",
       "category": "character",
-      "start_date": "2026-12-03",
+      "start_date": null,
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8後半復刻キャラ"
-    },
-    {
-      "character": "夕霞の飲露",
-      "event": "武器集音（復刻武器ピックアップ）",
-      "category": "weapon",
-      "start_date": "2026-12-03",
-      "end_date": "2026-12-21",
-      "confirmed": true,
-      "notes": "穂穂モチーフ武器復刻"
+      "notes": "Ver3.8後半復刻集音"
     },
     {
       "character": "緋雪",
-      "event": "共鳴者集音（復刻ピックアップ）",
+      "event": "ピックアップバナー復刻",
       "category": "character",
-      "start_date": "2026-12-03",
+      "start_date": null,
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8後半復刻キャラ"
+      "notes": "Ver3.8後半復刻集音"
+    },
+    {
+      "character": "天つ蒼淵",
+      "event": "武器ピックアップバナー復刻",
+      "category": "weapon",
+      "start_date": null,
+      "end_date": "2026-12-21",
+      "confirmed": true,
+      "notes": "秧秧・玄翎モチーフ武器復刻、Ver3.8後半"
+    },
+    {
+      "character": "夕霞の飲露",
+      "event": "武器ピックアップバナー復刻",
+      "category": "weapon",
+      "start_date": null,
+      "end_date": "2026-12-21",
+      "confirmed": true,
+      "notes": "穂穂モチーフ武器復刻、Ver3.8後半"
     },
     {
       "character": "灼霜",
-      "event": "武器集音（復刻武器ピックアップ）",
+      "event": "武器ピックアップバナー復刻",
       "category": "weapon",
-      "start_date": "2026-12-03",
+      "start_date": null,
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "緋雪モチーフ武器復刻"
+      "notes": "緋雪モチーフ武器復刻、Ver3.8後半"
     },
     {
-      "character": "追憶の響きⅡ",
-      "event": "共鳴者集音（追憶選択復刻ガチャ）",
+      "character": "追憶の響きⅡ（ツバキ / ロココ / フィービー / ブラント）",
+      "event": "選択型復刻集音バナー開催",
       "category": "character",
-      "start_date": "2026-11-12",
+      "start_date": "2026-12-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "ツバキ/ロココ/フィービー/ブラントから選択"
+      "notes": "Ver3.8期間中に開催される追憶ガチャ"
     },
     {
-      "character": "反響が刻む追憶Ⅱ",
-      "event": "武器集音（追憶選択復刻武器ガチャ）",
+      "character": "反響が刻む追憶Ⅱ（春裁ち / トラジコメーディア / 光のハルモニア / エンドレスボヤージュ）",
+      "event": "選択型武器復刻集音バナー開催",
       "category": "weapon",
-      "start_date": "2026-11-12",
+      "start_date": "2026-12-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "春裁ち/トラジコメーディア/光のハルモニア/エンドレスボヤージュから選択"
-    },
-    {
-      "character": "過ぎし夢のプレゼント",
-      "event": "ログインイベント",
-      "category": "event",
-      "start_date": "2026-11-12",
-      "end_date": "2026-12-21",
-      "confirmed": true,
-      "notes": "金髓の波模様*5、唱喚の渦模様*5獲得"
+      "notes": "Ver3.8期間中に開催される武器追憶ガチャ"
     },
     {
       "character": "第二ソラリス：題なき夢",
-      "event": "シミュレーション育成イベント",
+      "event": "イベント開催",
       "category": "event",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "テーマイベント、星声*1200獲得"
+      "notes": "Ver3.8学園シミュレーション育成イベント"
+    },
+    {
+      "character": "過ぎし夢のプレゼント",
+      "event": "ログインイベント開催",
+      "category": "event",
+      "start_date": "2026-11-12",
+      "end_date": "2026-12-21",
+      "confirmed": true,
+      "notes": "Ver3.8ログインボーナス"
     },
     {
       "character": "ラハイロイブロック・逆転",
-      "event": "パズルイベント",
+      "event": "ミニイベント開催",
       "category": "event",
       "start_date": "2026-11-19",
       "end_date": "2026-12-03",
       "confirmed": true,
-      "notes": "星声*400獲得"
+      "notes": "パズルミニイベント"
     },
     {
       "character": "反響領域",
-      "event": "育成素材2倍ドロップイベント",
+      "event": "育成素材ドロップ2倍イベント開催",
       "category": "event",
       "start_date": "2026-11-26",
       "end_date": "2026-12-03",
       "confirmed": true,
-      "notes": "1日3回まで仮想訓練・凝素領域報酬2倍"
+      "notes": "「仮想訓練」「凝素領域」報酬2倍"
+    },
+    {
+      "character": "ブブ企画・準備",
+      "event": "ミッション・ルーレットイベント開催",
+      "category": "event",
+      "start_date": "2026-12-03",
+      "end_date": "2026-12-17",
+      "confirmed": true,
+      "notes": "ミニイベント"
     },
     {
       "character": "夢見の巡り",
-      "event": "連続戦闘イベント",
+      "event": "戦闘イベント開催",
       "category": "event",
       "start_date": "2026-12-03",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "星声*300獲得"
+      "notes": "連続ステージ挑戦型戦闘イベント"
     },
     {
       "character": "風のゆくさき",
-      "event": "ログインイベント",
+      "event": "ログインイベント開催",
       "category": "event",
       "start_date": "2026-12-07",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "星声*300獲得"
+      "notes": "Ver3.8第2弾ログインボーナス"
     },
     {
       "character": "響き渡る音弦",
-      "event": "無音区報酬2倍イベント",
+      "event": "無音区報酬2倍イベント開催",
       "category": "event",
       "start_date": "2026-12-14",
       "end_date": "2026-12-21",
