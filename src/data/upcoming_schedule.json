@@ -1,176 +1,176 @@
 {
-  "updated_at": "2026-11-12T10:37:36.148824+00:00",
+  "updated_at": "2026-11-13T22:55:00.508659+00:00",
   "events": [
     {
-      "character": "Ver3.8「旧夢で朽ちゆく小百合花」",
+      "character": "Ver.3.8「旧夢で朽ちゆく小百合花」",
       "event": "バージョンアップデート",
       "category": "version",
       "start_date": "2026-11-12",
       "end_date": "2026-12-22",
       "confirmed": true,
-      "notes": "Ver3.8実装期間"
+      "notes": "Ver3.8アップデート実施・開催期間"
     },
     {
-      "character": "潮汐任務 第4章第5幕「明日へ捧ぐ花束」",
-      "event": "ストーリー章追加",
+      "character": "潮汐任務 第4章 第5幕「明日へ捧ぐ花束」",
+      "event": "メインストーリー第4章第5幕 実装",
       "category": "story",
       "start_date": "2026-11-12",
       "end_date": null,
       "confirmed": true,
-      "notes": "Ver3.8メインストーリー（常設）"
+      "notes": "Ver3.8新メインストーリー・新エリア「魂の列車」解放"
     },
     {
       "character": "リリー",
-      "event": "新キャラクター実装・ピックアップバナー開催",
+      "event": "限定ピックアップガチャ「キャラクター集音」新登場",
       "category": "character",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8前半限定集音"
-    },
-    {
-      "character": "シグリカ",
-      "event": "ピックアップバナー復刻",
-      "category": "character",
-      "start_date": "2026-11-12",
-      "end_date": "2026-12-21",
-      "confirmed": true,
-      "notes": "Ver3.8前半復刻集音"
-    },
-    {
-      "character": "仇遠",
-      "event": "ピックアップバナー復刻",
-      "category": "character",
-      "start_date": "2026-11-12",
-      "end_date": "2026-12-21",
-      "confirmed": true,
-      "notes": "Ver3.8前半復刻集音"
+      "notes": "Ver3.8前半新キャラ（星5・回折・拳銃）"
     },
     {
       "character": "ララバイ",
-      "event": "新武器ピックアップバナー開催",
+      "event": "限定武器ピックアップ「武器集音」新登場",
       "category": "weapon",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "リリーモチーフ星5拳銃、Ver3.8前半"
+      "notes": "Ver3.8前半リリーモチーフ星5拳銃"
+    },
+    {
+      "character": "シグリカ",
+      "event": "復刻ピックアップガチャ「キャラクター集音」",
+      "category": "character",
+      "start_date": "2026-11-12",
+      "end_date": "2026-12-21",
+      "confirmed": true,
+      "notes": "Ver3.8前半復刻星5キャラ"
     },
     {
       "character": "ソル・スウォーンの注釈",
-      "event": "武器ピックアップバナー復刻",
+      "event": "復刻武器ピックアップ「武器集音」",
       "category": "weapon",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "シグリカモチーフ武器復刻、Ver3.8前半"
+      "notes": "Ver3.8前半シグリカモチーフ星5武器復刻"
+    },
+    {
+      "character": "仇遠",
+      "event": "復刻ピックアップガチャ「キャラクター集音」",
+      "category": "character",
+      "start_date": "2026-11-12",
+      "end_date": "2026-12-21",
+      "confirmed": true,
+      "notes": "Ver3.8前半復刻星5キャラ"
     },
     {
       "character": "破敵の鋭竹",
-      "event": "武器ピックアップバナー復刻",
+      "event": "復刻武器ピックアップ「武器集音」",
       "category": "weapon",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "仇遠モチーフ武器復刻、Ver3.8前半"
+      "notes": "Ver3.8前半仇遠モチーフ星5武器復刻"
     },
     {
       "character": "秧秧・玄翎",
-      "event": "ピックアップバナー復刻",
+      "event": "復刻ピックアップガチャ「キャラクター集音」",
       "category": "character",
       "start_date": null,
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8後半復刻集音"
-    },
-    {
-      "character": "穂穂",
-      "event": "ピックアップバナー復刻",
-      "category": "character",
-      "start_date": null,
-      "end_date": "2026-12-21",
-      "confirmed": true,
-      "notes": "Ver3.8後半復刻集音"
-    },
-    {
-      "character": "緋雪",
-      "event": "ピックアップバナー復刻",
-      "category": "character",
-      "start_date": null,
-      "end_date": "2026-12-21",
-      "confirmed": true,
-      "notes": "Ver3.8後半復刻集音"
+      "notes": "Ver3.8後半復刻星5キャラ"
     },
     {
       "character": "天つ蒼淵",
-      "event": "武器ピックアップバナー復刻",
+      "event": "復刻武器ピックアップ「武器集音」",
       "category": "weapon",
       "start_date": null,
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "秧秧・玄翎モチーフ武器復刻、Ver3.8後半"
+      "notes": "Ver3.8後半秧秧・玄翎モチーフ星5武器復刻"
+    },
+    {
+      "character": "穂穂",
+      "event": "復刻ピックアップガチャ「キャラクター集音」",
+      "category": "character",
+      "start_date": null,
+      "end_date": "2026-12-21",
+      "confirmed": true,
+      "notes": "Ver3.8後半復刻星5キャラ"
     },
     {
       "character": "夕霞の飲露",
-      "event": "武器ピックアップバナー復刻",
+      "event": "復刻武器ピックアップ「武器集音」",
       "category": "weapon",
       "start_date": null,
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "穂穂モチーフ武器復刻、Ver3.8後半"
+      "notes": "Ver3.8後半穂穂モチーフ星5武器復刻"
+    },
+    {
+      "character": "緋雪",
+      "event": "復刻ピックアップガチャ「キャラクター集音」",
+      "category": "character",
+      "start_date": null,
+      "end_date": "2026-12-21",
+      "confirmed": true,
+      "notes": "Ver3.8後半復刻星5キャラ"
     },
     {
       "character": "灼霜",
-      "event": "武器ピックアップバナー復刻",
+      "event": "復刻武器ピックアップ「武器集音」",
       "category": "weapon",
       "start_date": null,
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "緋雪モチーフ武器復刻、Ver3.8後半"
+      "notes": "Ver3.8後半緋雪モチーフ星5武器復刻"
     },
     {
       "character": "追憶の響きⅡ（ツバキ / ロココ / フィービー / ブラント）",
-      "event": "選択型復刻集音バナー開催",
+      "event": "選択型復刻集音イベント開催",
       "category": "character",
       "start_date": "2026-12-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8期間中に開催される追憶ガチャ"
+      "notes": "Ver3.8期間中に開催される過去限定キャラの選択式復刻集音"
     },
     {
       "character": "反響が刻む追憶Ⅱ（春裁ち / トラジコメーディア / 光のハルモニア / エンドレスボヤージュ）",
-      "event": "選択型武器復刻集音バナー開催",
+      "event": "選択型復刻武器集音イベント開催",
       "category": "weapon",
       "start_date": "2026-12-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8期間中に開催される武器追憶ガチャ"
+      "notes": "Ver3.8期間中に開催される過去限定武器の選択式復刻武器集音"
     },
     {
       "character": "第二ソラリス：題なき夢",
-      "event": "イベント開催",
+      "event": "シミュレーション育成イベント開催",
       "category": "event",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8学園シミュレーション育成イベント"
+      "notes": "Ver3.8テーマイベント（学園イベント）"
     },
     {
       "character": "過ぎし夢のプレゼント",
-      "event": "ログインイベント開催",
+      "event": "期間限定ログインボーナスイベント開催",
       "category": "event",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8ログインボーナス"
+      "notes": "金髓の波模様・唱喚の渦模様などを獲得可能"
     },
     {
       "character": "ラハイロイブロック・逆転",
-      "event": "ミニイベント開催",
+      "event": "パズルミニイベント開催",
       "category": "event",
       "start_date": "2026-11-19",
       "end_date": "2026-12-03",
       "confirmed": true,
-      "notes": "パズルミニイベント"
+      "notes": "ブロックを回転・消去するミニゲームイベント"
     },
     {
       "character": "反響領域",
@@ -179,7 +179,7 @@
       "start_date": "2026-11-26",
       "end_date": "2026-12-03",
       "confirmed": true,
-      "notes": "「仮想訓練」「凝素領域」報酬2倍"
+      "notes": "1日3回まで「仮想訓練」「凝素領域」の報酬が2倍"
     },
     {
       "character": "ブブ企画・準備",
@@ -188,34 +188,34 @@
       "start_date": "2026-12-03",
       "end_date": "2026-12-17",
       "confirmed": true,
-      "notes": "ミニイベント"
+      "notes": "Ver3.8期間限定ミニイベント"
     },
     {
       "character": "夢見の巡り",
-      "event": "戦闘イベント開催",
+      "event": "連続ステージ戦闘イベント開催",
       "category": "event",
       "start_date": "2026-12-03",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "連続ステージ挑戦型戦闘イベント"
+      "notes": "指定キャラを用いて挑戦する戦闘チャレンジイベント"
     },
     {
       "character": "風のゆくさき",
-      "event": "ログインイベント開催",
+      "event": "期間限定ログインボーナスイベント開催",
       "category": "event",
       "start_date": "2026-12-07",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8第2弾ログインボーナス"
+      "notes": "星声などを獲得できるログインボーナス"
     },
     {
       "character": "響き渡る音弦",
-      "event": "無音区報酬2倍イベント開催",
+      "event": "無音区ドロップ2倍イベント開催",
       "category": "event",
       "start_date": "2026-12-14",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "1日3回まで無音区報酬2倍"
+      "notes": "1日3回まで「無音区」の報酬が2倍"
     }
   ]
 }
