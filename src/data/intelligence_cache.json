@@ -3,17 +3,17 @@
   "items": [
     {
       "id": "card-0",
-      "title": "鳴潮 11月13日付 - 徳島新聞デジタル",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBXMXVZUUFyOHdsVGJzZ3FhUWg1VG9OWU93SXhORDk3NW5VY0tSQURBaW4tdTY1eGx0REtXblA5R2thTWw2ZzlpdnlVSWg5UFY2WmNnRllR?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮 11月13日付&nbsp;&nbsp;徳島新聞デジタル",
-      "reason": "約6時間前に出たばかりの新しい情報",
-      "score": 64,
+      "title": "海外鳴潮コミュニティ公式FAQ・質問メガスレッドの活用ガイド",
+      "sourceType": "海外Redditフォーラム 鳴潮総合 (公式純リンクRSS)",
+      "sourceUrl": "https://www.reddit.com/r/WutheringWaves/comments/1xuwor6/daily_questions_megathread_november_13_2026/",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n海外Redditの鳴潮総合フォーラムで運用されている「毎日の質問メガスレッド」の概要と役立つリソースについて解説。\n・スレッドの趣旨：冒険を始めたばかりの初心者から経験者まで、ゲーム内の一般的な疑問やヒントを共有し、ローバー同士で助け合うための専用スレッド。\n・紹介されている有益なリンク集：\n 1. u/Zapphiren氏による「鳴潮スターターガイド」\n 2. u/nihilistfun氏による「フルバージョン 1.X ストーリーアーカイブ」\n 3. 「Chasey's WW Character Build Guide（キャラクタービルドガイド）」\n 4. u/Aizen_Myo氏による「鳴潮簿記」\n 5. デバイス要件およびコミュニティFAQ\n・併設されている関連メガスレッド：「ウィークリー ガチャ & エコー メガスレッド」「ウィークリー フレンド & 協力メガスレッド」の存在を紹介し、疑問の検索や情報共有の場として活用が推奨されている。",
+      "reason": "海外コミュニティで共有されている有志作成のビルドガイドやストーリーアーカイブなどのリソースは、初心者からやり込み勢まで幅広いプレイヤーにとって有用な情報源となるため。",
+      "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-11-13",
-      "createdTime": "2026-11-13T11:46:20.566382+00:00"
+      "createdTime": "2026-11-13T15:07:33.168937+00:00"
     }
   ]
 }
