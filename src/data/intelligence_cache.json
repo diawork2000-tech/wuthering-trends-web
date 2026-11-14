@@ -3,17 +3,45 @@
   "items": [
     {
       "id": "card-0",
-      "title": "ゲーム『鳴潮』最新イベント情報まとめ",
+      "title": "あみあみ実店舗にて『鳴潮』Ver.3.7ノベルティフェア開催",
       "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFB6TlFqNjhrcTZuQTFxVTZXSkZMaGl0elNkZjNpLTV0d3RJQVVDRkQ5eS1faUg0UVBpZGRodUFFb3RDcFpjTkpYTWEzNG1McG9UQ0RF?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによるゲーム『鳴潮』のイベント最新情報まとめ。ゲーム内で開催されるイベントに関するスケジュールや最新情報を整理したまとめコンテンツとなっている。",
-      "reason": "イベントの開催状況や最新スケジュールは、ゲーム内報酬の獲得や育成計画を立てるプレイヤーにとって常に確認需要が高いトピックであるため。",
-      "score": 78,
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9uaEh5VmxyM3E5aTJvSTNCd3BKUWdrWlk3eTkwSENPeGRVVHk2WExzZXFLT0VvcmJOLU1JVDZ6WkZraWxsU00zeUt6ako1LXhxdm1mUHZfLWg?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nホビーショップ「あみあみ」の実店舗において、『鳴潮 あみあみ Ver.3.7 鏡に鎖す妄世、心で照らす紅塵 ノベルティフェア』が開催されます。フェアでは「心」や「鎖暝」関連グッズなどの販売が予定されています。",
+      "reason": "公式グッズ展開や実店舗フェアはファン・コレクター層の関心が高く、店舗イベントの開催情報は拡散性・話題性が見込めるため。",
+      "score": 92,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 2,
+      "date": "2026-11-14",
+      "createdTime": "2026-11-14T11:09:56.676357+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "GameWithによる『鳴潮』リセマラ当たりランキング",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1UZjlMWExyQlJ1X2VNQkpDSUpjc3RBVnVqYW9yVHdfQ0IzcVkxSllrbXJvNEx6YWpyQ2E4OUJFX3hpMkFuSDVaVi03SWM5c000N21z?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nGameWithによる『鳴潮』のリセマラ当たりランキングに関する情報です。ゲーム開始時のリセマラで狙うべき当たりキャラクターの最新評価がまとめられています。",
+      "reason": "リセマラ関連の情報は新規プレイヤー層からの検索需要が常に高く、攻略情報の定番として再生数を獲得しやすいため。",
+      "score": 72,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-11-14",
-      "createdTime": "2026-11-14T07:50:42.762334+00:00"
+      "createdTime": "2026-11-14T11:09:56.676380+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "潮汐任務第四章第五幕の実況プレイ配信",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=zxtuFPwpoBo",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n配信者「ノタル」による『鳴潮』の実況シリーズ第34回。メインストーリーの潮汐任務「第四章第五幕」を進めるゲームプレイ実況となっています。",
+      "reason": "メインストーリーの最新進行状況を追いたいプレイヤーの需要を捉えており、現在約1,513再生・約50再生毎時と安定して視聴を集めています。",
+      "score": 64,
+      "viewCount": 1513,
+      "viewsPerHour": 50.4,
+      "mentionCount": 1,
+      "date": "2026-11-14",
+      "createdTime": "2026-11-14T11:09:56.676393+00:00"
     }
   ]
 }
