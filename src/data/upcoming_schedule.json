@@ -1,194 +1,158 @@
 {
-  "updated_at": "2026-11-15T01:40:10.853178+00:00",
+  "updated_at": "2026-11-16T00:50:37.220505+00:00",
   "events": [
     {
-      "character": "Ver3.8「旧夢で朽ちゆく小百合花」",
+      "character": "Ver.3.8「旧夢で朽ちゆく小百合花」",
       "event": "バージョンアップデート",
       "category": "version",
       "start_date": "2026-11-12",
       "end_date": "2026-12-22",
       "confirmed": true,
-      "notes": "Ver3.8開催期間（メンテナンス・アプデ後より開始）"
+      "notes": "Ver.3.8アップデート期間"
     },
     {
       "character": "潮汐任務 第4章 第5幕「明日へ捧ぐ花束」",
-      "event": "ストーリー章追加",
+      "event": "メインストーリー追加",
       "category": "story",
       "start_date": "2026-11-12",
       "end_date": null,
       "confirmed": true,
-      "notes": "Ver3.8新メインストーリー・新エリア「魂の列車」解放"
+      "notes": "Ver.3.8実装に伴う恒常ストーリー開放"
     },
     {
       "character": "リリー",
-      "event": "限定キャラガチャ（新登場）",
+      "event": "新キャラクター限定集音（バナー）開始",
       "category": "character",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8第一期（前半）ピックアップ"
+      "notes": "Ver.3.8第一期（前半）ピックアップ"
     },
     {
       "character": "シグリカ",
-      "event": "限定キャラガチャ（復刻）",
+      "event": "限定キャラクター復刻集音（バナー）開始",
       "category": "character",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8第一期（前半）復刻ピックアップ"
+      "notes": "Ver.3.8第一期（前半）復刻ピックアップ"
     },
     {
       "character": "仇遠",
-      "event": "限定キャラガチャ（復刻）",
+      "event": "限定キャラクター復刻集音（バナー）開始",
       "category": "character",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8第一期（前半）復刻ピックアップ"
+      "notes": "Ver.3.8第一期（前半）復刻ピックアップ"
     },
     {
       "character": "ララバイ",
-      "event": "限定武器ガチャ（新登場）",
+      "event": "新武器限定集音（バナー）開始",
       "category": "weapon",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "リリーのモチーフ星5拳銃武器ピックアップ"
+      "notes": "Ver.3.8第一期（前半）リリーモチーフ星5拳銃"
     },
     {
-      "character": "ソル・スウォーンの注釈",
-      "event": "限定武器ガチャ（復刻）",
+      "character": "ソル・スウォーンの注釈 / 破敵の鋭竹",
+      "event": "限定武器復刻集音（バナー）開始",
       "category": "weapon",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "シグリカのモチーフ武器復刻ピックアップ"
-    },
-    {
-      "character": "破敵の鋭竹",
-      "event": "限定武器ガチャ（復刻）",
-      "category": "weapon",
-      "start_date": "2026-11-12",
-      "end_date": "2026-12-21",
-      "confirmed": true,
-      "notes": "仇遠のモチーフ武器復刻ピックアップ"
+      "notes": "Ver.3.8第一期（前半）シグリカ・仇遠モチーフ武器復刻"
     },
     {
       "character": "秧秧・玄翎",
-      "event": "限定キャラガチャ（復刻）",
+      "event": "限定キャラクター復刻集音（バナー）開始",
       "category": "character",
       "start_date": null,
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8第二期（後半）復刻ピックアップ"
+      "notes": "Ver.3.8第二期（後半）復刻ピックアップ"
     },
     {
       "character": "穂穂",
-      "event": "限定キャラガチャ（復刻）",
+      "event": "限定キャラクター復刻集音（バナー）開始",
       "category": "character",
       "start_date": null,
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8第二期（後半）復刻ピックアップ"
+      "notes": "Ver.3.8第二期（後半）復刻ピックアップ"
     },
     {
       "character": "緋雪",
-      "event": "限定キャラガチャ（復刻）",
+      "event": "限定キャラクター復刻集音（バナー）開始",
       "category": "character",
       "start_date": null,
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8第二期（後半）復刻ピックアップ"
+      "notes": "Ver.3.8第二期（後半）復刻ピックアップ"
     },
     {
-      "character": "天つ蒼淵",
-      "event": "限定武器ガチャ（復刻）",
+      "character": "天つ蒼淵 / 夕霞の飲露 / 灼霜",
+      "event": "限定武器復刻集音（バナー）開始",
       "category": "weapon",
       "start_date": null,
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "秧秧・玄翎のモチーフ武器復刻ピックアップ"
+      "notes": "Ver.3.8第二期（後半）秧秧・玄翎、穂穂、緋雪モチーフ武器復刻"
     },
     {
-      "character": "夕霞の飲露",
-      "event": "限定武器ガチャ（復刻）",
-      "category": "weapon",
-      "start_date": null,
-      "end_date": "2026-12-21",
-      "confirmed": true,
-      "notes": "穂穂のモチーフ武器復刻ピックアップ"
-    },
-    {
-      "character": "灼霜",
-      "event": "限定武器ガチャ（復刻）",
-      "category": "weapon",
-      "start_date": null,
-      "end_date": "2026-12-21",
-      "confirmed": true,
-      "notes": "緋雪のモチーフ武器復刻ピックアップ"
-    },
-    {
-      "character": "追憶の響きⅡ",
-      "event": "選択型復刻キャラガチャ（ツバキ・ロココ・フィービー・ブラント）",
+      "character": "ツバキ / ロココ / フィービー / ブラント",
+      "event": "追憶の響きⅡ（選択式復刻集音）開催",
       "category": "character",
-      "start_date": "2026-11-12",
+      "start_date": "2026-12-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8期間中に開催される共鳴者集音（追憶）"
+      "notes": "Ver.3.8期間中に開催される共鳴者集音（追憶）"
     },
     {
-      "character": "反響が刻む追憶Ⅱ",
-      "event": "選択型復刻武器ガチャ（春裁ち・トラジコメーディア・光のハルモニア・エンドレスボヤージュ）",
+      "character": "春裁ち / トラジコメーディア / 光のハルモニア / エンドレスボヤージュ",
+      "event": "反響が刻む追憶Ⅱ（復刻武器集音）開催",
       "category": "weapon",
-      "start_date": "2026-11-12",
+      "start_date": "2026-12-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "Ver3.8期間中に開催される武器集音（追憶）"
-    },
-    {
-      "character": "過ぎし夢のプレゼント",
-      "event": "ログインイベント開催",
-      "category": "event",
-      "start_date": "2026-11-12",
-      "end_date": "2026-12-21",
-      "confirmed": true,
-      "notes": "金髓の波模様・唱喚の渦模様等を獲得できるログインボーナス"
+      "notes": "Ver.3.8期間中に開催される武器集音（追憶）"
     },
     {
       "character": "第二ソラリス：題なき夢",
-      "event": "ミニイベント・シミュレーション育成開催",
+      "event": "テーマイベント開催",
       "category": "event",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "学園育成シミュレーションイベント（星声×1200獲得可能）"
+      "notes": "Ver.3.8学園シミュレーション育成イベント"
+    },
+    {
+      "character": "過ぎし夢のプレゼント",
+      "event": "ログインボーナスイベント開催",
+      "category": "event",
+      "start_date": "2026-11-12",
+      "end_date": "2026-12-21",
+      "confirmed": true,
+      "notes": "Ver.3.8期間中のログインイベント"
     },
     {
       "character": "追憶のプレゼント",
-      "event": "イベント開催",
+      "event": "集音回数報酬イベント開催",
       "category": "event",
       "start_date": "2026-11-12",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "共鳴者集音（追憶）の回数に応じて金髓の波模様を獲得"
-    },
-    {
-      "character": "鳴潮 × JOYSOUNDコラボ",
-      "event": "コラボイベント開催",
-      "category": "event",
-      "start_date": "2026-11-11",
-      "end_date": null,
-      "confirmed": true,
-      "notes": "鳴潮コンサート楽曲のカラオケ配信コラボ"
+      "notes": "共鳴者集音（追憶）の累計回数で報酬獲得"
     },
     {
       "character": "ラハイロイブロック・逆転",
-      "event": "ミニイベント・パズル開催",
+      "event": "パズルミニイベント開催",
       "category": "event",
       "start_date": "2026-11-19",
       "end_date": "2026-12-03",
       "confirmed": true,
-      "notes": "ブロックを回転・消去するパズルイベント（星声×400）"
+      "notes": "ブロックを回転・消去するパズルイベント"
     },
     {
       "character": "反響領域",
@@ -197,16 +161,16 @@
       "start_date": "2026-11-26",
       "end_date": "2026-12-03",
       "confirmed": true,
-      "notes": "1日3回まで仮想訓練・凝素領域の報酬2倍"
+      "notes": "仮想訓練・凝素領域の報酬が1日3回まで2倍"
     },
     {
       "character": "ブブ企画・準備",
-      "event": "ミニイベント開催",
+      "event": "ミッション・ルーレットイベント開催",
       "category": "event",
       "start_date": "2026-12-03",
       "end_date": "2026-12-17",
       "confirmed": true,
-      "notes": "ミッション・ルーレット形式のイベント"
+      "notes": "Ver.3.8ミニイベント"
     },
     {
       "character": "夢見の巡り",
@@ -215,16 +179,16 @@
       "start_date": "2026-12-03",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "連続ステージ挑戦型戦闘イベント（星声×300）"
+      "notes": "指定キャラを用いた連続ステージ挑戦イベント"
     },
     {
       "character": "風のゆくさき",
-      "event": "ログインイベント開催",
+      "event": "ログインボーナスイベント開催",
       "category": "event",
       "start_date": "2026-12-07",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "ログインボーナスイベント（星声×300）"
+      "notes": "星声などを獲得できるログインイベント"
     },
     {
       "character": "響き渡る音弦",
@@ -233,7 +197,7 @@
       "start_date": "2026-12-14",
       "end_date": "2026-12-21",
       "confirmed": true,
-      "notes": "1日3回まで無音区の報酬2倍"
+      "notes": "無音区の報酬が1日3回まで2倍"
     }
   ]
 }
