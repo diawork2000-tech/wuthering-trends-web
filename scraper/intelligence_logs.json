@@ -1,5 +1,16 @@
 [
   {
+    "timestamp": "2026-11-18 07:07:27",
+    "status": "Success",
+    "total_harvested": 113,
+    "final_selected": 1,
+    "breakdown": {
+      "YouTubeショート 伸び悩み＆神プレイ解説フォーラム": 1
+    },
+    "gemini_topic_status": "success",
+    "gemini_competitor_status": "no_items"
+  },
+  {
     "timestamp": "2026-11-18 03:51:45",
     "status": "Success",
     "total_harvested": 112,
@@ -590,14 +601,5 @@
     },
     "gemini_topic_status": "success",
     "gemini_competitor_status": "no_items"
-  },
-  {
-    "timestamp": "2026-11-11 10:31:26",
-    "status": "Success",
-    "total_harvested": 98,
-    "final_selected": 0,
-    "breakdown": {},
-    "gemini_topic_status": "not_configured",
-    "gemini_competitor_status": "not_configured"
   }
 ]
