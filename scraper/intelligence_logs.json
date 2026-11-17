@@ -1,5 +1,14 @@
 [
   {
+    "timestamp": "2026-11-17 11:31:43",
+    "status": "Success",
+    "total_harvested": 110,
+    "final_selected": 0,
+    "breakdown": {},
+    "gemini_topic_status": "not_configured",
+    "gemini_competitor_status": "not_configured"
+  },
+  {
     "timestamp": "2026-11-17 08:30:18",
     "status": "Success",
     "total_harvested": 110,
@@ -589,15 +598,6 @@
     "breakdown": {
       "YouTube 鳴潮総合 ＆ 急上昇トレンド動画 (Webハ": 2
     },
-    "gemini_topic_status": "failed",
-    "gemini_competitor_status": "no_items"
-  },
-  {
-    "timestamp": "2026-11-10 14:46:21",
-    "status": "Success",
-    "total_harvested": 100,
-    "final_selected": 0,
-    "breakdown": {},
     "gemini_topic_status": "failed",
     "gemini_competitor_status": "no_items"
   }
