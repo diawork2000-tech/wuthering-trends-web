@@ -320,7 +320,7 @@ class TestWatchAccounts(unittest.TestCase):
 
     def test_shipped_watch_list(self):
         accounts, exclude, interval = sns_collector.load_watch()
-        self.assertEqual(len(accounts), 11)
+        self.assertEqual(len(accounts), 14)
         # 除外は最初は空（オーナー判断。リーク系でも小ネタが多いので今は落とさない）
         self.assertEqual(exclude, [])
         self.assertGreaterEqual(interval, 2)
