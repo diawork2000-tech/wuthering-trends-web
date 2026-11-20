@@ -3,31 +3,17 @@
   "items": [
     {
       "id": "card-0",
-      "title": "Steam版『鳴潮』ランチャー導入による賛否と従来式への選択制対応",
+      "title": "Steam版『鳴潮』公式ランチャー導入でレビュー「賛否両論」に、ユーザーの声を受け従来式との選択制へ対応",
       "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQV1ZTVVo0MzMzeDA3T3dtVDc3bUVXX3kyeUVPLXcyb2NnTkU3NzlmWU9ERFl1X3FVODVVOWdqWUxHM0k4a2VSZUpHYnNKZ0VydzdtTG5LM2RHVm9rcUo4bjFCYlpjMzMybHFiLVZVSmxlRWMzSmJPTDNFdGtucXlPX2dwbVRrRE55QzIzeHNR?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nSteam版『鳴潮』において、最新バージョンへのアップデートに伴い公式ランチャーが導入された。しかし、これに対してユーザーから不満の声が相次ぎ、Steamの直近レビューが「賛否両論」へと落ち込む事態となった。ユーザーからのフィードバックを受けた開発・運営側は迅速に対応を行い、公式ランチャーを使用する方式と従来の起動方式を選択できる仕様への変更を実施した。",
-      "reason": "Steam版のプレイ環境に直結する仕様変更であり、レビュー評価の変動や公式の迅速な選択制対応についてPC版プレイヤーの間で強い関心と議論が集まっているため。",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5ON0dJTDNLeF83MllJb1Z3VmRuTmxiMDNYbDR1VVI5clJpUXF1azI5ZTZZOFJrckxQdWJSMVJWTnFtbGJWeVRPa1JoVEx1ZG9ub2p3TDJLLTlza2Z1aE43ZFF3c1B1N2pzMXJqdzAtTF9VNl9NTEE?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nSteam版『鳴潮』において、最新Verへのアップデートで公式ランチャーが導入されましたが、これに対してプレイヤーから不満の声が上がり、直近のストアレビューが「賛否両論」となる事態が発生しました。運営側はユーザーからのフィードバックを受け、公式ランチャーのみの運用から従来方式との選択制へと迅速に変更・対応を行いました。",
+      "reason": "Steam版プレイヤーの起動環境やプレイ利便性に直結するアップデート情報であり、運営のフィードバック対応の早さを含めPC版ユーザーの間で注目度が高いため。",
       "score": 82,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-11-20",
-      "createdTime": "2026-11-20T08:02:52.557595+00:00"
-    },
-    {
-      "id": "card-1",
-      "title": "『鳴潮』ルシェルの実装時期に関する最新動向",
-      "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE51S0ZSUHhmVkJtaU9DekNyMHJoUnN5VkFNX0M4X3VoNGFHV1c1NzNSLVVHclBzVGdiSzF5NTFuaDJ4VU80T09uZnYxN3pVYnhIQkNF?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nキャラクター「ルシェル」の実装時期に関するトピック。素材内には具体的な実装日や性能数値、属性などの詳細情報は記載されていないが、実装時期に関する攻略・情報発信が行われている。",
-      "reason": "今後のアップデートで実装が期待される新キャラクターの登場タイミングは、ガチャのリソース計画を立てるプレイヤーにとって常に需要が高いネタであるため。",
-      "score": 72,
-      "viewCount": 0,
-      "viewsPerHour": 0.0,
-      "mentionCount": 1,
-      "date": "2026-11-20",
-      "createdTime": "2026-11-20T08:02:52.557630+00:00"
+      "createdTime": "2026-11-20T11:17:53.981594+00:00"
     }
   ]
 }
