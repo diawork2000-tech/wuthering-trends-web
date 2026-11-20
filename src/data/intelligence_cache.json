@@ -3,17 +3,59 @@
   "items": [
     {
       "id": "card-0",
-      "title": "Steam版『鳴潮』公式ランチャー導入でレビュー「賛否両論」に、ユーザーの声を受け従来式との選択制へ対応",
+      "title": "Steam版『鳴潮』最新Verでランチャー導入を受け賛否両論に、フィードバックで従来式との選択制へ変更",
       "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5ON0dJTDNLeF83MllJb1Z3VmRuTmxiMDNYbDR1VVI5clJpUXF1azI5ZTZZOFJrckxQdWJSMVJWTnFtbGJWeVRPa1JoVEx1ZG9ub2p3TDJLLTlza2Z1aE43ZFF3c1B1N2pzMXJqdzAtTF9VNl9NTEE?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nSteam版『鳴潮』において、最新Verへのアップデートで公式ランチャーが導入されましたが、これに対してプレイヤーから不満の声が上がり、直近のストアレビューが「賛否両論」となる事態が発生しました。運営側はユーザーからのフィードバックを受け、公式ランチャーのみの運用から従来方式との選択制へと迅速に変更・対応を行いました。",
-      "reason": "Steam版プレイヤーの起動環境やプレイ利便性に直結するアップデート情報であり、運営のフィードバック対応の早さを含めPC版ユーザーの間で注目度が高いため。",
-      "score": 82,
+      "sourceUrl": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQV1ZTVVo0MzMzeDA3T3dtVDc3bUVXX3kyeUVPLXcyb2NnTkU3NzlmWU9ERFl1X3FVODVVOWdqWUxHM0k4a2VSZUpHYnNKZ0VydzdtTG5LM2RHVm9rcUo4bjFCYlpjMzMybHFiLVZVSmxlRWMzSmJPTDNFdGtucXlPX2dwbVRrRE55QzIzeHNR?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nSteam版『鳴潮』において、最新バージョンで公式ランチャーが導入されたことにより直近のユーザーレビューが「賛否両論」となる事態が発生した。ユーザーからの不満の声やフィードバックを受け、運営側は従来方式と公式ランチャー方式との選択制へ変更する対応を行った。",
+      "reason": "PC（Steam）版ユーザーのプレイ環境に直結する変更と運営の迅速な仕様変更対応について話題性が高く、プレイヤーコミュニティの関心を集めているため。",
+      "score": 78,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-11-20",
-      "createdTime": "2026-11-20T11:17:53.981594+00:00"
+      "createdTime": "2026-11-20T14:33:06.351674+00:00"
+    },
+    {
+      "id": "card-1",
+      "title": "【鳴潮】灯灯(トウトウ)の性能評価・おすすめ編成および装備ガイド",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFA5dlptc2VEYS1UZXpsSWgzSHhKbzMta1lSNGhadk5KRWxTVmY4U0o3MnBnRHRGZ0lyUzBPUi12cnVZeldqQWFNWTJSM0NELTZPZTY4?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n『鳴潮』の登場キャラクター「灯灯(トウトウ)」に関する総合評価まとめ。灯灯の強みや運用方法、相性の良いおすすめパーティ編成、適正音骸セット、相性の良い武器の選定基準について解説する攻略記事情報。",
+      "reason": "灯灯の育成方針や最適編成について調べるプレイヤー層からの検索需要が高く、キャラ個別解説として扱いやすいため。",
+      "score": 68,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-11-20",
+      "createdTime": "2026-11-20T14:33:06.351700+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "【鳴潮】インリン(吟霖)の最新評価・おすすめパーティ編成と装備まとめ",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5FcmJoZkxhQk1SWHFUR2g5YWVWem9lSndFeTYwa1RLNXRGcGkwcE9BRXBrb25fQkw5TTktNGNHcnJVN1B5ZDRSdy1mT0UzZE9KVDRv?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nキャラクター「インリン(吟霖)」の評価、適したパーティ構成、装備すべき音骸および武器のビルド方針に関する詳細情報。キャラクターの性能を最大限に引き出すための実践的な運用ガイド。",
+      "reason": "インリンの育成や編成を見直したいプレイヤーからの需要が継続して存在し、ビルド解説としての確実なニーズがあるため。",
+      "score": 68,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-11-20",
+      "createdTime": "2026-11-20T14:33:06.351712+00:00"
+    },
+    {
+      "id": "card-3",
+      "title": "【鳴潮】ツバキの総合評価と最適パーティ編成・音骸・武器解説",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFB1cG9LTUtrVzRmdmhFZFljaU1uVElSWG9EN1o1WEtSR3Nxc1pMbk5XNVhmUTI3Q0FwdDVpZGxrWjhiSFlMNEZ3VjBaLXJ5TUJpb0FR?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n新キャラクター「ツバキ」の性能評価とビルド方針の解説。ツバキを軸としたおすすめパーティ編成、適正な音骸、装備させるべき武器に関する攻略情報を提示する。",
+      "reason": "ツバキの性能やビルド、パーティの組み合わせについて関心を持つユーザーが多く、注目度が高いトピックであるため。",
+      "score": 68,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-11-20",
+      "createdTime": "2026-11-20T14:33:06.351722+00:00"
     }
   ]
 }
