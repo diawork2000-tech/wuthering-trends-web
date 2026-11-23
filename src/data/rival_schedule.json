@@ -1,6 +1,6 @@
 {
   "_note": "競合タイトルのアップデート日程。鳴潮本体の予定(upcoming_schedule.json)とは別ファイルにしてある。混ぜるとネタのスコア計算(schedule_boost)が他ゲームの名前に反応してしまうため。versions は自動収集(collect_rival_schedule.py)が上書きするので、手で直す場合は confirmed:true の行だけにすること。",
-  "updated_at": "2026-11-22T09:50:07.194740+00:00",
+  "updated_at": "2026-11-23T12:21:27.751103+00:00",
   "games": [
     {
       "id": "genshin",
@@ -10,15 +10,6 @@
       "enabled": true,
       "source": "https://wikiwiki.jp/genshinwiki/%E4%BB%8A%E5%BE%8C%E3%81%AE%E5%AE%9F%E8%A3%85%E6%83%85%E5%A0%B1",
       "versions": [
-        {
-          "version": "7.1",
-          "date": "2026-09-23",
-          "confirmed": true,
-          "title": "冥府へのレクイエム",
-          "note": "",
-          "new_character_first": true,
-          "new_character_second": true
-        },
         {
           "version": "7.2",
           "date": "2026-11-04",
@@ -59,7 +50,7 @@
           "version": "7.7",
           "title": "",
           "date": "2027-06-02",
-          "confirmed": false,
+          "confirmed": true,
           "new_character_first": null,
           "new_character_second": null,
           "note": ""
@@ -68,7 +59,7 @@
           "version": "7.8",
           "title": "",
           "date": "2027-07-14",
-          "confirmed": false,
+          "confirmed": true,
           "new_character_first": null,
           "new_character_second": null,
           "note": ""
@@ -148,7 +139,7 @@
         {
           "version": "1.5",
           "title": "",
-          "date": "2026-11-11",
+          "date": "2026-11-18",
           "confirmed": true,
           "new_character_first": true,
           "new_character_second": true,
@@ -190,39 +181,39 @@
   ],
   "source_health": {
     "genshin": {
-      "last_fetch_ok_at": "2026-11-22T09:49:19.463680+00:00",
+      "last_fetch_ok_at": "2026-11-23T12:20:47.808512+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-11-22T09:49:19.463680+00:00",
+      "last_parse_ok_at": "2026-11-23T12:20:47.808512+00:00",
       "consecutive_parse_empty": 0,
       "last_error_at": "2026-10-21T19:16:23.460291+00:00",
       "last_parse_empty_at": "2026-10-21T19:16:23.460291+00:00"
     },
     "hsr": {
-      "last_fetch_ok_at": "2026-11-22T09:49:19.463680+00:00",
+      "last_fetch_ok_at": "2026-11-23T12:20:47.808512+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-11-22T09:49:19.463680+00:00",
+      "last_parse_ok_at": "2026-11-23T12:20:47.808512+00:00",
       "consecutive_parse_empty": 0
     },
     "zzz": {
-      "last_fetch_ok_at": "2026-11-22T09:49:19.463680+00:00",
+      "last_fetch_ok_at": "2026-11-23T12:20:47.808512+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-11-22T09:49:19.463680+00:00",
+      "last_parse_ok_at": "2026-11-23T12:20:47.808512+00:00",
       "consecutive_parse_empty": 0,
       "last_error_at": "2026-10-21T19:16:23.460291+00:00",
       "last_parse_empty_at": "2026-10-21T19:16:23.460291+00:00"
     },
     "nte": {
-      "last_fetch_ok_at": "2026-11-22T09:49:19.463680+00:00",
+      "last_fetch_ok_at": "2026-11-23T12:20:47.808512+00:00",
       "consecutive_failures": 0,
-      "last_parse_ok_at": "2026-11-22T09:49:19.463680+00:00",
+      "last_parse_ok_at": "2026-11-23T12:20:47.808512+00:00",
       "consecutive_parse_empty": 0,
       "last_parse_empty_at": "2026-10-25T01:17:13.338452+00:00"
     },
     "endfield": {
-      "last_fetch_ok_at": "2026-11-22T09:49:19.463680+00:00",
+      "last_fetch_ok_at": "2026-11-23T12:20:47.808512+00:00",
       "consecutive_failures": 0,
-      "last_parse_empty_at": "2026-11-21T07:46:26.743202+00:00",
-      "consecutive_parse_empty": 0,
+      "last_parse_empty_at": "2026-11-23T12:20:47.808512+00:00",
+      "consecutive_parse_empty": 1,
       "last_parse_ok_at": "2026-11-22T09:49:19.463680+00:00",
       "last_error_at": "2026-10-21T19:16:23.460291+00:00"
     }
