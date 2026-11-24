@@ -1,5 +1,36 @@
 [
   {
+    "id": "2026-11-24T21:01:37.615618+00:00",
+    "timestamp": "2026/11/24 21:01 (JST)",
+    "status": "Success",
+    "api_key_status": "Key #1 (メイン構成運用)",
+    "new_items_count": 35,
+    "summary": "正常完了 (新着Notion追加: 35 件)",
+    "details": [
+      "🎬 [21:01] 起動: トレンド収集＆自動整理プロセス始動",
+      "• [21:01:37] 🚀 YouTubeトレンド収集ツールの自動実行プロセス始動",
+      "• [21:01:37] 📋 検索設定ロード: キーワード 3個 / 1ワード最大 50 件",
+      "• [21:01:37] 🆕 [ステップ1] 「最新トレンド (Shorts & 長尺)」の検索・回収処理をスタート...",
+      "• [21:01:37] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
+      "• [21:01:39] 🔥 [ステップ2] 「週間人気ランキング (直近7日間)」の回収処理をスタート...",
+      "• [21:01:39] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
+      "• [21:01:41] 📣 [ステップ2.5] 「出稿中の広告クリエイティブ」の回収処理をスタート...",
+      "• [21:02:01] 📣 広告 1293 件を確認し、動画広告 359 件を回収（動画以外 307 件 / 除外 0 件）",
+      "• [21:02:01] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
+      "• [21:02:02] 📡 [ステップ2.6] 「公式アカウントの投稿」の回収処理をスタート...",
+      "• [21:02:02] 📡 収集対象アカウント 33 件: X ・ 日本語 ・ @WW_JP_Official / X ・ 日本語 ・ @wwdevteam / X ・ 英語 ・ @Wuthering_Waves / X ・ 英語 ・ @WW_devteam / X ・ 韓国語 ・ @WW_KR_Official / X ・ 韓国語 ・ @wwdevteamKR / X ・ スペイン語 ・ @WW_ES_Official / X ・ フランス語 ・ @WW_FR_Official / X ・ ドイツ語 ・ @WW_DE_Official / X ・ タイ語 ・ @WW_TH_Official / X ・ ポルトガル語 ・ @WW_BR_Official_ / X ・ 日本語 ・ @KUROMETHEUS / X ・ 日本語 ・ @WW_2NDFES / X ・ 日本語 ・ @kuro_onroad_jp / X ・ 日本語 ・ @Ds2fgH86931 / BiliBili ・ 中国語 ・ 鸣潮 / BiliBili ・ 中国語 ・ 鸣潮先行公约 / Weibo ・ 中国語 ・ 鸣潮 公式Weibo / Reddit ・ 英語 ・ r/WutheringWaves / X ・ 言語自動 ・ @WutheringW_GW / X ・ 言語自動 ・ @WW_Game8 / X ・ 言語自動 ・ @wuwaguy / X ・ 言語自動 ・ @Narushio_666 / X ・ 言語自動 ・ @meicyououenbu / X ・ 言語自動 ・ @yadonnu_meityo / X ・ 言語自動 ・ @WuWa_Verse1 / X ・ 言語自動 ・ @AboutWuwa / X ・ 言語自動 ・ @Jiyan0117 / X ・ 言語自動 ・ @Naruvt0 / X ・ 言語自動 ・ @meicyonews / X ・ 言語自動 ・ @Sabchg / X ・ 言語自動 ・ @wuwazanio / X ・ 言語自動 ・ @yadonnu_gameyt",
+      "• [21:03:47] ⚠️ 取得に失敗したアカウント: 4 件（BiliBili ・ 中国語 ・ 鸣潮（HTTP 503: FetchError: [GET] &quot;https://api.bilibili.com&quot;: 412）, BiliBili ・ 中国語 ・ 鸣潮先行公约（HTTP 503: FetchError: [GET] &quot;https://api.bilibili.com&quot;: 412）, Reddit ・ 英語 ・ r/WutheringWaves（HTTP 404: 2026-11-24T12:03:09Z https://rss.reddit.com/ Not Found）, X ・ 言語自動 ・ @yadonnu_meityo（HTTP 503: Error: Twitter API returned an incomplete user response））",
+      "• [21:03:47] 📡 公式SNS 対象 33 アカウント中 29 件から投稿 461 件を回収",
+      "• [21:03:47] 📤 [ステップ3] Notionデータベースへの差分・新規アップロード検証を開始...",
+      "• [21:05:00] カテゴリ「最新 (Shorts)」: 新規追加 7 件 / スキップ 69 件 (登録済)",
+      "• [21:05:10] 🌐 投稿 5 件を日本語に翻訳しました",
+      "• [21:05:27] カテゴリ「SNS」: 新規追加 28 件 / スキップ 433 件 (登録済)",
+      "• [21:05:29] 📣 出稿期間・チャンネルを 0 件に記録しました（対象 359 件 / 変更なし 359 件）",
+      "• [21:05:29] 🌐 見出しの翻訳（YouTube・SNSの合計）: 成功 10 件 / 失敗 0 件",
+      "• [21:05:29] ✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: 35 件)"
+    ]
+  },
+  {
     "id": "2026-11-24T20:01:45.341702+00:00",
     "timestamp": "2026/11/24 20:01 (JST)",
     "status": "Success",
@@ -5391,39 +5422,6 @@
       "• [20:04:41] 📣 出稿期間・チャンネルを 0 件に記録しました（対象 375 件 / 変更なし 375 件）",
       "• [20:04:41] 🌐 見出しの翻訳（YouTube・SNSの合計）: 成功 7 件 / 失敗 0 件",
       "• [20:04:41] ✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: 23 件)"
-    ]
-  },
-  {
-    "id": "2026-11-17T19:01:38.686919+00:00",
-    "timestamp": "2026/11/17 19:01 (JST)",
-    "status": "Success",
-    "api_key_status": "Key #1 (メイン構成運用)",
-    "new_items_count": 29,
-    "summary": "正常完了 (新着Notion追加: 29 件)",
-    "details": [
-      "🎬 [19:01] 起動: トレンド収集＆自動整理プロセス始動",
-      "• [19:01:38] 🚀 YouTubeトレンド収集ツールの自動実行プロセス始動",
-      "• [19:01:38] 📋 検索設定ロード: キーワード 3個 / 1ワード最大 50 件",
-      "• [19:01:38] 🆕 [ステップ1] 「最新トレンド (Shorts & 長尺)」の検索・回収処理をスタート...",
-      "• [19:01:38] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
-      "• [19:01:40] 🔥 [ステップ2] 「週間人気ランキング (直近7日間)」の回収処理をスタート...",
-      "• [19:01:40] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
-      "• [19:01:42] 📣 [ステップ2.5] 「出稿中の広告クリエイティブ」の回収処理をスタート...",
-      "• [19:02:01] 📣 広告 1355 件を確認し、動画広告 375 件を回収（動画以外 318 件 / 除外 0 件）",
-      "• [19:02:01] 🔑 APIキープール構築完了: 全 2 枚中、Key #1 から通信スタート",
-      "• [19:02:02] 📡 [ステップ2.6] 「公式アカウントの投稿」の回収処理をスタート...",
-      "• [19:02:02] 📡 収集対象アカウント 30 件: X ・ 日本語 ・ @WW_JP_Official / X ・ 日本語 ・ @wwdevteam / X ・ 英語 ・ @Wuthering_Waves / X ・ 英語 ・ @WW_devteam / X ・ 韓国語 ・ @WW_KR_Official / X ・ 韓国語 ・ @wwdevteamKR / X ・ スペイン語 ・ @WW_ES_Official / X ・ フランス語 ・ @WW_FR_Official / X ・ ドイツ語 ・ @WW_DE_Official / X ・ タイ語 ・ @WW_TH_Official / X ・ ポルトガル語 ・ @WW_BR_Official_ / X ・ 日本語 ・ @KUROMETHEUS / X ・ 日本語 ・ @WW_2NDFES / X ・ 日本語 ・ @kuro_onroad_jp / X ・ 日本語 ・ @Ds2fgH86931 / BiliBili ・ 中国語 ・ 鸣潮 / BiliBili ・ 中国語 ・ 鸣潮先行公约 / Weibo ・ 中国語 ・ 鸣潮 公式Weibo / Reddit ・ 英語 ・ r/WutheringWaves / X ・ 言語自動 ・ @WutheringW_GW / X ・ 言語自動 ・ @WW_Game8 / X ・ 言語自動 ・ @wuwaguy / X ・ 言語自動 ・ @Narushio_666 / X ・ 言語自動 ・ @meicyououenbu / X ・ 言語自動 ・ @yadonnu_meityo / X ・ 言語自動 ・ @WuWa_Verse1 / X ・ 言語自動 ・ @AboutWuwa / X ・ 言語自動 ・ @Jiyan0117 / X ・ 言語自動 ・ @Naruvt0 / X ・ 言語自動 ・ @meicyonews",
-      "• [19:03:19] ⚠️ 取得に失敗したアカウント: 3 件（BiliBili ・ 中国語 ・ 鸣潮（HTTP 503: FetchError: [GET] &quot;https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/space?offset=&amp;host_mid=1955897084&amp;platform=web&amp;features=itemOpusStyle,listOnlyfans,opusBi）, BiliBili ・ 中国語 ・ 鸣潮先行公约（HTTP 503: FetchError: [GET] &quot;https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/space?offset=&amp;host_mid=3493090606188642&amp;platform=web&amp;features=itemOpusStyle,listOnlyfans,）, Weibo ・ 中国語 ・ 鸣潮 公式Weibo（HTTP 503: Error: Cooling down before new visitor Cookies from https://m.weibo.cn/ may be fetched））",
-      "• [19:03:19] 📡 公式SNS 対象 19 アカウント中 16 件から投稿 295 件を回収",
-      "• [19:03:19] ℹ️ 公式以外のX 11 件は今回の巡回では読まない回です（数時間おき）",
-      "• [19:03:19] 📤 [ステップ3] Notionデータベースへの差分・新規アップロード検証を開始...",
-      "• [19:04:16] カテゴリ「週間人気 (Shorts)」: 新規追加 2 件 / スキップ 75 件 (登録済)",
-      "• [19:04:25] カテゴリ「最新 (Shorts)」: 新規追加 8 件 / スキップ 72 件 (登録済)",
-      "• [19:04:37] 🌐 投稿 6 件を日本語に翻訳しました",
-      "• [19:04:48] カテゴリ「SNS」: 新規追加 19 件 / スキップ 276 件 (登録済)",
-      "• [19:04:51] 📣 出稿期間・チャンネルを 0 件に記録しました（対象 375 件 / 変更なし 375 件）",
-      "• [19:04:51] 🌐 見出しの翻訳（YouTube・SNSの合計）: 成功 12 件 / 失敗 0 件",
-      "• [19:04:51] ✅ 全プロセスの収集＆同期が安全に完了しました！ (今回追加: 29 件)"
     ]
   }
 ]
