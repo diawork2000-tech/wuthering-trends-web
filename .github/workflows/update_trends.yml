@@ -75,6 +75,17 @@ jobs:
           cd scraper
           python trend_collector.py
 
+      # 翻訳の窓口が断った回（HTTP 429）の見出しを、後の回で拾い直す
+      - name: Retry titles left untranslated
+        timeout-minutes: 4
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        run: |
+          cd scraper
+          python retranslate_titles.py --apply --days 3 --limit 40
+        continue-on-error: true # 訳し直しの失敗で本体の収集成功を無駄にしないため
+
       - name: Purge videos matching exclude words (retroactive cleanup)
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}

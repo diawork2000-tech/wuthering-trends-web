@@ -15,7 +15,10 @@
 間隔をあけて少しずつ訳す。まとめて投げると、この窓口も止められかねない。
 毎時02分〜10分の巡回とは重ならないよう、15分〜55分の間に動かすこと。
 
-    実行: python retranslate_titles.py [--apply] [--limit N] [--since 2026-09-06]
+    実行: python retranslate_titles.py [--apply] [--limit N] [--since 2026-09-06 | --days 3]
+
+毎時の巡回でも --days 3 で動かしている。窓口は回によって丸ごと断る（HTTP 429）ことがあり、
+その回に入った見出しは訳されないまま残るため、後の回で拾い直す。
 """
 
 import argparse
@@ -25,6 +28,7 @@ import os
 import re
 import sys
 import time
+from datetime import datetime, timedelta, timezone
 
 from dotenv import load_dotenv
 
@@ -35,6 +39,8 @@ load_dotenv()
 
 AUDIT_LOG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "retranslate_audit.log")
 KANA = re.compile(r"[ぁ-んァ-ヶ]")
+# 絵文字・記号・URL・ハッシュタグだけの見出しは訳しようがない
+NOT_TEXT = re.compile(r"https?://\S+|[#＃@]\S+|[\W\d_]+")
 
 
 def title_of(row):
@@ -55,6 +61,12 @@ def needs_translation(row, sns_langs):
     category = select_of(row, "カテゴリ")
     if not title or KANA.search(title) or category == "広告":
         return False
+    if not NOT_TEXT.sub("", title):
+        return False
+    # 訳した結果が漢字だけになった行。もう一度訳すと崩れるので触らない。
+    original = text_of(row, "原文")
+    if original and original != title:
+        return False
     if category == "SNS":
         return select_of(row, "言語") in sns_langs
     return True
@@ -65,8 +77,11 @@ def main():
     parser.add_argument("--apply", action="store_true", help="実際に書き換える")
     parser.add_argument("--limit", type=int, default=0, help="この件数で止める（0なら全部）")
     parser.add_argument("--since", default="2026-09-06", help="この日以降に登録された行だけ")
+    parser.add_argument("--days", type=int, default=0, help="直近この日数だけ（--since より優先）")
     parser.add_argument("--interval", type=float, default=1.0, help="1件ごとに待つ秒数")
     args = parser.parse_args()
+    if args.days:
+        args.since = (datetime.now(timezone.utc) - timedelta(days=args.days)).strftime("%Y-%m-%d")
 
     headers = {
         "Authorization": f"Bearer {os.getenv('NOTION_API_KEY')}",
@@ -85,6 +100,8 @@ def main():
         print("[Error] 一覧を全部読めなかったので中止します")
         sys.exit(1)
     targets = [r for r in rows if needs_translation(r, sns_langs)]
+    # 新しい行から。訳せない行が古い側に溜まっても、新しい行の番が回ってくるように。
+    targets.sort(key=lambda r: r.get("created_time", ""), reverse=True)
     if args.limit:
         targets = targets[: args.limit]
     print(f"{args.since} 以降の行: {len(rows)} 件 / 訳し直す対象: {len(targets)} 件")

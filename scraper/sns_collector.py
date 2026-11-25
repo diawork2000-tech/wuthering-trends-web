@@ -101,6 +101,11 @@ def detect_lang(text):
     text = text or ""
     if re.search(r"[ぁ-んァ-ヶ]", text):
         return "ja"
+    # 英語の投稿でも「#鳴潮」と付くことが多い。タグの漢字で中国語と取り違えないよう外して見る。
+    # タグしか無い投稿は、タグで判定する。
+    body = re.sub(r"[#＃]\S+|https?://\S+", " ", text)
+    if re.search(r"[^\W\d_]", body):
+        text = body
     if re.search(r"[가-힣]", text):
         return "ko"
     if re.search(r"[一-鿿]", text):
