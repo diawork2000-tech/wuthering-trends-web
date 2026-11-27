@@ -3,31 +3,59 @@
   "items": [
     {
       "id": "card-0",
-      "title": "鳴潮 11月27日付 - 徳島新聞デジタル",
-      "sourceType": "Yahoo!ニュース・リアルタイム トレンド検索 (鳴潮炎上",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiVkFVX3lxTFBXMUo1ajJuZlRUbUZ2S1RRRGsya2xwaUxFeVEyZHBBdER0eFNsQ29WNFpDdG5MckRPcnlLWHhQUVJWbmRaOUdMUVREN0JscU0tV19ScVFR?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n鳴潮 11月27日付&nbsp;&nbsp;徳島新聞デジタル",
-      "reason": "約1時間前に出たばかりの新しい情報",
-      "score": 68,
+      "title": "新キャラクター「シミュシス」の実装時期情報",
+      "sourceType": "鳴潮 アップデート＆公式発表ヘッドライン (4Gamer＆フ",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9DS0FWTUo3RGZQUE1FdGNLMVZRN0tnMVlTSVZ0NjBHTk9neWtXWnp0X2QzZGVVTy1pZnM3Y295M01vWmhMREpaOVhmNklNVWhkV1BF?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n記事タイトル「【鳴潮】シミュシスはいつ実装？」に基づき、キャラクター「シミュシス」の実装タイミングに関する情報を整理する内容。素材内に具体的な実装日や詳細仕様の記述は無いため、実装予定の動向に焦点を絞って簡潔にまとめる。",
+      "reason": "新キャラクターの実装スケジュールはプレイヤーの関心が最も高いトピックの一つであり、実装時期への疑問を解消するテーマは検索流入および再生維持を獲得しやすいため。",
+      "score": 74,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-11-27",
-      "createdTime": "2026-11-27T06:31:31.407367+00:00"
+      "createdTime": "2026-11-27T09:46:38.289985+00:00"
     },
     {
       "id": "card-1",
-      "title": "【鳴潮】主人公(消滅)の評価とおすすめパーティ編成・音骸・武器｜漂泊者 - GameWith",
+      "title": "相里要（そうりよう）の評価とおすすめパーティ編成・音骸・武器まとめ",
       "sourceType": "YouTubeショート 伸び悩み＆神プレイ解説フォーラム",
-      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5mYkoyQURVanJlSmczdFdfUnFTbW95OFJMOWFWbUh2cFJYb3R0UWdIUHVaZ2tGS3I2MkJIM3c2MWp4WlZUT1V6eTcwd2V3Mmg3eUNn?oc=5",
-      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n【鳴潮】主人公(消滅)の評価とおすすめパーティ編成・音骸・武器｜漂泊者&nbsp;&nbsp;GameWith",
-      "reason": "競合が扱っている注目ワード「漂泊者」を含む",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9VVHZ0aWtURUdlYWtOdHdxUU81akZpWkJqdkxFWksxaV9lNG45Y0ZNRXBaT19aRE4yeDZuWDdjOVQ5THJyaUlsRm5obWhmR0g5eXZF?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n相里要（そうりよう）の性能評価をもとに、おすすめパーティ編成、適正な音骸、推奨武器の選択肢を提示する。素材内に具体的な武器名や音骸名の記載はないため、育成・ビルドの全体像と重要方針を簡潔に論説する。",
+      "reason": "相里要を所持または育成中のプレイヤーにとって、ビルド（武器・音骸・編成）の最適解は実用性が非常に高く、息の長い需要がある攻略テーマであるため。",
       "score": 68,
       "viewCount": 0,
       "viewsPerHour": 0.0,
       "mentionCount": 1,
       "date": "2026-11-27",
-      "createdTime": "2026-11-27T06:31:31.407392+00:00"
+      "createdTime": "2026-11-27T09:46:38.290013+00:00"
+    },
+    {
+      "id": "card-2",
+      "title": "『鳴潮』最新リセマラ当たりランキング",
+      "sourceType": "鳴潮 最強攻略＆ティア掲示板 (GameWith等トレンド)",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1UZjlMWExyQlJ1X2VNQkpDSUpjc3RBVnVqYW9yVHdfQ0IzcVkxSllrbXJvNEx6YWpyQ2E4OUJFX3hpMkFuSDVaVi03SWM5c000N21z?oc=5",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\nゲーム開始時に狙うべきリセマラ当たりキャラクターの順位付けと判断基準を解説する。素材内に特定キャラクターの個別順位や数値の記載はないため、当たり枠の基準と狙い目の概要を整理して伝える。",
+      "reason": "新規参入プレイヤーや復帰勢が最初に検索する鉄板コンテンツであり、序盤攻略における定番ネタとして安定した視聴回数が見込めるため。",
+      "score": 62,
+      "viewCount": 0,
+      "viewsPerHour": 0.0,
+      "mentionCount": 1,
+      "date": "2026-11-27",
+      "createdTime": "2026-11-27T09:46:38.290023+00:00"
+    },
+    {
+      "id": "card-3",
+      "title": "衣装実装への要望とキャラクター性能・立ち回り解説",
+      "sourceType": "YouTube競合 (別枠全件枠)",
+      "sourceUrl": "https://www.youtube.com/watch?v=yUX5QZCmEtk",
+      "scriptOutline": "【動画・記事の完全論説・網羅的詳細】：\n「どの衣装も最高すぎるので実装お願いします」という視点から、衣装の魅力に触れつつ、キャラクター性能評価、パーティの組み上げ方針、立ち回りの攻略論を解説する。（実績データ：hiragi-e4xにて1,751再生、高評価71、時速約149再生）",
+      "reason": "衣装・スキンという共感を得やすいビジュアル面への要望をフックにしつつ、実際の攻略情報（性能・編成・立ち回り）を組み合わせることで、視聴者のエンゲージメントと高評価率を短時間で高める導線設計ができているため。",
+      "score": 68,
+      "viewCount": 1751,
+      "viewsPerHour": 148.9,
+      "mentionCount": 1,
+      "date": "2026-11-27",
+      "createdTime": "2026-11-27T09:46:38.290034+00:00"
     }
   ]
 }
