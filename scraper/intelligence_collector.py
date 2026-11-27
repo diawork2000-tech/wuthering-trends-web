@@ -751,6 +751,35 @@ class IntelligenceEngine:
                 
         print(f"  [Crawl Complete] Total collected raw items across all networks: {len(self.collected_raw_items)}")
 
+    def _generate_with_fallback(self, prompt, label, attempts=2):
+        """混雑(503)・回数制限(429)なら少し待って試し直し、駄目なら予備モデルへ切り替える。
+
+        2026-11-22〜26 に gemini-flash-latest が混雑で断り続け、日程表が5日間止まった。
+        予備モデルは実際に呼べることを確認したものだけ（競合スケジュールと同じ並び）。
+        すべて駄目なら最後の例外を投げる。
+        """
+        models_to_try = [self.gemini_model_name]
+        for alt in ("gemini-flash-lite-latest", "gemini-3.5-flash"):
+            if alt not in models_to_try:
+                models_to_try.append(alt)
+        last_error = None
+        for model_name in models_to_try:
+            for attempt in range(attempts):
+                try:
+                    res = self.gemini_client.models.generate_content(model=model_name, contents=prompt)
+                    if model_name != self.gemini_model_name:
+                        print(f"  [{label}] 予備モデル {model_name} で解析しました")
+                    return res
+                except Exception as e:
+                    last_error = e
+                    msg = str(e)
+                    print(f"  [Warning] {label} の解析に失敗 ({model_name}, {attempt + 1}回目): {msg[:120]}")
+                    if not ("503" in msg or "UNAVAILABLE" in msg or "429" in msg):
+                        break  # 待っても直らないものは次のモデルへ
+                    if attempt + 1 < attempts:
+                        time.sleep(5)
+        raise last_error
+
     def update_schedule_if_stale(self, stale_after_hours=20):
         """新キャラ・バージョン実装予定のスケジュールを更新する（アップデート先読み機能）。
 
@@ -838,9 +867,7 @@ class IntelligenceEngine:
         )
 
         try:
-            res = self.gemini_client.models.generate_content(
-                model=self.gemini_model_name, contents=prompt
-            )
+            res = self._generate_with_fallback(prompt, "Schedule")
             raw_txt = re.sub(r'^```(json)?|```$', '', res.text.strip(), flags=re.MULTILINE).strip()
             events = json.loads(raw_txt)
             events = [e for e in events if e.get("character")]

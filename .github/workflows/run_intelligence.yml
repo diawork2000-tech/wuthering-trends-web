@@ -5,6 +5,13 @@ on:
   repository_dispatch:
     types: [trigger-intelligence] # Webやcron-job.org(30分おき等)からの着信トリガー
 
+# 15分おきの起動が前の回の終わらないうちに重なると、両方が intelligence_logs.json 等を
+# 書き換えて保存がぶつかり、後の回の結果（日程表など）が捨てられる（2026-11-22 に発生）。
+# 同時に動かすのは1本だけにし、重なった回は前の回が終わるまで待たせる。
+concurrency:
+  group: run-intelligence
+  cancel-in-progress: false
+
 jobs:
   run-intelligence:
     runs-on: ubuntu-latest
